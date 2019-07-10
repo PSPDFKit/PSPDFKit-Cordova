@@ -10,7 +10,7 @@
 //  This notice may not be removed from this file.
 //
 
-var PSPDFKit = new function() {
+var PSPDFKitPlugin = new function() {
     
     // Utilities
     
@@ -215,4 +215,4 @@ var PSPDFKit = new function() {
         processAnnotations: ['annotationChange', 'processedDocumentPath', 'callback', 'annotationType'],
     });
 };
-module.exports = PSPDFKit;
+module.exports = PSPDFKitPlugin;
