@@ -12,7 +12,6 @@
 
 var PSPDFKitPlugin = new (function() {
   // Utilities
-
   var self = this;
   function addMethods(methods) {
     for (var name in methods) {
@@ -48,7 +47,6 @@ var PSPDFKitPlugin = new (function() {
   }
 
   // Events
-
   var listeners = {};
 
   this.dispatchEvent = function(event) {
@@ -91,19 +89,16 @@ var PSPDFKitPlugin = new (function() {
   };
 
   // License key
-
   addMethods({
     setLicenseKey: ["key"]
   });
 
   // PDF Generation method
-
   addMethods({
     convertPDFFromHTMLString: ["html", "fileName", "options", "callback"]
   });
 
   // Document methods
-
   addMethods({
     present: ["path", "callback", "options"],
     presentWithXFDF: ["path", "xfdfPath", "callback", "options"],
@@ -115,7 +110,6 @@ var PSPDFKitPlugin = new (function() {
   });
 
   // Configuration
-
   addMethods({
     setOptions: ["options", "animated"],
     getOptions: ["names", "callback"],
@@ -124,7 +118,6 @@ var PSPDFKitPlugin = new (function() {
   });
 
   // Page scrolling
-
   addMethods({
     setPage: ["page", "animated"],
     getPage: ["callback"],
@@ -135,20 +128,17 @@ var PSPDFKitPlugin = new (function() {
   });
 
   // Appearance
-
   addMethods({
     setAppearanceMode: ["appearanceMode"]
   });
 
   // Cache
-
   addMethods({
     clearCache: [],
     removeCacheForPresentedDocument: []
   });
 
   // Toolbar
-
   var leftBarButtonItems = ["close"];
   var rightBarButtonItems = ["search", "outline", "thumbnails"];
 
