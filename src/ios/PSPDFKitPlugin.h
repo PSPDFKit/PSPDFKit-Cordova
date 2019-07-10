@@ -13,6 +13,6 @@
 #import <Foundation/Foundation.h>
 #import <Cordova/CDV.h>
 
-@interface PSPDFKit : CDVPlugin
+@interface PSPDFKitPlugin : CDVPlugin
 
 @end
