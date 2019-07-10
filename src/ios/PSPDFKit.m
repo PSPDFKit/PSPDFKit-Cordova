@@ -10,14 +10,14 @@
 //  This notice may not be removed from this file.
 //
 
-#import "PSPDFKitPlugin.h"
+#import "PSPDFKit.h"
 #import <WebKit/WebKit.h>
 #import <PSPDFKit/PSPDFKit.h>
 #import <PSPDFKitUI/PSPDFKitUI.h>
 
 #define VALIDATE_DOCUMENT(document, ...) { if (!document.isValid) { [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Document is invalid."] callbackId:command.callbackId]; return __VA_ARGS__; }}
 
-@interface PSPDFKitPlugin () <PSPDFViewControllerDelegate, PSPDFFlexibleToolbarContainerDelegate>
+@interface PSPDFKit () <PSPDFViewControllerDelegate, PSPDFFlexibleToolbarContainerDelegate>
 
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property (nonatomic, strong) PSPDFViewController *pdfController;
@@ -28,7 +28,7 @@
 @end
 
 
-@implementation PSPDFKitPlugin
+@implementation PSPDFKit
 
 #pragma mark Private methods
 
@@ -298,7 +298,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     if ([JSON isKindOfClass:[NSDictionary class]]) {
         JSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:NULL] encoding:NSUTF8StringEncoding];
     }
-    NSString *script = [NSString stringWithFormat:@"PSPDFKitPlugin.dispatchEvent(%@)", JSON];
+    NSString *script = [NSString stringWithFormat:@"PSPDFKit.dispatchEvent(%@)", JSON];
     NSString *result = [self stringByEvaluatingJavaScriptFromString:script];
     return [result length]? [result boolValue]: YES;
 }
@@ -376,11 +376,11 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     if (index == NSNotFound) {
         index = [_pdfController.navigationItem.rightBarButtonItems indexOfObject:sender];
         if (index != NSNotFound) {
-            NSString *script = [NSString stringWithFormat:@"PSPDFKitPlugin.dispatchRightBarButtonAction(%ld)", (long)index];
+            NSString *script = [NSString stringWithFormat:@"PSPDFKit.dispatchRightBarButtonAction(%ld)", (long)index];
             [self stringByEvaluatingJavaScriptFromString:script];
         }
     } else {
-        NSString *script = [NSString stringWithFormat:@"PSPDFKitPlugin.dispatchLeftBarButtonAction(%ld)", (long)index];
+        NSString *script = [NSString stringWithFormat:@"PSPDFKit.dispatchLeftBarButtonAction(%ld)", (long)index];
         [self stringByEvaluatingJavaScriptFromString:script];
     }
 }
@@ -1433,7 +1433,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     VALIDATE_DOCUMENT(document);
 
     NSArray <PSPDFAnnotation *> *annotations = [document annotationsForPageAtIndex:pageIndex type:type];
-    NSArray <NSDictionary *> *annotationsJSON = [PSPDFKitPlugin instantJSONFromAnnotations:annotations];
+    NSArray <NSDictionary *> *annotationsJSON = [PSPDFKit instantJSONFromAnnotations:annotations];
 
     CDVPluginResult *pluginResult;
     if (annotationsJSON) {

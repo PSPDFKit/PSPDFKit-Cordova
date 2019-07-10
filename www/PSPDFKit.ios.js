@@ -10,7 +10,7 @@
 //  This notice may not be removed from this file.
 //
 
-var PSPDFKitPlugin = new function() {
+var PSPDFKit = new function() {
     
     // Utilities
     
@@ -36,7 +36,7 @@ var PSPDFKitPlugin = new function() {
                     }, function (error) {
                         console.log(error);
                         if (callback) callback(null, error);
-                    }, 'PSPDFKitPlugin', methodName, argArray);
+                    }, 'PSPDFKit', methodName, argArray);
                 }
             })();
         }
@@ -162,14 +162,14 @@ var PSPDFKitPlugin = new function() {
     {
         leftBarButtonItems = items;
         cordova.exec(function (result) { }, function (error) { },
-                     'PSPDFKitPlugin', 'setLeftBarButtonItems', [items]);
+                     'PSPDFKit', 'setLeftBarButtonItems', [items]);
     }
 
     this.setRightBarButtonItems = function(items)
     {
         rightBarButtonItems = items;
         cordova.exec(function (result) { }, function (error) { },
-                     'PSPDFKitPlugin', 'setRightBarButtonItems', [items]);
+                     'PSPDFKit', 'setRightBarButtonItems', [items]);
     }
 
     this.getLeftBarButtonItems = function(callback)
@@ -215,4 +215,4 @@ var PSPDFKitPlugin = new function() {
         processAnnotations: ['annotationChange', 'processedDocumentPath', 'callback', 'annotationType'],
     });
 };
-module.exports = PSPDFKitPlugin;
+module.exports = PSPDFKit;
