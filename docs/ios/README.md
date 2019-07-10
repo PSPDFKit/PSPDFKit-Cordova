@@ -13,7 +13,7 @@ Install
 
 We assume you have [a current install of Cordova](https://cordova.apache.org/#getstarted).
 
-    cordova plugin add https://github.com/PSPDFKit/Cordova-iOS.git
+    cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 
 Read the message at the end and complete installation.
 
@@ -49,7 +49,7 @@ Ionic
 1. Create Ionic app Cordova plugin (replace `IonicDemo` with your app's name): `ionic start IonicDemo blank --cordova`
 2. Go into your app's folder: `cd IonicDemo`
 3. Add iOS platform: `ionic cordova platform add ios`
-4. Add PSPDFKit plugin: `ionic cordova plugin add https://github.com/PSPDFKit/Cordova-iOS.git`
+4. Add PSPDFKit plugin: `ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git`
 5. Follow the instructions after adding the PSPDFKit plugin (manually edit the Xcode project)
 6. Declare `PSPDFKitPlugin` in `src/declarations.d.ts` (create this file first): `declare var PSPDFKitPlugin: any;`
 7. Present PDF by modifying `src/app/app.component.ts`:
@@ -76,12 +76,12 @@ constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen
 #### Problem:
 
 ```sh
-Error: Cannot find plugin.xml for plugin "Cordova-iOS". Please try adding it again.
+Error: Cannot find plugin.xml for plugin "PSPDFKit-Cordova". Please try adding it again.
 ```
 
 #### Solution:
 
-Run `cordova plugin add https://github.com/PSPDFKit/Cordova-iOS.git` instead of `ionic cordova plugin add https://github.com/PSPDFKit/Cordova-iOS.git`.
+Run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` instead of `ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git`.
 
 Ionic Demo
 -----------
