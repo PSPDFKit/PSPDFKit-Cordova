@@ -9,12 +9,12 @@ THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY AUSTRIAN CO
 http://pspdfkit.com/license.html</license>
 	<platform name="ios">
 		<config-file parent="/*" target="config.xml">
-			<feature name="PSPDFKitPlugin">
-				<param name="ios-package" value="PSPDFKitPlugin"/>
+			<feature name="PSPDFKit">
+				<param name="ios-package" value="PSPDFKit"/>
 			</feature>
 		</config-file>
 
-		<js-module src="www/PSPDFKit.ios.js" name="PSPDFKitPlugin">
+		<js-module src="www/PSPDFKit.ios.js" name="PSPDFKit">
 			<clobbers target="PSPDFKitPlugin" />
 		</js-module>
 
@@ -51,7 +51,7 @@ of your Xcode project in platforms/ios to iOS 9.
 
 Plugin usage example:
 
-PSPDFKitPlugin.present('file.pdf', {
+PSPDFKit.present('file.pdf', {
 	pageTransition: 'curl',
 	editableAnnotationTypes: ['FreeText', 'Signature']
 });
