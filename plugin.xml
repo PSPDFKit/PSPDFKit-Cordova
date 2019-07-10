@@ -14,7 +14,7 @@ http://pspdfkit.com/license.html</license>
 			</feature>
 		</config-file>
 
-		<js-module src="src/ios/PSPDFKit.ios.js" name="PSPDFKit">
+		<js-module src="www/PSPDFKit.ios.js" name="PSPDFKit">
 			<clobbers target="PSPDFKit" />
 		</js-module>
 
