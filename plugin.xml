@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin id="pspdfkit-cordova-ios" version="1.3.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<plugin id="pspdfkit-cordova" version="1.0.0" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
 	<engines>
 		<engine name="cordova" version=">=6.3.1"/>
 	</engines>
@@ -9,17 +9,17 @@ THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY AUSTRIAN CO
 http://pspdfkit.com/license.html</license>
 	<platform name="ios">
 		<config-file parent="/*" target="config.xml">
-			<feature name="PSPDFKitPlugin">
-				<param name="ios-package" value="PSPDFKitPlugin"/>
+			<feature name="PSPDFKit">
+				<param name="ios-package" value="PSPDFKit"/>
 			</feature>
 		</config-file>
 
-		<js-module src="PSPDFKitPlugin/pspdfkit.js" name="PSPDFKitPlugin">
-			<clobbers target="PSPDFKitPlugin" />
+		<js-module src="src/ios/PSPDFKit.ios.js" name="PSPDFKit">
+			<clobbers target="PSPDFKit" />
 		</js-module>
 
-		<source-file src="PSPDFKitPlugin/PSPDFKitPlugin.m"/>
-		<header-file src="PSPDFKitPlugin/PSPDFKitPlugin.h"/>
+		<source-file src="src/ios/PSPDFKitPlugin.h"/>
+		<header-file src="src/ios/PSPDFKitPlugin.m"/>
 
 		<framework src="CoreText.framework" />
 		<framework src="QuartzCore.framework" />
@@ -51,7 +51,7 @@ of your Xcode project in platforms/ios to iOS 9.
 
 Plugin usage example:
 
-PSPDFKitPlugin.present('file.pdf', {
+PSPDFKit.present('file.pdf', {
 	pageTransition: 'curl',
 	editableAnnotationTypes: ['FreeText', 'Signature']
 });
