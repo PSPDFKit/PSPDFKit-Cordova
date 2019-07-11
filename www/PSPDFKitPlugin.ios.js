@@ -1,6 +1,6 @@
 //
-//  PSPDFKit.ios.js
-//  PSPDFPlugin for Apache Cordova
+//  PSPDFPlugin.ios.js
+//  Plugin for PSPDFKit for Apache Cordova
 //
 //  Copyright © 2013-2019 PSPDFKit GmbH. All rights reserved.
 //
@@ -11,41 +11,6 @@
 //
 
 var PSPDFKitPlugin = new (function() {
-  // Utilities
-  var self = this;
-  function addMethods(methods) {
-    for (var name in methods) {
-      (function() {
-        var methodName = name;
-        var methodArgs = methods[methodName];
-        self[methodName] = function() {
-          var callback = null;
-          var argArray = [];
-          for (var i = 0; i < arguments.length; i++) {
-            argArray.push(arguments[i]);
-            if (methodArgs[i] == "callback") {
-              if (typeof arguments[i] == "function") {
-                callback = arguments[i];
-              }
-            }
-          }
-          cordova.exec(
-            function(result) {
-              if (callback) callback(result, null);
-            },
-            function(error) {
-              console.log(error);
-              if (callback) callback(null, error);
-            },
-            "PSPDFKitPlugin",
-            methodName,
-            argArray
-          );
-        };
-      })();
-    }
-  }
-
   // Events
   var listeners = {};
 
@@ -89,54 +54,343 @@ var PSPDFKitPlugin = new (function() {
   };
 
   // License key
-  addMethods({
-    setLicenseKey: ["key"]
-  });
+  this.setLicenseKey = function(key, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "setLicenseKey",
+      [key]
+    );
+  };
 
   // PDF Generation method
-  addMethods({
-    convertPDFFromHTMLString: ["html", "fileName", "options", "callback"]
-  });
+  this.convertPDFFromHTMLString = function(html, fileName, options, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "convertPDFFromHTMLString",
+      [html, fileName, options]
+    );
+  };
 
   // Document methods
-  addMethods({
-    present: ["path", "callback", "options"],
-    presentWithXFDF: ["path", "xfdfPath", "callback", "options"],
-    dismiss: ["callback"],
-    reload: [],
-    search: ["query", "animated", "headless"],
-    saveAnnotations: ["callback"],
-    getHasDirtyAnnotations: ["callback"]
-  });
+  this.present = function(path, options, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "present",
+      [path, options]
+    );
+  };
+
+  this.presentWithXFDF = function(path, xfdfPath, callback, options) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "presentWithXFDF",
+      [path, xfdfPath, options]
+    );
+  };
+
+  this.dismiss = function(callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "dismiss",
+      []
+    );
+  };
+
+  this.reload = function(callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "reload",
+      []
+    );
+  };
+
+  this.search = function(query, animated, headless, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "search",
+      [query, animated, headless]
+    );
+  };
+
+  this.saveAnnotations = function(callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "saveAnnotations",
+      []
+    );
+  };
+
+  this.getHasDirtyAnnotations = function(callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getHasDirtyAnnotations",
+      []
+    );
+  };
 
   // Configuration
-  addMethods({
-    setOptions: ["options", "animated"],
-    getOptions: ["names", "callback"],
-    setOption: ["name", "value", "animated"],
-    getOption: ["name", "callback"]
-  });
+  this.setOptions = function(options, animated, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "setOptions",
+      [options, animated]
+    );
+  };
+
+  this.getOptions = function(names, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getOptions",
+      [names]
+    );
+  };
+
+  this.setOption = function(name, value, animated, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "setOption",
+      [name, value, animated]
+    );
+  };
+
+  this.getOption = function(name, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getOption",
+      [name]
+    );
+  };
 
   // Page scrolling
-  addMethods({
-    setPage: ["page", "animated"],
-    getPage: ["callback"],
-    getScreenPage: ["callback"],
-    getPageCount: ["callback"],
-    scrollToNextPage: ["animated"],
-    scrollToPreviousPage: ["animated"]
-  });
+
+  this.setPage = function(page, animated, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "setPage",
+      [page, animated]
+    );
+  };
+
+  this.getPage = function(callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getPage",
+      []
+    );
+  };
+
+  this.getScreenPage = function(callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getScreenPage",
+      []
+    );
+  };
+
+  this.getPageCount = function(callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getPageCount",
+      []
+    );
+  };
+
+  this.scrollToNextPage = function(animated, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "scrollToNextPage",
+      [animated]
+    );
+  };
+
+  this.scrollToPreviousPage = function(animated, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "scrollToPreviousPage",
+      [animated]
+    );
+  };
 
   // Appearance
-  addMethods({
-    setAppearanceMode: ["appearanceMode"]
-  });
+  this.setAppearanceMode = function(appearanceMode, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "setAppearanceMode",
+      [appearanceMode]
+    );
+  };
 
   // Cache
-  addMethods({
-    clearCache: [],
-    removeCacheForPresentedDocument: []
-  });
+
+  this.clearCache = function(callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "clearCache",
+      []
+    );
+  };
+
+  this.removeCacheForPresentedDocument = function(callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "removeCacheForPresentedDocument",
+      []
+    );
+  };
 
   // Toolbar
   var leftBarButtonItems = ["close"];
@@ -181,41 +435,210 @@ var PSPDFKitPlugin = new (function() {
   };
 
   // Annotation toolbar
-  addMethods({
-    hideAnnotationToolbar: [],
-    showAnnotationToolbar: [],
-    toggleAnnotationToolbar: []
-  });
+
+  this.hideAnnotationToolbar = function(callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "hideAnnotationToolbar",
+      []
+    );
+  };
+
+  this.showAnnotationToolbar = function(callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "showAnnotationToolbar",
+      []
+    );
+  };
+
+  this.toggleAnnotationToolbar = function(callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "toggleAnnotationToolbar",
+      []
+    );
+  };
 
   // Instant JSON
-  addMethods({
-    applyInstantJSON: ["jsonValue", "callback"],
-    addAnnotation: ["jsonAnnotation", "callback"],
-    removeAnnotation: ["jsonAnnotation", "callback"],
-    getAnnotations: ["pageIndex", "type", "callback"],
-    getAllUnsavedAnnotations: ["callback"]
-  });
+
+  this.applyInstantJSON = function(jsonValue, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "applyInstantJSON",
+      [jsonValue]
+    );
+  };
+
+  this.addAnnotation = function(jsonAnnotation, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "addAnnotation",
+      [jsonAnnotation]
+    );
+  };
+
+  this.removeAnnotation = function(jsonAnnotation, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "removeAnnotation",
+      [jsonAnnotation]
+    );
+  };
+
+  this.getAnnotations = function(pageIndex, type, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getAnnotations",
+      [pageIndex, type]
+    );
+  };
+
+  this.getAllUnsavedAnnotations = function(callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getAllUnsavedAnnotations",
+      []
+    );
+  };
 
   // Forms
-  addMethods({
-    setFormFieldValue: ["value", "fullyQualifiedName", "callback"],
-    getFormFieldValue: ["fullyQualifiedName", "callback"]
-  });
+  this.setFormFieldValue = function(value, fullyQualifiedName, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "setFormFieldValue",
+      [value, fullyQualifiedName]
+    );
+  };
+
+  this.getFormFieldValue = function(fullyQualifiedName, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getFormFieldValue",
+      [fullyQualifiedName]
+    );
+  };
 
   // XFDF
-  addMethods({
-    importXFDF: ["xfdfPath", "callback"],
-    exportXFDF: ["xfdfPath", "callback"]
-  });
+  this.importXFDF = function(xfdfPath, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "importXFDF",
+      [xfdfPath]
+    );
+  };
+
+  this.exportXFDF = function(xfdfPath, callback) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "exportXFDF",
+      [xfdfPath]
+    );
+  };
 
   // Document Processing
-  addMethods({
-    processAnnotations: [
-      "annotationChange",
-      "processedDocumentPath",
-      "callback",
-      "annotationType"
-    ]
-  });
+  this.processAnnotations = function(
+    annotationChange,
+    processedDocumentPath,
+    callback,
+    annotationType
+  ) {
+    cordova.exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "processAnnotations",
+      [annotationChange, processedDocumentPath, annotationType]
+    );
+  };
 })();
 module.exports = PSPDFKitPlugin;
