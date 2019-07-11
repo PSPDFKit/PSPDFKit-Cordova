@@ -10,637 +10,634 @@
 //  This notice may not be removed from this file.
 //
 
-var PSPDFKitPlugin = new (function() {
-  var exec = require('cordova/exec');
-	
-  // Events
-  var listeners = {};
+var exec = require("cordova/exec");
 
-  this.dispatchEvent = function(event) {
-    var result = undefined;
-    var functions = listeners[event.type];
-    if (functions) {
-      for (var i = 0; i < functions.length; i++) {
-        result = functions[i](event);
-        if (typeof result != "undefined") {
-          if (!result) return result;
-        }
+// Events
+var listeners = {};
+
+exports.dispatchEvent = function(event) {
+  var result = undefined;
+  var functions = listeners[event.type];
+  if (functions) {
+    for (var i = 0; i < functions.length; i++) {
+      result = functions[i](event);
+      if (typeof result != "undefined") {
+        if (!result) return result;
       }
     }
-    return result;
-  };
+  }
+  return result;
+};
 
-  this.addEventListener = function(type, listener) {
-    var existing = listeners[type];
-    if (!existing) {
-      existing = [];
-      listeners[type] = existing;
+exports.addEventListener = function(type, listener) {
+  var existing = listeners[type];
+  if (!existing) {
+    existing = [];
+    listeners[type] = existing;
+  }
+  existing.push(listener);
+};
+
+exports.addEventListeners = function(listeners) {
+  for (type in listeners) {
+    exports.addEventListener(type, listeners[type]);
+  }
+};
+
+exports.removeEventListener = function(type, listener) {
+  var existing = listeners[type];
+  if (existing) {
+    var index;
+    while ((index = existing.indexOf(listener)) != -1) {
+      existing.splice(index, 1);
     }
-    existing.push(listener);
-  };
+  }
+};
 
-  this.addEventListeners = function(listeners) {
-    for (type in listeners) {
-      this.addEventListener(type, listeners[type]);
-    }
-  };
+// License key
+exports.setLicenseKey = function(key, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "setLicenseKey",
+    [key]
+  );
+};
 
-  this.removeEventListener = function(type, listener) {
-    var existing = listeners[type];
-    if (existing) {
-      var index;
-      while ((index = existing.indexOf(listener)) != -1) {
-        existing.splice(index, 1);
-      }
-    }
-  };
+// PDF Generation method
+exports.convertPDFFromHTMLString = function(html, fileName, options, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "convertPDFFromHTMLString",
+    [html, fileName, options]
+  );
+};
 
-  // License key
-  this.setLicenseKey = function(key, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "setLicenseKey",
-      [key]
-    );
-  };
+// Document methods
+exports.present = function(path, options, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "present",
+    [path, options]
+  );
+};
 
-  // PDF Generation method
-  this.convertPDFFromHTMLString = function(html, fileName, options, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "convertPDFFromHTMLString",
-      [html, fileName, options]
-    );
-  };
+exports.presentWithXFDF = function(path, xfdfPath, callback, options) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "presentWithXFDF",
+    [path, xfdfPath, options]
+  );
+};
 
-  // Document methods
-  this.present = function(path, options, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "present",
-      [path, options]
-    );
-  };
+exports.dismiss = function(callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "dismiss",
+    []
+  );
+};
 
-  this.presentWithXFDF = function(path, xfdfPath, callback, options) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "presentWithXFDF",
-      [path, xfdfPath, options]
-    );
-  };
+exports.reload = function(callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "reload",
+    []
+  );
+};
 
-  this.dismiss = function(callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "dismiss",
-      []
-    );
-  };
+exports.search = function(query, animated, headless, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "search",
+    [query, animated, headless]
+  );
+};
 
-  this.reload = function(callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "reload",
-      []
-    );
-  };
+exports.saveAnnotations = function(callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "saveAnnotations",
+    []
+  );
+};
 
-  this.search = function(query, animated, headless, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "search",
-      [query, animated, headless]
-    );
-  };
+exports.getHasDirtyAnnotations = function(callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "getHasDirtyAnnotations",
+    []
+  );
+};
 
-  this.saveAnnotations = function(callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "saveAnnotations",
-      []
-    );
-  };
+// Configuration
+exports.setOptions = function(options, animated, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "setOptions",
+    [options, animated]
+  );
+};
 
-  this.getHasDirtyAnnotations = function(callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "getHasDirtyAnnotations",
-      []
-    );
-  };
+exports.getOptions = function(names, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "getOptions",
+    [names]
+  );
+};
 
-  // Configuration
-  this.setOptions = function(options, animated, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "setOptions",
-      [options, animated]
-    );
-  };
+exports.setOption = function(name, value, animated, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "setOption",
+    [name, value, animated]
+  );
+};
 
-  this.getOptions = function(names, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "getOptions",
-      [names]
-    );
-  };
+exports.getOption = function(name, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "getOption",
+    [name]
+  );
+};
 
-  this.setOption = function(name, value, animated, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "setOption",
-      [name, value, animated]
-    );
-  };
+// Page scrolling
 
-  this.getOption = function(name, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "getOption",
-      [name]
-    );
-  };
+exports.setPage = function(page, animated, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "setPage",
+    [page, animated]
+  );
+};
 
-  // Page scrolling
+exports.getPage = function(callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "getPage",
+    []
+  );
+};
 
-  this.setPage = function(page, animated, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "setPage",
-      [page, animated]
-    );
-  };
+exports.getScreenPage = function(callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "getScreenPage",
+    []
+  );
+};
 
-  this.getPage = function(callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "getPage",
-      []
-    );
-  };
+exports.getPageCount = function(callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "getPageCount",
+    []
+  );
+};
 
-  this.getScreenPage = function(callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "getScreenPage",
-      []
-    );
-  };
+exports.scrollToNextPage = function(animated, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "scrollToNextPage",
+    [animated]
+  );
+};
 
-  this.getPageCount = function(callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "getPageCount",
-      []
-    );
-  };
+exports.scrollToPreviousPage = function(animated, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "scrollToPreviousPage",
+    [animated]
+  );
+};
 
-  this.scrollToNextPage = function(animated, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "scrollToNextPage",
-      [animated]
-    );
-  };
+// Appearance
+exports.setAppearanceMode = function(appearanceMode, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "setAppearanceMode",
+    [appearanceMode]
+  );
+};
 
-  this.scrollToPreviousPage = function(animated, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "scrollToPreviousPage",
-      [animated]
-    );
-  };
+// Cache
 
-  // Appearance
-  this.setAppearanceMode = function(appearanceMode, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "setAppearanceMode",
-      [appearanceMode]
-    );
-  };
+exports.clearCache = function(callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "clearCache",
+    []
+  );
+};
 
-  // Cache
+exports.removeCacheForPresentedDocument = function(callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "removeCacheForPresentedDocument",
+    []
+  );
+};
 
-  this.clearCache = function(callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "clearCache",
-      []
-    );
-  };
+// Toolbar
+var leftBarButtonItems = ["close"];
+var rightBarButtonItems = ["search", "outline", "thumbnails"];
 
-  this.removeCacheForPresentedDocument = function(callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "removeCacheForPresentedDocument",
-      []
-    );
-  };
+exports.dispatchLeftBarButtonAction = function(index) {
+  leftBarButtonItems[index].action();
+};
 
-  // Toolbar
-  var leftBarButtonItems = ["close"];
-  var rightBarButtonItems = ["search", "outline", "thumbnails"];
+exports.dispatchRightBarButtonAction = function(index) {
+  rightBarButtonItems[index].action();
+};
 
-  this.dispatchLeftBarButtonAction = function(index) {
-    leftBarButtonItems[index].action();
-  };
+exports.setLeftBarButtonItems = function(items) {
+  leftBarButtonItems = items;
+  exec(
+    function(result) {},
+    function(error) {},
+    "PSPDFKitPlugin",
+    "setLeftBarButtonItems",
+    [items]
+  );
+};
 
-  this.dispatchRightBarButtonAction = function(index) {
-    rightBarButtonItems[index].action();
-  };
+exports.setRightBarButtonItems = function(items) {
+  rightBarButtonItems = items;
+  exec(
+    function(result) {},
+    function(error) {},
+    "PSPDFKitPlugin",
+    "setRightBarButtonItems",
+    [items]
+  );
+};
 
-  this.setLeftBarButtonItems = function(items) {
-    leftBarButtonItems = items;
-    exec(
-      function(result) {},
-      function(error) {},
-      "PSPDFKitPlugin",
-      "setLeftBarButtonItems",
-      [items]
-    );
-  };
+exports.getLeftBarButtonItems = function(callback) {
+  callback(leftBarButtonItems);
+};
 
-  this.setRightBarButtonItems = function(items) {
-    rightBarButtonItems = items;
-    exec(
-      function(result) {},
-      function(error) {},
-      "PSPDFKitPlugin",
-      "setRightBarButtonItems",
-      [items]
-    );
-  };
+exports.getRightBarButtonItems = function(callback) {
+  callback(rightBarButtonItems);
+};
 
-  this.getLeftBarButtonItems = function(callback) {
-    callback(leftBarButtonItems);
-  };
+// Annotation toolbar
 
-  this.getRightBarButtonItems = function(callback) {
-    callback(rightBarButtonItems);
-  };
+exports.hideAnnotationToolbar = function(callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "hideAnnotationToolbar",
+    []
+  );
+};
 
-  // Annotation toolbar
+exports.showAnnotationToolbar = function(callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "showAnnotationToolbar",
+    []
+  );
+};
 
-  this.hideAnnotationToolbar = function(callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "hideAnnotationToolbar",
-      []
-    );
-  };
+exports.toggleAnnotationToolbar = function(callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "toggleAnnotationToolbar",
+    []
+  );
+};
 
-  this.showAnnotationToolbar = function(callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "showAnnotationToolbar",
-      []
-    );
-  };
+// Instant JSON
 
-  this.toggleAnnotationToolbar = function(callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "toggleAnnotationToolbar",
-      []
-    );
-  };
+exports.applyInstantJSON = function(jsonValue, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "applyInstantJSON",
+    [jsonValue]
+  );
+};
 
-  // Instant JSON
+exports.addAnnotation = function(jsonAnnotation, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "addAnnotation",
+    [jsonAnnotation]
+  );
+};
 
-  this.applyInstantJSON = function(jsonValue, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "applyInstantJSON",
-      [jsonValue]
-    );
-  };
+exports.removeAnnotation = function(jsonAnnotation, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "removeAnnotation",
+    [jsonAnnotation]
+  );
+};
 
-  this.addAnnotation = function(jsonAnnotation, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "addAnnotation",
-      [jsonAnnotation]
-    );
-  };
+exports.getAnnotations = function(pageIndex, type, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "getAnnotations",
+    [pageIndex, type]
+  );
+};
 
-  this.removeAnnotation = function(jsonAnnotation, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "removeAnnotation",
-      [jsonAnnotation]
-    );
-  };
+exports.getAllUnsavedAnnotations = function(callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "getAllUnsavedAnnotations",
+    []
+  );
+};
 
-  this.getAnnotations = function(pageIndex, type, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "getAnnotations",
-      [pageIndex, type]
-    );
-  };
+// Forms
+exports.setFormFieldValue = function(value, fullyQualifiedName, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "setFormFieldValue",
+    [value, fullyQualifiedName]
+  );
+};
 
-  this.getAllUnsavedAnnotations = function(callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "getAllUnsavedAnnotations",
-      []
-    );
-  };
+exports.getFormFieldValue = function(fullyQualifiedName, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "getFormFieldValue",
+    [fullyQualifiedName]
+  );
+};
 
-  // Forms
-  this.setFormFieldValue = function(value, fullyQualifiedName, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "setFormFieldValue",
-      [value, fullyQualifiedName]
-    );
-  };
+// XFDF
+exports.importXFDF = function(xfdfPath, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "importXFDF",
+    [xfdfPath]
+  );
+};
 
-  this.getFormFieldValue = function(fullyQualifiedName, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "getFormFieldValue",
-      [fullyQualifiedName]
-    );
-  };
+exports.exportXFDF = function(xfdfPath, callback) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "exportXFDF",
+    [xfdfPath]
+  );
+};
 
-  // XFDF
-  this.importXFDF = function(xfdfPath, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "importXFDF",
-      [xfdfPath]
-    );
-  };
-
-  this.exportXFDF = function(xfdfPath, callback) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "exportXFDF",
-      [xfdfPath]
-    );
-  };
-
-  // Document Processing
-  this.processAnnotations = function(
-    annotationChange,
-    processedDocumentPath,
-    callback,
-    annotationType
-  ) {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "processAnnotations",
-      [annotationChange, processedDocumentPath, annotationType]
-    );
-  };
-})();
-module.exports = PSPDFKitPlugin;
+// Document Processing
+exports.processAnnotations = function(
+  annotationChange,
+  processedDocumentPath,
+  callback,
+  annotationType
+) {
+  exec(
+    function(success) {
+      if (callback) callback(success, null);
+    },
+    function(error) {
+      console.log(error);
+      if (callback) callback(null, error);
+    },
+    "PSPDFKitPlugin",
+    "processAnnotations",
+    [annotationChange, processedDocumentPath, annotationType]
+  );
+};
