@@ -11,6 +11,8 @@
 //
 
 var PSPDFKitPlugin = new (function() {
+  var exec = require('cordova/exec');
+	
   // Events
   var listeners = {};
 
@@ -55,7 +57,7 @@ var PSPDFKitPlugin = new (function() {
 
   // License key
   this.setLicenseKey = function(key, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -71,7 +73,7 @@ var PSPDFKitPlugin = new (function() {
 
   // PDF Generation method
   this.convertPDFFromHTMLString = function(html, fileName, options, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -87,7 +89,7 @@ var PSPDFKitPlugin = new (function() {
 
   // Document methods
   this.present = function(path, options, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -102,7 +104,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.presentWithXFDF = function(path, xfdfPath, callback, options) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -117,7 +119,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.dismiss = function(callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -132,7 +134,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.reload = function(callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -147,7 +149,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.search = function(query, animated, headless, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -162,7 +164,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.saveAnnotations = function(callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -177,7 +179,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.getHasDirtyAnnotations = function(callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -193,7 +195,7 @@ var PSPDFKitPlugin = new (function() {
 
   // Configuration
   this.setOptions = function(options, animated, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -208,7 +210,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.getOptions = function(names, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -223,7 +225,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.setOption = function(name, value, animated, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -238,7 +240,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.getOption = function(name, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -255,7 +257,7 @@ var PSPDFKitPlugin = new (function() {
   // Page scrolling
 
   this.setPage = function(page, animated, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -270,7 +272,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.getPage = function(callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -285,7 +287,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.getScreenPage = function(callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -300,7 +302,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.getPageCount = function(callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -315,7 +317,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.scrollToNextPage = function(animated, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -330,7 +332,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.scrollToPreviousPage = function(animated, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -346,7 +348,7 @@ var PSPDFKitPlugin = new (function() {
 
   // Appearance
   this.setAppearanceMode = function(appearanceMode, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -363,7 +365,7 @@ var PSPDFKitPlugin = new (function() {
   // Cache
 
   this.clearCache = function(callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -378,7 +380,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.removeCacheForPresentedDocument = function(callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -406,7 +408,7 @@ var PSPDFKitPlugin = new (function() {
 
   this.setLeftBarButtonItems = function(items) {
     leftBarButtonItems = items;
-    cordova.exec(
+    exec(
       function(result) {},
       function(error) {},
       "PSPDFKitPlugin",
@@ -417,7 +419,7 @@ var PSPDFKitPlugin = new (function() {
 
   this.setRightBarButtonItems = function(items) {
     rightBarButtonItems = items;
-    cordova.exec(
+    exec(
       function(result) {},
       function(error) {},
       "PSPDFKitPlugin",
@@ -437,7 +439,7 @@ var PSPDFKitPlugin = new (function() {
   // Annotation toolbar
 
   this.hideAnnotationToolbar = function(callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -452,7 +454,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.showAnnotationToolbar = function(callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -467,7 +469,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.toggleAnnotationToolbar = function(callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -484,7 +486,7 @@ var PSPDFKitPlugin = new (function() {
   // Instant JSON
 
   this.applyInstantJSON = function(jsonValue, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -499,7 +501,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.addAnnotation = function(jsonAnnotation, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -514,7 +516,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.removeAnnotation = function(jsonAnnotation, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -529,7 +531,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.getAnnotations = function(pageIndex, type, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -544,7 +546,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.getAllUnsavedAnnotations = function(callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -560,7 +562,7 @@ var PSPDFKitPlugin = new (function() {
 
   // Forms
   this.setFormFieldValue = function(value, fullyQualifiedName, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -575,7 +577,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.getFormFieldValue = function(fullyQualifiedName, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -591,7 +593,7 @@ var PSPDFKitPlugin = new (function() {
 
   // XFDF
   this.importXFDF = function(xfdfPath, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -606,7 +608,7 @@ var PSPDFKitPlugin = new (function() {
   };
 
   this.exportXFDF = function(xfdfPath, callback) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
@@ -627,7 +629,7 @@ var PSPDFKitPlugin = new (function() {
     callback,
     annotationType
   ) {
-    cordova.exec(
+    exec(
       function(success) {
         if (callback) callback(success, null);
       },
