@@ -1,8 +1,8 @@
 //
 //  PSPDFKit.h
-//  PSPDFPlugin for Apache Cordova
+//  PSPDFKit Plugin for Apache Cordova
 //
-//  Copyright © 2013-2017 PSPDFKit GmbH. All rights reserved.
+//  Copyright © 2013-2019 PSPDFKit GmbH. All rights reserved.
 //
 //  THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY AUSTRIAN COPYRIGHT LAW
 //  AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT.

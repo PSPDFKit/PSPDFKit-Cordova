@@ -1,8 +1,8 @@
 //
 //  PSPDFKit.m
-//  PSPDFPlugin for Apache Cordova
+//  PSPDFKit Plugin for Apache Cordova
 //
-//  Copyright © 2013-2017 PSPDFKit GmbH. All rights reserved.
+//  Copyright © 2013-2019 PSPDFKit GmbH. All rights reserved.
 //
 //  THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY AUSTRIAN COPYRIGHT LAW
 //  AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT.
@@ -26,7 +26,6 @@
 @property (nonatomic) BOOL disableAutomaticSaving;
 
 @end
-
 
 @implementation PSPDFKitPlugin
 
@@ -56,7 +55,6 @@
 
 - (void)setOptions:(NSDictionary *)options forObject:(id)object animated:(BOOL)animated {
     if (object) {
-
         //merge with defaults
         NSMutableDictionary *newOptions = [self.defaultOptions mutableCopy];
         [newOptions addEntriesFromDictionary:options];
@@ -600,140 +598,140 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     if (!enumsByType) {
         enumsByType = @{
 
-                        @"UIBarButtonItemStyle":
+            @"UIBarButtonItemStyle":
 
-                            @{@"plain": @(UIBarButtonItemStylePlain),
-                              @"done": @(UIBarButtonItemStyleDone)},
+                @{@"plain": @(UIBarButtonItemStylePlain),
+                  @"done": @(UIBarButtonItemStyleDone)},
 
-                        @"PSPDFAnnotationSaveMode":
+            @"PSPDFAnnotationSaveMode":
 
-                            @{@"disabled": @(PSPDFAnnotationSaveModeDisabled),
-                              @"externalFile": @(PSPDFAnnotationSaveModeExternalFile),
-                              @"embedded": @(PSPDFAnnotationSaveModeEmbedded),
-                              @"embeddedWithExternalFileAsFallback": @(PSPDFAnnotationSaveModeEmbeddedWithExternalFileAsFallback)},
+                @{@"disabled": @(PSPDFAnnotationSaveModeDisabled),
+                  @"externalFile": @(PSPDFAnnotationSaveModeExternalFile),
+                  @"embedded": @(PSPDFAnnotationSaveModeEmbedded),
+                  @"embeddedWithExternalFileAsFallback": @(PSPDFAnnotationSaveModeEmbeddedWithExternalFileAsFallback)},
 
-                        @"PSPDFTextCheckingType":
+            @"PSPDFTextCheckingType":
 
-                            @{@"link": @(PSPDFTextCheckingTypeLink),
-                              @"phoneNumber": @(PSPDFTextCheckingTypePhoneNumber),
-                              @"all": @(PSPDFTextCheckingTypeAll)},
+                @{@"link": @(PSPDFTextCheckingTypeLink),
+                  @"phoneNumber": @(PSPDFTextCheckingTypePhoneNumber),
+                  @"all": @(PSPDFTextCheckingTypeAll)},
 
-                        @"PSPDFTextSelectionMenuAction":
+            @"PSPDFTextSelectionMenuAction":
 
-                            @{@"search": @(PSPDFTextSelectionMenuActionSearch),
-                              @"define": @(PSPDFTextSelectionMenuActionDefine),
-                              @"wikipedia": @(PSPDFTextSelectionMenuActionWikipedia),
-                              @"speak": @(PSPDFTextSelectionMenuActionSpeak),
-                              @"all": @(PSPDFTextSelectionMenuActionAll)},
+                @{@"search": @(PSPDFTextSelectionMenuActionSearch),
+                  @"define": @(PSPDFTextSelectionMenuActionDefine),
+                  @"wikipedia": @(PSPDFTextSelectionMenuActionWikipedia),
+                  @"speak": @(PSPDFTextSelectionMenuActionSpeak),
+                  @"all": @(PSPDFTextSelectionMenuActionAll)},
 
-                        @"PSPDFPageTransition":
+            @"PSPDFPageTransition":
 
-                            @{@"scrollPerSpread": @(PSPDFPageTransitionScrollPerSpread),
-                              @"scrollContinuous": @(PSPDFPageTransitionScrollContinuous),
-                              @"curl": @(PSPDFPageTransitionCurl)},
+                @{@"scrollPerSpread": @(PSPDFPageTransitionScrollPerSpread),
+                  @"scrollContinuous": @(PSPDFPageTransitionScrollContinuous),
+                  @"curl": @(PSPDFPageTransitionCurl)},
 
-                        @"PSPDFViewMode":
+            @"PSPDFViewMode":
 
-                            @{@"document": @(PSPDFViewModeDocument),
-                              @"thumbnails": @(PSPDFViewModeThumbnails)},
+                @{@"document": @(PSPDFViewModeDocument),
+                  @"thumbnails": @(PSPDFViewModeThumbnails)},
 
-                        @"PSPDFPageMode":
+            @"PSPDFPageMode":
 
-                            @{@"single": @(PSPDFPageModeSingle),
-                              @"double": @(PSPDFPageModeDouble),
-                              @"automatic": @(PSPDFPageModeAutomatic)},
+                @{@"single": @(PSPDFPageModeSingle),
+                  @"double": @(PSPDFPageModeDouble),
+                  @"automatic": @(PSPDFPageModeAutomatic)},
 
-                        @"PSPDFScrollDirection":
+            @"PSPDFScrollDirection":
 
-                            @{@"horizontal": @(PSPDFScrollDirectionHorizontal),
-                              @"vertical": @(PSPDFScrollDirectionVertical)},
+                @{@"horizontal": @(PSPDFScrollDirectionHorizontal),
+                  @"vertical": @(PSPDFScrollDirectionVertical)},
 
-                        @"PSPDFLinkAction":
+            @"PSPDFLinkAction":
 
-                            @{@"none": @(PSPDFLinkActionNone),
-                              @"alertView": @(PSPDFLinkActionAlertView),
-                              @"openSafari": @(PSPDFLinkActionOpenSafari),
-                              @"inlineBrowser": @(PSPDFLinkActionInlineBrowser)},
+                @{@"none": @(PSPDFLinkActionNone),
+                  @"alertView": @(PSPDFLinkActionAlertView),
+                  @"openSafari": @(PSPDFLinkActionOpenSafari),
+                  @"inlineBrowser": @(PSPDFLinkActionInlineBrowser)},
 
-                        @"PSPDFUserInterfaceViewMode":
+            @"PSPDFUserInterfaceViewMode":
 
-                            @{@"always": @(PSPDFUserInterfaceViewModeAlways),
-                              @"automatic": @(PSPDFUserInterfaceViewModeAutomatic),
-                              @"automaticNoFirstLastPage": @(PSPDFUserInterfaceViewModeAutomaticNoFirstLastPage),
-                              @"never": @(PSPDFUserInterfaceViewModeNever)},
+                @{@"always": @(PSPDFUserInterfaceViewModeAlways),
+                  @"automatic": @(PSPDFUserInterfaceViewModeAutomatic),
+                  @"automaticNoFirstLastPage": @(PSPDFUserInterfaceViewModeAutomaticNoFirstLastPage),
+                  @"never": @(PSPDFUserInterfaceViewModeNever)},
 
-                        @"PSPDFUserInterfaceViewAnimation":
+            @"PSPDFUserInterfaceViewAnimation":
 
-                            @{@"none": @(PSPDFUserInterfaceViewAnimationNone),
-                              @"fade": @(PSPDFUserInterfaceViewAnimationFade),
-                              @"slide": @(PSPDFUserInterfaceViewAnimationSlide)},
+                @{@"none": @(PSPDFUserInterfaceViewAnimationNone),
+                  @"fade": @(PSPDFUserInterfaceViewAnimationFade),
+                  @"slide": @(PSPDFUserInterfaceViewAnimationSlide)},
 
-                        @"PSPDFThumbnailBarMode":
+            @"PSPDFThumbnailBarMode":
 
-                            @{@"none": @(PSPDFThumbnailBarModeNone),
-                              @"scrobbleBar": @(PSPDFThumbnailBarModeScrubberBar),
-                              @"scrollable": @(PSPDFThumbnailBarModeScrollable)},
+                @{@"none": @(PSPDFThumbnailBarModeNone),
+                  @"scrobbleBar": @(PSPDFThumbnailBarModeScrubberBar),
+                  @"scrollable": @(PSPDFThumbnailBarModeScrollable)},
 
-                        @"PSPDFAnnotationType":
+            @"PSPDFAnnotationType":
 
-                            @{@"None": @(PSPDFAnnotationTypeNone),
-                              @"Undefined": @(PSPDFAnnotationTypeUndefined),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeLink): @(PSPDFAnnotationTypeLink),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeHighlight): @(PSPDFAnnotationTypeHighlight),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeStrikeOut): @(PSPDFAnnotationTypeStrikeOut),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeUnderline): @(PSPDFAnnotationTypeUnderline),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeSquiggly): @(PSPDFAnnotationTypeSquiggly),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeFreeText): @(PSPDFAnnotationTypeFreeText),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeInk): @(PSPDFAnnotationTypeInk),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeSquare): @(PSPDFAnnotationTypeSquare),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeCircle): @(PSPDFAnnotationTypeCircle),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeLine): @(PSPDFAnnotationTypeLine),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeNote): @(PSPDFAnnotationTypeNote),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeStamp): @(PSPDFAnnotationTypeStamp),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeCaret): @(PSPDFAnnotationTypeCaret),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeRichMedia): @(PSPDFAnnotationTypeRichMedia),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeScreen): @(PSPDFAnnotationTypeScreen),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeWidget): @(PSPDFAnnotationTypeWidget),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeSound): @(PSPDFAnnotationTypeSound),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeFile): @(PSPDFAnnotationTypeFile),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypePolygon): @(PSPDFAnnotationTypePolygon),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypePolyLine): @(PSPDFAnnotationTypePolyLine),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypePopup): @(PSPDFAnnotationTypePopup),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeWatermark): @(PSPDFAnnotationTypeWatermark),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeTrapNet): @(PSPDFAnnotationTypeTrapNet),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeThreeDimensional): @(PSPDFAnnotationTypeThreeDimensional),
-                              PSPDFStringFromAnnotationType(PSPDFAnnotationTypeRedaction): @(PSPDFAnnotationTypeRedaction),
-                              @"All": @(PSPDFAnnotationTypeAll)},
+                @{@"None": @(PSPDFAnnotationTypeNone),
+                  @"Undefined": @(PSPDFAnnotationTypeUndefined),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeLink): @(PSPDFAnnotationTypeLink),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeHighlight): @(PSPDFAnnotationTypeHighlight),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeStrikeOut): @(PSPDFAnnotationTypeStrikeOut),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeUnderline): @(PSPDFAnnotationTypeUnderline),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeSquiggly): @(PSPDFAnnotationTypeSquiggly),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeFreeText): @(PSPDFAnnotationTypeFreeText),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeInk): @(PSPDFAnnotationTypeInk),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeSquare): @(PSPDFAnnotationTypeSquare),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeCircle): @(PSPDFAnnotationTypeCircle),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeLine): @(PSPDFAnnotationTypeLine),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeNote): @(PSPDFAnnotationTypeNote),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeStamp): @(PSPDFAnnotationTypeStamp),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeCaret): @(PSPDFAnnotationTypeCaret),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeRichMedia): @(PSPDFAnnotationTypeRichMedia),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeScreen): @(PSPDFAnnotationTypeScreen),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeWidget): @(PSPDFAnnotationTypeWidget),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeSound): @(PSPDFAnnotationTypeSound),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeFile): @(PSPDFAnnotationTypeFile),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypePolygon): @(PSPDFAnnotationTypePolygon),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypePolyLine): @(PSPDFAnnotationTypePolyLine),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypePopup): @(PSPDFAnnotationTypePopup),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeWatermark): @(PSPDFAnnotationTypeWatermark),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeTrapNet): @(PSPDFAnnotationTypeTrapNet),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeThreeDimensional): @(PSPDFAnnotationTypeThreeDimensional),
+                  PSPDFStringFromAnnotationType(PSPDFAnnotationTypeRedaction): @(PSPDFAnnotationTypeRedaction),
+                  @"All": @(PSPDFAnnotationTypeAll)},
 
-                        @"PSPDFAppearanceMode":
+            @"PSPDFAppearanceMode":
 
-                            @{@"default": @(PSPDFAppearanceModeDefault),
-                              @"sepia": @(PSPDFAppearanceModeSepia),
-                              @"night": @(PSPDFAppearanceModeNight)},
+                @{@"default": @(PSPDFAppearanceModeDefault),
+                  @"sepia": @(PSPDFAppearanceModeSepia),
+                  @"night": @(PSPDFAppearanceModeNight)},
 
-                        @"PSPDFAnnotationChange":
+            @"PSPDFAnnotationChange":
 
-                            @{@"flatten": @(PSPDFAnnotationChangeFlatten),
-                              @"remove": @(PSPDFAnnotationChangeRemove),
-                              @"embed": @(PSPDFAnnotationChangeEmbed),
-                              @"print": @(PSPDFAnnotationChangePrint)},
+                @{@"flatten": @(PSPDFAnnotationChangeFlatten),
+                  @"remove": @(PSPDFAnnotationChangeRemove),
+                  @"embed": @(PSPDFAnnotationChangeEmbed),
+                  @"print": @(PSPDFAnnotationChangePrint)},
 
-                        //                        @"PSPDFDocumentSharingOptions":
-                        //
-                        //                            @{@"None": @(PSPDFDocumentSharingOptionNone),
-                        //                              @"CurrentPageOnly": @(PSPDFDocumentSharingOptionCurrentPageOnly),
-                        //                              @"PageRange": @(PSPDFDocumentSharingOptionPageRange),
-                        //                              @"AllPages": @(PSPDFDocumentSharingOptionAllPages),
-                        //                              @"AnnotatedPages": @(PSPDFDocumentSharingOptionAnnotatedPages),
-                        //                              @"EmbedAnnotations": @(PSPDFDocumentSharingOptionEmbedAnnotations),
-                        //                              @"FlattenAnnotations": @(PSPDFDocumentSharingOptionFlattenAnnotations),
-                        //                              @"AnnotationsSummary": @(PSPDFDocumentSharingOptionAnnotationsSummary),
-                        //                              @"RemoveAnnotations": @(PSPDFDocumentSharingOptionRemoveAnnotations),
-                        //                              @"FlattenAnnotationsForPrint": @(PSPDFDocumentSharingOptionFlattenAnnotationsForPrint),
-                        //                              @"OriginalFile": @(PSPDFDocumentSharingOptionOriginalFile),
-                        //                              @"Image": @(PSPDFDocumentSharingOptionImage)},
+            //                        @"PSPDFDocumentSharingOptions":
+            //
+            //                            @{@"None": @(PSPDFDocumentSharingOptionNone),
+            //                              @"CurrentPageOnly": @(PSPDFDocumentSharingOptionCurrentPageOnly),
+            //                              @"PageRange": @(PSPDFDocumentSharingOptionPageRange),
+            //                              @"AllPages": @(PSPDFDocumentSharingOptionAllPages),
+            //                              @"AnnotatedPages": @(PSPDFDocumentSharingOptionAnnotatedPages),
+            //                              @"EmbedAnnotations": @(PSPDFDocumentSharingOptionEmbedAnnotations),
+            //                              @"FlattenAnnotations": @(PSPDFDocumentSharingOptionFlattenAnnotations),
+            //                              @"AnnotationsSummary": @(PSPDFDocumentSharingOptionAnnotationsSummary),
+            //                              @"RemoveAnnotations": @(PSPDFDocumentSharingOptionRemoveAnnotations),
+            //                              @"FlattenAnnotationsForPrint": @(PSPDFDocumentSharingOptionFlattenAnnotationsForPrint),
+            //                              @"OriginalFile": @(PSPDFDocumentSharingOptionOriginalFile),
+            //                              @"Image": @(PSPDFDocumentSharingOptionImage)},
 
-                        };
+        };
 
         //Note: this method crashes the second time a
         //PDF is opened if the dictionary is not copied.
@@ -751,6 +749,9 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     NSString *key = [command argumentAtIndex:0];
     if (key.length > 0) {
         [PSPDFKit setLicenseKey:key];
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:YES] callbackId:command.callbackId];
+    } else {
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Invalid License Key"] callbackId:command.callbackId];
     }
 }
 
