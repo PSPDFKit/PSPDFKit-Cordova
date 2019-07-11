@@ -11,6 +11,7 @@
 //
 
 var exec = require("cordova/exec");
+var platform = window.cordova.platformId;
 
 // License key
 
@@ -25,18 +26,22 @@ var exec = require("cordova/exec");
  * -iOS
  */
 exports.setLicenseKey = function(key, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "setLicenseKey",
-    [key]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "setLicenseKey",
+      [key]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 // Document methods
@@ -54,18 +59,22 @@ exports.setLicenseKey = function(key, callback) {
  * -iOS
  */
 exports.present = function(path, options, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "present",
-    [path, options]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "present",
+      [path, options]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 /**
@@ -82,18 +91,22 @@ exports.present = function(path, options, callback) {
  * -iOS
  */
 exports.presentWithXFDF = function(path, xfdfPath, callback, options) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "presentWithXFDF",
-    [path, xfdfPath, options]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "presentWithXFDF",
+      [path, xfdfPath, options]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 /** Dismisses the modally presented PDF view.
@@ -105,18 +118,22 @@ exports.presentWithXFDF = function(path, xfdfPath, callback, options) {
  * -iOS
  */
 exports.dismiss = function(callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "dismiss",
-    []
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "dismiss",
+      []
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 /** Reloads the current PDF.
@@ -128,18 +145,22 @@ exports.dismiss = function(callback) {
  * -iOS
  */
 exports.reload = function(callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "reload",
-    []
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "reload",
+      []
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 /** Triggers a search for the specified query text.
@@ -154,18 +175,22 @@ exports.reload = function(callback) {
  * -iOS
  */
 exports.search = function(query, animated, headless, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "search",
-    [query, animated, headless]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "search",
+      [query, animated, headless]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 /** Saves any changed annotations in the current document.
@@ -177,18 +202,22 @@ exports.search = function(query, animated, headless, callback) {
  * -iOS
  */
 exports.saveAnnotations = function(callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "saveAnnotations",
-    []
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "saveAnnotations",
+      []
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 /** Return true in the success (or result) callback if the document has unsaved annotation. Returns false otherwise.
@@ -200,18 +229,22 @@ exports.saveAnnotations = function(callback) {
  * -iOS
  */
 exports.getHasDirtyAnnotations = function(callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "getHasDirtyAnnotations",
-    []
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getHasDirtyAnnotations",
+      []
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 // Events
@@ -270,18 +303,22 @@ exports.removeEventListener = function(type, listener) {
  * -iOS
  */
 exports.setOptions = function(options, animated, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "setOptions",
-    [options, animated]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "setOptions",
+      [options, animated]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 /**
@@ -295,18 +332,22 @@ exports.setOptions = function(options, animated, callback) {
  * -iOS
  */
 exports.getOptions = function(names, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "getOptions",
-    [names]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getOptions",
+      [names]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 /**
@@ -322,18 +363,22 @@ exports.getOptions = function(names, callback) {
  * -iOS
  */
 exports.setOption = function(name, value, animated, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "setOption",
-    [name, value, animated]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "setOption",
+      [name, value, animated]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 /**
@@ -347,158 +392,198 @@ exports.setOption = function(name, value, animated, callback) {
  * -iOS
  */
 exports.getOption = function(name, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "getOption",
-    [name]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getOption",
+      [name]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 // Page scrolling
 
 exports.setPage = function(page, animated, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "setPage",
-    [page, animated]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "setPage",
+      [page, animated]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 exports.getPage = function(callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "getPage",
-    []
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getPage",
+      []
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 exports.getScreenPage = function(callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "getScreenPage",
-    []
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getScreenPage",
+      []
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 exports.getPageCount = function(callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "getPageCount",
-    []
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getPageCount",
+      []
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 exports.scrollToNextPage = function(animated, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "scrollToNextPage",
-    [animated]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "scrollToNextPage",
+      [animated]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 exports.scrollToPreviousPage = function(animated, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "scrollToPreviousPage",
-    [animated]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "scrollToPreviousPage",
+      [animated]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 // Appearance
 exports.setAppearanceMode = function(appearanceMode, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "setAppearanceMode",
-    [appearanceMode]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "setAppearanceMode",
+      [appearanceMode]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 // Cache
 
 exports.clearCache = function(callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "clearCache",
-    []
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "clearCache",
+      []
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 exports.removeCacheForPresentedDocument = function(callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "removeCacheForPresentedDocument",
-    []
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "removeCacheForPresentedDocument",
+      []
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 // Toolbar
@@ -506,7 +591,11 @@ var leftBarButtonItems = ["close"];
 var rightBarButtonItems = ["search", "outline", "thumbnails"];
 
 exports.dispatchLeftBarButtonAction = function(index) {
-  leftBarButtonItems[index].action();
+  if (platform === "ios") {
+    leftBarButtonItems[index].action();
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 exports.dispatchRightBarButtonAction = function(index) {
@@ -514,80 +603,108 @@ exports.dispatchRightBarButtonAction = function(index) {
 };
 
 exports.setLeftBarButtonItems = function(items) {
-  leftBarButtonItems = items;
-  exec(
-    function(result) {},
-    function(error) {},
-    "PSPDFKitPlugin",
-    "setLeftBarButtonItems",
-    [items]
-  );
+  if (platform === "ios") {
+    leftBarButtonItems = items;
+    exec(
+      function(result) {},
+      function(error) {},
+      "PSPDFKitPlugin",
+      "setLeftBarButtonItems",
+      [items]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 exports.setRightBarButtonItems = function(items) {
-  rightBarButtonItems = items;
-  exec(
-    function(result) {},
-    function(error) {},
-    "PSPDFKitPlugin",
-    "setRightBarButtonItems",
-    [items]
-  );
+  if (platform === "ios") {
+    rightBarButtonItems = items;
+    exec(
+      function(result) {},
+      function(error) {},
+      "PSPDFKitPlugin",
+      "setRightBarButtonItems",
+      [items]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 exports.getLeftBarButtonItems = function(callback) {
-  callback(leftBarButtonItems);
+  if (platform === "ios") {
+    callback(leftBarButtonItems);
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 exports.getRightBarButtonItems = function(callback) {
-  callback(rightBarButtonItems);
+  if (platform === "ios") {
+    callback(rightBarButtonItems);
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 // Annotation toolbar
 
 exports.hideAnnotationToolbar = function(callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "hideAnnotationToolbar",
-    []
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "hideAnnotationToolbar",
+      []
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 exports.showAnnotationToolbar = function(callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "showAnnotationToolbar",
-    []
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "showAnnotationToolbar",
+      []
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 exports.toggleAnnotationToolbar = function(callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "toggleAnnotationToolbar",
-    []
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "toggleAnnotationToolbar",
+      []
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 // Instant JSON
@@ -721,33 +838,41 @@ exports.getAllUnsavedAnnotations = function(callback) {
 
 // Forms
 exports.setFormFieldValue = function(value, fullyQualifiedName, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "setFormFieldValue",
-    [value, fullyQualifiedName]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "setFormFieldValue",
+      [value, fullyQualifiedName]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 exports.getFormFieldValue = function(fullyQualifiedName, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "getFormFieldValue",
-    [fullyQualifiedName]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getFormFieldValue",
+      [fullyQualifiedName]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 // XFDF
@@ -809,18 +934,22 @@ exports.processAnnotations = function(
   callback,
   annotationType
 ) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "processAnnotations",
-    [annotationChange, processedDocumentPath, annotationType]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "processAnnotations",
+      [annotationChange, processedDocumentPath, annotationType]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 // PDF Generation method
@@ -838,16 +967,20 @@ exports.processAnnotations = function(
  * -iOS
  */
 exports.convertPDFFromHTMLString = function(html, fileName, options, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "convertPDFFromHTMLString",
-    [html, fileName, options]
-  );
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "convertPDFFromHTMLString",
+      [html, fileName, options]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
