@@ -65,10 +65,12 @@ public class CordovaPdfActivity extends PdfActivity {
 
   private void bindActivity(@NonNull final CordovaPdfActivity activity) {
     checkArgumentNotNull(activity, "activity");
+
     if (currentActivity != null) {
-      throw new IllegalStateException(
-          "EventDispatcher only supports a single CordovaPdfActivity at a time.");
+      releaseActivity();
+      currentActivity.disposeSubscriptions();
     }
+
     currentActivity = activity;
     final PdfFragment pdfFragment = currentActivity.getPdfFragment();
     if (pdfFragment == null) {
@@ -111,10 +113,12 @@ public class CordovaPdfActivity extends PdfActivity {
 
   @Override
   protected void onDestroy() {
-    releaseActivity();
+    if(currentActivity.equals(this)) {
+      releaseActivity();
 
-    if (isFinishing()) {
-      disposeSubscriptions();
+      if (isFinishing()) {
+        disposeSubscriptions();
+      }
     }
 
     super.onDestroy();
