@@ -29,6 +29,33 @@ We assume you have [a current install of Cordova](https://cordova.apache.org/#ge
 
 4. Install the Pods: `cd YourApp/platforms/ios` and run `pod install`.
 
+Usage
+-----------
+
+The plugin is accessed via the PSPDFKit singleton. Here are some example calls:
+    
+    // Set your license key here.
+    PSPDFKit.setLicenseKey("YOUR KEY");
+
+    // Show pdf with in single page mode, with a cblack background.
+    PSPDFKit.present('pdf/document.pdf', {
+        pageMode: 'single',
+        backgroundColor: 'black'
+    });
+    
+    // Show a PDF document with a callback.
+    PSPDFKit.present('pdf/castles.pdf', function() {
+        alert('pdf has appeared');
+    });
+    
+    // Scroll to page 1.
+    PSPDFKit.setPage(1, true);
+    
+    // Get the page number.
+    PSPDFKit.getPage(function(page) {
+        alert('Current page: ' + page);
+    });
+
 Getting Started
 ---------------
 
@@ -102,7 +129,7 @@ Let's create a simple Ionic app that integrates PSPDFKit and uses the `pspdfkit-
 
 5. Use your CocoaPods Key: `open plugins/pspdfkit-cordova/plugin.xml` and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own key. If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
 
-6. Declare `PSPDFKitPlugin` in `src/declarations.d.ts` (create this file first): `declare var PSPDFKit: any;`
+6. Declare `PSPDFKit` in `src/declarations.d.ts` (create this file first): `declare var PSPDFKit: any;`
 7. Modifying `src/app/app.component.ts` to use the PSPDFKit plugin to Present a PDF:
 
 ```javascript
@@ -134,35 +161,6 @@ Error: Cannot find plugin.xml for plugin "PSPDFKit-Cordova". Please try adding i
 #### Solution:
 
 Run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` instead of `ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git`.
-
-Usage
------------
-
-The plugin is accessed via the PSPDFKitPlugin singleton. Here are some example calls:
-    
-    // set your license key here
-    PSPDFKit.setLicenseKey("YOUR KEY");
-
-    //show pdf with in double page mode, with curl transition red background
-    PSPDFKit.present('pdf/castles.pdf', {
-        pageTransition : 'curl',
-        pageMode: 'double',
-        backgroundColor: 'red'
-    });
-    
-    //show pdf with callback
-    PSPDFKit.present('pdf/castles.pdf', function() {
-        alert('pdf has appeared');
-    });
-    
-    //scroll to page 1
-    PSPDFKit.setPage(1, true);
-    
-    //get the page number
-    PSPDFKit.getPage(function(page) {
-        alert('Current page: ' + page);
-    });
-
 
 Functions
 ------------
@@ -418,7 +416,7 @@ Appearance options
 Events
 -------------
 
-The following events are supported by the PSPDFKitPlugin class
+The following events are supported by the PSPDFKit class
 
     shouldSetDocument
     willDisplayDocument
