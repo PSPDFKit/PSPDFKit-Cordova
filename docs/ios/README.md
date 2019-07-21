@@ -195,18 +195,3 @@ If you were using the old [Cordova-iOS Plugin](https://github.com/PSPDFKit/Cordo
   pageMode: 'single',
 });
 ```
-
-License
-------------
-
-Copyright 2011-2019 PSPDFKit GmbH. All rights reserved.
-
-THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY AUSTRIAN COPYRIGHT LAW
-AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT.
-UNAUTHORIZED REPRODUCTION OR DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
-
-You need a commercial license to use this project. Contact sales@pspdfkit.com for details.
-
-## Contributing
-  
-Please ensure [you signed our CLA](https://pspdfkit.com/guides/web/current/miscellaneous/contributing/) so we can accept your contributions.
