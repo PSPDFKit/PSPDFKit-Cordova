@@ -171,19 +171,19 @@ API
 
 You can find the API documentation in [PSPDFKit.js](../../www/PSPDFKit.js).
 
-`Cordova-iOS` Migration Guide
-----------------------------
+Migration Guide from `Cordova-iOS` 
+----------------------------------
 
 If you were using the old [Cordova-iOS Plugin](https://github.com/PSPDFKit/Cordova-iOS), please follow the steps below to migrate to this plugin:
 
 
 1. Remove the old plugin: `cordova plugin remove pspdfkit-cordova-ios`
-2. Open your Xcode project or workspace and remove `PSPDFKit.framework` and `PSPDFKitUI.framework` from your Target's embedded frameworks.
+2. Open your Xcode project or workspace and remove `PSPDFKit.framework` and `PSPDFKitUI.framework` from your Target:
 
 ![remove-frameworks](screenshots/remove-frameworks.png)
 
 3. Close your Xcode project or workspace.
-4. Integrate the new `pspdfkit-cordova` Plugin. See [Install](#install) instructions above.
+4. Integrate the new `pspdfkit-cordova` Plugin. See the [Install](#install) instructions above.
 5. Rename all `PSPDFKitPlugin` calls to `PSPDFKit` in your app's JavaScript code:
 
 ```diff
