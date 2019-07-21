@@ -5,7 +5,7 @@
 	<engines>
 		<engine name="cordova" version=">=6.3.1"/>
 	</engines>
-	<name>PSPDFKitPlugin</name>
+	<name>PSPDFKit</name>
 	<description>Integration of the PSPDFKit for Android and iOS.</description>
 	<author>PSPDFKit</author>
 	<license>Copyright 2011-2019 PSPDFKit GmbH. All rights reserved.
@@ -63,8 +63,8 @@ http://pspdfkit.com/license.html</license>
 			</feature>
 		</config-file>
 
-		<js-module src="www/PSPDFKitPlugin.js" name="PSPDFKitPlugin">
-			<clobbers target="PSPDFKitPlugin" />
+		<js-module src="www/PSPDFKit.js" name="PSPDFKit">
+			<clobbers target="PSPDFKit" />
 		</js-module>
 
 		<source-file src="src/ios/PSPDFKitPlugin.m"/>
@@ -125,7 +125,7 @@ In case there are issues, feel free to reach out to our support team at https://
 
 Plugin usage example:
 
-PSPDFKitPlugin.present('pdf/document.pdf', {
+PSPDFKit.present('pdf/document.pdf', {
   pageTransition: 'curl',
   editableAnnotationTypes: ['FreeText', 'Signature']
 });
