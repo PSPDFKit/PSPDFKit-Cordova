@@ -1,12 +1,20 @@
 Cordova Plugin for PSPDFKit 8 for iOS
 ========================================
 
-The [PSPDFKit SDK](https://pspdfkit.com/pdf-sdk/) is a framework that allows you to view, annotate, sign, and fill PDF forms on iOS, Android, Windows, macOS, and Web. [PSPDFKit Instant](https://pspdfkit.com/instant/) adds real-time collaboration features to seamlessly share, edit, and annotate PDF documents.
+The [PSPDFKit SDK](https://pspdfkit.com/pdf-sdk/) is a framework that allows you to view, annotate, sign, and fill PDF forms on iOS, Android, Windows, macOS, and Web.
 
 PSPDFKit comes with open source plugins for Cordova on both [iOS](https://pspdfkit.com/guides/ios/current/other-languages/apache-cordova-phonegap/) and [Android](https://pspdfkit.com/guides/android/current/other-languages/apache-cordova-phonegap/).
 
-**This plugin works with Cordova version 8.1.2 and above.**  
-**Please also make sure that you're using the latest version of Xcode 10.**
+**This plugin works with Cordova version 9.0.0 and above.**  
+**Please also make sure that you're using the latest version of Xcode 10.2.1**
+
+Requirements
+------------
+
+- Xcode 10.2.1 or later
+- PSPDFKit 8.4.2 for iOS or later
+- Cordova >= 9.0.0
+- CocoaPods >= 1.7.5
 
 Install
 -----------
