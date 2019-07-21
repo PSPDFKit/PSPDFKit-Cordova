@@ -13,46 +13,92 @@ Install
 
 We assume you have [a current install of Cordova](https://cordova.apache.org/#getstarted).
 
-    cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
+1. Run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
+2.  Open your project's `config.xml` and make sure that the deployment target to iOS 11 or later:
+```diff
+<platform name="ios">
+	<allow-intent href="itms:*" />
+	<allow-intent href="itms-apps:*" />
++	<preference name="deployment-target" value="11.0" />
+</platform>
+```
 
-Read the message at the end and complete installation.
-
-**You will need to manually edit the Xcode project and add PSPDFKit to your project manually.
-There is no automatic support for dynamic frameworks in Cordova yet. You will get a linker error if you forget this step.**
-
-**Note:** Make sure to follow [our integration guide](https://pspdfkit.com/guides/ios/current/getting-started/integrating-pspdfkit/) to strip the framework, working around an App Store submission bug.
-
-### Optional: CocoaPods Integration
-
-If you wish to integrate PSPDFKit into your project [using CocoaPods](https://pspdfkit.com/guides/ios/current/getting-started/using-cocoapods/), you can use a third-party plugin like [`cordova-plugin-cocoapods-support`](https://github.com/blakgeek/cordova-plugin-cocoapods-support).
+3. Open your project's `plugins/pspdfkit-cordova/plugin.xml` and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own CocoaPods Key.
 
 **Important** If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
 
-Demo
------------
+4. Install the Pods: `cd YouApp/platforms/ios` and run `pod install`.
 
-You can find a demo app in [CordovaDemo](CordovaDemo).
+Getting Started
+---------------
 
-In order to build it, please download PSPDFKit from your customer portal: https://customers.pspdfkit.com  
-The .dmg file you downloaded contains two directories called `PSPDFKit.framework` and `PSPDFKitUI.framework`.  
-Please copy these directories to `CordovaDemo/platforms/ios`.
+#### New Cordova Project
 
-You can set your license key in `CordovaDemo/www/js/index.js`.  
-(Look for `PSPDFKitPlugin.setLicenseKey('YOUR KEY');`)
+Let's create a simple Corodva app that integrates PSPDFKit and uses the `pspdfkit-cordova` plugin.
 
-After that, you can build the demo app with `$ cordova build`.  
-To run the demo app in the simulator use `$ cordova emulate`.
+1. Run `cordova create Cordova-Demo com.pspdfkit.demo CordovaDemo` to create a new Cordova project.
+2. Add a sample PDF into your `www` directory: `www/pdf/document.pdf`.
+3. Modify the `onDeviceReady` function in `www/js/index.js` like so:
 
-Ionic
------------
+```javascript
+    onDeviceReady: function() {
+        this.receivedEvent('deviceready');
+        // set your license key here
+        PSPDFKit.setLicenseKey("YOUR KEY", function(success, error) {
+        	if (success) {
+        		console.log("Success: " + success);
+        	} else if (error) {
+        		console.log("error: " + error);
+        	}
+        });
+		
+        //show pdf with in double page mode, with curl transition red background
+        PSPDFKit.present('pdf/PSPDFKit 8 QuickStart Guide.pdf', {
+            pageTransition : 'curl',
+            pageMode: 'double',
+            backgroundColor: 'red'
+        });
+    },
+```
 
-1. Create Ionic app Cordova plugin (replace `IonicDemo` with your app's name): `ionic start IonicDemo blank --cordova`
-2. Go into your app's folder: `cd IonicDemo`
-3. Add iOS platform: `ionic cordova platform add ios`
-4. Add PSPDFKit plugin: `ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git`
-5. Follow the instructions after adding the PSPDFKit plugin (manually edit the Xcode project)
-6. Declare `PSPDFKitPlugin` in `src/declarations.d.ts` (create this file first): `declare var PSPDFKitPlugin: any;`
-7. Present PDF by modifying `src/app/app.component.ts`:
+4. Run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
+5. Open `config.xml` and change the deployment target to iOS 11 or later:
+
+```diff
+<platform name="ios">
+	<allow-intent href="itms:*" />
+	<allow-intent href="itms-apps:*" />
++	<preference name="deployment-target" value="11.0" />
+</platform>
+```
+
+6. Use your CocoaPods Key: `open plugins/pspdfkit-cordova/plugin.xml` and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own key. If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
+
+5. Run `cordova platform add ios` to add the iOS platform.
+6. Run the app: Open `platforms/ios/CordovaDemo.xcworkspace` in Xcode, then build and run, or run `cordova emulate ios` in the Terminal.
+
+#### New Ionic Project
+
+Let's create a simple Ionic app that integrates PSPDFKit and uses the `pspdfkit-cordova` plugin.
+
+1. Run `ionic start IonicDemo blank --type=angular` to create a new Ionic project.
+2. Run `ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
+3. Add a sample PDF into your `www` directory: `www/pdf/document.pdf`.
+4. Open `config.xml` and change the deployment target to iOS 11 or later:
+
+```diff
+<platform name="ios">
+	<allow-intent href="itms:*" />
+	<allow-intent href="itms-apps:*" />
++ 	<allow-navigation href="*" />
++	<preference name="deployment-target" value="11.0" />
+</platform>
+```
+
+5. Use your CocoaPods Key: `open plugins/pspdfkit-cordova/plugin.xml` and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own key. If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
+
+6. Declare `PSPDFKitPlugin` in `src/declarations.d.ts` (create this file first): `declare var PSPDFKit: any;`
+7. Modifying `src/app/app.component.ts` to use the PSPDFKit plugin to Present a PDF:
 
 ```javascript
 constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
@@ -62,14 +108,15 @@ constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen
       statusBar.styleDefault();
       splashScreen.hide();
 
-      PSPDFKitPlugin.setLicenseKey('YOUR KEY');
-      PSPDFKitPlugin.present('pdf/document.pdf', {});
+      PSPDFKit.setLicenseKey('YOUR KEY');
+      PSPDFKit.present('pdf/document.pdf', {});
     });
 }
 ```
 
-8. Place your `document.pdf` in the `www/pdf` subdirectory.
-9. Try out your app: `ionic cordova emulate ios`
+8. Run `ionic cordova platform add ios` to add the iOS platform.
+9. Run `ionic cordova prepare ios` to prepare iOS platform.
+10. Run the app: Open `platforms/ios/MyApp.xcworkspace` in Xcode, then build and run, or run `ionic cordova emulate ios` in the Terminal.
 
 ### Troubleshooting
 
@@ -83,43 +130,31 @@ Error: Cannot find plugin.xml for plugin "PSPDFKit-Cordova". Please try adding i
 
 Run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` instead of `ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git`.
 
-Ionic Demo
------------
-
-You can find an Ionic demo app in [IonicDemo](IonicDemo).
-
-1. Go into the demo app's directory: `cd IonicDemo`
-2. Prepare the app: `ionic cordova prepare ios`
-3. Download PSPDFKit from your customer portal: https://customers.pspdfkit.com. The .dmg file you downloaded contains two directories called `PSPDFKit.framework` and `PSPDFKitUI.framework`. Please copy these directories to `IonicDemo/platforms/ios`.
-4. Follow the instructions that are shown after the PSPDFKit plugin gets added (manually edit the Xcode workspace, `IonicDemo.xcworkspace`)  
-5. Set your license key in `IonicDemo/src/app/app.component.ts` (look for `PSPDFKitPlugin.setLicenseKey('YOUR KEY');`)
-6. Build the app with `ionic cordova build ios` and run it with `ionic cordova emulate ios`
-
 Usage
 -----------
 
 The plugin is accessed via the PSPDFKitPlugin singleton. Here are some example calls:
     
     // set your license key here
-    PSPDFKitPlugin.setLicenseKey("YOUR KEY");
+    PSPDFKit.setLicenseKey("YOUR KEY");
 
     //show pdf with in double page mode, with curl transition red background
-    PSPDFKitPlugin.present('pdf/castles.pdf', {
+    PSPDFKit.present('pdf/castles.pdf', {
         pageTransition : 'curl',
         pageMode: 'double',
         backgroundColor: 'red'
     });
     
     //show pdf with callback
-    PSPDFKitPlugin.present('pdf/castles.pdf', function() {
+    PSPDFKit.present('pdf/castles.pdf', function() {
         alert('pdf has appeared');
     });
     
     //scroll to page 1
-    PSPDFKitPlugin.setPage(1, true);
+    PSPDFKit.setPage(1, true);
     
     //get the page number
-    PSPDFKitPlugin.getPage(function(page) {
+    PSPDFKit.getPage(function(page) {
         alert('Current page: ' + page);
     });
 
