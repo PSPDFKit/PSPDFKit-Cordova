@@ -27,7 +27,7 @@ We assume you have [a current install of Cordova](https://cordova.apache.org/#ge
 
 **Important** If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
 
-4. Install the Pods: `cd YouApp/platforms/ios` and run `pod install`.
+4. Install the Pods: `cd YourApp/platforms/ios` and run `pod install`.
 
 Getting Started
 ---------------
