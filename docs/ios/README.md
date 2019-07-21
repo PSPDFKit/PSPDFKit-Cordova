@@ -41,24 +41,29 @@ Let's create a simple Corodva app that integrates PSPDFKit and uses the `pspdfki
 3. Modify the `onDeviceReady` function in `www/js/index.js` like so:
 
 ```javascript
-    onDeviceReady: function() {
-        this.receivedEvent('deviceready');
-        // set your license key here
-        PSPDFKit.setLicenseKey("YOUR KEY", function(success, error) {
-        	if (success) {
-        		console.log("Success: " + success);
-        	} else if (error) {
-        		console.log("error: " + error);
-        	}
-        });
-		
-        //show pdf with in double page mode, with curl transition red background
-        PSPDFKit.present('pdf/PSPDFKit 8 QuickStart Guide.pdf', {
-            pageTransition : 'curl',
-            pageMode: 'double',
-            backgroundColor: 'red'
-        });
-    },
+onDeviceReady: function() {
+  this.receivedEvent('deviceready');
+    // Set your license key here.
+    PSPDFKit.setLicenseKey("YOUR KEY");
+
+    // Show pdf with in single page mode.
+    PSPDFKit.present('pdf/document.pdf', {
+      pageMode: 'single',
+    });
+  },
+  
+  // Update DOM on a Received Event
+  receivedEvent: function(id) {
+    var parentElement = document.getElementById(id);
+    var listeningElement = parentElement.querySelector('.listening');
+    var receivedElement = parentElement.querySelector('.received');
+    
+    listeningElement.setAttribute('style', 'display:none;');
+    receivedElement.setAttribute('style', 'display:block;');
+
+    console.log('Received Event: ' + id);
+  }
+};
 ```
 
 4. Run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
