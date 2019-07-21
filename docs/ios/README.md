@@ -16,8 +16,8 @@ Requirements
 - Cordova >= 9.0.0
 - CocoaPods >= 1.7.5
 
-Install
------------
+Installation
+------------
 
 We assume that you have [an existing Cordova project](https://cordova.apache.org/#getstarted).
 
