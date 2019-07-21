@@ -11,23 +11,27 @@ PSPDFKit comes with open source wrappers for Cordova on both [iOS](https://pspdf
 Install
 -----------
 
-We assume you have [a current install of Cordova](https://cordova.apache.org/#getstarted).
+We assume that you have [an existing Cordova project](https://cordova.apache.org/#getstarted).
 
 1. Run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
-2.  Open your project's `config.xml` and make sure that the deployment target to iOS 11 or later:
-```diff
-<platform name="ios">
-	<allow-intent href="itms:*" />
-	<allow-intent href="itms-apps:*" />
-+	<preference name="deployment-target" value="11.0" />
-</platform>
-```
+2. Update yoor `Podfile`: `cd platforms/ios` and open your `Podfile` in a text editor. Make sure the platorm is set to iOS 11 or later, and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own CocoaPods Key. Your `Podfile` should look like this:
 
-3. Open your project's `plugins/pspdfkit-cordova/plugin.xml` and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own CocoaPods Key.
+```diff
+source 'https://github.com/CocoaPods/Specs.git'
+- platform :ios, '9.0'
++ platform :ios, '11.0'
+
+use_frameworks!
+target 'CordovaDemo' do
+	project 'CordovaDemo.xcodeproj'
+-	pod 'PSPDFKit', podspec: 'https://customers.pspdfkit.com/cocoapods/YOUR_COCOAPODS_KEY_GOES_HERE/pspdfkit/latest.podspec'
++	pod 'PSPDFKit', podspec: 'https://customers.pspdfkit.com/cocoapods/USE_YOUR_OWN_COCOAPODS_KEY/pspdfkit/latest.podspec'
+end
+```
 
 **Important** If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
 
-4. Install the Pods: `cd YourApp/platforms/ios` and run `pod install`.
+3. Install the Pods: run `pod install`.
 
 Usage
 -----------
