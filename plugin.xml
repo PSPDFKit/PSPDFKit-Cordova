@@ -86,6 +86,14 @@ http://pspdfkit.com/license.html</license>
 		<framework src="CoreTelephony.framework" />
 		<framework src="SystemConfiguration.framework" />
 		<framework src="Accelerate.framework" />
+		<podspec>
+			<config>
+		        <source url="https://github.com/CocoaPods/Specs.git"/>
+			</config>
+			<pods use-frameworks="true">
+		    	<pod name="PSPDFKit" options="podspec: 'https://customers.pspdfkit.com/cocoapods/YOUR_COCOAPODS_KEY_GOES_HERE/pspdfkit/latest.podspec'" />
+		   	</pods>
+		</podspec>
 	</platform>
 	
 	<!-- don't indent the info block, because it will also indent the console output -->
