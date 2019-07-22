@@ -1,6 +1,10 @@
 # PSPDFKit-Cordova
 The official plugin to use PSPDFKit with Apache Cordova/PhoneGap/Ionic
 
+## Announcements
+
+- [How to Manipulate Annotations Programmatically in Cordova](https://pspdfkit.com/blog/2019/how-to-manipulate-annotations-programmatically-in-cordova/)
+
 ## Installation and Integration Steps.
 
 - [Android](/docs/android#installation)
