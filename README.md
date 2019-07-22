@@ -38,7 +38,7 @@ PSPDFKit.present("pdf/document.pdf", {
 });
 
 // Show a PDF document with a callback.
-PSPDFKit.present("pdf/castles.pdf", function() {
+PSPDFKit.present("pdf/document.pdf", function() {
   alert("pdf has appeared");
 });
 
@@ -53,10 +53,10 @@ PSPDFKit.getPage(function(page) {
 
 ## Getting Started
 
-* [New Cordova Project on Android](/docs/android#new-cordova-project)
-* [New Ionic Project on Android](/docs/android#new-ionic-project)
-* [New Cordova Project on iOS](/docs/ios#new-cordova-project)
-* [New Ionic Project on iOS](/docs/ios#new-ionic-project)
+- [New Cordova Project on Android](/docs/android#new-cordova-project)
+- [New Ionic Project on Android](/docs/android#new-ionic-project)
+- [New Cordova Project on iOS](/docs/ios#new-cordova-project)
+- [New Ionic Project on iOS](/docs/ios#new-ionic-project)
 
 ## Documentation
 
@@ -69,8 +69,8 @@ PSPDFKit.getPage(function(page) {
 
 ## Troubleshooting
 
-* [Android](/docs/android#troubleshooting)
-* [iOS](/docs/ios#troubleshooting)
+- [Android](/docs/android#troubleshooting)
+- [iOS](/docs/ios#troubleshooting)
 
 ## Migration Guides
 

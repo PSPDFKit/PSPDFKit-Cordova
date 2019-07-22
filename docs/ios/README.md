@@ -38,28 +38,30 @@ end
 ## Usage
 
 The plugin is accessed via the PSPDFKit singleton. Here are some example calls:
-  
- // Set your license key here.
+
+```javascript
+// Set your license key here.
 PSPDFKit.setLicenseKey("YOUR KEY");
 
-    // Show pdf with in single page mode, with a cblack background.
-    PSPDFKit.present('pdf/document.pdf', {
-        pageMode: 'single',
-        backgroundColor: 'black'
-    });
+// Show pdf with in single page mode, with a cblack background.
+PSPDFKit.present("pdf/document.pdf", {
+  pageMode: "single",
+  backgroundColor: "black"
+});
 
-    // Show a PDF document with a callback.
-    PSPDFKit.present('pdf/castles.pdf', function() {
-        alert('pdf has appeared');
-    });
+// Show a PDF document with a callback.
+PSPDFKit.present("pdf/document.pdf", function() {
+  alert("pdf has appeared");
+});
 
-    // Scroll to page 1.
-    PSPDFKit.setPage(1, true);
+// Scroll to page 1.
+PSPDFKit.setPage(1, true);
 
-    // Get the page number.
-    PSPDFKit.getPage(function(page) {
-        alert('Current page: ' + page);
-    });
+// Get the page number.
+PSPDFKit.getPage(function(page) {
+  alert("Current page: " + page);
+});
+```
 
 ## Getting Started
 
