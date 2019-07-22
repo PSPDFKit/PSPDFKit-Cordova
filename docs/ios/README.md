@@ -1,23 +1,17 @@
-Cordova Plugin for PSPDFKit 8 for iOS
-========================================
+# Cordova Plugin for PSPDFKit 8 for iOS
 
 The [PSPDFKit SDK](https://pspdfkit.com/pdf-sdk/) is a framework that allows you to view, annotate, sign, and fill PDF forms on iOS, Android, Windows, macOS, and Web.
 
 PSPDFKit comes with open source plugins for Cordova on both [iOS](https://pspdfkit.com/guides/ios/current/other-languages/apache-cordova-phonegap/) and [Android](https://pspdfkit.com/guides/android/current/other-languages/apache-cordova-phonegap/).
 
-**This plugin works with Cordova version 9.0.0 and above.**  
-**Please also make sure that you're using the latest version of Xcode 10.2.1**
-
-Requirements
-------------
+## Requirements
 
 - Xcode 10.2.1 or later
 - PSPDFKit 8.4.2 for iOS or later
 - Cordova >= 9.0.0
 - CocoaPods >= 1.7.5
 
-Installation
-------------
+## Installation
 
 We assume that you have [an existing Cordova project](https://cordova.apache.org/#getstarted).
 
@@ -41,35 +35,33 @@ end
 
 3. Install the Pods: run `pod install`.
 
-Usage
------------
+## Usage
 
 The plugin is accessed via the PSPDFKit singleton. Here are some example calls:
-    
-    // Set your license key here.
-    PSPDFKit.setLicenseKey("YOUR KEY");
+  
+ // Set your license key here.
+PSPDFKit.setLicenseKey("YOUR KEY");
 
     // Show pdf with in single page mode, with a cblack background.
     PSPDFKit.present('pdf/document.pdf', {
         pageMode: 'single',
         backgroundColor: 'black'
     });
-    
+
     // Show a PDF document with a callback.
     PSPDFKit.present('pdf/castles.pdf', function() {
         alert('pdf has appeared');
     });
-    
+
     // Scroll to page 1.
     PSPDFKit.setPage(1, true);
-    
+
     // Get the page number.
     PSPDFKit.getPage(function(page) {
         alert('Current page: ' + page);
     });
 
-Getting Started
----------------
+## Getting Started
 
 #### New Cordova Project
 
@@ -90,13 +82,13 @@ onDeviceReady: function() {
       pageMode: 'single',
     });
   },
-  
+
   // Update DOM on a Received Event
   receivedEvent: function(id) {
     var parentElement = document.getElementById(id);
     var listeningElement = parentElement.querySelector('.listening');
     var receivedElement = parentElement.querySelector('.received');
-    
+
     listeningElement.setAttribute('style', 'display:none;');
     receivedElement.setAttribute('style', 'display:block;');
 
@@ -118,8 +110,8 @@ onDeviceReady: function() {
 
 6. Use your CocoaPods Key: `open plugins/pspdfkit-cordova/plugin.xml` and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own key. If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
 
-5. Run `cordova platform add ios` to add the iOS platform.
-6. Run the app: Open `platforms/ios/CordovaDemo.xcworkspace` in Xcode, then build and run, or run `cordova emulate ios` in the Terminal.
+7. Run `cordova platform add ios` to add the iOS platform.
+8. Run the app: Open `platforms/ios/CordovaDemo.xcworkspace` in Xcode, then build and run, or run `cordova emulate ios` in the Terminal.
 
 #### New Ionic Project
 
@@ -174,16 +166,13 @@ Error: Cannot find plugin.xml for plugin "PSPDFKit-Cordova". Please try adding i
 
 Run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` instead of `ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git`.
 
-API
-------------
+## API
 
 You can find the API documentation in [PSPDFKit.js](../../www/PSPDFKit.js).
 
-Migration Guide from `Cordova-iOS` 
-----------------------------------
+## Migration Guide from `Cordova-iOS`
 
 If you were using the old [Cordova-iOS Plugin](https://github.com/PSPDFKit/Cordova-iOS), please follow the steps below to migrate to this plugin:
-
 
 1. Remove the old plugin: `cordova plugin remove pspdfkit-cordova-ios`
 2. Open your Xcode project or workspace and remove `PSPDFKit.framework` and `PSPDFKitUI.framework` from your Target:
