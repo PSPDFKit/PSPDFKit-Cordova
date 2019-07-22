@@ -1,106 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin id="pspdfkit-cordova" version="1.0.0" 
-	xmlns="http://apache.org/cordova/ns/plugins/1.0" 
-	xmlns:android="http://schemas.android.com/apk/res/android">
-	<engines>
-		<engine name="cordova" version=">=6.3.1"/>
-	</engines>
-	<name>PSPDFKit</name>
-	<description>Integration of the PSPDFKit for Android and iOS.</description>
-	<author>PSPDFKit</author>
-	<license>Copyright 2011-2019 PSPDFKit GmbH. All rights reserved.
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="pspdfkit-cordova" version="1.0.0">
+  <engines>
+    <engine name="cordova" version="&gt;=6.3.1" />
+  </engines>
+  <name>PSPDFKit</name>
+  <description>Integration of the PSPDFKit for Android and iOS.</description>
+  <author>PSPDFKit</author>
+  <license>Copyright 2011-2019 PSPDFKit GmbH. All rights reserved.
 THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY AUSTRIAN COPYRIGHT LAW AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT. UNAUTHORIZED REPRODUCTION OR DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
 http://pspdfkit.com/license.html</license>
-<platform name="android">
-        <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/AddAnnotationAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/ApplyInstantJsonAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/GetAnnotationsAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/GetAllUnsavedAnnotationsAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/RemoveAnnotationAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/action/document/SaveDocumentAction.java" target-dir="src/com/pspdfkit/cordova/action/document"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/action/document/ShowDocumentAction.java" target-dir="src/com/pspdfkit/cordova/action/document"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/action/document/ShowDocumentFromAssetsAction.java" target-dir="src/com/pspdfkit/cordova/action/document"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/action/xfdf/ExportXfdfAction.java" target-dir="src/com/pspdfkit/cordova/action/xfdf"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/action/xfdf/ImportXfdfAction.java" target-dir="src/com/pspdfkit/cordova/action/xfdf"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/action/Action.java" target-dir="src/com/pspdfkit/cordova/action"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/action/ActionManager.java" target-dir="src/com/pspdfkit/cordova/action"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/action/BasicAction.java" target-dir="src/com/pspdfkit/cordova/action"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/action/DismissAction.java" target-dir="src/com/pspdfkit/cordova/action"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/event/EventDispatcher.java" target-dir="src/com/pspdfkit/cordova/event"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/provider/DocumentJsonDataProvider.java" target-dir="src/com/pspdfkit/cordova/provider"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/CordovaPdfActivity.java" target-dir="src/com/pspdfkit/cordova"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/ExtractAssetTask.java" target-dir="src/com/pspdfkit/cordova"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/PSPDFKitCordovaPlugin.java" target-dir="src/com/pspdfkit/cordova"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/PSPDFKitCordovaPluginException.java" target-dir="src/com/pspdfkit/cordova"/>
-        <source-file src="src/android/java/com/pspdfkit/cordova/Utilities.java" target-dir="src/com/pspdfkit/cordova"/>
-
-        <framework custom="true" src="src/android/config.gradle" type="gradleReference"/>
-        <framework custom="true" src="src/android/pspdfkit.gradle" type="gradleReference"/>
-
-        <config-file parent="/*" target="res/xml/config.xml">
-            <feature name="PSPDFKitCordovaPlugin">
-                <param name="android-package" value="com.pspdfkit.cordova.PSPDFKitCordovaPlugin"/>
-            </feature>
-        </config-file>
-
-        <config-file parent="/*/application" target="app/src/main/AndroidManifest.xml">
-            <meta-data android:name="pspdfkit_license_key" android:value="@string/PSPDFKIT_LICENSE_KEY" />
-        </config-file>
-
-        <config-file parent="/*/application" target="app/src/main/AndroidManifest.xml" after="activity">
-            <activity android:name="com.pspdfkit.cordova.CordovaPdfActivity" android:theme="@style/PSPDFKit.Theme" android:windowSoftInputMode="adjustNothing"/>
-        </config-file>
-
-        <edit-config file="AndroidManifest.xml" target="/manifest/application" mode="merge">
-            <application android:largeHeap="true"/>
-        </edit-config>
-    </platform>
-
-	<platform name="ios">
-		<config-file parent="/*" target="config.xml">
-			<feature name="PSPDFKitPlugin">
-				<param name="ios-package" value="PSPDFKitPlugin"/>
-			</feature>
-		</config-file>
-
-		<js-module src="www/PSPDFKit.js" name="PSPDFKit">
-			<clobbers target="PSPDFKit" />
-		</js-module>
-
-		<source-file src="src/ios/PSPDFKitPlugin.m"/>
-		<header-file src="src/ios/PSPDFKitPlugin.h"/>
-
-		<framework src="CoreText.framework" />
-		<framework src="QuartzCore.framework" />
-		<framework src="MessageUI.framework" />
-		<framework src="ImageIO.framework" />
-		<framework src="CoreMedia.framework" />
-		<framework src="MediaPlayer.framework" />
-		<framework src="CFNetwork.framework" />
-		<framework src="AVFoundation.framework" />
-		<framework src="AssetsLibrary.framework" />
-		<framework src="Security.framework" />
-		<framework src="QuickLook.framework" />
-		<framework src="AudioToolbox.framework" />
-		<framework src="CoreData.framework" />
-		<framework src="CoreTelephony.framework" />
-		<framework src="SystemConfiguration.framework" />
-		<framework src="Accelerate.framework" />
-		<podspec>
-			<config>
-		        <source url="https://github.com/CocoaPods/Specs.git"/>
-			</config>
-			<pods use-frameworks="true">
-		    	<pod name="PSPDFKit" options="podspec: 'https://customers.pspdfkit.com/cocoapods/YOUR_COCOAPODS_KEY_GOES_HERE/pspdfkit/latest.podspec'" />
-		   	</pods>
-		</podspec>
-	</platform>
-	
-	<!-- don't indent the info block, because it will also indent the console output -->
-	<info>
-<![CDATA[
-
-Thanks for using the PSPDFKit for Cordova/Ionic Plugin. 
+  <platform name="android">
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/AddAnnotationAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/ApplyInstantJsonAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/GetAnnotationsAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/GetAllUnsavedAnnotationsAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/RemoveAnnotationAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/document/SaveDocumentAction.java" target-dir="src/com/pspdfkit/cordova/action/document" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/document/ShowDocumentAction.java" target-dir="src/com/pspdfkit/cordova/action/document" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/document/ShowDocumentFromAssetsAction.java" target-dir="src/com/pspdfkit/cordova/action/document" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/xfdf/ExportXfdfAction.java" target-dir="src/com/pspdfkit/cordova/action/xfdf" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/xfdf/ImportXfdfAction.java" target-dir="src/com/pspdfkit/cordova/action/xfdf" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/Action.java" target-dir="src/com/pspdfkit/cordova/action" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/ActionManager.java" target-dir="src/com/pspdfkit/cordova/action" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/BasicAction.java" target-dir="src/com/pspdfkit/cordova/action" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/DismissAction.java" target-dir="src/com/pspdfkit/cordova/action" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/event/EventDispatcher.java" target-dir="src/com/pspdfkit/cordova/event" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/provider/DocumentJsonDataProvider.java" target-dir="src/com/pspdfkit/cordova/provider" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/CordovaPdfActivity.java" target-dir="src/com/pspdfkit/cordova" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/ExtractAssetTask.java" target-dir="src/com/pspdfkit/cordova" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/PSPDFKitCordovaPlugin.java" target-dir="src/com/pspdfkit/cordova" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/PSPDFKitCordovaPluginException.java" target-dir="src/com/pspdfkit/cordova" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/Utilities.java" target-dir="src/com/pspdfkit/cordova" />
+    <framework custom="true" src="src/android/config.gradle" type="gradleReference" />
+    <framework custom="true" src="src/android/pspdfkit.gradle" type="gradleReference" />
+    <config-file parent="/*" target="res/xml/config.xml">
+      <feature name="PSPDFKitCordovaPlugin">
+        <param name="android-package" value="com.pspdfkit.cordova.PSPDFKitCordovaPlugin" />
+      </feature>
+    </config-file>
+    <config-file parent="/*/application" target="app/src/main/AndroidManifest.xml">
+      <meta-data android:name="pspdfkit_license_key" android:value="@string/PSPDFKIT_LICENSE_KEY" />
+    </config-file>
+    <config-file parent="/*/application" target="app/src/main/AndroidManifest.xml" after="activity">
+      <activity android:name="com.pspdfkit.cordova.CordovaPdfActivity" android:theme="@style/PSPDFKit.Theme" android:windowSoftInputMode="adjustNothing" />
+    </config-file>
+    <edit-config file="AndroidManifest.xml" target="/manifest/application" mode="merge">
+      <application android:largeHeap="true" />
+    </edit-config>
+  </platform>
+  <platform name="ios">
+    <config-file parent="/*" target="config.xml">
+      <feature name="PSPDFKitPlugin">
+        <param name="ios-package" value="PSPDFKitPlugin" />
+      </feature>
+    </config-file>
+    <js-module src="www/PSPDFKit.js" name="PSPDFKit">
+      <clobbers target="PSPDFKit" />
+    </js-module>
+    <source-file src="src/ios/PSPDFKitPlugin.m" />
+    <header-file src="src/ios/PSPDFKitPlugin.h" />
+    <framework src="CoreText.framework" />
+    <framework src="QuartzCore.framework" />
+    <framework src="MessageUI.framework" />
+    <framework src="ImageIO.framework" />
+    <framework src="CoreMedia.framework" />
+    <framework src="MediaPlayer.framework" />
+    <framework src="CFNetwork.framework" />
+    <framework src="AVFoundation.framework" />
+    <framework src="AssetsLibrary.framework" />
+    <framework src="Security.framework" />
+    <framework src="QuickLook.framework" />
+    <framework src="AudioToolbox.framework" />
+    <framework src="CoreData.framework" />
+    <framework src="CoreTelephony.framework" />
+    <framework src="SystemConfiguration.framework" />
+    <framework src="Accelerate.framework" />
+    <podspec>
+      <config>
+        <source url="https://github.com/CocoaPods/Specs.git" />
+      </config>
+      <pods use-frameworks="true">
+        <pod name="PSPDFKit" options="podspec: 'https://customers.pspdfkit.com/cocoapods/YOUR_COCOAPODS_KEY_GOES_HERE/pspdfkit/latest.podspec'" />
+      </pods>
+    </podspec>
+  </platform>
+  <!-- don't indent the info block, because it will also indent the console output -->
+  <info><![CDATA[Thanks for using the PSPDFKit for Cordova/Ionic Plugin. 
 
 ### iOS
 
@@ -132,10 +117,7 @@ Plugin usage example:
 PSPDFKit.present('pdf/document.pdf', {
   pageMode: 'single',
   editableAnnotationTypes: ['FreeText', 'Signature']
-});
-
-]]>
-	</info>
-	<!--Android Multidex-->
-	<dependency id="cordova-plugin-enable-multidex" url="https://github.com/PSPDFKit-labs/cordova-plugin-enable-multidex.git"/>
+});]]></info>
+  <!--Android Multidex-->
+  <dependency id="cordova-plugin-enable-multidex" url="https://github.com/PSPDFKit-labs/cordova-plugin-enable-multidex.git" />
 </plugin>

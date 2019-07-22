@@ -25,6 +25,16 @@ Please follow the step-by-step installation instructions below for:
 - [Android](/docs/android#installation)
 - [iOS](/docs/ios#installation)
 
+
+## Getting Started
+
+Please follow the getting started guides below:
+
+- [New Cordova Project on Android](/docs/android#new-cordova-project)
+- [New Ionic Project on Android](/docs/android#new-ionic-project)
+- [New Cordova Project on iOS](/docs/ios#new-cordova-project)
+- [New Ionic Project on iOS](/docs/ios#new-ionic-project)
+
 ## Usage
 
 ```javascript
@@ -50,13 +60,6 @@ PSPDFKit.getPage(function(page) {
   alert("Current page: " + page);
 });
 ```
-
-## Getting Started
-
-- [New Cordova Project on Android](/docs/android#new-cordova-project)
-- [New Ionic Project on Android](/docs/android#new-ionic-project)
-- [New Cordova Project on iOS](/docs/ios#new-cordova-project)
-- [New Ionic Project on iOS](/docs/ios#new-ionic-project)
 
 ## Documentation
 
