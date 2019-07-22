@@ -197,12 +197,12 @@
     //try hex
     string = [string stringByReplacingOccurrencesOfString:@"#" withString:@""];
     switch ([string length]) {
-        case 0:
+    case 0:
         {
             string = @"00000000";
             break;
         }
-        case 3:
+    case 3:
         {
             NSString *red = [string substringWithRange:NSMakeRange(0, 1)];
             NSString *green = [string substringWithRange:NSMakeRange(1, 1)];
@@ -210,12 +210,12 @@
             string = [NSString stringWithFormat:@"%1$@%1$@%2$@%2$@%3$@%3$@ff", red, green, blue];
             break;
         }
-        case 6:
+    case 6:
         {
             string = [string stringByAppendingString:@"ff"];
             break;
         }
-        default:
+    default:
         {
             return nil;
         }
@@ -233,7 +233,7 @@
     CGColorSpaceModel model = CGColorSpaceGetModel(CGColorGetColorSpace(color.CGColor));
     const CGFloat *components = CGColorGetComponents(color.CGColor);
     switch (model) {
-        case kCGColorSpaceModelMonochrome:
+    case kCGColorSpaceModelMonochrome:
         {
             rgba[0] = components[0];
             rgba[1] = components[0];
@@ -241,7 +241,7 @@
             rgba[3] = components[1];
             break;
         }
-        case kCGColorSpaceModelRGB:
+    case kCGColorSpaceModelRGB:
         {
             rgba[0] = components[0];
             rgba[1] = components[1];
@@ -249,7 +249,7 @@
             rgba[3] = components[3];
             break;
         }
-        default:
+    default:
         {
             rgba[0] = 0.0f;
             rgba[1] = 0.0f;
@@ -509,7 +509,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     return defaultValue;
 }
 
-- (NSString *)enumKeyForValue:(int)value ofType:(NSString *)type {
+- (NSString *)enumKeyForValue:(NSInteger)value ofType:(NSString *)type {
     NSDictionary *dict = [self enumValuesOfType:type];
     NSInteger index = [[dict allValues] indexOfObject:@(value)];
     if (index != NSNotFound) {
@@ -628,7 +628,12 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 
                 @{@"scrollPerSpread": @(PSPDFPageTransitionScrollPerSpread),
                   @"scrollContinuous": @(PSPDFPageTransitionScrollContinuous),
-                  @"curl": @(PSPDFPageTransitionCurl)},
+                  @"curl": @(PSPDFPageTransitionCurl),
+
+                  // Android Configuration.
+                  @"PER_PAGE": @(PSPDFPageTransitionScrollPerSpread),
+                  @"CONTINUOUS": @(PSPDFPageTransitionScrollContinuous),
+                },
 
             @"PSPDFViewMode":
 
@@ -644,7 +649,13 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
             @"PSPDFScrollDirection":
 
                 @{@"horizontal": @(PSPDFScrollDirectionHorizontal),
-                  @"vertical": @(PSPDFScrollDirectionVertical)},
+                  @"vertical": @(PSPDFScrollDirectionVertical),
+
+                  // Android Configuration.
+                  @"HORIZONTAL": @(PSPDFScrollDirectionHorizontal),
+                  @"VERTICAL": @(PSPDFScrollDirectionVertical)
+                },
+
 
             @"PSPDFLinkAction":
 
@@ -670,7 +681,13 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 
                 @{@"none": @(PSPDFThumbnailBarModeNone),
                   @"scrobbleBar": @(PSPDFThumbnailBarModeScrubberBar),
-                  @"scrollable": @(PSPDFThumbnailBarModeScrollable)},
+                  @"scrollable": @(PSPDFThumbnailBarModeScrollable),
+
+                  // Android Configuration.
+                  @"THUMBNAIL_BAR_MODE_DEFAULT": @(PSPDFThumbnailBarModeScrubberBar),
+                  @"THUMBNAIL_BAR_MODE_SCROLLABLE": @(PSPDFThumbnailBarModeScrollable),
+                  @"THUMBNAIL_BAR_MODE_NONE": @(PSPDFThumbnailBarModeNone),
+                },
 
             @"PSPDFAnnotationType":
 
@@ -716,21 +733,27 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
                   @"embed": @(PSPDFAnnotationChangeEmbed),
                   @"print": @(PSPDFAnnotationChangePrint)},
 
-            //                        @"PSPDFDocumentSharingOptions":
-            //
-            //                            @{@"None": @(PSPDFDocumentSharingOptionNone),
-            //                              @"CurrentPageOnly": @(PSPDFDocumentSharingOptionCurrentPageOnly),
-            //                              @"PageRange": @(PSPDFDocumentSharingOptionPageRange),
-            //                              @"AllPages": @(PSPDFDocumentSharingOptionAllPages),
-            //                              @"AnnotatedPages": @(PSPDFDocumentSharingOptionAnnotatedPages),
-            //                              @"EmbedAnnotations": @(PSPDFDocumentSharingOptionEmbedAnnotations),
-            //                              @"FlattenAnnotations": @(PSPDFDocumentSharingOptionFlattenAnnotations),
-            //                              @"AnnotationsSummary": @(PSPDFDocumentSharingOptionAnnotationsSummary),
-            //                              @"RemoveAnnotations": @(PSPDFDocumentSharingOptionRemoveAnnotations),
-            //                              @"FlattenAnnotationsForPrint": @(PSPDFDocumentSharingOptionFlattenAnnotationsForPrint),
-            //                              @"OriginalFile": @(PSPDFDocumentSharingOptionOriginalFile),
-            //                              @"Image": @(PSPDFDocumentSharingOptionImage)},
+            @"PSPDFConfigurationSpreadFitting":
 
+                @{@"fit": @(PSPDFConfigurationSpreadFittingFit),
+                  @"fill": @(PSPDFConfigurationSpreadFittingFill),
+                  @"adaptive": @(PSPDFConfigurationSpreadFittingAdaptive),
+
+                  // Android Configuration.
+                  @"FIT_TO_SCREEN": @(PSPDFConfigurationSpreadFittingFit),
+                  @"FIT_TO_WIDTH": @(PSPDFConfigurationSpreadFittingFill),
+                  @"ADAPTIVE": @(PSPDFConfigurationSpreadFittingAdaptive)
+                },
+
+            @"PSPDFSearchMode":
+
+                @{@"modal": @(PSPDFSearchModeModal),
+                  @"inline": @(PSPDFSearchModeInline),
+
+                  // Android Configuration.
+                  @"SEARCH_MODULAR": @(PSPDFSearchModeModal),
+                  @"SEARCH_INLINE": @(PSPDFSearchModeInline)
+                },
         };
 
         //Note: this method crashes the second time a
@@ -845,6 +868,14 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     return [self enumKeyForValue:_pdfController.configuration.pageTransition ofType:@"PSPDFPageTransition"];
 }
 
+- (void)setScrollModeForPSPDFViewControllerWithJSON:(NSString *)transition {
+    [self setPageTransitionForPSPDFViewControllerWithJSON:transition];
+}
+
+- (NSString *)ScrollModeAsJSON {
+    return [self pageTransitionAsJSON];
+}
+
 - (void)setViewModeAnimatedForPSPDFViewControllerWithJSON:(NSString *)mode {
     [_pdfController setViewMode:[self enumValueForKey:mode ofType:@"PSPDFViewMode" withDefault:PSPDFViewModeDocument] animated:YES];
 }
@@ -888,6 +919,14 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 
 - (NSString *)scrollDirectionAsJSON {
     return [self enumKeyForValue:_pdfController.configuration.scrollDirection ofType:@"PSPDFScrollDirection"];
+}
+
+- (void)setPageScrollDirectionForPSPDFViewControllerWithJSON:(NSString *)mode {
+    [self setScrollDirectionForPSPDFViewControllerWithJSON:mode];
+}
+
+- (NSString *)pageScrollDirectionAsJSON {
+    return [self scrollDirectionAsJSON];
 }
 
 - (void)setLinkActionForPSPDFViewControllerWithJSON:(NSString *)mode {
@@ -970,32 +1009,6 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     return [self optionKeysForValue:_pdfController.configuration.allowedMenuActions ofType:@"PSPDFTextSelectionMenuAction"];
 }
 
-//- (void)setPrintSharingOptionsForPSPDFViewControllerWithJSON:(NSArray *)options
-//{
-//    if (![options isKindOfClass:[NSArray class]])
-//    {
-//        options = @[options];
-//    }
-//
-//    NSUInteger sharingOptions = 0;
-//    for (NSString *option in options)
-//    {
-//        if ([option length]) {
-//            NSInteger newOption = [self enumValueForKey:[NSString stringWithFormat:@"%@%@", [[option substringToIndex:1] uppercaseString], [option substringFromIndex:1]] ofType:@"PSPDFDocumentSharingOptions" withDefault:PSPDFDocumentSharingOptionNone];
-//            sharingOptions = sharingOptions | newOption;
-//        }
-//    }
-//
-//    [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
-//        builder.printSharingOptions = sharingOptions;
-//    }];
-//}
-
-//- (NSNumber *)printSharingOptionsAsJSON
-//{
-//    return @(_pdfController.configuration.printSharingOptions);
-//}
-
 - (void)setShouldAskForAnnotationUsernameForPSPDFViewControllerWithJSON:(NSNumber *)shouldAskForAnnotationUsername {
     [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
         builder.shouldAskForAnnotationUsername = shouldAskForAnnotationUsername.boolValue;
@@ -1034,6 +1047,45 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 
 - (NSNumber *)documentLabelEnabledAsJSON {
     return @(_pdfController.configuration.documentLabelEnabled);
+}
+
+
+- (void)setSpreadFittingForPSPDFViewControllerWithJSON:(NSString *)spreadFitting {
+    PSPDFConfigurationSpreadFitting fitting = (PSPDFConfigurationSpreadFitting) [self enumValueForKey:spreadFitting ofType:@"PSPDFConfigurationSpreadFitting" withDefault:PSPDFConfigurationSpreadFittingFit];
+    [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
+        builder.spreadFitting = fitting;
+    }];
+}
+
+- (NSString *)spreadFittingAsJSON {
+    return [self enumKeyForValue:_pdfController.configuration.spreadFitting ofType:@"PSPDFConfigurationSpreadFitting"];
+}
+
+- (void)setPageFitModeForPSPDFViewControllerWithJSON:(NSString *)mode {
+    [self setSpreadFittingForPSPDFViewControllerWithJSON:mode];
+}
+
+- (NSString *)pageFitModeAsJSON {
+    return [self spreadFittingAsJSON];
+}
+
+- (void)setSearchModeForPSPDFViewControllerWithJSON:(NSString *)mode {
+    PSPDFSearchMode searchMode = (PSPDFSearchMode) [self enumValueForKey:mode ofType:@"PSPDFSearchMode" withDefault:PSPDFConfigurationSpreadFittingFit];
+    [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
+        builder.searchMode = searchMode;
+    }];
+}
+
+- (NSString *)searchModeAsJSON {
+    return [self enumKeyForValue:_pdfController.configuration.searchMode ofType:@"PSPDFSearchMode"];
+}
+
+- (void)setSearchTypeForPSPDFViewControllerWithJSON:(NSString *)type {
+    [self setSearchModeForPSPDFViewControllerWithJSON:type];
+}
+
+- (NSString *)searchTypeAsJSON {
+    return [self searchModeAsJSON];
 }
 
 #pragma mark PDFProcessing methods
@@ -1768,7 +1820,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 
     PSPDFDocument *document = self.pdfController.document;
     VALIDATE_DOCUMENT(document)
-
+    
     // Create a processor configuration with the current document.
     PSPDFProcessorConfiguration *configuration = [[PSPDFProcessorConfiguration alloc] initWithDocument:document];
 
