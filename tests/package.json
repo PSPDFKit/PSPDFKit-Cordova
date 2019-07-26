@@ -1,9 +1,9 @@
 {
-  "name": "pspdfkit-cordova-android-tests",
+  "name": "pspdfkit-cordova-tests",
   "version": "5.4.1",
   "description": "Test suite of the PSPDFKit for Android library Cordova plugin.",
   "cordova": {
-    "id": "pspdfkit-cordova-android-tests",
+    "id": "pspdfkit-cordova-tests",
     "platforms": []
   },
   "keywords": [

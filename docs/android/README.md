@@ -244,7 +244,7 @@ Below is a screenshot of how the project structure should look like if it's a wo
 │   │   │   └── src
 │   │   │       └── main
 │   │   │           └── AndroidManifest.xml
-│   │   ├── pspdfkit-cordova-android
+│   │   ├── pspdfkit-cordova
 │   │   │   └── starter-pspdfkit.gradle
 │   │   ├── gradle.properties
 │   │   └── local.properties
@@ -382,7 +382,7 @@ Could not resolve all files for configuration ':app:debugCompileClasspath'.
       https://jcenter.bintray.com/com/android/support/support-media-compat/26.0.2/support-media-compat-26.0.2.aar
 ```
 
-Simply open your `platforms/android/pspdfkit-cordova-android/YOURAPP-pspdfkit.gradle` file and change the version. In this case changing `26.0.2` to `26.0.1` can already fix such issues because sometimes specific support library versions are not available anymore.
+Simply open your `platforms/android/pspdfkit-cordova/YOURAPP-pspdfkit.gradle` file and change the version. In this case changing `26.0.2` to `26.0.1` can already fix such issues because sometimes specific support library versions are not available anymore.
 
 ### PSPDFKit name not found in TypeScript app
 

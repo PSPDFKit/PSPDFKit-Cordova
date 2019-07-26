@@ -47,6 +47,9 @@ http://pspdfkit.com/license.html</license>
     <edit-config file="AndroidManifest.xml" target="/manifest/application" mode="merge">
       <application android:largeHeap="true" />
     </edit-config>
+    
+    <!--Android Multidex-->
+    <dependency id="cordova-plugin-enable-multidex" url="https://github.com/PSPDFKit-labs/cordova-plugin-enable-multidex.git" />
   </platform>
   <platform name="ios">
     <config-file parent="/*" target="config.xml">
@@ -118,6 +121,4 @@ PSPDFKit.present('pdf/document.pdf', {
   pageMode: 'single',
   editableAnnotationTypes: ['FreeText', 'Signature']
 });]]></info>
-  <!--Android Multidex-->
-  <dependency id="cordova-plugin-enable-multidex" url="https://github.com/PSPDFKit-labs/cordova-plugin-enable-multidex.git" />
 </plugin>

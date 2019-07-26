@@ -8,7 +8,7 @@
   ~   This notice may not be removed from this file.
 -->
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="pspdfkit-cordova-android-tests"
+        id="pspdfkit-cordova-tests"
         version="5.4.1">
     <name>PSPDFKit-Android Tests</name>
     <license>MIT</license>
