@@ -13,6 +13,84 @@
 var exec = require("cordova/exec");
 var platform = window.cordova.platformId;
 
+/**
+ * Event channels
+ * 
+ * __Supported Platforms__
+ * 
+ * -Android
+ */
+var channel = require("cordova/channel");
+
+var channels = {
+  onDocumentSaved: channel.create("onDocumentSaved"),
+  onDocumentSaveFailed: channel.create("onDocumentSaveFailed"),
+  onDocumentDismissed: channel.create("onDocumentDismissed")
+};
+
+/**
+ * Retrieves total number of handlers for all available channels.
+ * 
+ * __Supported Platforms__
+ * 
+ * -Android
+ */
+function numberOfHandlers() {
+  return (
+    channels.onDocumentSaved.numHandlers +
+    channels.onDocumentSaveFailed.numHandlers +
+    channels.onDocumentDismissed.numHandlers
+  );
+}
+
+/**
+ * Notifies about any changes to collection of event handlers.
+ * 
+ * __Supported Platforms__
+ * 
+ * -Android
+ */
+function onEventSubscribersChanged() {
+  console.log("event subscribers changed");
+  // If we just registered the first handler, make sure native listener is started.
+  if (this.numHandlers === 1 && numberOfHandlers() === 1) {
+    console.log("connecting event channel");
+    exec(
+      function(info) {
+        console.log("Received event", info);
+        channels[info.eventType].fire(info.data);
+      },
+      function() {
+        console.log("Error while receiving event.");
+      },
+      "PSPDFKitCordovaPlugin",
+      "startEventDispatching",
+      []
+    );
+  } else if (numberOfHandlers() === 0) {
+    console.log("disconnecting event channel");
+    exec(null, null, "PSPDFKitCordovaPlugin", "stopEventDispatching", []);
+  }
+}
+
+for (var key in channels) {
+  console.log("subscriber listener for " + key);
+  channels[key].onHasSubscribersChange = onEventSubscribersChanged;
+}
+
+/**
+ * Retrieves a named property from the given target object while removing the property from the object.
+ * 
+ * __Supported Platforms__
+ * 
+ * -Android
+ */
+function getPropertyAndUnset(target, name) {
+  var value = target.hasOwnProperty(name) ? target[name] : null;
+  delete target[name];
+  return value;
+}
+
 // License key
 
 /**
@@ -57,6 +135,7 @@ exports.setLicenseKey = function(key, callback) {
  * __Supported Platforms__
  *
  * -iOS
+ * -Android
  */
 exports.present = function(path, options, callback) {
   if (platform === "ios") {
@@ -72,6 +151,14 @@ exports.present = function(path, options, callback) {
       "present",
       [path, options]
     );
+  } else if (platform === "android") {
+    options = options || {};
+    var password = getPropertyAndUnset(options, "password");
+    exec(success, error, "PSPDFKitCordovaPlugin", "showDocument", [
+      uri,
+      options,
+      password
+    ]);
   } else {
     console.log("Not implemented on " + platform + ".");
   }
@@ -264,13 +351,24 @@ exports.dispatchEvent = function(event) {
   return result;
 };
 
+/**
+ * Subscribes listener for given event type.
+ */
 exports.addEventListener = function(type, listener) {
-  var existing = listeners[type];
-  if (!existing) {
-    existing = [];
-    listeners[type] = existing;
+  if (platform === "ios") {
+    var existing = listeners[type];
+    if (!existing) {
+      existing = [];
+      listeners[type] = existing;
+    }
+    existing.push(listener);
+  } else if (platform === "android") {
+    if (type in channels) {
+      channels[type].subscribe(listener);
+    }
+  } else {
+    console.log("Not implemented on " + platform + ".");
   }
-  existing.push(listener);
 };
 
 exports.addEventListeners = function(listeners) {
@@ -279,13 +377,24 @@ exports.addEventListeners = function(listeners) {
   }
 };
 
+/**
+ * Unsubscribes listener for given event type.
+ */
 exports.removeEventListener = function(type, listener) {
-  var existing = listeners[type];
-  if (existing) {
-    var index;
-    while ((index = existing.indexOf(listener)) != -1) {
-      existing.splice(index, 1);
+  if (platform === "ios") {
+    var existing = listeners[type];
+    if (existing) {
+      var index;
+      while ((index = existing.indexOf(listener)) != -1) {
+        existing.splice(index, 1);
+      }
     }
+  }  else if (platform === "android") {
+    if (type in channels) {
+      channels[type].unsubscribe(listener);
+    }
+  } else {
+    console.log("Not implemented on " + platform + ".");
   }
 };
 
@@ -718,6 +827,7 @@ exports.toggleAnnotationToolbar = function(callback) {
  * __Supported Platforms__
  *
  * -iOS
+ * -Android
  */
 exports.applyInstantJSON = function(jsonValue, callback) {
   exec(
@@ -744,6 +854,7 @@ exports.applyInstantJSON = function(jsonValue, callback) {
  * __Supported Platforms__
  *
  * -iOS
+ * -Android
  */
 exports.addAnnotation = function(jsonAnnotation, callback) {
   exec(
@@ -770,6 +881,7 @@ exports.addAnnotation = function(jsonAnnotation, callback) {
  * __Supported Platforms__
  *
  * -iOS
+ * -Android
  */
 exports.removeAnnotation = function(jsonAnnotation, callback) {
   exec(
@@ -796,6 +908,7 @@ exports.removeAnnotation = function(jsonAnnotation, callback) {
  * __Supported Platforms__
  *
  * -iOS
+ * -Android
  */
 exports.getAnnotations = function(pageIndex, type, callback) {
   exec(
@@ -820,6 +933,7 @@ exports.getAnnotations = function(pageIndex, type, callback) {
  * __Supported Platforms__
  *
  * -iOS
+ * -Android
  */
 exports.getAllUnsavedAnnotations = function(callback) {
   exec(
