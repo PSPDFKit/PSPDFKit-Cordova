@@ -13,6 +13,8 @@
 var exec = require("cordova/exec");
 var platform = window.cordova.platformId;
 
+// Event listeners
+
 /** 
  * Event listeners collection.
  *
@@ -215,6 +217,8 @@ exports.setLicenseKey = function(key, callback) {
   }
 };
 
+// Showing and dismissing PDF
+
 /**
  * iOS: Displays a PDF in a full-screen modal.
  * Android: Opens the PSPDFActivity to show a document from the local device file system.
@@ -371,36 +375,7 @@ exports.reload = function(callback) {
   }
 };
 
-/** 
- * Triggers a search for the specified query text.
- *
- * @param query Search Term to query
- * @param animated Optional argument. Determines if the search should be animated (if omitted, the search will not be animated). The optional headless argument determines whether the search UI should be disaplyed (if omitted, the search UI *will* be displayed).
- * @param headless Optional argument. Determines whether the search UI should be disaplyed (if omitted, the search UI *will* be displayed).
- * @callback callback Success and error callback function.
- *
- * __Supported Platforms__
- *
- * -iOS
- */
-exports.search = function(query, animated, headless, callback) {
-  if (platform === "ios") {
-    exec(
-      function(success) {
-        if (callback) callback(success, null);
-      },
-      function(error) {
-        console.log(error);
-        if (callback) callback(null, error);
-      },
-      "PSPDFKitPlugin",
-      "search",
-      [query, animated, headless]
-    );
-  } else {
-    console.log("Not implemented on " + platform + ".");
-  }
-};
+// Saving
 
 /**
  * Saves the document to original location if it has been changed. If there were no changes to the
@@ -477,6 +452,41 @@ exports.getHasDirtyAnnotations = function(callback) {
     console.log("Not implemented on " + platform + ".");
   }
 };
+
+// Search
+
+/** 
+ * Triggers a search for the specified query text.
+ *
+ * @param query Search Term to query
+ * @param animated Optional argument. Determines if the search should be animated (if omitted, the search will not be animated). The optional headless argument determines whether the search UI should be disaplyed (if omitted, the search UI *will* be displayed).
+ * @param headless Optional argument. Determines whether the search UI should be disaplyed (if omitted, the search UI *will* be displayed).
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
+exports.search = function(query, animated, headless, callback) {
+  if (platform === "ios") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "search",
+      [query, animated, headless]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
+};
+
+// Document presentation options.
 
 /**
  * Constant values used for setting the `scrollMode` option.
@@ -720,6 +730,8 @@ exports.getOption = function(name, callback) {
   }
 };
 
+// Working with page navigation
+
 /**
  * FIXME: Description.
  * 
@@ -921,6 +933,8 @@ exports.setAppearanceMode = function(appearanceMode, callback) {
   }
 };
 
+// Cache
+
 /**
  * FIXME: Description.
  *
@@ -976,6 +990,8 @@ exports.removeCacheForPresentedDocument = function(callback) {
     console.log("Not implemented on " + platform + ".");
   }
 };
+
+// Working with toolbars
 
 /**
  * FIXME: Description.
@@ -1460,6 +1476,8 @@ exports.exportXFDF = function(xfdfPath, callback) {
   }
 };
 
+// Document processing
+
 /**
  * FIXME: Description.
  *
@@ -1495,6 +1513,8 @@ exports.processAnnotations = function(
     console.log("Not implemented on " + platform + ".");
   }
 };
+
+// Document generation
 
 /**
  * Generates a PDF document from HTML string.
