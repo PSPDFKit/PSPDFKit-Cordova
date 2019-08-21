@@ -13,8 +13,96 @@
 var exec = require("cordova/exec");
 var platform = window.cordova.platformId;
 
+/** 
+ * Event listeners collection.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
+var listeners = {};
+
+exports.dispatchEvent = function(event) {
+  var result = undefined;
+  var functions = listeners[event.type];
+  if (functions) {
+    for (var i = 0; i < functions.length; i++) {
+      result = functions[i](event);
+      if (typeof result != "undefined") {
+        if (!result) return result;
+      }
+    }
+  }
+  return result;
+};
+
 /**
- * Event channels
+ * Subscribes listener for given event type.
+ * 
+ * __Supported Platforms__
+ *
+ * -iOS
+ * -Android
+ */
+exports.addEventListener = function(type, listener) {
+  if (platform === "ios") {
+    var existing = listeners[type];
+    if (!existing) {
+      existing = [];
+      listeners[type] = existing;
+    }
+    existing.push(listener);
+  } else if (platform === "android") {
+    if (type in channels) {
+      channels[type].subscribe(listener);
+    }
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
+};
+
+/**
+ * Subscribes listeners to their event types.
+ * 
+ * __Supported Platforms__
+ *
+ * -iOS
+ * -Android
+ */
+exports.addEventListeners = function(listeners) {
+  for (type in listeners) {
+    exports.addEventListener(type, listeners[type]);
+  }
+};
+
+/**
+ * Unsubscribes listener for given event type.
+ * 
+ * __Supported Platforms__
+ *
+ * -iOS
+ * -Android
+ */
+exports.removeEventListener = function(type, listener) {
+  if (platform === "ios") {
+    var existing = listeners[type];
+    if (existing) {
+      var index;
+      while ((index = existing.indexOf(listener)) != -1) {
+        existing.splice(index, 1);
+      }
+    }
+  }  else if (platform === "android") {
+    if (type in channels) {
+      channels[type].unsubscribe(listener);
+    }
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
+};
+
+/**
+ * Event channels.
  * 
  * __Supported Platforms__
  * 
@@ -122,12 +210,10 @@ exports.setLicenseKey = function(key, callback) {
   }
 };
 
-// Document methods
-
 /**
- * Displays a PDF in a full-screen modal.
+ * iOS: Displays a PDF in a full-screen modal.
+ * Android: Opens the PSPDFActivity to show a document from the local device file system.
  *
- * @param html HTML string.
  * @param path The path should be a string containing the file path (not URL) for the PDF. Relative paths are assumed to be relative to the www directory (if the path has a different base URL set, this will be ignored). To specify a path inside the application documents or library directory, use a `~`, e.g. `"~/Documents/mypdf.pdf"` or `"~/Library/Application Support/mypdf.pdf"`. Path can be null, but must not be omitted
  * @param options The `options` parameter is an optional object containing configuration properties for the PDF document and/or view controller. All currently supported values are listed below under Options.
  * @callback callback Success and error callback function.
@@ -170,8 +256,7 @@ exports.present = function(path, options, callback) {
  *
  * @param assetFile Relative path within the app's assets folder.
  * @param options   PSPDFKit configuration options.
- * @param success   Success callback function.
- * @param error     Error callback function.
+ * @callback callback Success and error callback function.
  * 
  * __Supported Platforms__
  *
@@ -196,7 +281,7 @@ exports.showDocumentFromAssets = function(assetFile, options, callback) {
  *
  * @param html HTML string.
  * @param path Should be a string containing the file path (not URL) for the PDF. Relative paths are assumed to be relative to the www directory (if the path has a different base URL set, this will be ignored). To specify a path inside the application documents or library directory, use a `~`, e.g. `"~/Documents/mypdf.pdf"` or `"~/Library/Application Support/mypdf.pdf"`. Path can be null, but must not be omitted
- * @param path should be a string containing the file path (not URL) for the XFDF file backing the PDF document. Relative paths are assumed to be relative to the www directory (if the xfdf path has a different base URL set, we will create an XFDF file in `'"~/Documents/" + xfdfPath'`). To specify a path inside the application documents or library directory, use a ~, e.g. `"~/Documents/myXFDF.xfdf"` or `"~/Library/Application Support/myXFDF.xfdf"`. The xfdfPath cannot be null and must not be omitted.
+ * @param xfdfPath should be a string containing the file path (not URL) for the XFDF file backing the PDF document. Relative paths are assumed to be relative to the www directory (if the xfdf path has a different base URL set, we will create an XFDF file in `'"~/Documents/" + xfdfPath'`). To specify a path inside the application documents or library directory, use a ~, e.g. `"~/Documents/myXFDF.xfdf"` or `"~/Library/Application Support/myXFDF.xfdf"`. The xfdfPath cannot be null and must not be omitted.
  * @param options The `options` parameter is an optional object containing configuration properties for the PDF document and/or view controller. All currently supported values are listed below under Options.
  * @callback callback Success and error callback function.
  *
@@ -226,8 +311,7 @@ exports.presentWithXFDF = function(path, xfdfPath, callback, options) {
 /** 
  * iOS: Dismisses the modally presented PDF view.
  * 
- * Android: Dismisses any previously launched PDF activity. Calls the optional callback function after all 
- * activities have been dismissed.
+ * Android: Dismisses any previously launched PDF activity. Calls the optional callback function after all activities have been dismissed.
  *
  * @callback callback Success and error callback function.
  *
@@ -255,7 +339,8 @@ exports.dismiss = function(callback) {
   }
 };
 
-/** Reloads the current PDF.
+/** 
+ * Reloads the current PDF.
  *
  * @callback callback Success and error callback function.
  *
@@ -282,11 +367,12 @@ exports.reload = function(callback) {
   }
 };
 
-/** Triggers a search for the specified query text.
+/** 
+ * Triggers a search for the specified query text.
  *
  * @param query Search Term to query
- * @param animated Optional argument determines if the search should be animated (if omitted, the search will not be animated). The optional headless argument determines whether the search UI should be disaplyed (if omitted, the search UI *will* be displayed).
- * @param headless )ptional argument determines whether the search UI should be disaplyed (if omitted, the search UI *will* be displayed).
+ * @param animated Optional argument. Determines if the search should be animated (if omitted, the search will not be animated). The optional headless argument determines whether the search UI should be disaplyed (if omitted, the search UI *will* be displayed).
+ * @param headless Optional argument. Determines whether the search UI should be disaplyed (if omitted, the search UI *will* be displayed).
  * @callback callback Success and error callback function.
  *
  * __Supported Platforms__
@@ -318,8 +404,11 @@ exports.search = function(query, animated, headless, callback) {
  * Provides "wasModified" as a part of a successful response which will be equal to {@code true} if
  * the file was modified and changes were saved. {@code false} if there was nothing to save.
  *
- * @param success Success callback function.
- * @param error Error callback function
+ * @callback callback Success and error callback function.
+ * 
+ * __Supported Platforms__
+ *
+ * -Android
  */
 exports.saveDocument = function(success, error) {
   if (platform === "android") {
@@ -329,7 +418,8 @@ exports.saveDocument = function(success, error) {
   }
 };
 
-/** Saves any changed annotations in the current document.
+/** 
+ * Saves any changed annotations in the current document.
  *
  * @callback callback Success and error callback function.
  *
@@ -356,7 +446,8 @@ exports.saveAnnotations = function(callback) {
   }
 };
 
-/** Return true in the success (or result) callback if the document has unsaved annotation. Returns false otherwise.
+/** 
+ * Return true in the success (or result) callback if the document has unsaved annotation. Returns false otherwise.
  *
  * @callback callback Success (or result) and error callback function.
  *
@@ -380,49 +471,6 @@ exports.getHasDirtyAnnotations = function(callback) {
     );
   } else {
     console.log("Not implemented on " + platform + ".");
-  }
-};
-
-// Events
-var listeners = {};
-
-exports.dispatchEvent = function(event) {
-  var result = undefined;
-  var functions = listeners[event.type];
-  if (functions) {
-    for (var i = 0; i < functions.length; i++) {
-      result = functions[i](event);
-      if (typeof result != "undefined") {
-        if (!result) return result;
-      }
-    }
-  }
-  return result;
-};
-
-/**
- * Subscribes listener for given event type.
- */
-exports.addEventListener = function(type, listener) {
-  if (platform === "ios") {
-    var existing = listeners[type];
-    if (!existing) {
-      existing = [];
-      listeners[type] = existing;
-    }
-    existing.push(listener);
-  } else if (platform === "android") {
-    if (type in channels) {
-      channels[type].subscribe(listener);
-    }
-  } else {
-    console.log("Not implemented on " + platform + ".");
-  }
-};
-
-exports.addEventListeners = function(listeners) {
-  for (type in listeners) {
-    exports.addEventListener(type, listeners[type]);
   }
 };
 
@@ -550,29 +598,6 @@ exports.ShareFeatures = {
 };
 
 /**
- * Unsubscribes listener for given event type.
- */
-exports.removeEventListener = function(type, listener) {
-  if (platform === "ios") {
-    var existing = listeners[type];
-    if (existing) {
-      var index;
-      while ((index = existing.indexOf(listener)) != -1) {
-        existing.splice(index, 1);
-      }
-    }
-  }  else if (platform === "android") {
-    if (type in channels) {
-      channels[type].unsubscribe(listener);
-    }
-  } else {
-    console.log("Not implemented on " + platform + ".");
-  }
-};
-
-// Configuration
-
-/**
  * Sets multiple document and view controller settings at once.
  *
  * @param options The options set will be applied to the current document (if there is one) as well as all subsequently displayed documents. All currently supported values are listed below under Options.
@@ -691,8 +716,6 @@ exports.getOption = function(name, callback) {
   }
 };
 
-// Page scrolling
-
 exports.setPage = function(page, animated, callback) {
   if (platform === "ios") {
     exec(
@@ -807,7 +830,6 @@ exports.scrollToPreviousPage = function(animated, callback) {
   }
 };
 
-// Appearance
 exports.setAppearanceMode = function(appearanceMode, callback) {
   if (platform === "ios") {
     exec(
@@ -826,8 +848,6 @@ exports.setAppearanceMode = function(appearanceMode, callback) {
     console.log("Not implemented on " + platform + ".");
   }
 };
-
-// Cache
 
 exports.clearCache = function(callback) {
   if (platform === "ios") {
@@ -867,7 +887,6 @@ exports.removeCacheForPresentedDocument = function(callback) {
   }
 };
 
-// Toolbar
 var leftBarButtonItems = ["close"];
 var rightBarButtonItems = ["search", "outline", "thumbnails"];
 
@@ -928,8 +947,6 @@ exports.getRightBarButtonItems = function(callback) {
     console.log("Not implemented on " + platform + ".");
   }
 };
-
-// Annotation toolbar
 
 exports.hideAnnotationToolbar = function(callback) {
   if (platform === "ios") {
