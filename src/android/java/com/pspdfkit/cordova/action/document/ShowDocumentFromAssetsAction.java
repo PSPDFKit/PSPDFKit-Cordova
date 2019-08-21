@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 import com.pspdfkit.configuration.activity.PdfActivityConfiguration;
 import com.pspdfkit.cordova.ExtractAssetTask;
-import com.pspdfkit.cordova.PSPDFKitCordovaPlugin;
+import com.pspdfkit.cordova.PSPDFKitPlugin;
 
 import org.apache.cordova.CallbackContext;
 import org.jetbrains.annotations.NotNull;
@@ -17,7 +17,7 @@ import org.jetbrains.annotations.NotNull;
  * file to the internal app directory on the device before showing it.
  */
 public class ShowDocumentFromAssetsAction extends ShowDocumentAction {
-  public ShowDocumentFromAssetsAction(@NonNull String name, @NonNull PSPDFKitCordovaPlugin plugin) {
+  public ShowDocumentFromAssetsAction(@NonNull String name, @NonNull PSPDFKitPlugin plugin) {
     super(name, plugin);
   }
 

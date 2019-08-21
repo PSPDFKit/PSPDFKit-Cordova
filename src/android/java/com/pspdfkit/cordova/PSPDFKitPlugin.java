@@ -43,7 +43,7 @@ import androidx.annotation.NonNull;
  * Primary PSPDFKit plugin class for Cordova applications. Methods of this class are exposed in
  * JavaScript using the {@code PSPDFKit} object.
  */
-public class PSPDFKitCordovaPlugin extends CordovaPlugin {
+public class PSPDFKitPlugin extends CordovaPlugin {
   /**
    * Name of a {@code meta-data} element in the app manifest file holding the PSPDFKit license key.
    */
@@ -93,19 +93,19 @@ public class PSPDFKitCordovaPlugin extends CordovaPlugin {
               .metaData
               .getString(METADATA_LICENSE_KEY, null);
     } catch (PackageManager.NameNotFoundException e) {
-      throw new PSPDFKitCordovaPluginException(
+      throw new PSPDFKitPluginException(
           "Error while reading PSPDFKit license from AndroidManifest.xml", e);
     }
 
     if (TextUtils.isEmpty(licenseKey)) {
-      throw new PSPDFKitCordovaPluginException(
+      throw new PSPDFKitPluginException(
           "PSPDFKit license key is missing! Please add a <meta-data android:name=\"pspdfkit_license_key\" android:value=\"...\"> to your AndroidManifest.xml.");
     }
 
     try {
       PSPDFKit.initialize(cordova.getActivity(), licenseKey);
     } catch (Exception ex) {
-      throw new PSPDFKitCordovaPluginException("Error while initializing PSPDFKit", ex);
+      throw new PSPDFKitPluginException("Error while initializing PSPDFKit", ex);
     }
   }
 

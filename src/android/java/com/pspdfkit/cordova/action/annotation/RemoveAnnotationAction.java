@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.pspdfkit.annotations.AnnotationProvider;
 import com.pspdfkit.cordova.CordovaPdfActivity;
-import com.pspdfkit.cordova.PSPDFKitCordovaPlugin;
+import com.pspdfkit.cordova.PSPDFKitPlugin;
 import com.pspdfkit.cordova.action.BasicAction;
 import com.pspdfkit.document.PdfDocument;
 import com.pspdfkit.ui.PdfFragment;
@@ -28,7 +28,7 @@ public class RemoveAnnotationAction extends BasicAction {
 
   private static final int ARG_ANNOTATION_JSON = 0;
 
-  public RemoveAnnotationAction(@NonNull String name, @NonNull PSPDFKitCordovaPlugin plugin) {
+  public RemoveAnnotationAction(@NonNull String name, @NonNull PSPDFKitPlugin plugin) {
     super(name, plugin);
   }
 

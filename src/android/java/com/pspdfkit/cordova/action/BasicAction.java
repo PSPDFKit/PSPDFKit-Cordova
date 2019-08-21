@@ -1,6 +1,6 @@
 package com.pspdfkit.cordova.action;
 
-import com.pspdfkit.cordova.PSPDFKitCordovaPlugin;
+import com.pspdfkit.cordova.PSPDFKitPlugin;
 
 import org.apache.cordova.CallbackContext;
 import org.jetbrains.annotations.NotNull;
@@ -12,13 +12,13 @@ import static com.pspdfkit.cordova.Utilities.checkArgumentNotNull;
 import static com.pspdfkit.cordova.Utilities.propagate;
 
 /**
- * Represents a simple abstract action which can be executed by {@link PSPDFKitCordovaPlugin}.
+ * Represents a simple abstract action which can be executed by {@link PSPDFKitPlugin}.
  */
 public abstract class BasicAction implements Action {
   @NonNull private final String name;
-  @NonNull private final PSPDFKitCordovaPlugin plugin;
+  @NonNull private final PSPDFKitPlugin plugin;
 
-  public BasicAction(@NonNull final String name, @NonNull PSPDFKitCordovaPlugin plugin) {
+  public BasicAction(@NonNull final String name, @NonNull PSPDFKitPlugin plugin) {
     checkArgumentNotNull(name, "name");
     this.name = name;
     this.plugin = plugin;
@@ -31,7 +31,7 @@ public abstract class BasicAction implements Action {
   }
 
   @NonNull
-  protected PSPDFKitCordovaPlugin getPlugin() {
+  protected PSPDFKitPlugin getPlugin() {
     return plugin;
   }
 

@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import com.pspdfkit.annotations.Annotation;
 import com.pspdfkit.cordova.CordovaPdfActivity;
-import com.pspdfkit.cordova.PSPDFKitCordovaPlugin;
+import com.pspdfkit.cordova.PSPDFKitPlugin;
 import com.pspdfkit.cordova.action.BasicAction;
 import com.pspdfkit.document.PdfDocument;
 
@@ -27,7 +27,7 @@ public class GetAnnotationsAction extends BasicAction {
   private static final int ARG_PAGE_INDEX = 0;
   private static final int ARG_ANNOTATION_TYPE = 1;
 
-  public GetAnnotationsAction(@NonNull String name, @NonNull PSPDFKitCordovaPlugin plugin) {
+  public GetAnnotationsAction(@NonNull String name, @NonNull PSPDFKitPlugin plugin) {
     super(name, plugin);
   }
 

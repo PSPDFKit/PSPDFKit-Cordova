@@ -31,14 +31,14 @@ http://pspdfkit.com/license.html</license>
     <source-file src="src/android/java/com/pspdfkit/cordova/provider/DocumentJsonDataProvider.java" target-dir="src/com/pspdfkit/cordova/provider" />
     <source-file src="src/android/java/com/pspdfkit/cordova/CordovaPdfActivity.java" target-dir="src/com/pspdfkit/cordova" />
     <source-file src="src/android/java/com/pspdfkit/cordova/ExtractAssetTask.java" target-dir="src/com/pspdfkit/cordova" />
-    <source-file src="src/android/java/com/pspdfkit/cordova/PSPDFKitCordovaPlugin.java" target-dir="src/com/pspdfkit/cordova" />
-    <source-file src="src/android/java/com/pspdfkit/cordova/PSPDFKitCordovaPluginException.java" target-dir="src/com/pspdfkit/cordova" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/PSPDFKitPlugin.java" target-dir="src/com/pspdfkit/cordova" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/PSPDFKitPluginException.java" target-dir="src/com/pspdfkit/cordova" />
     <source-file src="src/android/java/com/pspdfkit/cordova/Utilities.java" target-dir="src/com/pspdfkit/cordova" />
     <framework custom="true" src="src/android/config.gradle" type="gradleReference" />
     <framework custom="true" src="src/android/pspdfkit.gradle" type="gradleReference" />
     <config-file parent="/*" target="res/xml/config.xml">
-      <feature name="PSPDFKitCordovaPlugin">
-        <param name="android-package" value="com.pspdfkit.cordova.PSPDFKitCordovaPlugin" />
+      <feature name="PSPDFKitPlugin">
+        <param name="android-package" value="com.pspdfkit.cordova.PSPDFKitPlugin" />
       </feature>
     </config-file>
     <config-file parent="/*/application" target="app/src/main/AndroidManifest.xml">

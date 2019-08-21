@@ -63,13 +63,13 @@ function onEventSubscribersChanged() {
       function() {
         console.log("Error while receiving event.");
       },
-      "PSPDFKitCordovaPlugin",
+      "PSPDFKitPlugin",
       "startEventDispatching",
       []
     );
   } else if (numberOfHandlers() === 0) {
     console.log("disconnecting event channel");
-    exec(null, null, "PSPDFKitCordovaPlugin", "stopEventDispatching", []);
+    exec(null, null, "PSPDFKitPlugin", "stopEventDispatching", []);
   }
 }
 
@@ -154,7 +154,7 @@ exports.present = function(path, options, callback) {
   } else if (platform === "android") {
     options = options || {};
     var password = getPropertyAndUnset(options, "password");
-    exec(success, error, "PSPDFKitCordovaPlugin", "showDocument", [
+    exec(success, error, "PSPDFKitPlugin", "showDocument", [
       uri,
       options,
       password
@@ -181,7 +181,7 @@ exports.showDocumentFromAssets = function(assetFile, options, callback) {
   if (platform === "android") {
     options = options || {};
     var password = getPropertyAndUnset(options, "password");
-    exec(success, error, "PSPDFKitCordovaPlugin", "showDocumentFromAssets", [
+    exec(success, error, "PSPDFKitPlugin", "showDocumentFromAssets", [
       assetFile,
       options,
       password
@@ -323,7 +323,7 @@ exports.search = function(query, animated, headless, callback) {
  */
 exports.saveDocument = function(success, error) {
   if (platform === "android") {
-   exec(success, error, "PSPDFKitCordovaPlugin", "saveDocument");
+   exec(success, error, "PSPDFKitPlugin", "saveDocument");
   } else {
     console.log("Not implemented on " + platform + ".");
   }

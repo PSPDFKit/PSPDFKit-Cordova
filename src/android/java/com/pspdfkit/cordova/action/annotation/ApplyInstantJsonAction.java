@@ -3,7 +3,7 @@ package com.pspdfkit.cordova.action.annotation;
 import androidx.annotation.NonNull;
 
 import com.pspdfkit.cordova.CordovaPdfActivity;
-import com.pspdfkit.cordova.PSPDFKitCordovaPlugin;
+import com.pspdfkit.cordova.PSPDFKitPlugin;
 import com.pspdfkit.cordova.action.BasicAction;
 import com.pspdfkit.cordova.provider.DocumentJsonDataProvider;
 import com.pspdfkit.document.PdfDocument;
@@ -26,7 +26,7 @@ public class ApplyInstantJsonAction extends BasicAction {
 
   private static final int ARG_ANNOTATIONS_JSON = 0;
 
-  public ApplyInstantJsonAction(@NonNull String name, @NonNull PSPDFKitCordovaPlugin plugin) {
+  public ApplyInstantJsonAction(@NonNull String name, @NonNull PSPDFKitPlugin plugin) {
     super(name, plugin);
   }
 

@@ -19,8 +19,8 @@ import com.pspdfkit.configuration.page.PageScrollDirection;
 import com.pspdfkit.configuration.page.PageScrollMode;
 import com.pspdfkit.configuration.sharing.ShareFeatures;
 import com.pspdfkit.cordova.CordovaPdfActivity;
-import com.pspdfkit.cordova.PSPDFKitCordovaPlugin;
-import com.pspdfkit.cordova.PSPDFKitCordovaPluginException;
+import com.pspdfkit.cordova.PSPDFKitPlugin;
+import com.pspdfkit.cordova.PSPDFKitPluginException;
 import com.pspdfkit.cordova.action.BasicAction;
 import com.pspdfkit.preferences.PSPDFKitPreferences;
 import com.pspdfkit.ui.PdfActivity;
@@ -44,7 +44,7 @@ public class ShowDocumentAction extends BasicAction {
   private static final int ARG_OPTIONS = 1;
   private static final int ARG_DOCUMENT_PASSWORD = 2;
 
-  public ShowDocumentAction(@NonNull String name, @NonNull PSPDFKitCordovaPlugin plugin) {
+  public ShowDocumentAction(@NonNull String name, @NonNull PSPDFKitPlugin plugin) {
     super(name, plugin);
   }
 
@@ -181,7 +181,7 @@ public class ShowDocumentAction extends BasicAction {
           throw new IllegalArgumentException(String.format("Invalid plugin option '%s'", option));
         }
       } catch (Exception ex) {
-        throw new PSPDFKitCordovaPluginException(
+        throw new PSPDFKitPluginException(
             String.format("Error while parsing option '%s'", option), ex);
       }
     }
@@ -203,7 +203,7 @@ public class ShowDocumentAction extends BasicAction {
       @Nullable final String password,
       @NonNull final PdfActivityConfiguration configuration,
       @NonNull final CallbackContext callbackContext) {
-    final PSPDFKitCordovaPlugin plugin = getPlugin();
+    final PSPDFKitPlugin plugin = getPlugin();
     final Intent launchIntent =
         PdfActivityIntentBuilder.fromUri(plugin.cordova.getContext(), uri)
             .activityClass(CordovaPdfActivity.class)

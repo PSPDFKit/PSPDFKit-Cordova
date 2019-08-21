@@ -9,20 +9,20 @@
 
 package com.pspdfkit.cordova;
 
-public class PSPDFKitCordovaPluginException extends RuntimeException {
+public class PSPDFKitPluginException extends RuntimeException {
 
-    public PSPDFKitCordovaPluginException() {
+    public PSPDFKitPluginException() {
     }
 
-    public PSPDFKitCordovaPluginException(String detailMessage) {
+    public PSPDFKitPluginException(String detailMessage) {
         super(detailMessage);
     }
 
-    public PSPDFKitCordovaPluginException(String detailMessage, Throwable throwable) {
+    public PSPDFKitPluginException(String detailMessage, Throwable throwable) {
         super(detailMessage, throwable);
     }
 
-    public PSPDFKitCordovaPluginException(Throwable throwable) {
+    public PSPDFKitPluginException(Throwable throwable) {
         super(throwable);
     }
 }

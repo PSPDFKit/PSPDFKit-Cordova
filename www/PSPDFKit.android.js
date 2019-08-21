@@ -37,13 +37,13 @@ function onEventSubscribersChanged() {
       function() {
         console.log("Error while receiving event.");
       },
-      "PSPDFKitCordovaPlugin",
+      "PSPDFKitPlugin",
       "startEventDispatching",
       []
     );
   } else if (numberOfHandlers() === 0) {
     console.log("disconnecting event channel");
-    exec(null, null, "PSPDFKitCordovaPlugin", "stopEventDispatching", []);
+    exec(null, null, "PSPDFKitPlugin", "stopEventDispatching", []);
   }
 }
 
@@ -88,7 +88,7 @@ exports.removeEventListener = function(eventType, f) {
  * @param error     Error callback function.
  */
 exports.addAnnotation = function(annotation, success, error) {
-  exec(success, error, "PSPDFKitCordovaPlugin", "addAnnotation", [annotation]);
+  exec(success, error, "PSPDFKitPlugin", "addAnnotation", [annotation]);
 };
 
 /**
@@ -100,7 +100,7 @@ exports.addAnnotation = function(annotation, success, error) {
  * @param error     Error callback function.
  */
 exports.removeAnnotation = function(annotation, success, error) {
-  exec(success, error, "PSPDFKitCordovaPlugin", "removeAnnotation", [annotation]);
+  exec(success, error, "PSPDFKitPlugin", "removeAnnotation", [annotation]);
 };
 
 /**
@@ -111,7 +111,7 @@ exports.removeAnnotation = function(annotation, success, error) {
  * @param error     Error callback function.
  */
 exports.applyInstantJson = function(annotations, success, error) {
-  exec(success, error, "PSPDFKitCordovaPlugin", "applyInstantJson", [
+  exec(success, error, "PSPDFKitPlugin", "applyInstantJson", [
     annotations
   ]);
 };
@@ -125,7 +125,7 @@ exports.applyInstantJson = function(annotations, success, error) {
  * @param error     Error callback function.
  */
 exports.getAnnotations = function(pageIndex, type, success, error) {
-  exec(success, error, "PSPDFKitCordovaPlugin", "getAnnotations", [
+  exec(success, error, "PSPDFKitPlugin", "getAnnotations", [
     pageIndex,
     type
   ]);
@@ -138,7 +138,7 @@ exports.getAnnotations = function(pageIndex, type, success, error) {
  * @param error     Error callback function.
  */
 exports.getAllUnsavedAnnotations = function(success, error) {
-  exec(success, error, "PSPDFKitCordovaPlugin", "getAllUnsavedAnnotations", []);
+  exec(success, error, "PSPDFKitPlugin", "getAllUnsavedAnnotations", []);
 };
 
 /**
@@ -152,7 +152,7 @@ exports.getAllUnsavedAnnotations = function(success, error) {
 exports.showDocument = function(uri, options, success, error) {
   options = options || {};
   var password = getPropertyAndUnset(options, "password");
-  exec(success, error, "PSPDFKitCordovaPlugin", "showDocument", [
+  exec(success, error, "PSPDFKitPlugin", "showDocument", [
     uri,
     options,
     password
@@ -171,7 +171,7 @@ exports.showDocument = function(uri, options, success, error) {
 exports.showDocumentFromAssets = function(assetFile, options, success, error) {
   options = options || {};
   var password = getPropertyAndUnset(options, "password");
-  exec(success, error, "PSPDFKitCordovaPlugin", "showDocumentFromAssets", [
+  exec(success, error, "PSPDFKitPlugin", "showDocumentFromAssets", [
     assetFile,
     options,
     password
@@ -185,7 +185,7 @@ exports.showDocumentFromAssets = function(assetFile, options, success, error) {
  * @param callback Success callback function.
  */
 exports.dismiss = function(callback) {
-  exec(callback, null, "PSPDFKitCordovaPlugin", "dismiss");
+  exec(callback, null, "PSPDFKitPlugin", "dismiss");
 };
 
 /**
@@ -198,7 +198,7 @@ exports.dismiss = function(callback) {
  * @param error Error callback function
  */
 exports.saveDocument = function(success, error) {
-  exec(success, error, "PSPDFKitCordovaPlugin", "saveDocument");
+  exec(success, error, "PSPDFKitPlugin", "saveDocument");
 };
 
 /**
@@ -209,7 +209,7 @@ exports.saveDocument = function(success, error) {
  * @param error Error callback function
  */
 exports.importXfdf = function(xfdfFile, success, error) {
-  exec(success, error, "PSPDFKitCordovaPlugin", "importXfdf", [xfdfFile]);
+  exec(success, error, "PSPDFKitPlugin", "importXfdf", [xfdfFile]);
 };
 
 /**
@@ -220,7 +220,7 @@ exports.importXfdf = function(xfdfFile, success, error) {
  * @param error Error callback function
  */
 exports.exportXfdf = function(xfdfFile, success, error) {
-  exec(success, error, "PSPDFKitCordovaPlugin", "exportXfdf", [xfdfFile]);
+  exec(success, error, "PSPDFKitPlugin", "exportXfdf", [xfdfFile]);
 };
 
 /**

@@ -3,7 +3,7 @@ package com.pspdfkit.cordova.action.document;
 import androidx.annotation.NonNull;
 
 import com.pspdfkit.cordova.CordovaPdfActivity;
-import com.pspdfkit.cordova.PSPDFKitCordovaPlugin;
+import com.pspdfkit.cordova.PSPDFKitPlugin;
 import com.pspdfkit.cordova.action.BasicAction;
 
 import org.apache.cordova.CallbackContext;
@@ -20,7 +20,7 @@ import java.io.IOException;
  * the file was modified and changes were saved. {@code false} if there was nothing to save.
  */
 public class SaveDocumentAction extends BasicAction {
-  public SaveDocumentAction(@NonNull String name, @NonNull PSPDFKitCordovaPlugin plugin) {
+  public SaveDocumentAction(@NonNull String name, @NonNull PSPDFKitPlugin plugin) {
     super(name, plugin);
   }
 

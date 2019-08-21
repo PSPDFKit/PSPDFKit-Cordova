@@ -3,7 +3,7 @@ package com.pspdfkit.cordova.action.annotation;
 import androidx.annotation.NonNull;
 
 import com.pspdfkit.cordova.CordovaPdfActivity;
-import com.pspdfkit.cordova.PSPDFKitCordovaPlugin;
+import com.pspdfkit.cordova.PSPDFKitPlugin;
 import com.pspdfkit.cordova.action.BasicAction;
 import com.pspdfkit.document.PdfDocument;
 import com.pspdfkit.document.formatters.DocumentJsonFormatter;
@@ -24,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class GetAllUnsavedAnnotationsAction extends BasicAction {
 
-  public GetAllUnsavedAnnotationsAction(@NonNull String name, @NonNull PSPDFKitCordovaPlugin plugin) {
+  public GetAllUnsavedAnnotationsAction(@NonNull String name, @NonNull PSPDFKitPlugin plugin) {
     super(name, plugin);
   }
 

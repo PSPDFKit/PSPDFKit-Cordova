@@ -1,6 +1,6 @@
 package com.pspdfkit.cordova.event;
 
-import com.pspdfkit.cordova.PSPDFKitCordovaPlugin;
+import com.pspdfkit.cordova.PSPDFKitPlugin;
 import com.pspdfkit.cordova.Utilities;
 import com.pspdfkit.cordova.action.Action;
 import com.pspdfkit.cordova.action.BasicAction;
@@ -65,7 +65,7 @@ public class EventDispatcher {
     }
   }
 
-  public EventDispatchingActions getConnectionActions(@NonNull final PSPDFKitCordovaPlugin plugin) {
+  public EventDispatchingActions getConnectionActions(@NonNull final PSPDFKitPlugin plugin) {
     Utilities.checkArgumentNotNull(plugin, "plugin");
     if (connectionActions == null) {
       connectionActions = new EventDispatchingActions(plugin);
@@ -85,7 +85,7 @@ public class EventDispatcher {
     public final Action startEventDispatching;
     public final Action stopEventDispatching;
 
-    EventDispatchingActions(PSPDFKitCordovaPlugin plugin) {
+    EventDispatchingActions(PSPDFKitPlugin plugin) {
       startEventDispatching =
           new BasicAction("startEventDispatching", plugin) {
             @Override

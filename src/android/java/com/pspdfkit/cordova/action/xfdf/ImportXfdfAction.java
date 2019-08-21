@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import com.pspdfkit.annotations.Annotation;
 import com.pspdfkit.annotations.AnnotationProvider;
 import com.pspdfkit.cordova.CordovaPdfActivity;
-import com.pspdfkit.cordova.PSPDFKitCordovaPlugin;
+import com.pspdfkit.cordova.PSPDFKitPlugin;
 import com.pspdfkit.cordova.action.BasicAction;
 import com.pspdfkit.document.PdfDocument;
 import com.pspdfkit.document.formatters.XfdfFormatter;
@@ -29,7 +29,7 @@ public class ImportXfdfAction extends BasicAction {
 
   private static final int ARG_XFDF_FILE_URI = 0;
 
-  public ImportXfdfAction(@NonNull String name, @NonNull PSPDFKitCordovaPlugin plugin) {
+  public ImportXfdfAction(@NonNull String name, @NonNull PSPDFKitPlugin plugin) {
     super(name, plugin);
   }
 

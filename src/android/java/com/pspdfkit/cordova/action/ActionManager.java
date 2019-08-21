@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import static com.pspdfkit.cordova.Utilities.checkArgumentNotNull;
 
 /**
- * Keeps track of available {@link Action}s and maps execution requests from {@link com.pspdfkit.cordova.PSPDFKitCordovaPlugin}
+ * Keeps track of available {@link Action}s and maps execution requests from {@link com.pspdfkit.cordova.PSPDFKitPlugin}
  * to available API action calls.
  */
 public class ActionManager {
