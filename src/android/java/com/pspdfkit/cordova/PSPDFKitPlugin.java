@@ -76,8 +76,8 @@ public class PSPDFKitPlugin extends CordovaPlugin {
             new ApplyInstantJsonAction("applyInstantJSON", this),
             new GetAnnotationsAction("getAnnotations", this),
             new GetAllUnsavedAnnotationsAction("getAllUnsavedAnnotations", this),
-            new ImportXfdfAction("importXfdf", this),
-            new ExportXfdfAction("exportXfdf", this)
+            new ImportXfdfAction("importXFDF", this),
+            new ExportXfdfAction("exportXFDF", this)
         );
   }
 

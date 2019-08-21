@@ -22,18 +22,23 @@ var platform = window.cordova.platformId;
  */
 var listeners = {};
 
-exports.dispatchEvent = function(event) {
-  var result = undefined;
-  var functions = listeners[event.type];
-  if (functions) {
-    for (var i = 0; i < functions.length; i++) {
-      result = functions[i](event);
-      if (typeof result != "undefined") {
-        if (!result) return result;
+exports.dispatchEvent = function(event) {  
+  if (platform === "ios") {
+    var result = undefined;
+    var functions = listeners[event.type];
+    if (functions) {
+      for (var i = 0; i < functions.length; i++) {
+        result = functions[i](event);
+        if (typeof result != "undefined") {
+          if (!result) return result;
+        }
       }
     }
+    return result;
+  } else {
+    console.log("Not implemented on " + platform + ".");
+    return undefined;
   }
-  return result;
 };
 
 /**
@@ -279,7 +284,6 @@ exports.showDocumentFromAssets = function(assetFile, options, callback) {
 /**
  * Displays a PDF in a full-screen modal and imports annotations from a given XFDF file.
  *
- * @param html HTML string.
  * @param path Should be a string containing the file path (not URL) for the PDF. Relative paths are assumed to be relative to the www directory (if the path has a different base URL set, this will be ignored). To specify a path inside the application documents or library directory, use a `~`, e.g. `"~/Documents/mypdf.pdf"` or `"~/Library/Application Support/mypdf.pdf"`. Path can be null, but must not be omitted
  * @param xfdfPath should be a string containing the file path (not URL) for the XFDF file backing the PDF document. Relative paths are assumed to be relative to the www directory (if the xfdf path has a different base URL set, we will create an XFDF file in `'"~/Documents/" + xfdfPath'`). To specify a path inside the application documents or library directory, use a ~, e.g. `"~/Documents/myXFDF.xfdf"` or `"~/Library/Application Support/myXFDF.xfdf"`. The xfdfPath cannot be null and must not be omitted.
  * @param options The `options` parameter is an optional object containing configuration properties for the PDF document and/or view controller. All currently supported values are listed below under Options.
@@ -630,7 +634,7 @@ exports.setOptions = function(options, animated, callback) {
 /**
  * Gets several document or view controller options in a single call.
  *
- * @param options array of option names
+ * @param names array of option names
  * @callback callback Success (or result) and error callback function.
  *
  * __Supported Platforms__
@@ -716,6 +720,17 @@ exports.getOption = function(name, callback) {
   }
 };
 
+/**
+ * FIXME: Description.
+ * 
+ * @param page Description
+ * @param animated Description
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.setPage = function(page, animated, callback) {
   if (platform === "ios") {
     exec(
@@ -735,6 +750,15 @@ exports.setPage = function(page, animated, callback) {
   }
 };
 
+/**
+ * FIXME: Description.
+ * 
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.getPage = function(callback) {
   if (platform === "ios") {
     exec(
@@ -754,6 +778,15 @@ exports.getPage = function(callback) {
   }
 };
 
+/**
+ * FIXME: Description.
+ * 
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.getScreenPage = function(callback) {
   if (platform === "ios") {
     exec(
@@ -773,6 +806,15 @@ exports.getScreenPage = function(callback) {
   }
 };
 
+/**
+ * FIXME: Description.
+ * 
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.getPageCount = function(callback) {
   if (platform === "ios") {
     exec(
@@ -792,6 +834,16 @@ exports.getPageCount = function(callback) {
   }
 };
 
+/**
+ * FIXME: Description.
+ * 
+ * @param animated Description
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.scrollToNextPage = function(animated, callback) {
   if (platform === "ios") {
     exec(
@@ -811,6 +863,16 @@ exports.scrollToNextPage = function(animated, callback) {
   }
 };
 
+/**
+ * FIXME: Description.
+ * 
+ * @param animated Description
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.scrollToPreviousPage = function(animated, callback) {
   if (platform === "ios") {
     exec(
@@ -830,6 +892,16 @@ exports.scrollToPreviousPage = function(animated, callback) {
   }
 };
 
+/**
+ * FIXME: Description.
+ * 
+ * @param appearanceMode Description
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.setAppearanceMode = function(appearanceMode, callback) {
   if (platform === "ios") {
     exec(
@@ -849,6 +921,15 @@ exports.setAppearanceMode = function(appearanceMode, callback) {
   }
 };
 
+/**
+ * FIXME: Description.
+ *
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.clearCache = function(callback) {
   if (platform === "ios") {
     exec(
@@ -868,6 +949,15 @@ exports.clearCache = function(callback) {
   }
 };
 
+/**
+ * FIXME: Description.
+ *
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.removeCacheForPresentedDocument = function(callback) {
   if (platform === "ios") {
     exec(
@@ -887,9 +977,25 @@ exports.removeCacheForPresentedDocument = function(callback) {
   }
 };
 
+/**
+ * FIXME: Description.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 var leftBarButtonItems = ["close"];
 var rightBarButtonItems = ["search", "outline", "thumbnails"];
 
+/**
+ * FIXME: Description.
+ *
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.dispatchLeftBarButtonAction = function(index) {
   if (platform === "ios") {
     leftBarButtonItems[index].action();
@@ -898,10 +1004,28 @@ exports.dispatchLeftBarButtonAction = function(index) {
   }
 };
 
+/**
+ * FIXME: Description.
+ *
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.dispatchRightBarButtonAction = function(index) {
   rightBarButtonItems[index].action();
 };
 
+/**
+ * FIXME: Description.
+ *
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.setLeftBarButtonItems = function(items) {
   if (platform === "ios") {
     leftBarButtonItems = items;
@@ -917,6 +1041,15 @@ exports.setLeftBarButtonItems = function(items) {
   }
 };
 
+/**
+ * FIXME: Description.
+ *
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.setRightBarButtonItems = function(items) {
   if (platform === "ios") {
     rightBarButtonItems = items;
@@ -932,6 +1065,15 @@ exports.setRightBarButtonItems = function(items) {
   }
 };
 
+/**
+ * FIXME: Description.
+ *
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.getLeftBarButtonItems = function(callback) {
   if (platform === "ios") {
     callback(leftBarButtonItems);
@@ -940,6 +1082,15 @@ exports.getLeftBarButtonItems = function(callback) {
   }
 };
 
+/**
+ * FIXME: Description.
+ *
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.getRightBarButtonItems = function(callback) {
   if (platform === "ios") {
     callback(rightBarButtonItems);
@@ -948,6 +1099,15 @@ exports.getRightBarButtonItems = function(callback) {
   }
 };
 
+/**
+ * FIXME: Description.
+ *
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.hideAnnotationToolbar = function(callback) {
   if (platform === "ios") {
     exec(
@@ -967,6 +1127,15 @@ exports.hideAnnotationToolbar = function(callback) {
   }
 };
 
+/**
+ * FIXME: Description.
+ *
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.showAnnotationToolbar = function(callback) {
   if (platform === "ios") {
     exec(
@@ -986,6 +1155,15 @@ exports.showAnnotationToolbar = function(callback) {
   }
 };
 
+/**
+ * FIXME: Description.
+ *
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.toggleAnnotationToolbar = function(callback) {
   if (platform === "ios") {
     exec(
@@ -1010,7 +1188,7 @@ exports.toggleAnnotationToolbar = function(callback) {
 /**
  * Applies the passed in document Instant JSON.
  *
- * @param annotations The document Instant JSON to apply.
+ * @param jsonValue The document Instant JSON to apply.
  * @callback callback Success and error callback function.
  *
  * __Supported Platforms__
@@ -1019,18 +1197,22 @@ exports.toggleAnnotationToolbar = function(callback) {
  * -Android
  */
 exports.applyInstantJSON = function(jsonValue, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "applyInstantJSON",
-    [jsonValue]
-  );
+  if (platform === "ios" || platform === "android") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "applyInstantJSON",
+      [jsonValue]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 /**
@@ -1046,18 +1228,22 @@ exports.applyInstantJSON = function(jsonValue, callback) {
  * -Android
  */
 exports.addAnnotation = function(jsonAnnotation, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "addAnnotation",
-    [jsonAnnotation]
-  );
+  if (platform === "ios" || platform === "android") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "addAnnotation",
+      [jsonAnnotation]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }  
 };
 
 /**
@@ -1073,18 +1259,22 @@ exports.addAnnotation = function(jsonAnnotation, callback) {
  * -Android
  */
 exports.removeAnnotation = function(jsonAnnotation, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "removeAnnotation",
-    [jsonAnnotation]
-  );
+  if (platform === "ios" || platform === "android") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "removeAnnotation",
+      [jsonAnnotation]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 /**
@@ -1100,18 +1290,22 @@ exports.removeAnnotation = function(jsonAnnotation, callback) {
  * -Android
  */
 exports.getAnnotations = function(pageIndex, type, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "getAnnotations",
-    [pageIndex, type]
-  );
+  if (platform === "ios" || platform === "android") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getAnnotations",
+      [pageIndex, type]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 /**
@@ -1125,21 +1319,37 @@ exports.getAnnotations = function(pageIndex, type, callback) {
  * -Android
  */
 exports.getAllUnsavedAnnotations = function(callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "getAllUnsavedAnnotations",
-    []
-  );
+  if (platform === "ios" || platform === "android") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "getAllUnsavedAnnotations",
+      []
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 // Forms
+
+/**
+ * FIXME: Description.
+ *
+ * @param value description.
+ * @param fullyQualifiedName description.
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.setFormFieldValue = function(value, fullyQualifiedName, callback) {
   if (platform === "ios") {
     exec(
@@ -1159,6 +1369,16 @@ exports.setFormFieldValue = function(value, fullyQualifiedName, callback) {
   }
 };
 
+/**
+ * FIXME: Description.
+ *
+ * @param fullyQualifiedName description.
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.getFormFieldValue = function(fullyQualifiedName, callback) {
   if (platform === "ios") {
     exec(
@@ -1183,7 +1403,7 @@ exports.getFormFieldValue = function(fullyQualifiedName, callback) {
 /**
  * Imports all annotations from the specified XFDF file to the current document.
  *
- * @param xfdfFile XFDF file path to import annotations
+ * @param xfdfPath XFDF file path to import annotations
  * @callback callback Success and error callback function.
  *
  * __Supported Platforms__
@@ -1192,24 +1412,28 @@ exports.getFormFieldValue = function(fullyQualifiedName, callback) {
  * -Android
  */
 exports.importXFDF = function(xfdfPath, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "importXFDF",
-    [xfdfPath]
-  );
+  if (platform === "ios" || platform === "android") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "importXFDF",
+      [xfdfPath]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
 /**
  * Exports all annotations from the current document to the specified XFDF file path.
  *
- * @param xfdfFile XFDF file path to export annotations
+ * @param xfdfPath XFDF file path to export annotations
  * @callback callback Success and error callback function.
  *
  * __Supported Platforms__
@@ -1218,21 +1442,36 @@ exports.importXFDF = function(xfdfPath, callback) {
  * -Android
  */
 exports.exportXFDF = function(xfdfPath, callback) {
-  exec(
-    function(success) {
-      if (callback) callback(success, null);
-    },
-    function(error) {
-      console.log(error);
-      if (callback) callback(null, error);
-    },
-    "PSPDFKitPlugin",
-    "exportXFDF",
-    [xfdfPath]
-  );
+  if (platform === "ios" || platform === "android") {
+    exec(
+      function(success) {
+        if (callback) callback(success, null);
+      },
+      function(error) {
+        console.log(error);
+        if (callback) callback(null, error);
+      },
+      "PSPDFKitPlugin",
+      "exportXFDF",
+      [xfdfPath]
+    );
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
 };
 
-// Document Processing
+/**
+ * FIXME: Description.
+ *
+ * @param annotationChange description.
+ * @param processedDocumentPath description.
+ * @param annotationType description.
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 exports.processAnnotations = function(
   annotationChange,
   processedDocumentPath,
@@ -1256,8 +1495,6 @@ exports.processAnnotations = function(
     console.log("Not implemented on " + platform + ".");
   }
 };
-
-// PDF Generation method
 
 /**
  * Generates a PDF document from HTML string.
