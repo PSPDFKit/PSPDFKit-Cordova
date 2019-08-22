@@ -272,7 +272,7 @@ exports.present = function(path, options, callback) {
  *
  * -Android
  */
-exports.showDocumentFromAssets = function(assetFile, options, callback) {
+exports.presentFromAssets = function(assetFile, options, callback) {
   if (platform === "android") {
     options = options || {};
     var password = getPropertyAndUnset(options, "password");
