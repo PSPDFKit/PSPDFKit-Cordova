@@ -10,7 +10,7 @@
 THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY AUSTRIAN COPYRIGHT LAW AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT. UNAUTHORIZED REPRODUCTION OR DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES.
 http://pspdfkit.com/license.html</license>
   <platform name="android">
-    <js-module name="PSPDFKit" src="www/PSPDFKit.android.js">
+    <js-module name="PSPDFKit" src="www/PSPDFKit.js">
         <clobbers target="PSPDFKit"/>
     </js-module>
     <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/AddAnnotationAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation" />
