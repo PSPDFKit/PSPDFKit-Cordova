@@ -32,7 +32,7 @@ Please follow the step-by-step installation instructions below for:
 Please follow the getting started guides below:
 
 - [New Cordova Project on Android](/docs/android#new-cordova-project)
-- [New Ionic Project on Android](/docs/android#new-ionic-project)
+- [New Ionic Project on Android](/docs/android#quickstart-guide-ionic)
 - [New Cordova Project on iOS](/docs/ios#new-cordova-project)
 - [New Ionic Project on iOS](/docs/ios#new-ionic-project)
 
