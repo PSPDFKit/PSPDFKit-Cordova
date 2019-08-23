@@ -156,21 +156,21 @@ constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen
 9. Run `ionic cordova prepare ios` to prepare iOS platform.
 10. Run the app: Open `platforms/ios/MyApp.xcworkspace` in Xcode, then build and run, or run `ionic cordova emulate ios` in the Terminal.
 
-### Troubleshooting
+## API
 
-#### Problem:
+You can find the API documentation in [PSPDFKit.js](../../www/PSPDFKit.js).
+
+## Troubleshooting
+
+### Problem:
 
 ```sh
 Error: Cannot find plugin.xml for plugin "PSPDFKit-Cordova". Please try adding it again.
 ```
 
-#### Solution:
+### Solution:
 
 Run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` instead of `ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git`.
-
-## API
-
-You can find the API documentation in [PSPDFKit.js](../../www/PSPDFKit.js).
 
 ## Migration Guide from `Cordova-iOS`
 
