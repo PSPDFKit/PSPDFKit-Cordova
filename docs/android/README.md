@@ -18,13 +18,13 @@ We assume that you have [an existing Cordova project](https://cordova.apache.org
 ### Installation in a Cordova app
 
 ```shell
-cordova plugin add https://github.com/PSPDFKit/Cordova-Android.git
+cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 ```
 
 ### Installation in an Ionic app
 
 ```shell
-ionic cordova plugin add https://github.com/PSPDFKit/Cordova-Android.git
+ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 ```
 
 ## Usage
@@ -136,13 +136,14 @@ Let's create a simple Corodva app that integrates PSPDFKit and uses the `pspdfki
 
 > Important: Your app's package name (in the above example `com.example.pdfapp`) has to match your PSPDFKit license name or PSPDFKit will throw an exception. If you don't have a license yet, you can request an evaluation license of PSPDFKit at https://pspdfkit.com/try.
 
-2. Add Android platform support to your project. This plugin requires the latest `cordova-android` plugin 8+.
+2. Add Android platform support to your project. This plugin requires the latest `
+roid` plugin 8+.
 
     cordova platform add android@8.0.0
 
 3. Install the PSPDFKit plugin:
 
-    cordova plugin add https://github.com/PSPDFKit/Cordova-Android.git
+    cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 
 4. Next you need to setup your PSPDFKit license key and Maven password. If you don't have a license key or Maven password yet, you can get them by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Inside your Android app's `platforms/android/local.properties` file, specify the `pspdfkit.password` and `pspdfkit.license` properties.:
 
@@ -199,7 +200,7 @@ ionic cordova platform add android@8.0.0
 3. Install the PSPDFKit plugin:
 
 ```shell
-ionic cordova plugin add https://github.com/PSPDFKit/Cordova-Android.git
+ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 ```
 
 4. Next you need to setup your PSPDFKit license key and Maven password. If you don't have a license key or Maven password yet, you can get them by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Specify the `pspdfkit.password` and `pspdfkit.license` properties inside your Android app's `platforms/android/local.properties` file, create the file if it does not exist:
@@ -418,7 +419,7 @@ src/app/app.component.ts(30,26): error TS2304: Cannot find name 'PSPDFKit'.
 src/app/app.component.ts(31,21): error TS2304: Cannot find name 'PSPDFKit'.
 ```
 
-Since TypeScript is a type-safe language, and the `Cordova-Android` plugin is written for JavaScript, you need to manually define the `PSPDFKit` type inside your application. The easiest way to do this is to add following line to your `app.components.ts` file, or any other suitable TypeScript file in your app:
+Since TypeScript is a type-safe language, and the `PSPDFKit-Cordova` plugin is written for JavaScript, you need to manually define the `PSPDFKit` type inside your application. The easiest way to do this is to add following line to your `app.components.ts` file, or any other suitable TypeScript file in your app:
 
 ```typescript
 // import statements should go first
