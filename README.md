@@ -36,32 +36,6 @@ Please follow the getting started guides below:
 - [New Cordova Project on iOS](/docs/ios#new-cordova-project)
 - [New Ionic Project on iOS](/docs/ios#new-ionic-project)
 
-## Usage
-
-```javascript
-// Set your license key here.
-PSPDFKit.setLicenseKey("YOUR KEY");
-
-// Show pdf with in single page mode, with a cblack background.
-PSPDFKit.present("pdf/document.pdf", {
-  pageMode: "single",
-  backgroundColor: "black"
-});
-
-// Show a PDF document with a callback.
-PSPDFKit.present("pdf/document.pdf", function() {
-  alert("pdf has appeared");
-});
-
-// Scroll to page 1.
-PSPDFKit.setPage(1, true);
-
-// Get the page number.
-PSPDFKit.getPage(function(page) {
-  alert("Current page: " + page);
-});
-```
-
 ## Documentation
 
 - [Android](/docs/android/README.md)
