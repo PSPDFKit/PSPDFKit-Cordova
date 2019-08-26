@@ -28,8 +28,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Adds a new annotation to the current document using the Instant JSON Annotation payload:
- * https://pspdfkit.com/guides/ios/current/importing-exporting/instant-json/#instant-annotation-json-api
+ * Sets form field value using its fully specified name.
  */
 public class SetFormFieldValueAction extends BasicAction {
 
