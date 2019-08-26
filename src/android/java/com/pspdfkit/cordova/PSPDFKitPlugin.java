@@ -24,6 +24,8 @@ import com.pspdfkit.cordova.action.annotation.RemoveAnnotationAction;
 import com.pspdfkit.cordova.action.document.SaveDocumentAction;
 import com.pspdfkit.cordova.action.document.ShowDocumentFromAssetsAction;
 import com.pspdfkit.cordova.action.document.ShowDocumentAction;
+import com.pspdfkit.cordova.action.form.GetFormFieldValueAction;
+import com.pspdfkit.cordova.action.form.SetFormFieldValueAction;
 import com.pspdfkit.cordova.action.xfdf.ExportXfdfAction;
 import com.pspdfkit.cordova.action.xfdf.ImportXfdfAction;
 import com.pspdfkit.cordova.event.EventDispatcher;
@@ -77,7 +79,9 @@ public class PSPDFKitPlugin extends CordovaPlugin {
             new GetAnnotationsAction("getAnnotations", this),
             new GetAllUnsavedAnnotationsAction("getAllUnsavedAnnotations", this),
             new ImportXfdfAction("importXFDF", this),
-            new ExportXfdfAction("exportXFDF", this)
+            new ExportXfdfAction("exportXFDF", this),
+            new GetFormFieldValueAction("getFormFieldValue", this),
+            new SetFormFieldValueAction("setFormFieldValue", this)
         );
   }
 
