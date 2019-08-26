@@ -33,8 +33,8 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class SetFormFieldValueAction extends BasicAction {
 
-  private static final int ARG_FORM_FIELD_NAME = 0;
   private static final int ARG_FORM_FIELD_NEW_VALUE = 0;
+  private static final int ARG_FORM_FIELD_NAME = 1;
 
   public SetFormFieldValueAction(@NonNull String name, @NonNull PSPDFKitPlugin plugin) {
     super(name, plugin);
@@ -94,6 +94,8 @@ public class SetFormFieldValueAction extends BasicAction {
                 }
               }
             }
+
+            callbackContext.success();
           })
       );
     } else {
