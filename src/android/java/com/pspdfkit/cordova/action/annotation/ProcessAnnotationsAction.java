@@ -24,6 +24,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
 
+import static com.pspdfkit.cordova.Utilities.convertJsonNullToJavaNull;
 import static com.pspdfkit.cordova.Utilities.getAnnotationProcessingModeFromString;
 import static com.pspdfkit.cordova.Utilities.getAnnotationTypeFromString;
 
@@ -44,7 +45,7 @@ public class ProcessAnnotationsAction extends BasicAction {
   protected void execAction(JSONArray args, CallbackContext callbackContext) throws JSONException {
     final Uri outputFileUri = Uri.parse(args.getString(ARG_OUTPUT_FILE_URI));
     final PdfProcessorTask.AnnotationProcessingMode processingMode = getAnnotationProcessingModeFromString(args.getString(ARG_PROCESSING_MODE));
-    String typeString = args.getString(ARG_ANNOTATION_TYPE);
+    String typeString = convertJsonNullToJavaNull(args.getString(ARG_ANNOTATION_TYPE));
 
     final CordovaPdfActivity cordovaPdfActivity = CordovaPdfActivity.getCurrentActivity();
     final PdfDocument document = cordovaPdfActivity.getDocument();
