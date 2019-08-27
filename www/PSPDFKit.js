@@ -15,7 +15,7 @@ var platform = window.cordova.platformId;
 
 // Event listeners
 
-/** 
+/**
  * Event listeners collection.
  *
  * __Supported Platforms__
@@ -24,7 +24,7 @@ var platform = window.cordova.platformId;
  */
 var listeners = {};
 
-exports.dispatchEvent = function(event) {  
+exports.dispatchEvent = function(event) {
   if (platform === "ios") {
     var result = undefined;
     var functions = listeners[event.type];
@@ -45,7 +45,7 @@ exports.dispatchEvent = function(event) {
 
 /**
  * Subscribes listener for given event type.
- * 
+ *
  * __Supported Platforms__
  *
  * -iOS
@@ -70,7 +70,7 @@ exports.addEventListener = function(type, listener) {
 
 /**
  * Subscribes listeners to their event types.
- * 
+ *
  * __Supported Platforms__
  *
  * -iOS
@@ -88,7 +88,7 @@ exports.addEventListeners = function(listeners) {
 
 /**
  * Unsubscribes listener for given event type.
- * 
+ *
  * __Supported Platforms__
  *
  * -iOS
@@ -103,7 +103,7 @@ exports.removeEventListener = function(type, listener) {
         existing.splice(index, 1);
       }
     }
-  }  else if (platform === "android") {
+  } else if (platform === "android") {
     if (type in channels) {
       channels[type].unsubscribe(listener);
     }
@@ -114,9 +114,9 @@ exports.removeEventListener = function(type, listener) {
 
 /**
  * Event channels.
- * 
+ *
  * __Supported Platforms__
- * 
+ *
  * -Android
  */
 var channel = require("cordova/channel");
@@ -129,9 +129,9 @@ var channels = {
 
 /**
  * Retrieves total number of handlers for all available channels.
- * 
+ *
  * __Supported Platforms__
- * 
+ *
  * -Android
  */
 function numberOfHandlers() {
@@ -144,9 +144,9 @@ function numberOfHandlers() {
 
 /**
  * Notifies about any changes to collection of event handlers.
- * 
+ *
  * __Supported Platforms__
- * 
+ *
  * -Android
  */
 function onEventSubscribersChanged() {
@@ -179,9 +179,9 @@ for (var key in channels) {
 
 /**
  * Retrieves a named property from the given target object while removing the property from the object.
- * 
+ *
  * __Supported Platforms__
- * 
+ *
  * -Android
  */
 function getPropertyAndUnset(target, name) {
@@ -192,9 +192,9 @@ function getPropertyAndUnset(target, name) {
 
 /**
  * Executes action with givin parameters and handles callback result.
- * 
+ *
  * __Supported Platforms__
- * 
+ *
  * -Android
  * -iOS
  */
@@ -227,7 +227,7 @@ function executeAction(callback, action, params) {
  */
 exports.setLicenseKey = function(key, callback) {
   if (platform === "ios") {
-    executeAction(callback, "setLicenseKey", [key])
+    executeAction(callback, "setLicenseKey", [key]);
   } else {
     console.log("Not implemented on " + platform + ".");
   }
@@ -261,13 +261,13 @@ exports.present = function(path, options, callback) {
 };
 
 /**
- * Opens the PSPDFActivity to show a document from the app's assets folder. This method copies the 
+ * Opens the PSPDFActivity to show a document from the app's assets folder. This method copies the
  * file to the internal app directory on the device before showing it.
  *
  * @param assetFile Relative path within the app's assets folder.
  * @param options   PSPDFKit configuration options.
  * @callback callback Success and error callback function.
- * 
+ *
  * __Supported Platforms__
  *
  * -Android
@@ -276,7 +276,11 @@ exports.presentFromAssets = function(assetFile, options, callback) {
   if (platform === "android") {
     options = options || {};
     var password = getPropertyAndUnset(options, "password");
-    executeAction(callback, "showDocumentFromAssets", [assetFile, options, password]);
+    executeAction(callback, "showDocumentFromAssets", [
+      assetFile,
+      options,
+      password
+    ]);
   } else {
     console.log("Not implemented on " + platform + ".");
   }
@@ -302,9 +306,9 @@ exports.presentWithXFDF = function(path, xfdfPath, callback, options) {
   }
 };
 
-/** 
+/**
  * iOS: Dismisses the modally presented PDF view.
- * 
+ *
  * Android: Dismisses any previously launched PDF activity. Calls the optional callback function after all activities have been dismissed.
  *
  * @callback callback Success and error callback function.
@@ -322,7 +326,7 @@ exports.dismiss = function(callback) {
   }
 };
 
-/** 
+/**
  * Reloads the current PDF.
  *
  * @callback callback Success and error callback function.
@@ -348,20 +352,20 @@ exports.reload = function(callback) {
  * the file was modified and changes were saved. {@code false} if there was nothing to save.
  *
  * @callback callback Success and error callback function.
- * 
+ *
  * __Supported Platforms__
  *
  * -Android
  */
 exports.saveDocument = function(success, error) {
   if (platform === "android") {
-   executeAction(callback, "saveDocument", []);
+    executeAction(callback, "saveDocument", []);
   } else {
     console.log("Not implemented on " + platform + ".");
   }
 };
 
-/** 
+/**
  * Saves any changed annotations in the current document.
  *
  * @callback callback Success and error callback function.
@@ -378,7 +382,7 @@ exports.saveAnnotations = function(callback) {
   }
 };
 
-/** 
+/**
  * Return true in the success (or result) callback if the document has unsaved annotation. Returns false otherwise.
  *
  * @callback callback Success (or result) and error callback function.
@@ -397,7 +401,7 @@ exports.getHasDirtyAnnotations = function(callback) {
 
 // Search
 
-/** 
+/**
  * Triggers a search for the specified query text.
  *
  * @param query Search Term to query
@@ -421,7 +425,7 @@ exports.search = function(query, animated, headless, callback) {
 
 /**
  * Constant values used for setting the `scrollMode` option.
- * 
+ *
  * __Supported Platforms__
  *
  * -Android
@@ -440,7 +444,7 @@ exports.ScrollMode = {
 
 /**
  * Constant values used for setting the 'pageFitMode' option.
- * 
+ *
  * __Supported Platforms__
  *
  * -Android
@@ -459,7 +463,7 @@ exports.PageFitMode = {
 
 /**
  * Constant values used for setting the 'pageDirection' option.
- * 
+ *
  * __Supported Platforms__
  *
  * -Android
@@ -478,7 +482,7 @@ exports.PageScrollDirection = {
 
 /**
  * Constant values used for setting the 'searchType' option.
- * 
+ *
  * __Supported Platforms__
  *
  * -Android
@@ -497,7 +501,7 @@ exports.SearchType = {
 
 /**
  * Constant values used for setting the 'thumbnailBarMode' option.
- * 
+ *
  * __Supported Platforms__
  *
  * -Android
@@ -518,9 +522,9 @@ exports.ThumbnailBarMode = {
 };
 
 /**
- * Constant values used for setting the 'shareFeatures' option. These settings control the visibility 
+ * Constant values used for setting the 'shareFeatures' option. These settings control the visibility
  * of share actions inside the user interface.
- * 
+ *
  * __Supported Platforms__
  *
  * -Android
@@ -620,12 +624,12 @@ exports.getOption = function(name, callback) {
 // Working with page navigation
 
 /**
- * FIXME: Description.
+ * Sets the current visible page.
  * 
- * @param page Description
- * @param animated Description
- * @callback callback Success and error callback function.
- *
+ * @param page the page index
+ * @param animated Optional argument. Determines if the page change should be animated (if omitted, the search will not be animated).
+ * @callback callback Success (or result) and error callback function.
+ 
  * __Supported Platforms__
  *
  * -iOS
@@ -639,9 +643,9 @@ exports.setPage = function(page, animated, callback) {
 };
 
 /**
- * FIXME: Description.
- * 
- * @callback callback Success and error callback function.
+ * Gets the currently visible page.
+ *
+ * @callback callback Success (or result) and error callback function.
  *
  * __Supported Platforms__
  *
@@ -656,26 +660,9 @@ exports.getPage = function(callback) {
 };
 
 /**
- * FIXME: Description.
- * 
- * @callback callback Success and error callback function.
+ * Gets the page count of the current document.
  *
- * __Supported Platforms__
- *
- * -iOS
- */
-exports.getScreenPage = function(callback) {
-  if (platform === "ios") {
-    executeAction(callback, "getScreenPage", []);
-  } else {
-    console.log("Not implemented on " + platform + ".");
-  }
-};
-
-/**
- * FIXME: Description.
- * 
- * @callback callback Success and error callback function.
+ * @callback callback Success (or result) and error callback function.
  *
  * __Supported Platforms__
  *
@@ -690,10 +677,10 @@ exports.getPageCount = function(callback) {
 };
 
 /**
- * FIXME: Description.
- * 
- * @param animated Description
- * @callback callback Success and error callback function.
+ * Scrolls to the next page.
+ *
+ * @param animated Optional argument. Determines if the page change should be animated (if omitted, the search will not be animated).
+ * @callback callback Success (or result) and error callback function.
  *
  * __Supported Platforms__
  *
@@ -708,10 +695,10 @@ exports.scrollToNextPage = function(animated, callback) {
 };
 
 /**
- * FIXME: Description.
- * 
- * @param animated Description
- * @callback callback Success and error callback function.
+ * Scrolls to the previous page.
+ *
+ * @param animated Optional argument. Determines if the page change should be animated (if omitted, the search will not be animated).
+ * @callback callback Success (or result) and error callback function.
  *
  * __Supported Platforms__
  *
@@ -726,10 +713,10 @@ exports.scrollToPreviousPage = function(animated, callback) {
 };
 
 /**
- * FIXME: Description.
- * 
- * @param appearanceMode Description
- * @callback callback Success and error callback function.
+ * Sets the appearance mode.
+ *
+ * @param appearanceMode the appearance mode. Can be 'default', 'sepia', or 'night'
+ * @callback callback Success (or result) and error callback function.
  *
  * __Supported Platforms__
  *
@@ -746,7 +733,7 @@ exports.setAppearanceMode = function(appearanceMode, callback) {
 // Cache
 
 /**
- * FIXME: Description.
+ * Clears the entire cache.
  *
  * @callback callback Success and error callback function.
  *
@@ -763,7 +750,7 @@ exports.clearCache = function(callback) {
 };
 
 /**
- * FIXME: Description.
+ * Removes the cache from the currently presented document.
  *
  * @callback callback Success and error callback function.
  *
@@ -782,17 +769,25 @@ exports.removeCacheForPresentedDocument = function(callback) {
 // Working with toolbars
 
 /**
- * FIXME: Description.
+ * Default left bar button items
  *
  * __Supported Platforms__
  *
  * -iOS
  */
 var leftBarButtonItems = ["close"];
+
+/**
+ * Default right bar button items
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
 var rightBarButtonItems = ["search", "outline", "thumbnails"];
 
 /**
- * FIXME: Description.
+ * Action for custom left bar button item.
  *
  * @callback callback Success and error callback function.
  *
@@ -809,7 +804,7 @@ exports.dispatchLeftBarButtonAction = function(index) {
 };
 
 /**
- * FIXME: Description.
+ * Action for custom right bar button item.
  *
  * @callback callback Success and error callback function.
  *
@@ -822,9 +817,11 @@ exports.dispatchRightBarButtonAction = function(index) {
 };
 
 /**
- * FIXME: Description.
+ * Sets the left bar button items.
+ * Note: The same button item cannot be added to both the left and right bar button items simultaneously.
  *
- * @callback callback Success and error callback function.
+ * @param items The list of bar button items. See the full list of button items here: https://pspdfkit.com/api/ios/Classes/PSPDFViewController.html#/Toolbar%20button%20items
+ * @callback callback Success (or result) and error callback function.
  *
  * __Supported Platforms__
  *
@@ -846,9 +843,10 @@ exports.setLeftBarButtonItems = function(items) {
 };
 
 /**
- * FIXME: Description.
+ * Sets the right bar button items.
+ * Note: The same button item cannot be added to both the left and right bar button items simultaneously.
  *
- * @callback callback Success and error callback function.
+ * @param items The list of bar button items. See the full list of button items here: https://pspdfkit.com/api/ios/Classes/PSPDFViewController.html#/Toolbar%20button%20items
  *
  * __Supported Platforms__
  *
@@ -870,9 +868,9 @@ exports.setRightBarButtonItems = function(items) {
 };
 
 /**
- * FIXME: Description.
+ * Gets the left bar button items.
  *
- * @callback callback Success and error callback function.
+ * @callback callback Success (or result) and error callback function.
  *
  * __Supported Platforms__
  *
@@ -887,9 +885,9 @@ exports.getLeftBarButtonItems = function(callback) {
 };
 
 /**
- * FIXME: Description.
+ * Gets the right bar button items.
  *
- * @callback callback Success and error callback function.
+ * @callback callback Success (or result) and error callback function.
  *
  * __Supported Platforms__
  *
@@ -904,7 +902,7 @@ exports.getRightBarButtonItems = function(callback) {
 };
 
 /**
- * FIXME: Description.
+ * Hides the annotation toolbar
  *
  * @callback callback Success and error callback function.
  *
@@ -921,7 +919,7 @@ exports.hideAnnotationToolbar = function(callback) {
 };
 
 /**
- * FIXME: Description.
+ * Shows the annotation toolbar
  *
  * @callback callback Success and error callback function.
  *
@@ -938,7 +936,7 @@ exports.showAnnotationToolbar = function(callback) {
 };
 
 /**
- * FIXME: Description.
+ * Toggles the annotation toolbar
  *
  * @callback callback Success and error callback function.
  *
@@ -992,7 +990,7 @@ exports.addAnnotation = function(jsonAnnotation, callback) {
     executeAction(callback, "addAnnotation", [jsonAnnotation]);
   } else {
     console.log("Not implemented on " + platform + ".");
-  }  
+  }
 };
 
 /**
@@ -1056,11 +1054,11 @@ exports.getAllUnsavedAnnotations = function(callback) {
 // Forms
 
 /**
- * FIXME: Description.
+ * Sets the value of the form element of the fully qualified name.
  *
- * @param value description.
- * @param fullyQualifiedName description.
- * @callback callback Success and error callback function.
+ * @param value the value.
+ * @param fullyQualifiedName the fully qualified name of the form element.
+ * @callback callback Success (result) and error callback function.
  *
  * __Supported Platforms__
  *
@@ -1075,10 +1073,10 @@ exports.setFormFieldValue = function(value, fullyQualifiedName, callback) {
 };
 
 /**
- * FIXME: Description.
+ * Gets the value of the form element of the fully qualified name.
  *
  * @param fullyQualifiedName description.
- * @callback callback Success and error callback function.
+ * @callback callback Success (result) and error callback function.
  *
  * __Supported Platforms__
  *
@@ -1135,11 +1133,11 @@ exports.exportXFDF = function(xfdfPath, callback) {
 // Document processing
 
 /**
- * FIXME: Description.
+ * Processes annotations (embed, remove, flatten, or print) and saves the processed document to the given document path.
  *
- * @param annotationChange description.
+ * @param annotationChange the annotation change. Can be 'flatten', 'remove', 'embed' or 'print'
  * @param processedDocumentPath description.
- * @param annotationType description.
+ * @param annotationType The optional string annotationType argument. If omitted, we process 'All' annotations. The annotation type can have one of the following values: None, Undefined, Link, Highlight, StrikeOut, Underline, Squiggly, FreeText, Ink, Square, Circle, Line, Text, Stamp, Caret, RichMedia, Screen, Widget, Sound, FileAttachment, Polygon, PolyLine, Popup, Watermark, TrapNet, 3D, Redact, All.
  * @callback callback Success and error callback function.
  *
  * __Supported Platforms__
@@ -1153,7 +1151,11 @@ exports.processAnnotations = function(
   annotationType
 ) {
   if (platform === "ios") {
-    executeAction(callback, "processAnnotations", [annotationChange, processedDocumentPath, annotationType]);
+    executeAction(callback, "processAnnotations", [
+      annotationChange,
+      processedDocumentPath,
+      annotationType
+    ]);
   } else {
     console.log("Not implemented on " + platform + ".");
   }
@@ -1175,7 +1177,11 @@ exports.processAnnotations = function(
  */
 exports.convertPDFFromHTMLString = function(html, fileName, options, callback) {
   if (platform === "ios") {
-    executeAction(callback, "convertPDFFromHTMLString", [html, fileName, options]);
+    executeAction(callback, "convertPDFFromHTMLString", [
+      html,
+      fileName,
+      options
+    ]);
   } else {
     console.log("Not implemented on " + platform + ".");
   }
