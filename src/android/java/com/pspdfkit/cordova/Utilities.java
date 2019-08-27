@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.pspdfkit.annotations.AnnotationType;
+import com.pspdfkit.document.processor.PdfProcessorTask;
+import com.pspdfkit.document.processor.PdfProcessorTask.AnnotationProcessingMode;
 
 import java.util.EnumSet;
 
@@ -94,5 +96,76 @@ public final class Utilities {
       return EnumSet.of(AnnotationType.FREETEXT);
     }
     return EnumSet.noneOf(AnnotationType.class);
+  }
+
+  /**
+   * Converts given string for annotation type into a corresponding {@link AnnotationType}
+   * @param type string for annotation type to convert
+   * @return corresponding {@link AnnotationType} or null if no such enum exists.
+   */
+  public static AnnotationType getExistingAnnotationTypeFromString(@NonNull String type) {
+    if ("pspdfkit/ink".equalsIgnoreCase(type)) {
+      return AnnotationType.INK;
+    }
+    if ("pspdfkit/link".equalsIgnoreCase(type)) {
+      return AnnotationType.LINK;
+    }
+    if ("pspdfkit/markup/highlight".equalsIgnoreCase(type)) {
+      return AnnotationType.HIGHLIGHT;
+    }
+    if ("pspdfkit/markup/squiggly".equalsIgnoreCase(type)) {
+      return AnnotationType.SQUIGGLY;
+    }
+    if ("pspdfkit/markup/strikeout".equalsIgnoreCase(type)) {
+      return AnnotationType.STRIKEOUT;
+    }
+    if ("pspdfkit/markup/underline".equalsIgnoreCase(type)) {
+      return AnnotationType.UNDERLINE;
+    }
+    if ("pspdfkit/note".equalsIgnoreCase(type)) {
+      return AnnotationType.NOTE;
+    }
+    if ("pspdfkit/shape/ellipse".equalsIgnoreCase(type)) {
+      return AnnotationType.CIRCLE;
+    }
+    if ("pspdfkit/shape/line".equalsIgnoreCase(type)) {
+      return AnnotationType.LINE;
+    }
+    if ("pspdfkit/shape/polygon".equalsIgnoreCase(type)) {
+      return AnnotationType.POLYGON;
+    }
+    if ("pspdfkit/shape/polyline".equalsIgnoreCase(type)) {
+      return AnnotationType.POLYLINE;
+    }
+    if ("pspdfkit/shape/rectangle".equalsIgnoreCase(type)) {
+      return AnnotationType.SQUARE;
+    }
+    if ("pspdfkit/text".equalsIgnoreCase(type)) {
+      return AnnotationType.FREETEXT;
+    }
+
+    return AnnotationType.NONE;
+  }
+
+  /**
+   * Converts given string for annotation processing mode into a corresponding {@link AnnotationProcessingMode}
+   * @param processingMode string for annotation type to convert
+   * @return corresponding {@link EnumSet<AnnotationType>}
+   */
+  public static AnnotationProcessingMode getAnnotationProcessingModeFromString(@Nullable String processingMode) {
+    if ("flatten".equalsIgnoreCase(processingMode)) {
+      return AnnotationProcessingMode.FLATTEN;
+    }
+    if ("remove".equalsIgnoreCase(processingMode)) {
+      return AnnotationProcessingMode.DELETE;
+    }
+    if ("embed".equalsIgnoreCase(processingMode)) {
+      return AnnotationProcessingMode.KEEP;
+    }
+    if ("print".equalsIgnoreCase(processingMode)) {
+      return AnnotationProcessingMode.PRINT;
+    }
+
+    throw new IllegalArgumentException("Annotation processing mode should one of the following: flatten, remove, embed, or print");
   }
 }

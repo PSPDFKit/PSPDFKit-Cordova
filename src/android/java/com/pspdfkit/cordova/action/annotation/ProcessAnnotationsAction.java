@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
+import com.pspdfkit.annotations.AnnotationType;
 import com.pspdfkit.cordova.CordovaPdfActivity;
 import com.pspdfkit.cordova.PSPDFKitPlugin;
 import com.pspdfkit.cordova.action.BasicAction;
@@ -18,10 +19,16 @@ import org.json.JSONException;
 
 import java.io.FileNotFoundException;
 import java.io.OutputStream;
+import java.util.EnumSet;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
+
+import static com.pspdfkit.cordova.Utilities.convertJsonNullToJavaNull;
+import static com.pspdfkit.cordova.Utilities.getAnnotationProcessingModeFromString;
+import static com.pspdfkit.cordova.Utilities.getAnnotationTypeFromString;
+import static com.pspdfkit.cordova.Utilities.getExistingAnnotationTypeFromString;
 
 /**
  * Processes annotations (embed, remove, flatten, or print) and saves the processed document to the given document path.
@@ -39,6 +46,8 @@ public class ProcessAnnotationsAction extends BasicAction {
   @Override
   protected void execAction(JSONArray args, CallbackContext callbackContext) throws JSONException {
     final Uri outputFileUri = Uri.parse(args.getString(ARG_OUTPUT_FILE_URI));
+    final PdfProcessorTask.AnnotationProcessingMode processingMode = getAnnotationProcessingModeFromString(args.getString(ARG_PROCESSING_MODE));
+    String typeString = args.getString(ARG_ANNOTATION_TYPE);
 
     final CordovaPdfActivity cordovaPdfActivity = CordovaPdfActivity.getCurrentActivity();
     final PdfDocument document = cordovaPdfActivity.getDocument();
@@ -48,9 +57,14 @@ public class ProcessAnnotationsAction extends BasicAction {
     callbackContext.sendPluginResult(result);
 
     if (document != null) {
-      PdfProcessorTask task = PdfProcessorTask
-          .fromDocument(document)
-          .changeAllAnnotations(PdfProcessorTask.AnnotationProcessingMode.FLATTEN);
+      PdfProcessorTask task = PdfProcessorTask.fromDocument(document);
+
+      if(typeString != null && !"pspdfkit/all".equalsIgnoreCase(typeString)) {
+        final AnnotationType annotationType = getExistingAnnotationTypeFromString((typeString));
+        task.changeAnnotationsOfType(annotationType, processingMode);
+      } else {
+        task.changeAllAnnotations(processingMode);
+      }
 
       try {
         final OutputStream outputStream = cordovaPdfActivity.getContentResolver().openOutputStream(outputFileUri);
