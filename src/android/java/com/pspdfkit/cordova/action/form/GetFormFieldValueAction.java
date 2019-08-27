@@ -21,7 +21,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Retrieves form field value using its fully specified name.
+ * Retrieves a form field value using the form fields fully qualified name.
  */
 public class GetFormFieldValueAction extends BasicAction {
 
