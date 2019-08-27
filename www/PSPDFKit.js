@@ -1137,7 +1137,7 @@ exports.exportXFDF = function(xfdfPath, callback) {
  *
  * @param annotationChange the annotation change. Can be 'flatten', 'remove', 'embed' or 'print'
  * @param processedDocumentPath description.
- * @param annotationType The optional string annotationType argument. If omitted, we process 'All' annotations. The annotation type can have one of the following values: None, Undefined, Link, Highlight, StrikeOut, Underline, Squiggly, FreeText, Ink, Square, Circle, Line, Text, Stamp, Caret, RichMedia, Screen, Widget, Sound, FileAttachment, Polygon, PolyLine, Popup, Watermark, TrapNet, 3D, Redact, All.
+ * @param annotationType The optional string annotationType argument. If omitted, we process 'All' annotations. The annotation type can have one of the following values: None, Undefined, Link, Highlight, StrikeOut, Underline, Squiggly, FreeText, Ink, Square, Circle, Line, Text, Stamp, Caret, RichMedia, Screen, Widget, Sound, FileAttachment, Polygon, PolyLine, Popup, Watermark, TrapNet, 3D, Redact.
  * @callback callback Success and error callback function.
  *
  * __Supported Platforms__

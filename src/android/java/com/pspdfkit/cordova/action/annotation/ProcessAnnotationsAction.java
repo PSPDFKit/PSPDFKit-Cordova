@@ -19,16 +19,13 @@ import org.json.JSONException;
 
 import java.io.FileNotFoundException;
 import java.io.OutputStream;
-import java.util.EnumSet;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subscribers.DisposableSubscriber;
 
-import static com.pspdfkit.cordova.Utilities.convertJsonNullToJavaNull;
 import static com.pspdfkit.cordova.Utilities.getAnnotationProcessingModeFromString;
 import static com.pspdfkit.cordova.Utilities.getAnnotationTypeFromString;
-import static com.pspdfkit.cordova.Utilities.getExistingAnnotationTypeFromString;
 
 /**
  * Processes annotations (embed, remove, flatten, or print) and saves the processed document to the given document path.
@@ -59,8 +56,8 @@ public class ProcessAnnotationsAction extends BasicAction {
     if (document != null) {
       PdfProcessorTask task = PdfProcessorTask.fromDocument(document);
 
-      if(typeString != null && !"pspdfkit/all".equalsIgnoreCase(typeString)) {
-        final AnnotationType annotationType = getExistingAnnotationTypeFromString((typeString));
+      if (typeString != null) {
+        final AnnotationType annotationType = getAnnotationTypeFromString((typeString));
         task.changeAnnotationsOfType(annotationType, processingMode);
       } else {
         task.changeAllAnnotations(processingMode);

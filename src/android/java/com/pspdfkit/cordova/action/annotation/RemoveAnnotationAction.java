@@ -18,7 +18,7 @@ import org.json.JSONObject;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.pspdfkit.cordova.Utilities.getAnnotationTypeFromString;
+import static com.pspdfkit.cordova.Utilities.getAnnotationTypeSetFromString;
 
 /**
  * Removes a given annotation from the current document. The annotation should be in the Instant
@@ -52,7 +52,7 @@ public class RemoveAnnotationAction extends BasicAction {
     if (document != null) {
       AnnotationProvider annotationProvider = document.getAnnotationProvider();
       pdfActivity.addSubscription(annotationProvider.getAllAnnotationsOfType(
-          getAnnotationTypeFromString(type),
+          getAnnotationTypeSetFromString(type),
           pageIndex,
           1)
           .observeOn(Schedulers.io())

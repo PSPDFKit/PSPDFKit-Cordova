@@ -52,7 +52,7 @@ public final class Utilities {
    * @param type string for annotation type to convert
    * @return corresponding {@link EnumSet<AnnotationType>}
    */
-  public static EnumSet<AnnotationType> getAnnotationTypeFromString(@Nullable String type) {
+  public static EnumSet<AnnotationType> getAnnotationTypeSetFromString(@Nullable String type) {
     if (type == null) {
       return EnumSet.allOf(AnnotationType.class);
     }
@@ -103,7 +103,7 @@ public final class Utilities {
    * @param type string for annotation type to convert
    * @return corresponding {@link AnnotationType} or null if no such enum exists.
    */
-  public static AnnotationType getExistingAnnotationTypeFromString(@NonNull String type) {
+  public static AnnotationType getAnnotationTypeFromString(@NonNull String type) {
     if ("pspdfkit/ink".equalsIgnoreCase(type)) {
       return AnnotationType.INK;
     }
