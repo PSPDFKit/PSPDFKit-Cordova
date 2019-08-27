@@ -1143,6 +1143,7 @@ exports.exportXFDF = function(xfdfPath, callback) {
  * __Supported Platforms__
  *
  * -iOS
+ * -Android
  */
 exports.processAnnotations = function(
   annotationChange,
@@ -1150,7 +1151,7 @@ exports.processAnnotations = function(
   callback,
   annotationType
 ) {
-  if (platform === "ios") {
+  if (platform === "ios" || platform === "android") {
     executeAction(callback, "processAnnotations", [
       annotationChange,
       processedDocumentPath,
