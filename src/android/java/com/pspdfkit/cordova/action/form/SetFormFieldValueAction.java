@@ -28,7 +28,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Sets form field value using its fully specified name.
+ * Sets a form field value using the form fields fully qualified name.
  */
 public class SetFormFieldValueAction extends BasicAction {
 
