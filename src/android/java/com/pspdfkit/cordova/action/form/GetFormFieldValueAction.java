@@ -54,7 +54,7 @@ public class GetFormFieldValueAction extends BasicAction {
                 if (formElement instanceof TextFormElement) {
                   TextFormElement textFormElement = (TextFormElement) formElement;
                   String text = textFormElement.getText();
-                  if (text == null || text.isEmpty()) {
+                  if (text == null) {
                     response.put(FORM_FIELD_VALUE, JSONObject.NULL);
                   } else {
                     response.put(FORM_FIELD_VALUE, text);
