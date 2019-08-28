@@ -56,46 +56,14 @@ public final class Utilities {
     if (type == null) {
       return EnumSet.allOf(AnnotationType.class);
     }
-    if ("pspdfkit/ink".equalsIgnoreCase(type)) {
-      return EnumSet.of(AnnotationType.INK);
+
+    AnnotationType typeFromString = getAnnotationTypeFromString(type);
+
+    if(typeFromString == AnnotationType.NONE) {
+      return EnumSet.noneOf(AnnotationType.class);
+    } else {
+      return EnumSet.of(typeFromString);
     }
-    if ("pspdfkit/link".equalsIgnoreCase(type)) {
-      return EnumSet.of(AnnotationType.LINK);
-    }
-    if ("pspdfkit/markup/highlight".equalsIgnoreCase(type)) {
-      return EnumSet.of(AnnotationType.HIGHLIGHT);
-    }
-    if ("pspdfkit/markup/squiggly".equalsIgnoreCase(type)) {
-      return EnumSet.of(AnnotationType.SQUIGGLY);
-    }
-    if ("pspdfkit/markup/strikeout".equalsIgnoreCase(type)) {
-      return EnumSet.of(AnnotationType.STRIKEOUT);
-    }
-    if ("pspdfkit/markup/underline".equalsIgnoreCase(type)) {
-      return EnumSet.of(AnnotationType.UNDERLINE);
-    }
-    if ("pspdfkit/note".equalsIgnoreCase(type)) {
-      return EnumSet.of(AnnotationType.NOTE);
-    }
-    if ("pspdfkit/shape/ellipse".equalsIgnoreCase(type)) {
-      return EnumSet.of(AnnotationType.CIRCLE);
-    }
-    if ("pspdfkit/shape/line".equalsIgnoreCase(type)) {
-      return EnumSet.of(AnnotationType.LINE);
-    }
-    if ("pspdfkit/shape/polygon".equalsIgnoreCase(type)) {
-      return EnumSet.of(AnnotationType.POLYGON);
-    }
-    if ("pspdfkit/shape/polyline".equalsIgnoreCase(type)) {
-      return EnumSet.of(AnnotationType.POLYLINE);
-    }
-    if ("pspdfkit/shape/rectangle".equalsIgnoreCase(type)) {
-      return EnumSet.of(AnnotationType.SQUARE);
-    }
-    if ("pspdfkit/text".equalsIgnoreCase(type)) {
-      return EnumSet.of(AnnotationType.FREETEXT);
-    }
-    return EnumSet.noneOf(AnnotationType.class);
   }
 
   /**
