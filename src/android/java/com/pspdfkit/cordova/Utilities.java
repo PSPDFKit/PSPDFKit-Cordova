@@ -48,7 +48,7 @@ public final class Utilities {
   }
 
   /**
-   * Converts given string for annotation type support by Instant JSON into a corresponding {@link EnumSet<AnnotationType>}
+   * Converts given string for annotation type (supported by Instant JSON) into a corresponding {@link EnumSet<AnnotationType>}
    * @param type string for annotation type (supported by Instant JSON) to convert
    * @return corresponding {@link EnumSet<AnnotationType>}
    */
