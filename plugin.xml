@@ -22,6 +22,8 @@ http://pspdfkit.com/license.html</license>
     <source-file src="src/android/java/com/pspdfkit/cordova/action/document/SaveDocumentAction.java" target-dir="src/com/pspdfkit/cordova/action/document" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/document/ShowDocumentAction.java" target-dir="src/com/pspdfkit/cordova/action/document" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/document/ShowDocumentFromAssetsAction.java" target-dir="src/com/pspdfkit/cordova/action/document" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/form/GetFormFieldValueAction.java" target-dir="src/com/pspdfkit/cordova/action/form" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/form/SetFormFieldValueAction.java" target-dir="src/com/pspdfkit/cordova/action/form" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/xfdf/ExportXfdfAction.java" target-dir="src/com/pspdfkit/cordova/action/xfdf" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/xfdf/ImportXfdfAction.java" target-dir="src/com/pspdfkit/cordova/action/xfdf" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/Action.java" target-dir="src/com/pspdfkit/cordova/action" />
