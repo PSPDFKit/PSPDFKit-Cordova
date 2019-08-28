@@ -48,68 +48,66 @@ public final class Utilities {
   }
 
   /**
-   * Converts given string for annotation type into a corresponding {@link EnumSet<AnnotationType>}
-   * @param type string for annotation type to convert
+   * Converts given string for annotation type support by Instant JSON into a corresponding {@link EnumSet<AnnotationType>}
+   * @param type string for annotation type (supported by Instant JSON) to convert
    * @return corresponding {@link EnumSet<AnnotationType>}
    */
-  public static EnumSet<AnnotationType> getAnnotationTypeSetFromString(@Nullable String type) {
+  public static EnumSet<AnnotationType> getAnnotationTypeSetFromInstantJsonType(@Nullable String type) {
     if (type == null) {
       return EnumSet.allOf(AnnotationType.class);
     }
-
-    AnnotationType typeFromString = getAnnotationTypeFromString(type);
-
-    if(typeFromString == AnnotationType.NONE) {
-      return EnumSet.noneOf(AnnotationType.class);
-    } else {
-      return EnumSet.of(typeFromString);
+    if ("pspdfkit/ink".equalsIgnoreCase(type)) {
+      return EnumSet.of(AnnotationType.INK);
     }
+    if ("pspdfkit/link".equalsIgnoreCase(type)) {
+      return EnumSet.of(AnnotationType.LINK);
+    }
+    if ("pspdfkit/markup/highlight".equalsIgnoreCase(type)) {
+      return EnumSet.of(AnnotationType.HIGHLIGHT);
+    }
+    if ("pspdfkit/markup/squiggly".equalsIgnoreCase(type)) {
+      return EnumSet.of(AnnotationType.SQUIGGLY);
+    }
+    if ("pspdfkit/markup/strikeout".equalsIgnoreCase(type)) {
+      return EnumSet.of(AnnotationType.STRIKEOUT);
+    }
+    if ("pspdfkit/markup/underline".equalsIgnoreCase(type)) {
+      return EnumSet.of(AnnotationType.UNDERLINE);
+    }
+    if ("pspdfkit/note".equalsIgnoreCase(type)) {
+      return EnumSet.of(AnnotationType.NOTE);
+    }
+    if ("pspdfkit/shape/ellipse".equalsIgnoreCase(type)) {
+      return EnumSet.of(AnnotationType.CIRCLE);
+    }
+    if ("pspdfkit/shape/line".equalsIgnoreCase(type)) {
+      return EnumSet.of(AnnotationType.LINE);
+    }
+    if ("pspdfkit/shape/polygon".equalsIgnoreCase(type)) {
+      return EnumSet.of(AnnotationType.POLYGON);
+    }
+    if ("pspdfkit/shape/polyline".equalsIgnoreCase(type)) {
+      return EnumSet.of(AnnotationType.POLYLINE);
+    }
+    if ("pspdfkit/shape/rectangle".equalsIgnoreCase(type)) {
+      return EnumSet.of(AnnotationType.SQUARE);
+    }
+    if ("pspdfkit/text".equalsIgnoreCase(type)) {
+      return EnumSet.of(AnnotationType.FREETEXT);
+    }
+    return EnumSet.noneOf(AnnotationType.class);
   }
 
   /**
    * Converts given string for annotation type into a corresponding {@link AnnotationType}
    * @param type string for annotation type to convert
-   * @return corresponding {@link AnnotationType} or null if no such enum exists.
+   * @return corresponding {@link AnnotationType} or {@link AnnotationType#NONE} if no such enum exists.
    */
   public static AnnotationType getAnnotationTypeFromString(@NonNull String type) {
-    if ("pspdfkit/ink".equalsIgnoreCase(type)) {
-      return AnnotationType.INK;
-    }
-    if ("pspdfkit/link".equalsIgnoreCase(type)) {
-      return AnnotationType.LINK;
-    }
-    if ("pspdfkit/markup/highlight".equalsIgnoreCase(type)) {
-      return AnnotationType.HIGHLIGHT;
-    }
-    if ("pspdfkit/markup/squiggly".equalsIgnoreCase(type)) {
-      return AnnotationType.SQUIGGLY;
-    }
-    if ("pspdfkit/markup/strikeout".equalsIgnoreCase(type)) {
-      return AnnotationType.STRIKEOUT;
-    }
-    if ("pspdfkit/markup/underline".equalsIgnoreCase(type)) {
-      return AnnotationType.UNDERLINE;
-    }
-    if ("pspdfkit/note".equalsIgnoreCase(type)) {
-      return AnnotationType.NOTE;
-    }
-    if ("pspdfkit/shape/ellipse".equalsIgnoreCase(type)) {
-      return AnnotationType.CIRCLE;
-    }
-    if ("pspdfkit/shape/line".equalsIgnoreCase(type)) {
-      return AnnotationType.LINE;
-    }
-    if ("pspdfkit/shape/polygon".equalsIgnoreCase(type)) {
-      return AnnotationType.POLYGON;
-    }
-    if ("pspdfkit/shape/polyline".equalsIgnoreCase(type)) {
-      return AnnotationType.POLYLINE;
-    }
-    if ("pspdfkit/shape/rectangle".equalsIgnoreCase(type)) {
-      return AnnotationType.SQUARE;
-    }
-    if ("pspdfkit/text".equalsIgnoreCase(type)) {
-      return AnnotationType.FREETEXT;
+    for (AnnotationType annotationType : AnnotationType.values()) {
+      if(annotationType.name().equalsIgnoreCase(type)) {
+        return annotationType;
+      }
     }
 
     return AnnotationType.NONE;

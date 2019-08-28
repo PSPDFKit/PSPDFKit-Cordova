@@ -57,7 +57,7 @@ public class ProcessAnnotationsAction extends BasicAction {
     if (document != null) {
       PdfProcessorTask task = PdfProcessorTask.fromDocument(document);
 
-      if (typeString != null && !typeString.isEmpty()) {
+      if (typeString != null && !typeString.isEmpty() && !"all".equalsIgnoreCase(typeString)) {
         final AnnotationType annotationType = getAnnotationTypeFromString((typeString));
         task.changeAnnotationsOfType(annotationType, processingMode);
       } else {
