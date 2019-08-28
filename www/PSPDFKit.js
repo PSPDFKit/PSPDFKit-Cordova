@@ -1063,9 +1063,10 @@ exports.getAllUnsavedAnnotations = function(callback) {
  * __Supported Platforms__
  *
  * -iOS
+ * -Android
  */
 exports.setFormFieldValue = function(value, fullyQualifiedName, callback) {
-  if (platform === "ios") {
+  if (platform === "ios" || platform === "android") {
     executeAction(callback, "setFormFieldValue", [value, fullyQualifiedName]);
   } else {
     console.log("Not implemented on " + platform + ".");
@@ -1081,9 +1082,10 @@ exports.setFormFieldValue = function(value, fullyQualifiedName, callback) {
  * __Supported Platforms__
  *
  * -iOS
+ * -Android
  */
 exports.getFormFieldValue = function(fullyQualifiedName, callback) {
-  if (platform === "ios") {
+  if (platform === "ios" || platform === "android") {
     executeAction(callback, "getFormFieldValue", [fullyQualifiedName]);
   } else {
     console.log("Not implemented on " + platform + ".");
