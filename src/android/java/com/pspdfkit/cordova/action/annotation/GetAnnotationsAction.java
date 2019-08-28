@@ -17,7 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 import static com.pspdfkit.cordova.Utilities.convertJsonNullToJavaNull;
-import static com.pspdfkit.cordova.Utilities.getAnnotationTypeFromString;
+import static com.pspdfkit.cordova.Utilities.getAnnotationTypeSetFromInstantJsonType;
 
 /**
  * Asynchronously retrieves all annotations of the given type from the given page.
@@ -44,7 +44,7 @@ public class GetAnnotationsAction extends BasicAction {
     if (document != null) {
       cordovaPdfActivity.addSubscription(
           document.getAnnotationProvider().getAllAnnotationsOfType(
-              getAnnotationTypeFromString(convertJsonNullToJavaNull(args.getString(ARG_ANNOTATION_TYPE))),
+              getAnnotationTypeSetFromInstantJsonType(convertJsonNullToJavaNull(args.getString(ARG_ANNOTATION_TYPE))),
               args.getInt(ARG_PAGE_INDEX),
               1)
               .observeOn(Schedulers.io())

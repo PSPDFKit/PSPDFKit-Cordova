@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.pspdfkit.annotations.AnnotationType;
+import com.pspdfkit.document.processor.PdfProcessorTask;
+import com.pspdfkit.document.processor.PdfProcessorTask.AnnotationProcessingMode;
 
 import java.util.EnumSet;
 
@@ -46,11 +48,11 @@ public final class Utilities {
   }
 
   /**
-   * Converts given string for annotation type into a corresponding {@link EnumSet<AnnotationType>}
-   * @param type string for annotation type to convert
+   * Converts given string for annotation type (supported by Instant JSON) into a corresponding {@link EnumSet<AnnotationType>}
+   * @param type string for annotation type (supported by Instant JSON) to convert
    * @return corresponding {@link EnumSet<AnnotationType>}
    */
-  public static EnumSet<AnnotationType> getAnnotationTypeFromString(@Nullable String type) {
+  public static EnumSet<AnnotationType> getAnnotationTypeSetFromInstantJsonType(@Nullable String type) {
     if (type == null) {
       return EnumSet.allOf(AnnotationType.class);
     }
@@ -94,5 +96,42 @@ public final class Utilities {
       return EnumSet.of(AnnotationType.FREETEXT);
     }
     return EnumSet.noneOf(AnnotationType.class);
+  }
+
+  /**
+   * Converts given string for annotation type into a corresponding {@link AnnotationType}
+   * @param type string for annotation type to convert
+   * @return corresponding {@link AnnotationType} or {@link AnnotationType#NONE} if no such enum exists.
+   */
+  public static AnnotationType getAnnotationTypeFromString(@NonNull String type) {
+    for (AnnotationType annotationType : AnnotationType.values()) {
+      if(annotationType.name().equalsIgnoreCase(type)) {
+        return annotationType;
+      }
+    }
+
+    return AnnotationType.NONE;
+  }
+
+  /**
+   * Converts given string for annotation processing mode into a corresponding {@link AnnotationProcessingMode}
+   * @param processingMode string for annotation type to convert
+   * @return corresponding {@link EnumSet<AnnotationType>}
+   */
+  public static AnnotationProcessingMode getAnnotationProcessingModeFromString(@Nullable String processingMode) {
+    if ("flatten".equalsIgnoreCase(processingMode)) {
+      return AnnotationProcessingMode.FLATTEN;
+    }
+    if ("remove".equalsIgnoreCase(processingMode)) {
+      return AnnotationProcessingMode.DELETE;
+    }
+    if ("embed".equalsIgnoreCase(processingMode)) {
+      return AnnotationProcessingMode.KEEP;
+    }
+    if ("print".equalsIgnoreCase(processingMode)) {
+      return AnnotationProcessingMode.PRINT;
+    }
+
+    throw new IllegalArgumentException("Annotation processing mode should one of the following: flatten, remove, embed, or print");
   }
 }
