@@ -45,7 +45,7 @@ public class ProcessAnnotationsAction extends BasicAction {
   protected void execAction(JSONArray args, CallbackContext callbackContext) throws JSONException {
     final Uri outputFileUri = Uri.parse(args.getString(ARG_OUTPUT_FILE_URI));
     final PdfProcessorTask.AnnotationProcessingMode processingMode = getAnnotationProcessingModeFromString(args.getString(ARG_PROCESSING_MODE));
-    String typeString = convertJsonNullToJavaNull(args.getString(ARG_ANNOTATION_TYPE));
+    String typeString = convertJsonNullToJavaNull(args.optString(ARG_ANNOTATION_TYPE));
 
     final CordovaPdfActivity cordovaPdfActivity = CordovaPdfActivity.getCurrentActivity();
     final PdfDocument document = cordovaPdfActivity.getDocument();
@@ -57,7 +57,7 @@ public class ProcessAnnotationsAction extends BasicAction {
     if (document != null) {
       PdfProcessorTask task = PdfProcessorTask.fromDocument(document);
 
-      if (typeString != null) {
+      if (typeString != null && !typeString.isEmpty()) {
         final AnnotationType annotationType = getAnnotationTypeFromString((typeString));
         task.changeAnnotationsOfType(annotationType, processingMode);
       } else {
