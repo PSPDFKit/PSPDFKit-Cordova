@@ -20,6 +20,7 @@ import com.pspdfkit.cordova.action.annotation.AddAnnotationAction;
 import com.pspdfkit.cordova.action.annotation.ApplyInstantJsonAction;
 import com.pspdfkit.cordova.action.annotation.GetAllUnsavedAnnotationsAction;
 import com.pspdfkit.cordova.action.annotation.GetAnnotationsAction;
+import com.pspdfkit.cordova.action.annotation.GetHasDirtyAnnotationsAction;
 import com.pspdfkit.cordova.action.annotation.ProcessAnnotationsAction;
 import com.pspdfkit.cordova.action.annotation.RemoveAnnotationAction;
 import com.pspdfkit.cordova.action.cache.ClearCacheAction;
@@ -89,7 +90,8 @@ public class PSPDFKitPlugin extends CordovaPlugin {
             new SetFormFieldValueAction("setFormFieldValue", this),
             new ClearCacheAction("clearCache", this),
             new ClearCacheForPageAction("clearCacheForPage", this),
-            new RemoveCacheForPresentedDocumentAction("removeCacheForPresentedDocument", this)
+            new RemoveCacheForPresentedDocumentAction("removeCacheForPresentedDocument", this),
+            new GetHasDirtyAnnotationsAction("getHasDirtyAnnotations", this)
         );
   }
 
