@@ -740,9 +740,10 @@ exports.setAppearanceMode = function(appearanceMode, callback) {
  * __Supported Platforms__
  *
  * -iOS
+ * -Android
  */
 exports.clearCache = function(callback) {
-  if (platform === "ios") {
+  if (platform === "ios" || platform === "android") {
     executeAction(callback, "clearCache", []);
   } else {
     console.log("Not implemented on " + platform + ".");
@@ -757,10 +758,29 @@ exports.clearCache = function(callback) {
  * __Supported Platforms__
  *
  * -iOS
+ * -Android
  */
 exports.removeCacheForPresentedDocument = function(callback) {
-  if (platform === "ios") {
+  if (platform === "ios" || platform === "android") {
     executeAction(callback, "removeCacheForPresentedDocument", []);
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
+};
+
+/**
+ * Removes the cache for specified page number.
+ *
+ * @param pageIndex The page to remove cache for.
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -Android
+ */
+exports.removeCacheForPage = function(pageIndex, callback) {
+  if (platform === "android") {
+    executeAction(callback, "removeCacheForPage", [pageIndex]);
   } else {
     console.log("Not implemented on " + platform + ".");
   }
