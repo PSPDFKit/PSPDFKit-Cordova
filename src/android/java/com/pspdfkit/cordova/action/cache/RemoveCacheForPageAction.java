@@ -12,6 +12,7 @@ import com.pspdfkit.document.PdfDocument;
 import com.pspdfkit.ui.PdfFragment;
 
 import org.apache.cordova.CallbackContext;
+import org.apache.cordova.PluginResult;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -32,9 +33,14 @@ public class RemoveCacheForPageAction extends BasicAction {
   @Override
   protected void execAction(JSONArray args, CallbackContext callbackContext) throws JSONException {
     final int pageIndex = args.getInt(ARG_PAGE_INDEX);
-    CordovaPdfActivity pdfActivity = CordovaPdfActivity.getCurrentActivity();
-
+    final CordovaPdfActivity pdfActivity = CordovaPdfActivity.getCurrentActivity();
     final PdfDocument document = pdfActivity.getDocument();
+
+    // Capture the given callback and make sure it is retained in JavaScript too.
+    final PluginResult result = new PluginResult(PluginResult.Status.NO_RESULT);
+    result.setKeepCallback(true);
+    callbackContext.sendPluginResult(result);
+
     if (document != null) {
       pdfActivity.addSubscription(
           Completable.fromAction(() -> document.invalidateCacheForPage(pageIndex))
