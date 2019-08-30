@@ -2,6 +2,7 @@ package com.pspdfkit.cordova.action.cache;
 
 import androidx.annotation.NonNull;
 
+import com.pspdfkit.PSPDFKit;
 import com.pspdfkit.annotations.Annotation;
 import com.pspdfkit.annotations.AnnotationProvider;
 import com.pspdfkit.cordova.CordovaPdfActivity;
@@ -14,13 +15,15 @@ import org.apache.cordova.CallbackContext;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import io.reactivex.Completable;
+import io.reactivex.schedulers.Schedulers;
+
 /**
- * Adds a new annotation to the current document using the Instant JSON Annotation payload:
- * https://pspdfkit.com/guides/ios/current/importing-exporting/instant-json/#instant-annotation-json-api
+ * Removes the cache for specified page number.
  */
 public class RemoveCacheForPageAction extends BasicAction {
 
-  private static final int ARG_ANNOTATION_JSON = 0;
+  private static final int ARG_PAGE_INDEX = 0;
 
   public RemoveCacheForPageAction(@NonNull String name, @NonNull PSPDFKitPlugin plugin) {
     super(name, plugin);
@@ -28,20 +31,19 @@ public class RemoveCacheForPageAction extends BasicAction {
 
   @Override
   protected void execAction(JSONArray args, CallbackContext callbackContext) throws JSONException {
-    String annotationJson = args.getJSONObject(ARG_ANNOTATION_JSON).toString();
+    final int pageIndex = args.getInt(ARG_PAGE_INDEX);
     CordovaPdfActivity pdfActivity = CordovaPdfActivity.getCurrentActivity();
 
     final PdfDocument document = pdfActivity.getDocument();
     if (document != null) {
-      Annotation annotationFromInstantJson = document.getAnnotationProvider()
-          .createAnnotationFromInstantJson(annotationJson);
-
-      PdfFragment pdfFragment = pdfActivity.getPdfFragment();
-      if(pdfFragment != null){
-        pdfFragment.notifyAnnotationHasChanged(annotationFromInstantJson);
-      }
-
-      callbackContext.success();
+      pdfActivity.addSubscription(
+          Completable.fromAction(() -> document.invalidateCacheForPage(pageIndex))
+              .subscribeOn(Schedulers.io())
+              .subscribe(
+                  callbackContext::success,
+                  e -> callbackContext.error(e.getMessage())
+              )
+      );
     } else {
       callbackContext.error("No document is set");
     }

@@ -735,6 +735,7 @@ exports.setAppearanceMode = function(appearanceMode, callback) {
 /**
  * Clears the entire cache.
  *
+ * @param clearDiskCache optional parameter. Android: if set to true clears disk cache as well. iOS: has no effect.
  * @callback callback Success and error callback function.
  *
  * __Supported Platforms__
@@ -742,9 +743,10 @@ exports.setAppearanceMode = function(appearanceMode, callback) {
  * -iOS
  * -Android
  */
-exports.clearCache = function(callback) {
+exports.clearCache = function(clearDiskCache, callback) {
   if (platform === "ios" || platform === "android") {
-    executeAction(callback, "clearCache", []);
+    clearDiskCache = clearDiskCache || {};
+    executeAction(callback, "clearCache", [clearDiskCache]);
   } else {
     console.log("Not implemented on " + platform + ".");
   }
