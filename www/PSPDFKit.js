@@ -775,7 +775,7 @@ exports.removeCacheForPresentedDocument = function(callback) {
 /**
  * Invalidates the render cache for the specified page.
  *
- * @param pageIndex The page to remove cache for.
+ * @param pageIndex 0-based index of the page whose render cache should be invalidated.
  * @callback callback Success and error callback function.
  *
  * __Supported Platforms__
