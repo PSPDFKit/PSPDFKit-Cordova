@@ -23,7 +23,7 @@ import com.pspdfkit.cordova.action.annotation.GetAnnotationsAction;
 import com.pspdfkit.cordova.action.annotation.ProcessAnnotationsAction;
 import com.pspdfkit.cordova.action.annotation.RemoveAnnotationAction;
 import com.pspdfkit.cordova.action.cache.ClearCacheAction;
-import com.pspdfkit.cordova.action.cache.RemoveCacheForPageAction;
+import com.pspdfkit.cordova.action.cache.ClearCacheForPageAction;
 import com.pspdfkit.cordova.action.cache.RemoveCacheForPresentedDocumentAction;
 import com.pspdfkit.cordova.action.document.SaveDocumentAction;
 import com.pspdfkit.cordova.action.document.ShowDocumentFromAssetsAction;
@@ -88,7 +88,7 @@ public class PSPDFKitPlugin extends CordovaPlugin {
             new GetFormFieldValueAction("getFormFieldValue", this),
             new SetFormFieldValueAction("setFormFieldValue", this),
             new ClearCacheAction("clearCache", this),
-            new RemoveCacheForPageAction("removeCacheForPage", this),
+            new ClearCacheForPageAction("clearCacheForPage", this),
             new RemoveCacheForPresentedDocumentAction("removeCacheForPresentedDocument", this)
         );
   }

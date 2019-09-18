@@ -20,7 +20,7 @@ http://pspdfkit.com/license.html</license>
     <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/ProcessAnnotationsAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/RemoveAnnotationAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/cache/ClearCacheAction.java" target-dir="src/com/pspdfkit/cordova/action/cache" />
-    <source-file src="src/android/java/com/pspdfkit/cordova/action/cache/RemoveCacheForPageAction.java" target-dir="src/com/pspdfkit/cordova/action/cache" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/cache/ClearCacheForPageAction.java" target-dir="src/com/pspdfkit/cordova/action/cache" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/cache/RemoveCacheForPresentedDocumentAction.java" target-dir="src/com/pspdfkit/cordova/action/cache" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/document/SaveDocumentAction.java" target-dir="src/com/pspdfkit/cordova/action/document" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/document/ShowDocumentAction.java" target-dir="src/com/pspdfkit/cordova/action/document" />

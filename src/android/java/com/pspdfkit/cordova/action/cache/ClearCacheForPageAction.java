@@ -20,13 +20,13 @@ import io.reactivex.Completable;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * Removes the cache for specified page number.
+ * Clears the cache for specified page number.
  */
-public class RemoveCacheForPageAction extends BasicAction {
+public class ClearCacheForPageAction extends BasicAction {
 
   private static final int ARG_PAGE_INDEX = 0;
 
-  public RemoveCacheForPageAction(@NonNull String name, @NonNull PSPDFKitPlugin plugin) {
+  public ClearCacheForPageAction(@NonNull String name, @NonNull PSPDFKitPlugin plugin) {
     super(name, plugin);
   }
 

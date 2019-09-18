@@ -734,7 +734,7 @@ exports.setAppearanceMode = function(appearanceMode, callback) {
 
 /**
  * Clears the entire render cache. This invalidates render caches for all previously rendered documents.
- * Consider using `removeCacheForPresentedDocument()` or `removeCacheForPage()` instead of this,
+ * Consider using `removeCacheForPresentedDocument()` or `clearCacheForPage()` instead of this,
  * since invalidating single documents or specific page caches since excessive cache invalidation may decrease performance.
  *
  * @param clearDiskCache optional parameter. Android: if set to true clears disk cache as well. iOS: has no effect.
@@ -755,7 +755,7 @@ exports.clearCache = function(clearDiskCache, callback) {
 };
 
 /**
- * Removes the cache from the currently presented document.
+ * Clears the cache from the currently presented document.
  *
  * @callback callback Success and error callback function.
  *
@@ -782,9 +782,9 @@ exports.removeCacheForPresentedDocument = function(callback) {
  *
  * -Android
  */
-exports.removeCacheForPage = function(pageIndex, callback) {
+exports.clearCacheForPage = function(pageIndex, callback) {
   if (platform === "android") {
-    executeAction(callback, "removeCacheForPage", [pageIndex]);
+    executeAction(callback, "clearCacheForPage", [pageIndex]);
   } else {
     console.log("Not implemented on " + platform + ".");
   }
