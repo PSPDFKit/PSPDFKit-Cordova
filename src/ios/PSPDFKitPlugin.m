@@ -1290,12 +1290,12 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 #pragma mark Cache
 
 - (void)clearCache:(CDVInvokedUrlCommand *)command {
-    [PSPDFKit.sharedInstance.cache clearCache];
+    [PSPDFKitGlobal.sharedInstance.cache clearCache];
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
 - (void)removeCacheForPresentedDocument:(CDVInvokedUrlCommand *)command {
-    [PSPDFKit.sharedInstance.cache removeCacheForDocument:_pdfDocument];
+    [PSPDFKitGlobal.sharedInstance.cache removeCacheForDocument:_pdfDocument];
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
