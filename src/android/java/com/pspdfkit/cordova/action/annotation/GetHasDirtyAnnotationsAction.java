@@ -13,7 +13,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Returns true in the success (or result) callback if the document has unsaved annotation. Returns false otherwise.
+ * Returns true in the success (or result) callback if the document has unsaved changes. Returns false otherwise.
  */
 public class GetHasDirtyAnnotationsAction extends BasicAction {
 
