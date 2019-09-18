@@ -733,34 +733,58 @@ exports.setAppearanceMode = function(appearanceMode, callback) {
 // Cache
 
 /**
- * Clears the entire cache.
+ * Clears the entire render cache. This invalidates render caches for all previously rendered documents.
+ * Consider using `removeCacheForPresentedDocument()` or `clearCacheForPage()` instead of this,
+ * since invalidating single documents or specific page caches since excessive cache invalidation may decrease performance.
  *
+ * @param clearDiskCache optional parameter. Android: if set to true clears disk cache as well. iOS: has no effect.
  * @callback callback Success and error callback function.
  *
  * __Supported Platforms__
  *
  * -iOS
+ * -Android
  */
-exports.clearCache = function(callback) {
-  if (platform === "ios") {
-    executeAction(callback, "clearCache", []);
+exports.clearCache = function(clearDiskCache, callback) {
+  if (platform === "ios" || platform === "android") {
+    clearDiskCache = clearDiskCache || {};
+    executeAction(callback, "clearCache", [clearDiskCache]);
   } else {
     console.log("Not implemented on " + platform + ".");
   }
 };
 
 /**
- * Removes the cache from the currently presented document.
+ * Clears the cache from the currently presented document.
  *
  * @callback callback Success and error callback function.
  *
  * __Supported Platforms__
  *
  * -iOS
+ * -Android
  */
 exports.removeCacheForPresentedDocument = function(callback) {
-  if (platform === "ios") {
+  if (platform === "ios" || platform === "android") {
     executeAction(callback, "removeCacheForPresentedDocument", []);
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
+};
+
+/**
+ * Invalidates the render cache for the specified page.
+ *
+ * @param pageIndex 0-based index of the page whose render cache should be invalidated.
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -Android
+ */
+exports.clearCacheForPage = function(pageIndex, callback) {
+  if (platform === "android") {
+    executeAction(callback, "clearCacheForPage", [pageIndex]);
   } else {
     console.log("Not implemented on " + platform + ".");
   }
