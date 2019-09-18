@@ -1,4 +1,4 @@
-# Cordova Plugin for PSPDFKit 8 for iOS
+# Cordova Plugin for PSPDFKit 9 for iOS
 
 The [PSPDFKit SDK](https://pspdfkit.com/pdf-sdk/) is a framework that allows you to view, annotate, sign, and fill PDF forms on iOS, Android, Windows, macOS, and Web.
 
@@ -6,8 +6,8 @@ PSPDFKit comes with open source plugins for Cordova on both [iOS](https://pspdfk
 
 ## Requirements
 
-- Xcode 10.2.1 or later
-- PSPDFKit 8.4.2 for iOS or later
+- Xcode 11 or later
+- PSPDFKit 9.0.0 for iOS or later
 - Cordova >= 9.0.0
 - CocoaPods >= 1.7.5
 
@@ -30,6 +30,10 @@ target 'CordovaDemo' do
 +	pod 'PSPDFKit', podspec: 'https://customers.pspdfkit.com/cocoapods/USE_YOUR_OWN_COCOAPODS_KEY/pspdfkit/latest.podspec'
 end
 ```
+
+3. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
+
+![always-embed-swift-standard-libraries.png](screenshots/always-embed-swift-standard-libraries.png)
 
 **Important** If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
 
@@ -112,8 +116,12 @@ onDeviceReady: function() {
 
 6. Use your CocoaPods Key: `open plugins/pspdfkit-cordova/plugin.xml` and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own key. If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
 
-7. Run `cordova platform add ios` to add the iOS platform.
-8. Run the app: Open `platforms/ios/CordovaDemo.xcworkspace` in Xcode, then build and run, or run `cordova emulate ios` in the Terminal.
+7. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
+
+![always-embed-swift-standard-libraries.png](screenshots/always-embed-swift-standard-libraries.png)
+
+8. Run `cordova platform add ios` to add the iOS platform.
+9. Run the app: Open `platforms/ios/CordovaDemo.xcworkspace` in Xcode, then build and run, or run `cordova emulate ios` in the Terminal.
 
 #### New Ionic Project
 
@@ -154,7 +162,10 @@ constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen
 
 8. Run `ionic cordova platform add ios` to add the iOS platform.
 9. Run `ionic cordova prepare ios` to prepare iOS platform.
-10. Run the app: Open `platforms/ios/MyApp.xcworkspace` in Xcode, then build and run, or run `ionic cordova emulate ios` in the Terminal.
+10. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
+
+![always-embed-swift-standard-libraries.png](screenshots/always-embed-swift-standard-libraries.png)
+11. Run the app: Open `platforms/ios/MyApp.xcworkspace` in Xcode, then build and run, or run `ionic cordova emulate ios` in the Terminal.
 
 ## API
 
