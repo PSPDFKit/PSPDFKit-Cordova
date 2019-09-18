@@ -24,6 +24,8 @@ import static com.pspdfkit.cordova.Utilities.checkArgumentNotNull;
 
 public class CordovaPdfActivity extends PdfActivity {
 
+  public static final String LOG_TAG = "CordovaPdfActivity";
+
   /**
    * For communication with the JavaScript context, we keep a static reference to the current
    * activity.
@@ -32,32 +34,24 @@ public class CordovaPdfActivity extends PdfActivity {
   private final CompositeDisposable compositeDisposable = new CompositeDisposable();
 
   @NonNull
-  private final DocumentListener listener =
-      new SimpleDocumentListener() {
-        @Override
-        public void onDocumentSaved(@NonNull PdfDocument document) {
-          EventDispatcher.getInstance().sendEvent("onDocumentSaved", new JSONObject());
-          Log.d("WTF", "onDocumentSaved");
-        }
+  private final static DocumentListener listener = new SimpleDocumentListener() {
+    @Override
+    public void onDocumentSaved(@NonNull PdfDocument document) {
+      EventDispatcher.getInstance().sendEvent("onDocumentSaved", new JSONObject());
+    }
 
-        @Override
-        public void onDocumentSaveFailed(
-            @NonNull PdfDocument document, @NonNull Throwable exception) {
-          Log.d("WTF", "onDocumentSaveFailed");
-          try {
-            final JSONObject data = new JSONObject();
-            data.put("message", exception.getMessage());
-            EventDispatcher.getInstance().sendEvent("onDocumentSaveFailed", data);
-          } catch (JSONException e) {
-            e.printStackTrace();
-          }
-        }
-
-        @Override
-        public void onDocumentLoaded(@NonNull PdfDocument document) {
-          Log.d("WWTF", "onDocumentLoaded");
-        }
-      };
+    @Override
+    public void onDocumentSaveFailed(
+        @NonNull PdfDocument document, @NonNull Throwable exception) {
+      try {
+        final JSONObject data = new JSONObject();
+        data.put("message", exception.getMessage());
+        EventDispatcher.getInstance().sendEvent("onDocumentSaveFailed", data);
+      } catch (JSONException e) {
+        Log.e(LOG_TAG, "Error while creating JSON payload for 'onDocumentSaveFailed' event.", e);
+      }
+    }
+  };
 
   public static CordovaPdfActivity getCurrentActivity() {
     return currentActivity;
@@ -66,11 +60,12 @@ public class CordovaPdfActivity extends PdfActivity {
   private void bindActivity(@NonNull final CordovaPdfActivity activity) {
     checkArgumentNotNull(activity, "activity");
 
-    if (currentActivity != null) {
+    final CordovaPdfActivity oldActivity = currentActivity;
+    if (oldActivity != null) {
       releaseActivity();
-      currentActivity.disposeSubscriptions();
+      oldActivity.disposeSubscriptions();
     }
-
+    
     currentActivity = activity;
     final PdfFragment pdfFragment = currentActivity.getPdfFragment();
     if (pdfFragment == null) {
@@ -84,10 +79,10 @@ public class CordovaPdfActivity extends PdfActivity {
   }
 
   private void releaseActivity() {
-    PdfFragment fragment = currentActivity.getPdfFragment();
-    if (fragment != null) {
-      fragment.removeDocumentListener(listener);
-    }
+    // Release the current activity instance. However, we intentionally don't unregister the
+    // document listener, so that asynchronous save events from saving the document after the
+    // activity was destroyed, can still be relayed to the JavaScript interface.
+    // Since the listener is static, we also don't leak the activity nor fragment.
     currentActivity = null;
   }
 

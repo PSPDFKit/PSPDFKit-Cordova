@@ -17,6 +17,7 @@ http://pspdfkit.com/license.html</license>
     <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/ApplyInstantJsonAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/GetAnnotationsAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/GetAllUnsavedAnnotationsAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/GetHasDirtyAnnotationsAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/ProcessAnnotationsAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/annotation/RemoveAnnotationAction.java" target-dir="src/com/pspdfkit/cordova/action/annotation" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/cache/ClearCacheAction.java" target-dir="src/com/pspdfkit/cordova/action/cache" />

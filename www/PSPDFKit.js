@@ -390,9 +390,10 @@ exports.saveAnnotations = function(callback) {
  * __Supported Platforms__
  *
  * -iOS
+ * -Android
  */
 exports.getHasDirtyAnnotations = function(callback) {
-  if (platform === "ios") {
+  if (platform === "ios" || platform === "android") {
     executeAction(callback, "getHasDirtyAnnotations", []);
   } else {
     console.log("Not implemented on " + platform + ".");
