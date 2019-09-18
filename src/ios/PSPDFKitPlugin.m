@@ -197,12 +197,12 @@
     //try hex
     string = [string stringByReplacingOccurrencesOfString:@"#" withString:@""];
     switch ([string length]) {
-    case 0:
+        case 0:
         {
             string = @"00000000";
             break;
         }
-    case 3:
+        case 3:
         {
             NSString *red = [string substringWithRange:NSMakeRange(0, 1)];
             NSString *green = [string substringWithRange:NSMakeRange(1, 1)];
@@ -210,12 +210,12 @@
             string = [NSString stringWithFormat:@"%1$@%1$@%2$@%2$@%3$@%3$@ff", red, green, blue];
             break;
         }
-    case 6:
+        case 6:
         {
             string = [string stringByAppendingString:@"ff"];
             break;
         }
-    default:
+        default:
         {
             return nil;
         }
@@ -233,7 +233,7 @@
     CGColorSpaceModel model = CGColorSpaceGetModel(CGColorGetColorSpace(color.CGColor));
     const CGFloat *components = CGColorGetComponents(color.CGColor);
     switch (model) {
-    case kCGColorSpaceModelMonochrome:
+        case kCGColorSpaceModelMonochrome:
         {
             rgba[0] = components[0];
             rgba[1] = components[0];
@@ -241,7 +241,7 @@
             rgba[3] = components[1];
             break;
         }
-    case kCGColorSpaceModelRGB:
+        case kCGColorSpaceModelRGB:
         {
             rgba[0] = components[0];
             rgba[1] = components[1];
@@ -249,7 +249,7 @@
             rgba[3] = components[3];
             break;
         }
-    default:
+        default:
         {
             rgba[0] = 0.0f;
             rgba[1] = 0.0f;
@@ -498,7 +498,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
         //
         documentProvider.annotationManager.annotationProviders = @[XFDFProvider];
     };
-    
+
     return document;
 }
 
@@ -771,7 +771,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 - (void)setLicenseKey:(CDVInvokedUrlCommand *)command {
     NSString *key = [command argumentAtIndex:0];
     if (key.length > 0) {
-        [PSPDFKit setLicenseKey:key];
+        [PSPDFKitGlobal setLicenseKey:key];
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:YES] callbackId:command.callbackId];
     } else {
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Invalid License Key"] callbackId:command.callbackId];
@@ -831,14 +831,14 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 }
 
 - (void)setPageBackgroundColorForPSPDFDocumentWithJSON:(NSString *)color {
-    NSMutableDictionary *renderOptions = [[_pdfDocument renderOptionsForType:PSPDFRenderTypeAll context:nil] mutableCopy];
-    renderOptions[PSPDFRenderOptionBackgroundFillColorKey] = [self colorWithString:color];
+    PSPDFRenderOptions *renderOptions = [[_pdfDocument renderOptionsForType:PSPDFRenderTypeAll] mutableCopy];
+    renderOptions.backgroundFill = [self colorWithString:color];
     [_pdfDocument setRenderOptions:renderOptions type:PSPDFRenderTypeAll];
 }
 
 - (NSString *)pageBackgroundColorAsJSON {
-    NSDictionary *renderOptions = [_pdfDocument renderOptionsForType:PSPDFRenderTypeAll context:nil];
-    return [self colorAsString:renderOptions[PSPDFRenderOptionBackgroundFillColorKey]];
+    PSPDFRenderOptions *renderOptions = [_pdfDocument renderOptionsForType:PSPDFRenderTypeAll];
+    return [self colorAsString:renderOptions.backgroundFill];
 }
 
 - (void)setBackgroundColorForPSPDFDocumentWithJSON:(NSString *)color {
@@ -1094,28 +1094,21 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     NSString *decodeHTMLString = [[[command argumentAtIndex:0] stringByReplacingOccurrencesOfString:@"+" withString:@""]stringByRemovingPercentEncoding];
     NSString *fileName = [command argumentAtIndex:1 withDefault:@"Sample"];
     NSDictionary *options = [command argumentAtIndex:2 withDefault:nil];
-    NSString *outputFilePath = [NSTemporaryDirectory()
-                                stringByAppendingPathComponent:[fileName stringByAppendingPathExtension:@"pdf"]];
+    NSURL *outputFileURL = [NSURL fileURLWithPath:[NSTemporaryDirectory()
+                                                   stringByAppendingPathComponent:[fileName stringByAppendingPathExtension:@"pdf"]]];
 
-    void (^completionBlock)(NSError *error) = ^(NSError *error) {
+    [PSPDFProcessor generatePDFFromHTMLString:decodeHTMLString outputFileURL:outputFileURL options:options completionBlock:^(NSURL * _Nullable actualOutputFileURL, NSError * _Nullable error) {
         CDVPluginResult *pluginResult;
         if (error) {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
                                          messageAsDictionary:@{@"localizedDescription": error.localizedDescription, @"domin": error.domain}];
         } else {
             pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK
-                                         messageAsDictionary:@{@"filePath":outputFilePath}];
+                                         messageAsDictionary:@{@"filePath":actualOutputFileURL.path}];
         }
 
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
-    };
-
-    [self generatePDFFromHTMLString:decodeHTMLString outputFile:outputFilePath options:options completionBlock:completionBlock];
-}
-
-- (void)generatePDFFromHTMLString:(NSString *)html outputFile:(NSString *)filePath options:(NSDictionary *)options completionBlock:(void (^)(NSError *error))completionBlock {
-    PSPDFProcessor *processor = [[PSPDFProcessor alloc] initWithOptions:nil];
-    [processor convertHTMLString:html outputFileURL:[NSURL fileURLWithPath:filePath] completionBlock:completionBlock];
+    }];
 }
 
 #pragma mark Document methods
@@ -1356,9 +1349,10 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 
 - (void)hideAnnotationToolbar:(CDVInvokedUrlCommand *)command {
     [_pdfController.annotationToolbarController updateHostView:nil container:nil viewController:_pdfController];
-    [_pdfController.annotationToolbarController hideToolbarAnimated:YES];
-    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK]
-                                callbackId:command.callbackId];
+    [_pdfController.annotationToolbarController hideToolbarAnimated:YES completion:^(BOOL finished) {
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK]
+                                    callbackId:command.callbackId];
+    }];
 }
 
 - (void)showAnnotationToolbar:(CDVInvokedUrlCommand *)command {
@@ -1366,9 +1360,10 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [_pdfController setViewMode:PSPDFViewModeDocument animated:YES];
 
     [_pdfController.annotationToolbarController updateHostView:nil container:nil viewController:_pdfController];
-    [_pdfController.annotationToolbarController showToolbarAnimated:YES];
-    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK]
-                                callbackId:command.callbackId];
+    [_pdfController.annotationToolbarController showToolbarAnimated:YES completion:^(BOOL finished) {
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK]
+                                    callbackId:command.callbackId];
+    }];
 }
 
 - (void)toggleAnnotationToolbar:(CDVInvokedUrlCommand *)command {
@@ -1376,9 +1371,10 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [_pdfController setViewMode:PSPDFViewModeDocument animated:YES];
 
     [_pdfController.annotationToolbarController updateHostView:nil container:nil viewController:_pdfController];
-    [_pdfController.annotationToolbarController toggleToolbarAnimated:YES];
-    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK]
-                                callbackId:command.callbackId];
+    [_pdfController.annotationToolbarController toggleToolbarAnimated:YES completion:^(BOOL finished) {
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK]
+                                    callbackId:command.callbackId];
+    }];
 }
 
 #pragma mark Delegate methods
@@ -1436,7 +1432,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     _pdfDocument = nil;
     _pdfController = nil;
     _navigationController = nil;
-    
+
     //send event
     [self sendEventWithJSON:@"{type:'didDismiss'}"];
 }
@@ -1465,7 +1461,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 
 - (void)flexibleToolbarContainerDidHide:(nonnull PSPDFFlexibleToolbarContainer *)container {
     [self sendEventWithJSON:@"{type:'flexibleToolbarContainerDidHide'}"];
-} 
+}
 
 - (CGRect)flexibleToolbarContainerContentRect:(PSPDFFlexibleToolbarContainer *)container forToolbarPosition:(PSPDFFlexibleToolbarPosition)position {
     // This calls though to the default PDF controller implementation that excludes main UI elements from the available content rect.
@@ -1534,7 +1530,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     if (annotationUUID.length == 0) {
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Invalid annotation UUID."] callbackId:command.callbackId];
     }
-    
+
     PSPDFDocument *document = self.pdfController.document;
     VALIDATE_DOCUMENT(document)
     BOOL success = NO;
@@ -1820,7 +1816,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 
     PSPDFDocument *document = self.pdfController.document;
     VALIDATE_DOCUMENT(document)
-    
+
     // Create a processor configuration with the current document.
     PSPDFProcessorConfiguration *configuration = [[PSPDFProcessorConfiguration alloc] initWithDocument:document];
 
