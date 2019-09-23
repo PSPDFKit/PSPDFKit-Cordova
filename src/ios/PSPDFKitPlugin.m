@@ -459,6 +459,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
         _pdfController.delegate = self;
         _pdfController.annotationToolbarController.delegate = self;
         _navigationController = [[UINavigationController alloc] initWithRootViewController:_pdfController];
+        _navigationController.modalPresentationStyle = UIModalPresentationOverFullScreen;
     }
 
     [self resetBarButtonItemsIfNeededForOptions:newOptions];
