@@ -683,6 +683,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
                 @{@"none": @(PSPDFThumbnailBarModeNone),
                   @"scrobbleBar": @(PSPDFThumbnailBarModeScrubberBar),
                   @"scrollable": @(PSPDFThumbnailBarModeScrollable),
+                  @"floating": @(PSPDFThumbnailBarModeFloatingScrubberBar),
 
                   // Android Configuration.
                   @"THUMBNAIL_BAR_MODE_DEFAULT": @(PSPDFThumbnailBarModeScrubberBar),
