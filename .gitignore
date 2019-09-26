@@ -1,3 +1,5 @@
+# iOS
+
 # Xcode
 .DS_Store
 build/
@@ -15,8 +17,11 @@ xcuserdata
 profile
 *.moved-aside
 DerivedData
+
 PSPDFKit.framework
 PSPDFKitUI.framework
+PSPDFKit.xcframework
+PSPDFKitUI.xcframework
 
 # Android
 *.class
