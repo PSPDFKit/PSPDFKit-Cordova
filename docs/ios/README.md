@@ -115,12 +115,11 @@ onDeviceReady: function() {
 ```
 
 6. Use your CocoaPods Key: `open plugins/pspdfkit-cordova/plugin.xml` and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own key. If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
-
-7. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
+7. Run `cordova platform add ios` to add the iOS platform.
+8. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
 
 ![always-embed-swift-standard-libraries.png](screenshots/always-embed-swift-standard-libraries.png)
 
-8. Run `cordova platform add ios` to add the iOS platform.
 9. Run the app: Open `platforms/ios/CordovaDemo.xcworkspace` in Xcode, then build and run, or run `cordova emulate ios` in the Terminal.
 
 #### New Ionic Project
