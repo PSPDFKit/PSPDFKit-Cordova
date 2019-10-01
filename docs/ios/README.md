@@ -9,7 +9,7 @@ PSPDFKit comes with open source plugins for Cordova on both [iOS](https://pspdfk
 - Xcode 11 or later
 - PSPDFKit 9.0.0 for iOS or later
 - Cordova >= 9.0.0
-- CocoaPods >= 1.7.5
+- CocoaPods >= 1.8.1
 
 ## Installation
 
