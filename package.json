@@ -1,0 +1,32 @@
+{
+  "name": "pspdfkit-cordova",
+  "version": "1.0.0",
+  "description": "PSPDFKit Cordova Plugin for Android and iOS",
+  "cordova": {
+    "id": "pspdfkit-cordova",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PSPDFKit/PSPDFKit-Cordova.git"
+  },
+  "keywords": [
+    "pspdfkit",
+    "pdf",
+    "ios",
+    "android",
+    "ionic",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "author": "PSPDFKit GmbH",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PSPDFKit/PSPDFKit-Cordova/issues"
+  },
+  "homepage": "https://github.com/PSPDFKit/PSPDFKit-Cordova#readme"
+}
