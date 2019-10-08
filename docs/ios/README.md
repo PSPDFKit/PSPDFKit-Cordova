@@ -16,7 +16,7 @@ PSPDFKit comes with open source plugins for Cordova on both [iOS](https://pspdfk
 We assume that you have [an existing Cordova project](https://cordova.apache.org/#getstarted).
 
 1. Run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
-2. Update yoor `Podfile`: `cd platforms/ios` and open your `Podfile` in a text editor. Make sure the platorm is set to iOS 11 or later, and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own CocoaPods Key. Your `Podfile` should look like this:
+2. Update your `Podfile`: `cd platforms/ios` and open your `Podfile` in a text editor. Make sure the platorm is set to iOS 11 or later, and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own CocoaPods Key. Your `Podfile` should look like this:
 
 ```diff
 source 'https://github.com/CocoaPods/Specs.git'
@@ -103,7 +103,7 @@ onDeviceReady: function() {
 };
 ```
 
-4. Run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
+4. `cd` into `Cordova-Demo` and run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
 5. Open `config.xml` and change the deployment target to iOS 11 or later:
 
 ```diff
@@ -127,7 +127,7 @@ onDeviceReady: function() {
 Let's create a simple Ionic app that integrates PSPDFKit and uses the `pspdfkit-cordova` plugin.
 
 1. Run `ionic start IonicDemo blank --type=angular` to create a new Ionic project.
-2. Run `ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
+2. `cd` into `IonicDemo` and run `ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
 3. Add a sample PDF into your `www` directory: `www/pdf/document.pdf`.
 4. Open `config.xml` and change the deployment target to iOS 11 or later:
 
