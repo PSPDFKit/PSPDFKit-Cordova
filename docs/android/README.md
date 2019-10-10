@@ -1,4 +1,4 @@
-# Cordova Wrapper for PSPDFKit 5 for Android
+# Cordova Pluging - PSPDFKit for Android v5.5.1
 
 The [PSPDFKit SDK](https://pspdfkit.com/pdf-sdk/) is a framework that allows you to view, annotate, sign, and fill PDF forms on iOS, Android, Windows, macOS, and Web. [PSPDFKit Instant](https://pspdfkit.com/instant/) adds real-time collaboration features to seamlessly share, edit, and annotate PDF documents.
 
@@ -9,7 +9,7 @@ This plugin defines a global `PSPDFKit` object, which provides an API for viewin
 ## Requirements
 - Android SDK API level 19+ / Android 4.4+ (KitKat)
 - Cordova Android 8+.
-- PSPDFKit 5.5.1 for Android or later
+- PSPDFKit for Android v5.5.1
 
 ## Installation
 
@@ -131,32 +131,38 @@ Let's create a simple Corodva app that integrates PSPDFKit and uses the `pspdfki
 
 1. Create a new Apache Cordova project from your command line using the [Apache Cordova Command-Line Interface (CLI)](https://cordova.apache.org/docs/en/5.1.1/index.html).
 
-    cordova create pdfapp com.example.pdfapp PDF-App
-    cd pdfapp
+```shell
+cordova create pdfapp com.example.pdfapp PDF-App
+cd pdfapp
+```
 
 > Important: Your app's package name (in the above example `com.example.pdfapp`) has to match your PSPDFKit license name or PSPDFKit will throw an exception. If you don't have a license yet, you can request an evaluation license of PSPDFKit at https://pspdfkit.com/try.
 
-2. Add Android platform support to your project. This plugin requires the latest `
-roid` plugin 8+.
+2. Add Android platform support to your project. This plugin requires the latest `android` plugin 8+.
 
-    cordova platform add android@8.0.0
+```shell
+cordova platform add android
+```
 
 3. Install the PSPDFKit plugin:
 
-    cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
+```shell
+cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
+```
 
 4. Next you need to setup your PSPDFKit license key and Maven password. If you don't have a license key or Maven password yet, you can get them by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Inside your Android app's `platforms/android/local.properties` file, specify the `pspdfkit.password` and `pspdfkit.license` properties.:
 
 ```properties
 # This is the MAVEN_KEY you received when requesting a demo or from the customer portal.
 pspdfkit.password=YOUR_PASSWORD
+
 # This is the LICENSE_KEY you received when requesting a demo or from the customer portal.
 pspdfkit.license=LICENSE_STRING
 ```
 
 > Note: If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. com.ionic.test). You can check this in your `AndroidManifest.xml` by searching for `package`. If you are using a trial license then you don't have to worry about that.
 
-5. Now open your `index.js` file located in `www/js/` and paste the below code into the `receivedEvent: function(id)` function. For this to work you need to create a folder called `documents` in `wwww` and paste a PDF in this folder.
+5. Now open your `index.js` file located in `www/js/` and paste the below code into the `receivedEvent: function(id)` function. For this to work you need to create a folder called `documents` in `www` and paste a PDF in this folder.
 
 ```javascript
 PSPDFKit.presentFromAssets("www/documents/A.pdf", {
@@ -194,7 +200,7 @@ cd todo
 2. Add Android platform support to your project. This plugin requires the latest `cordova-android` plugin 8+.
 
 ```shell
-ionic cordova platform add android@8.0.0
+ionic cordova platform add android
 ```
 
 3. Install the PSPDFKit plugin:
@@ -206,13 +212,16 @@ ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 4. Next you need to setup your PSPDFKit license key and Maven password. If you don't have a license key or Maven password yet, you can get them by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Specify the `pspdfkit.password` and `pspdfkit.license` properties inside your Android app's `platforms/android/local.properties` file, create the file if it does not exist:
 
 ```properties
+# This is the MAVEN_KEY you received when requesting a demo or from the customer portal.
 pspdfkit.password=YOUR_PASSWORD
+
+# This is the LICENSE_KEY you received when requesting a demo or from the customer portal.
 pspdfkit.license=LICENSE_STRING
 ```
 
 > Note: If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. com.ionic.test). You can check this in your `AndroidManifest.xml` by searching for `package`. If you are using a trial license then you don't have to worry about that.
 
-5. Now open your `app.js` file located in `www/js/` and paste the below code into the `$ionicPlatform.ready(function() {}` function. For this to work you need to create a folder called `documents` in `wwww` and paste a PDF in this folder.
+5. Now open your `app.js` file located in `www/js/` and paste the below code into the `$ionicPlatform.ready(function() {}` function. For this to work you need to create a folder called `documents` in `www` and paste a PDF in this folder.
 
 ```javascript
 PSPDFKit.showDocumentFromAssets("www/documents/Document.pdf", {
