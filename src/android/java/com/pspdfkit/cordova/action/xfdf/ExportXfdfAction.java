@@ -56,7 +56,7 @@ public class ExportXfdfAction extends BasicAction {
           return;
         }
 
-        cordovaPdfActivity.addSubscription(document.getAnnotationProvider().getAllAnnotationsOfType(EnumSet.allOf(AnnotationType.class))
+        cordovaPdfActivity.addSubscription(document.getAnnotationProvider().getAllAnnotationsOfTypeAsync(EnumSet.allOf(AnnotationType.class))
             .toList()
             .observeOn(Schedulers.io())
             .flatMapCompletable(annotations -> XfdfFormatter.writeXfdfAsync(

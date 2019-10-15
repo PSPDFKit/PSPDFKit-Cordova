@@ -51,7 +51,7 @@ public class RemoveAnnotationAction extends BasicAction {
     final PdfDocument document = pdfActivity.getDocument();
     if (document != null) {
       AnnotationProvider annotationProvider = document.getAnnotationProvider();
-      pdfActivity.addSubscription(annotationProvider.getAllAnnotationsOfType(
+      pdfActivity.addSubscription(annotationProvider.getAllAnnotationsOfTypeAsync(
           getAnnotationTypeSetFromInstantJsonType(type),
           pageIndex,
           1)
