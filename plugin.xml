@@ -9,6 +9,7 @@
   <license>Copyright 2011-2019 PSPDFKit GmbH. All rights reserved.
 THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY INTERNATIONAL COPYRIGHT LAW
 AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT. UNAUTHORIZED REPRODUCTION OR DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. This notice may not be removed from this file. http://pspdfkit.com/license.html</license>
+  
   <platform name="android">
     <js-module name="PSPDFKit" src="www/PSPDFKit.js">
         <clobbers target="PSPDFKit"/>
@@ -61,6 +62,7 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
     <!--Android Multidex-->
     <dependency id="cordova-plugin-enable-multidex" url="https://github.com/PSPDFKit-labs/cordova-plugin-enable-multidex.git" />
   </platform>
+  
   <platform name="ios">
     <config-file parent="/*" target="config.xml">
       <feature name="PSPDFKitPlugin">

@@ -44,5 +44,5 @@ if (pspdfkitLicense == null || pspdfkitLicense == '') {
 ext.pspdfkitMavenModuleName = 'pspdfkit'
 ext.pspdfkitVersion = localProperties.getProperty('pspdfkit.version')
 if (pspdfkitVersion == null || pspdfkitVersion == '') {
-    ext.pspdfkitVersion = '5.5.1'
+    ext.pspdfkitVersion = '6.0.1'
 }

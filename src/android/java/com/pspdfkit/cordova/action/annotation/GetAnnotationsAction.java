@@ -43,7 +43,7 @@ public class GetAnnotationsAction extends BasicAction {
 
     if (document != null) {
       cordovaPdfActivity.addSubscription(
-          document.getAnnotationProvider().getAllAnnotationsOfType(
+          document.getAnnotationProvider().getAllAnnotationsOfTypeAsync(
               getAnnotationTypeSetFromInstantJsonType(convertJsonNullToJavaNull(args.getString(ARG_ANNOTATION_TYPE))),
               args.getInt(ARG_PAGE_INDEX),
               1)
