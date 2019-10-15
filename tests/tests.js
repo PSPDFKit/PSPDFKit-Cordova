@@ -12,15 +12,15 @@ exports.defineAutoTests = function() {
       expect(window.PSPDFKit).toBeDefined();
     });
 
-    describe("showDocument", function() {
+    describe("present", function() {
       it("should exist", function() {
-        expect(window.PSPDFKit.showDocument).toBeDefined();
+        expect(window.PSPDFKit.present).toBeDefined();
       });
     });
 
-    describe("showDocumentFromAssets", function() {
+    describe("presentFromAssets", function() {
       it("should exist", function() {
-        expect(window.PSPDFKit.showDocumentFromAssets).toBeDefined();
+        expect(window.PSPDFKit.presentFromAssets).toBeDefined();
       });
     });
 
