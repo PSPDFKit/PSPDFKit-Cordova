@@ -1,4 +1,4 @@
-# Cordova Pluging - PSPDFKit for Android 6
+# Cordova Plugin - PSPDFKit for Android 6
 
 The [PSPDFKit SDK](https://pspdfkit.com/pdf-sdk/) is a framework that allows you to view, annotate, sign, and fill PDF forms on iOS, Android, Windows, macOS, and Web. [PSPDFKit Instant](https://pspdfkit.com/instant/) adds real-time collaboration features to seamlessly share, edit, and annotate PDF documents.
 
