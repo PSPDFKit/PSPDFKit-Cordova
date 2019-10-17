@@ -1296,12 +1296,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 
 - (void)clearCacheForPage:(CDVInvokedUrlCommand *)command {
     PSPDFPageIndex pageIndex = (PSPDFPageIndex)[[command argumentAtIndex:0] longLongValue];
-    PSPDFDocument *document = self.pdfController.document;
-    VALIDATE_DOCUMENT(document);
-
-    [PSPDFKitGlobal.sharedInstance.cache invalidateImageFromDocument:document pageIndex:pageIndex];
     [self.pdfController reloadPageAtIndex:pageIndex animated:NO];
-
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
