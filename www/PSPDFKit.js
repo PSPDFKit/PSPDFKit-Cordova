@@ -581,10 +581,11 @@ exports.removeCacheForPresentedDocument = function(callback) {
  *
  * __Supported Platforms__
  *
+ * -iOS
  * -Android
  */
 exports.clearCacheForPage = function(pageIndex, callback) {
-  if (platform === "android") {
+  if (platform === "ios" || platform === "android") {
     executeAction(callback, "clearCacheForPage", [pageIndex]);
   } else {
     console.log("Not implemented on " + platform + ".");

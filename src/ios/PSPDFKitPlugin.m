@@ -1294,6 +1294,12 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
+- (void)clearCacheForPage:(CDVInvokedUrlCommand *)command {
+    PSPDFPageIndex pageIndex = (PSPDFPageIndex)[[command argumentAtIndex:0] longLongValue];
+    [self.pdfController reloadPageAtIndex:pageIndex animated:NO];
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
+}
+
 #pragma mark Paging
 
 - (void)setPage:(CDVInvokedUrlCommand *)command {
