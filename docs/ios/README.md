@@ -172,6 +172,31 @@ You can find the API documentation in [PSPDFKit.js](../../www/PSPDFKit.js).
 
 ## Troubleshooting
 
+
+### Problem:
+
+```sh
+Using cordova-fetch for cordova-ios@^5.0.0
+Adding ios project...
+Creating Cordova project for the iOS platform:
+	Path: platforms/ios
+	Package: com.pspdfkit.demo
+	Name: CordovaDemo
+iOS project created with cordova-ios@5.0.1
+Installing "pspdfkit-cordova" for ios
+Running command: pod install --verbose
+Failed to install 'pspdfkit-cordova': Error: pod: Command failed with exit code 1
+    at ChildProcess.whenDone (/Users/radazzouz/Downloads/Cordova-Demo/node_modules/cordova-common/src/superspawn.js:135:23)
+    at ChildProcess.emit (events.js:198:13)
+    at maybeClose (internal/child_process.js:982:16)
+    at Process.ChildProcess._handle.onexit (internal/child_process.js:259:5)
+pod: Command failed with exit code 1
+```
+
+### Solution:
+
+Use your CocoaPods Key: `open plugins/pspdfkit-cordova/plugin.xml` and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own key. If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
+
 ### Problem:
 
 ```sh
