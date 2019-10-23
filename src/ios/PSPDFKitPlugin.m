@@ -756,6 +756,12 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
                   @"SEARCH_MODULAR": @(PSPDFSearchModeModal),
                   @"SEARCH_INLINE": @(PSPDFSearchModeInline)
                 },
+
+            @"PSPDFImageSaveMode":
+
+                @{@"flatten": @(PSPDFImageSaveModeFlatten),
+                  @"flattenAndEmbed": @(PSPDFImageSaveModeFlattenAndEmbed),
+                },
         };
 
         //Note: this method crashes the second time a
@@ -855,6 +861,18 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 - (void)setRenderAnnotationTypesForPSPDFDocumentWithJSON:(NSArray *)options {
     PSPDFAnnotationType types = (PSPDFAnnotationType) [self optionsValueForKeys:options ofType:@"PSPDFAnnotationType" withDefault:PSPDFAnnotationTypeAll];
     _pdfDocument.renderAnnotationTypes = types;
+}
+
+- (void)setImageSaveModeForPSPDFDocumentWithJSON:(NSString *)option {
+    if (![_pdfDocument isKindOfClass:PSPDFImageDocument.class]) { return; }
+    PSPDFImageDocument *imageDocument = (PSPDFImageDocument *)_pdfDocument;
+    imageDocument.imageSaveMode = [self enumValueForKey:option ofType:@"PSPDFImageSaveMode" withDefault:PSPDFImageSaveModeFlattenAndEmbed];
+}
+
+- (NSString *)imageSaveModeAsJSON {
+    if (![_pdfDocument isKindOfClass:PSPDFImageDocument.class]) { return @""; }
+    PSPDFImageDocument *imageDocument = (PSPDFImageDocument *)_pdfDocument;
+    return [self enumKeyForValue:imageDocument.imageSaveMode ofType:@"PSPDFImageSaveMode"];
 }
 
 #pragma mark PSPDFViewController setters and getters
