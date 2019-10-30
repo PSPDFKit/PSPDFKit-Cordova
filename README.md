@@ -16,6 +16,13 @@ cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 ```
 
+#### Ionic Native
+
+```sh
+ionic cordova plugin add pspdfkit-cordova
+npm install @ionic-native/pspdfkit-cordova
+```
+
 Please follow the step-by-step installation instructions below for:
 
 - [Android](/docs/android#installation)
@@ -30,6 +37,7 @@ Please follow the getting started guides below:
 - [New Ionic Project on Android](/docs/android#quickstart-guide-ionic)
 - [New Cordova Project on iOS](/docs/ios#new-cordova-project)
 - [New Ionic Project on iOS](/docs/ios#new-ionic-project)
+- [New Ionic Native Project on iOS](/docs/ios#new-ionic-native-project)
 
 ## Documentation
 

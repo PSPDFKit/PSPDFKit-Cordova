@@ -166,6 +166,99 @@ constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen
 ![always-embed-swift-standard-libraries.png](screenshots/always-embed-swift-standard-libraries.png)
 11. Run the app: Open `platforms/ios/MyApp.xcworkspace` in Xcode, then build and run, or run `ionic cordova emulate ios` in the Terminal.
 
+## New Ionic Native Project
+
+1. Run `ionic start IonicDemo blank --type=angular` to create a new Ionic project.
+2. `cd` into `IonicDemo` and run `ionic cordova plugin add pspdfkit-cordova`, then run `npm install @ionic-native/pspdfkit-cordova` to install the `pspdfkit-cordova` plugin.
+3. Open `config.xml` and change the deployment target to iOS 11 or later:
+
+```diff
+<platform name="ios">
+	<allow-intent href="itms:*" />
+	<allow-intent href="itms-apps:*" />
++ 	<allow-navigation href="*" />
++	<preference name="deployment-target" value="11.0" />
+</platform>
+```
+
+4. Use your CocoaPods Key: `open plugins/pspdfkit-cordova/plugin.xml` and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own key. If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
+
+5. Modify `src/app/app.module.ts` to use PSPDFKit as follows:
+
+```diff
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouteReuseStrategy } from '@angular/router';
+
+import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
++import { PSPDFKit } from '@ionic-native/PSPDFKit-cordova/ngx';
+
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+
+@NgModule({
+  declarations: [AppComponent],
+  entryComponents: [],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  providers: [
+    StatusBar,
+    SplashScreen,
++   PSPDFKit,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+
+6. Modify `src/app/app.component.ts` to use the PSPDFKit plugin to Present a PDF:
+
+```diff
+import { Component } from '@angular/core';
+
+import { Platform } from '@ionic/angular';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
++import { PSPDFKit } from '@ionic-native/PSPDFKit-cordova/ngx';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss']
+})
+export class AppComponent {
+  constructor(
+    private platform: Platform,
+    private splashScreen: SplashScreen,
+-   private statusBar: StatusBar
++   private statusBar: StatusBar,
++   private pspdfkit: PSPDFKit
+  ) {
+    this.initializeApp();
+  }
+
+  initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
++     this.pspdfkit.setLicenseKey("YOUR LICENSE KEY GOES HERE");
++     this.pspdfkit.present('pdf/document.pdf')
+    });
+  }
+}
+```
+
+7. Run `ionic cordova platform add ios` to add the iOS platform.
+8. Run `ionic cordova prepare ios` to prepare iOS platform.
+9. Add a sample PDF into your `www` directory: `plaftorms/ios/www/pdf/document.pdf`.
+10. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
+
+![always-embed-swift-standard-libraries.png](screenshots/always-embed-swift-standard-libraries.png)
+
+11. Run the app: Open `platforms/ios/MyApp.xcworkspace` in Xcode, then build and run, or run `ionic cordova emulate ios` in the Terminal.
+
 ## API
 
 You can find the API documentation in [PSPDFKit.js](../../www/PSPDFKit.js).
