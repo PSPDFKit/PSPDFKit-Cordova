@@ -296,7 +296,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     if ([JSON isKindOfClass:[NSDictionary class]]) {
         JSON = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:JSON options:0 error:NULL] encoding:NSUTF8StringEncoding];
     }
-    NSString *script = [NSString stringWithFormat:@"PSPDFKitPlugin.dispatchEvent(%@)", JSON];
+    NSString *script = [NSString stringWithFormat:@"PSPDFKit.dispatchEvent(%@)", JSON];
     NSString *result = [self stringByEvaluatingJavaScriptFromString:script];
     return [result length]? [result boolValue]: YES;
 }
@@ -374,11 +374,11 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     if (index == NSNotFound) {
         index = [_pdfController.navigationItem.rightBarButtonItems indexOfObject:sender];
         if (index != NSNotFound) {
-            NSString *script = [NSString stringWithFormat:@"PSPDFKitPlugin.dispatchRightBarButtonAction(%ld)", (long)index];
+            NSString *script = [NSString stringWithFormat:@"PSPDFKit.dispatchRightBarButtonAction(%ld)", (long)index];
             [self stringByEvaluatingJavaScriptFromString:script];
         }
     } else {
-        NSString *script = [NSString stringWithFormat:@"PSPDFKitPlugin.dispatchLeftBarButtonAction(%ld)", (long)index];
+        NSString *script = [NSString stringWithFormat:@"PSPDFKit.dispatchLeftBarButtonAction(%ld)", (long)index];
         [self stringByEvaluatingJavaScriptFromString:script];
     }
 }
