@@ -875,6 +875,26 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     return [self enumKeyForValue:imageDocument.imageSaveMode ofType:@"PSPDFImageSaveMode"];
 }
 
+- (void)setCompressionQualityForPSPDFDocumentWithJSON:(NSNumber *)option {
+    if (![_pdfDocument isKindOfClass:PSPDFImageDocument.class]) { return; }
+    PSPDFImageDocument *imageDocument = (PSPDFImageDocument *)_pdfDocument;
+    #if CGFLOAT_IS_DOUBLE
+    imageDocument.compressionQuality = option.doubleValue;
+    #else
+    imageDocument.compressionQuality = option.floatValue;
+    #endif
+}
+
+- (NSNumber *)compressionQualityAsJSON {
+    if (![_pdfDocument isKindOfClass:PSPDFImageDocument.class]) { return @""; }
+    PSPDFImageDocument *imageDocument = (PSPDFImageDocument *)_pdfDocument;
+    #if CGFLOAT_IS_DOUBLE
+    return [NSNumber numberWithDouble:imageDocument.compressionQuality];
+    #else
+    return [NSNumber numberWithFloat:imageDocument.compressionQuality];
+    #endif
+}
+
 #pragma mark PSPDFViewController setters and getters
 
 - (void)setPageTransitionForPSPDFViewControllerWithJSON:(NSString *)transition {
