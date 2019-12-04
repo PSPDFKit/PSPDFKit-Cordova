@@ -886,7 +886,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 }
 
 - (NSNumber *)compressionQualityAsJSON {
-    if (![_pdfDocument isKindOfClass:PSPDFImageDocument.class]) { return @""; }
+    if (![_pdfDocument isKindOfClass:PSPDFImageDocument.class]) { return [NSNumber numberWithInteger:NSIntegerMax]; }
     PSPDFImageDocument *imageDocument = (PSPDFImageDocument *)_pdfDocument;
     #if CGFLOAT_IS_DOUBLE
     return [NSNumber numberWithDouble:imageDocument.compressionQuality];
