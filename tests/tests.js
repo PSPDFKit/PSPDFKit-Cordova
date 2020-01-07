@@ -67,7 +67,23 @@ exports.defineManualTests = function(contentEl, createActionButton) {
     var asset = "www/Guide.pdf";
     var options = {};
     console.log("Opening document " + asset);
-    window.PSPDFKit.showDocumentFromAssets(
+    window.PSPDFKit.presentFromAssets(
+      asset,
+      options,
+      function() {
+        console.log("Document was successfully loaded.");
+      },
+      function(error) {
+        console.log("Error while loading the document:" + error);
+      }
+    );
+  });
+
+  createActionButton("Open Image ocument", function() {
+    var asset = "www/image.jpg";
+    var options = {};
+    console.log("Opening image document " + asset);
+    window.PSPDFKit.presentFromAssets(
       asset,
       options,
       function() {
@@ -94,7 +110,7 @@ exports.defineManualTests = function(contentEl, createActionButton) {
 
     console.log("Opening document " + asset);
 
-    window.PSPDFKit.showDocumentFromAssets(
+    window.PSPDFKit.presentFromAssets(
       asset,
       options,
       function() {
@@ -119,7 +135,7 @@ exports.defineManualTests = function(contentEl, createActionButton) {
 
     console.log("Opening encrypted document " + asset);
 
-    window.PSPDFKit.showDocumentFromAssets(
+    window.PSPDFKit.presentFromAssets(
       asset,
       options,
       function() {
