@@ -2,6 +2,7 @@ package com.pspdfkit.cordova.action.document;
 
 import android.app.Activity;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -22,6 +23,7 @@ import com.pspdfkit.cordova.CordovaPdfActivity;
 import com.pspdfkit.cordova.PSPDFKitPlugin;
 import com.pspdfkit.cordova.PSPDFKitPluginException;
 import com.pspdfkit.cordova.action.BasicAction;
+import com.pspdfkit.document.ImageDocumentUtils;
 import com.pspdfkit.preferences.PSPDFKitPreferences;
 import com.pspdfkit.ui.PdfActivity;
 import com.pspdfkit.ui.PdfActivityIntentBuilder;
@@ -204,12 +206,17 @@ public class ShowDocumentAction extends BasicAction {
       @NonNull final PdfActivityConfiguration configuration,
       @NonNull final CallbackContext callbackContext) {
     final PSPDFKitPlugin plugin = getPlugin();
-    final Intent launchIntent =
-        PdfActivityIntentBuilder.fromUri(plugin.cordova.getContext(), uri)
-            .activityClass(CordovaPdfActivity.class)
-            .passwords(password)
-            .configuration(configuration)
-            .build();
+    final Context context = plugin.cordova.getContext();
+    final PdfActivityIntentBuilder builder =
+        ImageDocumentUtils.isImageUri(context, uri)
+            ? PdfActivityIntentBuilder.fromImageUri(context, uri)
+            : PdfActivityIntentBuilder.fromUri(context, uri)
+                // Only set passwords for PDF documents, since image documents don't support passwords.
+                .passwords(password);
+
+    final Intent launchIntent = builder.activityClass(CordovaPdfActivity.class)
+        .configuration(configuration)
+        .build();
     plugin.cordova.startActivityForResult(getPlugin(), launchIntent, 0);
     callbackContext.success();
   }
