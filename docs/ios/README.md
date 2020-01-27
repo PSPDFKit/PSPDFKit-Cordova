@@ -16,7 +16,7 @@ PSPDFKit comes with open source plugins for Cordova on both [iOS](https://pspdfk
 We assume that you have [an existing Cordova project](https://cordova.apache.org/#getstarted).
 
 1. Run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
-2. Update your `Podfile`: `cd platforms/ios` and open your `Podfile` in a text editor. Make sure the platorm is set to iOS 11 or later, and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own CocoaPods Key. Your `Podfile` should look like this:
+2. Update your `Podfile`: `cd platforms/ios` and open your `Podfile` in a text editor. Make sure the platform is set to iOS 11 or later, and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own CocoaPods Key. Your `Podfile` should look like this:
 
 ```diff
 source 'https://github.com/CocoaPods/Specs.git'
@@ -47,7 +47,7 @@ The plugin is accessed via the PSPDFKit singleton. Here are some example calls:
 // Set your license key here.
 PSPDFKit.setLicenseKey("YOUR KEY");
 
-// Show pdf with in single page mode, with a cblack background.
+// Show pdf with in single page mode, with a black background.
 PSPDFKit.present("pdf/document.pdf", {
   pageMode: "single",
   backgroundColor: "black"
