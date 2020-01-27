@@ -24,6 +24,7 @@
 @property (nonatomic, strong) PSPDFDocument *pdfDocument;
 @property (nonatomic, strong) NSDictionary *defaultOptions;
 @property (nonatomic) BOOL disableAutomaticSaving;
+@property (nonatomic) PSPDFImageQuality allowedImageQualities;
 
 @end
 
@@ -762,6 +763,15 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
                 @{@"flatten": @(PSPDFImageSaveModeFlatten),
                   @"flattenAndEmbed": @(PSPDFImageSaveModeFlattenAndEmbed),
                 },
+
+            @"PSPDFImageQuality":
+
+                @{@"low": @(PSPDFImageQualityLow),
+                  @"medium": @(PSPDFImageQualityMedium),
+                  @"higher": @(PSPDFImageQualityHigher),
+                  @"best": @(PSPDFImageQualityBest),
+                  @"all": @(PSPDFImageQualityAll)
+                },
         };
 
         //Note: this method crashes the second time a
@@ -1126,6 +1136,14 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 
 - (NSString *)searchTypeAsJSON {
     return [self searchModeAsJSON];
+}
+
+- (void)setAllowedImageQualitiesForPSPDFViewControllerWithJSON:(NSArray *)option {
+    self.allowedImageQualities = [self optionsValueForKeys:option ofType:@"PSPDFImageQuality" withDefault:PSPDFImageQualityAll];
+}
+
+- (NSArray *)allowedImageQualitiesAsJSON {
+    return [self optionKeysForValue:self.allowedImageQualities ofType:@"PSPDFImageQuality"];
 }
 
 #pragma mark PDFProcessing methods
@@ -1497,6 +1515,14 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 
 - (void)pdfViewController:(PSPDFViewController *)pdfController didHideUserInterface:(BOOL)animated {
     [self sendEventWithJSON:@{@"type": @"didHideUserInterface", @"animated": @(animated)}];
+}
+
+- (BOOL)pdfViewController:(PSPDFViewController *)pdfController shouldShowController:(UIViewController *)controller options:(NSDictionary<NSString *,id> *)options animated:(BOOL)animated {
+    if ([controller isKindOfClass:PSPDFImagePickerController.class]) {
+        PSPDFImagePickerController *imagePicker = (PSPDFImagePickerController *)controller;
+        imagePicker.allowedImageQualities = self.allowedImageQualities;
+    }
+    return YES;
 }
 
 #pragma mark Annotation toolbar delegate methods
