@@ -164,6 +164,7 @@ constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen
 10. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
 
 ![always-embed-swift-standard-libraries.png](screenshots/always-embed-swift-standard-libraries.png)
+
 11. Run the app: Open `platforms/ios/MyApp.xcworkspace` in Xcode, then build and run, or run `ionic cordova emulate ios` in the Terminal.
 
 ## API
