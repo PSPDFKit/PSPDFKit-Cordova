@@ -1242,7 +1242,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     BOOL headless = [[command argumentAtIndex:2 withDefault:@NO] boolValue];
 
     if (query) {
-        [_pdfController searchForString:query options:@{PSPDFViewControllerSearchHeadlessKey: @(headless)} sender:nil animated:animated];
+        [_pdfController searchForString:query options:@{PSPDFPresentationOptionSearchHeadless: @(headless)} sender:nil animated:animated];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     } else {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
