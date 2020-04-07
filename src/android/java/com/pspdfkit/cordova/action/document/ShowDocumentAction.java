@@ -95,39 +95,87 @@ public class ShowDocumentAction extends BasicAction {
           builder.autosaveEnabled((Boolean) value);
         } else if ("backgroundColor".equals(option)) {
           builder.backgroundColor(Color.parseColor((String) value));
-        } else if ("disableAnnotationList".equals(option) && ((Boolean) value)) {
-          builder.disableAnnotationList();
+        } else if ("disableAnnotationList".equals(option)) {
+          if ((Boolean) value) {
+            builder.disableAnnotationList();
+          } else {
+            builder.enableAnnotationList();
+          }
         } else if ("disableAnnotationNoteHinting".equals(option)) {
           builder.setAnnotationNoteHintingEnabled(!(Boolean) value);
-        } else if ("disableBookmarkEditing".equals(option) && ((Boolean) value)) {
-          builder.disableBookmarkEditing();
-        } else if ("disableBookmarkList".equals(option) && ((Boolean) value)) {
-          builder.disableBookmarkList();
+        } else if ("disableBookmarkEditing".equals(option)) {
+          if ((Boolean) value) {
+            builder.disableBookmarkEditing();
+          } else {
+            builder.enableBookmarkEditing();
+          }
+        } else if ("disableBookmarkList".equals(option)) {
+          if ((Boolean) value) {
+            builder.disableBookmarkList();
+          } else {
+            builder.enableBookmarkList();
+          }
         } else if ("disableCopyPaste".equals(option)) {
-          if ((Boolean) value) builder.disableCopyPaste();
-          else builder.enableCopyPaste();
-        } else if ("disableDocumentEditor".equals(option) && ((Boolean) value)) {
-          builder.disableDocumentEditor();
-        } else if ("disableOutline".equals(option) && ((Boolean) value)) {
-          builder.disableOutline();
-        } else if ("disablePrinting".equals(option) && ((Boolean) value)) {
-          builder.disablePrinting();
-        } else if ("disableSearch".equals(option) && ((Boolean) value)) {
-          builder.disableSearch();
+          if ((Boolean) value) {
+            builder.disableCopyPaste();
+          } else {
+            builder.enableCopyPaste();
+          }
+        } else if ("disableDocumentEditor".equals(option)) {
+          if ((Boolean) value) {
+            builder.disableDocumentEditor();
+          } else {
+            builder.enableDocumentEditor();
+          }
+        } else if ("disableOutline".equals(option)) {
+          if ((Boolean) value) {
+            builder.disableOutline();
+          } else {
+            builder.enableOutline();
+          }
+        } else if ("disablePrinting".equals(option)) {
+          if ((Boolean) value) {
+            builder.disablePrinting();
+          } else {
+            builder.enablePrinting();
+          }
+        } else if ("disableSearch".equals(option)) {
+          if ((Boolean) value) {
+            builder.disableSearch();
+          } else {
+            builder.enableSearch();
+          }
         } else if ("shareFeatures".equals(option)) {
           builder.setEnabledShareFeatures(parseShareFeatures((JSONArray) value));
         } else if ("disableUndoRedo".equals(option)) {
           builder.undoEnabled(!(Boolean) value);
-        } else if ("hidePageLabels".equals(option) && ((Boolean) value)) {
-          builder.hidePageLabels();
-        } else if ("hidePageNumberOverlay".equals(option) && ((Boolean) value)) {
-          builder.hidePageNumberOverlay();
-        } else if ("hideSettingsMenu".equals(option) && ((Boolean) value)) {
-          builder.hideSettingsMenu();
+        } else if ("hidePageLabels".equals(option)) {
+          if ((Boolean) value) {
+            builder.hidePageLabels();
+          } else {
+            builder.showPageLabels();
+          }
+        } else if ("hidePageNumberOverlay".equals(option)) {
+          if ((Boolean) value) {
+            builder.hidePageNumberOverlay();
+          } else {
+            builder.showPageNumberOverlay();
+          }
+        } else if ("hideSettingsMenu".equals(option)) {
+          if ((Boolean) value) {
+            builder.hideSettingsMenu();
+          } else {
+            builder.showSettingsMenu();
+          }
         } else if ("thumbnailBarMode".equals(option)) {
-          builder.setThumbnailBarMode(ThumbnailBarMode.valueOf((String) value));
-        } else if ("hideThumbnailGrid".equals(option) && ((Boolean) value)) {
-          builder.hideThumbnailGrid();
+          final CordovaThumbnailBarMode thumbnailBarMode = CordovaThumbnailBarMode.valueOf((String) value);
+          builder.setThumbnailBarMode(thumbnailBarMode.androidThumbnailBarMode);
+        } else if ("hideThumbnailGrid".equals(option)) {
+          if ((Boolean) value) {
+            builder.hideThumbnailGrid();
+          } else {
+            builder.showThumbnailGrid();
+          }
         } else if ("memoryCacheSize".equals(option)) {
           builder.memoryCacheSize((Integer) value);
         } else if ("pageFitMode".equals(option)) {
@@ -211,13 +259,31 @@ public class ShowDocumentAction extends BasicAction {
         ImageDocumentUtils.isImageUri(context, uri)
             ? PdfActivityIntentBuilder.fromImageUri(context, uri)
             : PdfActivityIntentBuilder.fromUri(context, uri)
-                // Only set passwords for PDF documents, since image documents don't support passwords.
-                .passwords(password);
+            // Only set passwords for PDF documents, since image documents don't support passwords.
+            .passwords(password);
 
     final Intent launchIntent = builder.activityClass(CordovaPdfActivity.class)
         .configuration(configuration)
         .build();
     plugin.cordova.startActivityForResult(getPlugin(), launchIntent, 0);
     callbackContext.success();
+  }
+
+  /**
+   * Cordova representation of the PSPDFKit thumbnail bar mode, that maps to the Android specific
+   * thumbnail bar mode. This is here, to map the cross-platform API we provide in JavaScript to the
+   * Android API. Values in this enum match the {@code ThumbnailBarMode} that is defined inside the
+   * {@code PSPDFKit.js} file.
+   */
+  private enum CordovaThumbnailBarMode {
+    THUMBNAIL_BAR_MODE_DEFAULT(ThumbnailBarMode.THUMBNAIL_BAR_MODE_FLOATING),
+    THUMBNAIL_BAR_MODE_SCROLLABLE(ThumbnailBarMode.THUMBNAIL_BAR_MODE_SCROLLABLE),
+    THUMBNAIL_BAR_MODE_NONE(ThumbnailBarMode.THUMBNAIL_BAR_MODE_NONE);
+
+    public final ThumbnailBarMode androidThumbnailBarMode;
+
+    CordovaThumbnailBarMode(ThumbnailBarMode androidThumbnailBarMode) {
+      this.androidThumbnailBarMode = androidThumbnailBarMode;
+    }
   }
 }
