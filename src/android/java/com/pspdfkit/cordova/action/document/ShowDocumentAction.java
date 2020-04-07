@@ -96,7 +96,7 @@ public class ShowDocumentAction extends BasicAction {
         } else if ("backgroundColor".equals(option)) {
           builder.backgroundColor(Color.parseColor((String) value));
         } else if ("disableAnnotationList".equals(option)) {
-          if (((Boolean) value)) {
+          if ((Boolean) value) {
             builder.disableAnnotationList();
           } else {
             builder.enableAnnotationList();
@@ -104,13 +104,13 @@ public class ShowDocumentAction extends BasicAction {
         } else if ("disableAnnotationNoteHinting".equals(option)) {
           builder.setAnnotationNoteHintingEnabled(!(Boolean) value);
         } else if ("disableBookmarkEditing".equals(option)) {
-          if (((Boolean) value)) {
+          if ((Boolean) value) {
             builder.disableBookmarkEditing();
           } else {
             builder.enableBookmarkEditing();
           }
         } else if ("disableBookmarkList".equals(option)) {
-          if (((Boolean) value)) {
+          if ((Boolean) value) {
             builder.disableBookmarkList();
           } else {
             builder.enableBookmarkList();
@@ -122,25 +122,25 @@ public class ShowDocumentAction extends BasicAction {
             builder.enableCopyPaste();
           }
         } else if ("disableDocumentEditor".equals(option)) {
-          if (((Boolean) value)) {
+          if ((Boolean) value) {
             builder.disableDocumentEditor();
           } else {
             builder.enableDocumentEditor();
           }
         } else if ("disableOutline".equals(option)) {
-          if (((Boolean) value)) {
+          if ((Boolean) value) {
             builder.disableOutline();
           } else {
             builder.enableOutline();
           }
         } else if ("disablePrinting".equals(option)) {
-          if (((Boolean) value)) {
+          if ((Boolean) value) {
             builder.disablePrinting();
           } else {
             builder.enablePrinting();
           }
         } else if ("disableSearch".equals(option)) {
-          if (((Boolean) value)) {
+          if ((Boolean) value) {
             builder.disableSearch();
           } else {
             builder.enableSearch();
@@ -150,19 +150,19 @@ public class ShowDocumentAction extends BasicAction {
         } else if ("disableUndoRedo".equals(option)) {
           builder.undoEnabled(!(Boolean) value);
         } else if ("hidePageLabels".equals(option)) {
-          if (((Boolean) value)) {
+          if ((Boolean) value) {
             builder.hidePageLabels();
           } else {
             builder.showPageLabels();
           }
         } else if ("hidePageNumberOverlay".equals(option)) {
-          if (((Boolean) value)) {
+          if ((Boolean) value) {
             builder.hidePageNumberOverlay();
           } else {
             builder.showPageNumberOverlay();
           }
         } else if ("hideSettingsMenu".equals(option)) {
-          if (((Boolean) value)) {
+          if ((Boolean) value) {
             builder.hideSettingsMenu();
           } else {
             builder.showSettingsMenu();
@@ -171,7 +171,7 @@ public class ShowDocumentAction extends BasicAction {
           final CordovaThumbnailBarMode thumbnailBarMode = CordovaThumbnailBarMode.valueOf((String) value);
           builder.setThumbnailBarMode(thumbnailBarMode.androidThumbnailBarMode);
         } else if ("hideThumbnailGrid".equals(option)) {
-          if (((Boolean) value)) {
+          if ((Boolean) value) {
             builder.hideThumbnailGrid();
           } else {
             builder.showThumbnailGrid();
