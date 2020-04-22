@@ -593,6 +593,30 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     }
 }
 
+- (PSPDFSettingKey)settingKeyFromString:(NSString *)settingKeyString {
+    if ([settingKeyString isEqualToString:@"PSPDFSettingKeyXCallbackURLString"]) {
+        return PSPDFSettingKeyXCallbackURLString;
+    } else if ([settingKeyString isEqualToString:@"PSPDFSettingKeyApplicationPolicy"]) {
+        return PSPDFSettingKeyApplicationPolicy;
+    } else if ([settingKeyString isEqualToString:@"PSPDFSettingKeyFileManager"]) {
+        return PSPDFSettingKeyFileManager;
+    } else if ([settingKeyString isEqualToString:@"PSPDFSettingKeyCoordinatedFileManager"]) {
+        return PSPDFSettingKeyCoordinatedFileManager;
+    } else if ([settingKeyString isEqualToString:@"PSPDFSettingKeyFileCoordinationEnabled"]) {
+        return PSPDFSettingKeyFileCoordinationEnabled;
+    } else if ([settingKeyString isEqualToString:@"PSPDFSettingKeyLibraryIndexingPriority"]) {
+        return PSPDFSettingKeyLibraryIndexingPriority;
+    } else if ([settingKeyString isEqualToString:@"PSPDFSettingKeyDebugMode"]) {
+        return PSPDFSettingKeyDebugMode;
+    } else if ([settingKeyString isEqualToString:@"PSPDFSettingKeyAdditionalFontDirectories"]) {
+        return PSPDFSettingKeyAdditionalFontDirectories;
+    } else if ([settingKeyString isEqualToString:@"PSPDFSettingKeyHonorDocumentPermissions"]) {
+        return PSPDFSettingKeyHonorDocumentPermissions;
+    } else {
+        return nil;
+    }
+}
+
 #pragma mark Enums and options
 
 - (NSDictionary *)enumValuesOfType:(NSString *)type {
@@ -796,6 +820,18 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     }
 }
 
+- (void)setGlobalOptions:(CDVInvokedUrlCommand *)command {
+    NSDictionary *options = [command argumentAtIndex:0];
+    if (options) {
+        for (NSString *key in options.allKeys) {
+            [PSPDFKitGlobal.sharedInstance setValue:options[key] forKey:[self settingKeyFromString:key]];
+        }
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:YES] callbackId:command.callbackId];
+    } else {
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Invalid License Key"] callbackId:command.callbackId];
+    }
+}
+
 #pragma mark PSPDFDocument setters and getters
 
 - (void)setFileURLForPSPDFDocumentWithJSON:(NSString *)path {
@@ -888,21 +924,21 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 - (void)setCompressionQualityForPSPDFDocumentWithJSON:(NSNumber *)option {
     if (![_pdfDocument isKindOfClass:PSPDFImageDocument.class]) { return; }
     PSPDFImageDocument *imageDocument = (PSPDFImageDocument *)_pdfDocument;
-    #if CGFLOAT_IS_DOUBLE
+#if CGFLOAT_IS_DOUBLE
     imageDocument.compressionQuality = option.doubleValue;
-    #else
+#else
     imageDocument.compressionQuality = option.floatValue;
-    #endif
+#endif
 }
 
 - (NSNumber *)compressionQualityAsJSON {
     if (![_pdfDocument isKindOfClass:PSPDFImageDocument.class]) { return [NSNumber numberWithInteger:NSIntegerMax]; }
     PSPDFImageDocument *imageDocument = (PSPDFImageDocument *)_pdfDocument;
-    #if CGFLOAT_IS_DOUBLE
+#if CGFLOAT_IS_DOUBLE
     return [NSNumber numberWithDouble:imageDocument.compressionQuality];
-    #else
+#else
     return [NSNumber numberWithFloat:imageDocument.compressionQuality];
-    #endif
+#endif
 }
 
 #pragma mark PSPDFViewController setters and getters
