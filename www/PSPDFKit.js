@@ -33,6 +33,24 @@ exports.setLicenseKey = function(key, callback) {
   }
 };
 
+/**
+ * Sets global options for PSPDFKit.
+ *
+ * @param options The `options` parameter. See the full list of `PSPDFSettingKeys` here: https://pspdfkit.com/api/ios/Other%20Constants.html#/c:@PSPDFSettingKeyXCallbackURLString
+ * @callback callback Success and error callback function.
+ *
+ * __Supported Platforms__
+ *
+ * -iOS
+ */
+exports.setGlobalOptions = function (options, callback) {
+  if (platform === "ios") {
+    executeAction(callback, "setGlobalOptions", [options]);
+  } else {
+    console.log("Not implemented on " + platform + ".");
+  }
+};
+
 // Showing and dismissing PDF
 
 /**
