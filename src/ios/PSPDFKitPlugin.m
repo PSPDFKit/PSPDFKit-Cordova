@@ -821,14 +821,14 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 }
 
 - (void)setGlobalOptions:(CDVInvokedUrlCommand *)command {
-    NSDictionary *options = [command argumentAtIndex:0];
+    NSDictionary<NSString *,id> *options = [command argumentAtIndex:0];
     if (options) {
         for (NSString *key in options.allKeys) {
             [PSPDFKitGlobal.sharedInstance setValue:options[key] forKey:[self settingKeyFromString:key]];
         }
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:YES] callbackId:command.callbackId];
     } else {
-        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Invalid License Key"] callbackId:command.callbackId];
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"No options provided."] callbackId:command.callbackId];
     }
 }
 
