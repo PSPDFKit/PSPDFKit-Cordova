@@ -1,6 +1,12 @@
 # PSPDFKit-Cordova
 
-The official plugin to use PSPDFKit with Apache Cordova/PhoneGap/Ionic
+The official plugin to use PSPDFKit with Apache Cordova/PhoneGap/Ionic.
+
+## Support, Issues and License Questions
+
+PSPDFKit offers support for customers with an active SDK license via https://pspdfkit.com/support/request/
+
+Are you [evaluating our SDK](https://pspdfkit.com/try/)? That's great, we're happy to help out! To make sure this is fast, please use a work email and have someone from your company fill out our sales form: https://pspdfkit.com/sales/
 
 ## Installation and Integration Steps
 
