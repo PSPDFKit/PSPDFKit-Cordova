@@ -22,6 +22,11 @@ We assume that you have [an existing Cordova project](https://cordova.apache.org
 source 'https://github.com/CocoaPods/Specs.git'
 - platform :ios, '10.0'
 + platform :ios, '12.0'
+use_frameworks!
+target 'CordovaDemo' do
+	project 'CordovaDemo.xcodeproj'
+	pod 'PSPDFKit', podspec: 'https://customers.pspdfkit.com/pspdfkit-ios/latest.podspec'
+end
 ```
 
 3. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
