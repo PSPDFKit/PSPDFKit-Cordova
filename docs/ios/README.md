@@ -20,7 +20,7 @@ We assume that you have [an existing Cordova project](https://cordova.apache.org
 
 ```diff
 source 'https://github.com/CocoaPods/Specs.git'
-- platform :ios, '9.0'
+- platform :ios, '10.0'
 + platform :ios, '12.0'
 ```
 
