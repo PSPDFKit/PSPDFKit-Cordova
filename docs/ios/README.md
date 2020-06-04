@@ -6,38 +6,29 @@ PSPDFKit comes with open source plugins for Cordova on both [iOS](https://pspdfk
 
 ## Requirements
 
-- Xcode 11.3.1 or later
-- PSPDFKit 9.2.0 for iOS or later
+- Xcode 11.5 or later
+- PSPDFKit 9.4.0 for iOS or later
 - Cordova >= 9.0.0
-- CocoaPods >= 1.8.1
+- CocoaPods >= 1.9.3
 
 ## Installation
 
 We assume that you have [an existing Cordova project](https://cordova.apache.org/#getstarted).
 
 1. Run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
-2. Update your `Podfile`: `cd platforms/ios` and open your `Podfile` in a text editor. Make sure the platform is set to iOS 11 or later, and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own CocoaPods Key. Your `Podfile` should look like this:
+2. Update your `Podfile`: `cd platforms/ios` and open your `Podfile` in a text editor. Make sure the platform is set to iOS 12 or later. Your `Podfile` should look like this:
 
 ```diff
 source 'https://github.com/CocoaPods/Specs.git'
 - platform :ios, '9.0'
-+ platform :ios, '11.0'
-
-use_frameworks!
-target 'CordovaDemo' do
-	project 'CordovaDemo.xcodeproj'
--	pod 'PSPDFKit', podspec: 'https://customers.pspdfkit.com/cocoapods/YOUR_COCOAPODS_KEY_GOES_HERE/pspdfkit/latest.podspec'
-+	pod 'PSPDFKit', podspec: 'https://customers.pspdfkit.com/cocoapods/USE_YOUR_OWN_COCOAPODS_KEY/pspdfkit/latest.podspec'
-end
++ platform :ios, '12.0'
 ```
 
 3. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
 
 ![always-embed-swift-standard-libraries.png](screenshots/always-embed-swift-standard-libraries.png)
 
-**Important** If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
-
-3. Install the Pods: run `pod install`.
+4. Install the Pods: run `pod install`.
 
 ## Usage
 
@@ -80,47 +71,33 @@ Let's create a simple Corodva app that integrates PSPDFKit and uses the `pspdfki
 ```javascript
 onDeviceReady: function() {
   this.receivedEvent('deviceready');
-    // Set your license key here.
-    PSPDFKit.setLicenseKey("YOUR KEY");
+  // Set your license key here.
+  PSPDFKit.setLicenseKey("YOUR KEY");
 
-    // Show pdf with in single page mode.
-    PSPDFKit.present('pdf/document.pdf', {
-      pageMode: 'single',
-    });
-  },
-
-  // Update DOM on a Received Event
-  receivedEvent: function(id) {
-    var parentElement = document.getElementById(id);
-    var listeningElement = parentElement.querySelector('.listening');
-    var receivedElement = parentElement.querySelector('.received');
-
-    listeningElement.setAttribute('style', 'display:none;');
-    receivedElement.setAttribute('style', 'display:block;');
-
-    console.log('Received Event: ' + id);
-  }
-};
+  // Show pdf with in single page mode.
+  PSPDFKit.present('pdf/document.pdf', {
+    pageMode: 'single',
+  });
+},
 ```
 
 4. `cd` into `Cordova-Demo` and run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
-5. Open `config.xml` and change the deployment target to iOS 11 or later:
+5. Open `config.xml` and change the deployment target to iOS 12 or later:
 
 ```diff
 <platform name="ios">
 	<allow-intent href="itms:*" />
 	<allow-intent href="itms-apps:*" />
-+	<preference name="deployment-target" value="11.0" />
++	<preference name="deployment-target" value="12.0" />
 </platform>
 ```
 
-6. Use your CocoaPods Key: `open plugins/pspdfkit-cordova/plugin.xml` and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own key. If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
-7. Run `cordova platform add ios` to add the iOS platform.
-8. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
+6. Run `cordova platform add ios` to add the iOS platform.
+7. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
 
 ![always-embed-swift-standard-libraries.png](screenshots/always-embed-swift-standard-libraries.png)
 
-9. Run the app: Open `platforms/ios/CordovaDemo.xcworkspace` in Xcode, then build and run, or run `cordova emulate ios` in the Terminal.
+8. Run the app: Open `platforms/ios/CordovaDemo.xcworkspace` in Xcode, then build and run, or run `cordova emulate ios` in the Terminal.
 
 #### New Ionic Project
 
@@ -128,75 +105,46 @@ Let's create a simple Ionic app that integrates PSPDFKit and uses the `pspdfkit-
 
 1. Run `ionic start IonicDemo blank --type=angular` to create a new Ionic project.
 2. `cd` into `IonicDemo` and run `ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
-3. Add a sample PDF into your `www` directory: `www/pdf/document.pdf`.
-4. Open `config.xml` and change the deployment target to iOS 11 or later:
+3. Open `config.xml` and change the deployment target to iOS 12 or later:
 
 ```diff
 <platform name="ios">
 	<allow-intent href="itms:*" />
 	<allow-intent href="itms-apps:*" />
 + 	<allow-navigation href="*" />
-+	<preference name="deployment-target" value="11.0" />
++	<preference name="deployment-target" value="12.0" />
 </platform>
 ```
 
-5. Use your CocoaPods Key: `open plugins/pspdfkit-cordova/plugin.xml` and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own key. If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
-
-6. Declare `PSPDFKit` in `src/declarations.d.ts` (create this file first): `declare var PSPDFKit: any;`
-7. Modifying `src/app/app.component.ts` to use the PSPDFKit plugin to Present a PDF:
+4. Declare `PSPDFKit` in `src/declarations.d.ts` (create this file first): `declare var PSPDFKit: any;`
+5. Modifying `src/app/app.component.ts` to use the PSPDFKit plugin to Present a PDF:
 
 ```javascript
-constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
-    platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      statusBar.styleDefault();
-      splashScreen.hide();
-
-      PSPDFKit.setLicenseKey('YOUR KEY');
-      PSPDFKit.present('pdf/document.pdf', {});
-    });
+initializeApp() {
+  this.platform.ready().then(() => {
+    this.statusBar.styleDefault();
+    this.splashScreen.hide();
+    
+    PSPDFKit.setLicenseKey('YOUR KEY');
+    PSPDFKit.present('pdf/document.pdf', {});
+  });
 }
 ```
 
-8. Run `ionic cordova platform add ios` to add the iOS platform.
-9. Run `ionic cordova prepare ios` to prepare iOS platform.
-10. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
+6. Run `ionic cordova platform add ios` to add the iOS platform.
+7. Run `ionic cordova prepare ios` to prepare iOS platform.
+8. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
 
 ![always-embed-swift-standard-libraries.png](screenshots/always-embed-swift-standard-libraries.png)
 
-11. Run the app: Open `platforms/ios/MyApp.xcworkspace` in Xcode, then build and run, or run `ionic cordova emulate ios` in the Terminal.
+9. Add a sample PDF into your `platforms/ios/www` directory: `platforms/ios/www/pdf/document.pdf`.
+10. Run the app: Open `platforms/ios/MyApp.xcworkspace` in Xcode, then build and run, or run `ionic cordova emulate ios` in the Terminal.
 
 ## API
 
 You can find the API documentation in [PSPDFKit.js](../../www/PSPDFKit.js).
 
 ## Troubleshooting
-
-
-### Problem:
-
-```sh
-Using cordova-fetch for cordova-ios@^5.0.0
-Adding ios project...
-Creating Cordova project for the iOS platform:
-	Path: platforms/ios
-	Package: com.pspdfkit.demo
-	Name: CordovaDemo
-iOS project created with cordova-ios@5.0.1
-Installing "pspdfkit-cordova" for ios
-Running command: pod install --verbose
-Failed to install 'pspdfkit-cordova': Error: pod: Command failed with exit code 1
-    at ChildProcess.whenDone (/Users/radazzouz/Downloads/Cordova-Demo/node_modules/cordova-common/src/superspawn.js:135:23)
-    at ChildProcess.emit (events.js:198:13)
-    at maybeClose (internal/child_process.js:982:16)
-    at Process.ChildProcess._handle.onexit (internal/child_process.js:259:5)
-pod: Command failed with exit code 1
-```
-
-### Solution:
-
-Use your CocoaPods Key: `open plugins/pspdfkit-cordova/plugin.xml` and replace `YOUR_COCOAPODS_KEY_GOES_HERE` with your own key. If you’re an existing customer, you can find the CocoaPods and license keys in your [customer portal](https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, [sign up for our 60-day trial](https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
 
 ### Problem:
 
