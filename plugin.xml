@@ -95,7 +95,7 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
         <source url="https://github.com/CocoaPods/Specs.git" />
       </config>
       <pods use-frameworks="true">
-        <pod name="PSPDFKit" options="podspec: 'https://customers.pspdfkit.com/cocoapods/YOUR_COCOAPODS_KEY_GOES_HERE/pspdfkit/latest.podspec'" />
+        <pod name="PSPDFKit" options="podspec: 'https://customers.pspdfkit.com/pspdfkit-ios/latest.podspec'" />
       </pods>
     </podspec>
   </platform>
@@ -104,10 +104,10 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
 
 ### iOS
 
-**Important** If you’re an existing customer, you can find the CocoaPods and license keys in your customer portal(https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, sign up for our 60-day trial(https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
+**Important** If you’re an existing customer, you can find your license key in your customer portal(https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, sign up for our 60-day trial(https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
 
-Since this plugin is iOS 11+ only, you will have to set the deployment target
-of your Xcode project in platforms/ios to iOS 11.
+Since this plugin is iOS 12+ only, you will have to set the deployment target
+of your Xcode project in platforms/ios to iOS 12.
 
 ### Android
 
