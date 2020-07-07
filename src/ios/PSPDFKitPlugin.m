@@ -272,15 +272,19 @@
 
 - (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)script {
     __block NSString *result;
-    if ([self.webView isKindOfClass:UIWebView.class]) {
-        result = [(UIWebView *)self.webView stringByEvaluatingJavaScriptFromString:script];
-    } else {
+#if WK_WEB_VIEW_ONLY
+    if ([self.webView isKindOfClass:WKWebView.class]) {
         runOnMainQueueWithoutDeadlocking(^{
             [((WKWebView *)self.webView) evaluateJavaScript:script completionHandler:^(id resultID, NSError *error) {
                 result = [resultID description];
             }];
         });
     }
+#else
+    if ([self.webView isKindOfClass:UIWebView.class]) {
+        result = [(UIWebView *)self.webView stringByEvaluatingJavaScriptFromString:script];
+    }
+#endif
     return result;
 }
 
