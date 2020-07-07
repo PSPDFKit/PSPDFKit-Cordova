@@ -283,6 +283,12 @@
 #else
     if ([self.webView isKindOfClass:UIWebView.class]) {
         result = [(UIWebView *)self.webView stringByEvaluatingJavaScriptFromString:script];
+    } else if ([self.webView isKindOfClass:WKWebView.class]) {
+        runOnMainQueueWithoutDeadlocking(^{
+            [((WKWebView *)self.webView) evaluateJavaScript:script completionHandler:^(id resultID, NSError *error) {
+                result = [resultID description];
+            }];
+        });
     }
 #endif
     return result;
