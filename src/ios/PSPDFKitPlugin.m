@@ -481,11 +481,11 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 
     // Setup gesture recognizers.
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognizerDidChangeState:)];
-    [_pdfController.documentViewController.interactions.allInteractions allowSimultaneousRecognitionWithGestureRecognizer:tapGestureRecognizer];
+    [_pdfController.interactions.allInteractions allowSimultaneousRecognitionWithGestureRecognizer:tapGestureRecognizer];
     [_pdfController.view addGestureRecognizer:tapGestureRecognizer];
 
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGestureRecognizerDidChangeState:)];
-    [_pdfController.documentViewController.interactions.allInteractions allowSimultaneousRecognitionWithGestureRecognizer:longPressGestureRecognizer];
+    [_pdfController.interactions.allInteractions allowSimultaneousRecognitionWithGestureRecognizer:longPressGestureRecognizer];
     [_pdfController.view addGestureRecognizer:longPressGestureRecognizer];
 }
 
@@ -1591,7 +1591,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 #pragma mark - UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    return [_pdfController.documentViewController.interactions.allAnnotationInteractions canActivateAtPoint:[gestureRecognizer locationInView:_pdfController.view] inCoordinateSpace:_pdfController.view];
+    return [_pdfController.interactions.allAnnotationInteractions canActivateAtPoint:[gestureRecognizer locationInView:_pdfController.view] inCoordinateSpace:_pdfController.view];
 }
 
 #pragma mark - Gesture Recognizers
