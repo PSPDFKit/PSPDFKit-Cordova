@@ -17,7 +17,7 @@
 
 #define VALIDATE_DOCUMENT(document, ...) { if (!document.isValid) { [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Document is invalid."] callbackId:command.callbackId]; return __VA_ARGS__; }}
 
-@interface PSPDFKitPlugin () <PSPDFViewControllerDelegate, PSPDFFlexibleToolbarContainerDelegate>
+@interface PSPDFKitPlugin () <PSPDFViewControllerDelegate, PSPDFFlexibleToolbarContainerDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property (nonatomic, strong) PSPDFViewController *pdfController;
@@ -272,15 +272,25 @@
 
 - (NSString *)stringByEvaluatingJavaScriptFromString:(NSString *)script {
     __block NSString *result;
-    if ([self.webView isKindOfClass:UIWebView.class]) {
-        result = [(UIWebView *)self.webView stringByEvaluatingJavaScriptFromString:script];
-    } else {
+#if WK_WEB_VIEW_ONLY
+    if ([self.webView isKindOfClass:WKWebView.class]) {
         runOnMainQueueWithoutDeadlocking(^{
             [((WKWebView *)self.webView) evaluateJavaScript:script completionHandler:^(id resultID, NSError *error) {
                 result = [resultID description];
             }];
         });
     }
+#else
+    if ([self.webView isKindOfClass:UIWebView.class]) {
+        result = [(UIWebView *)self.webView stringByEvaluatingJavaScriptFromString:script];
+    } else if ([self.webView isKindOfClass:WKWebView.class]) {
+        runOnMainQueueWithoutDeadlocking(^{
+            [((WKWebView *)self.webView) evaluateJavaScript:script completionHandler:^(id resultID, NSError *error) {
+                result = [resultID description];
+            }];
+        });
+    }
+#endif
     return result;
 }
 
@@ -468,6 +478,15 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [self setOptions:newOptions forObject:_pdfController animated:NO];
 
     _pdfController.document = _pdfDocument;
+
+    // Setup gesture recognizers.
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognizerDidChangeState:)];
+    [_pdfController.interactions.allInteractions allowSimultaneousRecognitionWithGestureRecognizer:tapGestureRecognizer];
+    [_pdfController.view addGestureRecognizer:tapGestureRecognizer];
+
+    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGestureRecognizerDidChangeState:)];
+    [_pdfController.interactions.allInteractions allowSimultaneousRecognitionWithGestureRecognizer:longPressGestureRecognizer];
+    [_pdfController.view addGestureRecognizer:longPressGestureRecognizer];
 }
 
 - (PSPDFDocument *)createXFDFDocumentWithPath:(NSString *)xfdfFilePath {
@@ -1499,18 +1518,6 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     [self sendEventWithJSON:[NSString stringWithFormat:@"{type:'didCleanupPageView',page:%ld}", (long) pageView.pageIndex]];
 }
 
-- (BOOL)pdfViewController:(PSPDFViewController *)pdfController didTapOnPageView:(PSPDFPageView *)pageView atPoint:(CGPoint)viewPoint {
-    // inverted because it's almost always YES (due to handling JS eval calls).
-    // in order to set this event as handled use explicit "return false;" in JS callback.
-    return ![self sendEventWithJSON:[NSString stringWithFormat:@"{type:'didTapOnPageView',viewPoint:[%g,%g]}", viewPoint.x, viewPoint.y]];
-}
-
-- (BOOL)pdfViewController:(PSPDFViewController *)pdfController didLongPressOnPageView:(PSPDFPageView *)pageView atPoint:(CGPoint)viewPoint gestureRecognizer:(UILongPressGestureRecognizer *)gestureRecognizer {
-    // inverted because it's almost always YES (due to handling JS eval calls).
-    // in order to set this event as handled use explicit "return false;" in JS callback.
-    return ![self sendEventWithJSON:[NSString stringWithFormat:@"{type:'didLongPressOnPageView',viewPoint:[%g,%g]}", viewPoint.x, viewPoint.y]];
-}
-
 static NSString *PSPDFStringFromCGRect(CGRect rect) {
     return [NSString stringWithFormat:@"[%g,%g,%g,%g]", rect.origin.x, rect.origin.y, rect.size.width, rect.size.height];
 }
@@ -1579,6 +1586,24 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
         return [controller flexibleToolbarContainerContentRect:container forToolbarPosition:position];
     }
     return container.bounds;
+}
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    return [_pdfController.interactions.allAnnotationInteractions canActivateAtPoint:[gestureRecognizer locationInView:_pdfController.view] inCoordinateSpace:_pdfController.view];
+}
+
+#pragma mark - Gesture Recognizers
+
+- (void)tapGestureRecognizerDidChangeState:(UITapGestureRecognizer *)gestureRecognizer {
+    CGPoint viewPoint = [gestureRecognizer locationInView:_pdfController.view];
+    [self sendEventWithJSON:[NSString stringWithFormat:@"{type:'didTapOnPageView',viewPoint:[%g,%g]}", viewPoint.x, viewPoint.y]];
+}
+
+- (void)longPressGestureRecognizerDidChangeState:(UILongPressGestureRecognizer *)gestureRecognizer {
+    CGPoint viewPoint = [gestureRecognizer locationInView:_pdfController.view];
+    [self sendEventWithJSON:[NSString stringWithFormat:@"{type:'didLongPressOnPageView',viewPoint:[%g,%g]}", viewPoint.x, viewPoint.y]];
 }
 
 #pragma mark - Instant JSON
