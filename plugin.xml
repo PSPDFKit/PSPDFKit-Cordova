@@ -117,8 +117,6 @@ There's only on more step to get you started:
 
     pspdfkit.license = YOUR_PSPDFKIT_LICENSE
 
-    2) Inside your `project.properties` you need to set the `target` to `android-28`.
-
     Make sure to replace YOUR_PSPDFKIT_LICENSE with the actual PSPDFKit license string that you
     received while requesting a demo at https://pspdfkit.com/try/ or via the 
     PSPDFKit customer portal (in case you already own a license).
