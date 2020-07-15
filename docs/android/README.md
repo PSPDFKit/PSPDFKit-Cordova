@@ -9,7 +9,7 @@ This plugin defines a global `PSPDFKit` object, which provides an API for viewin
 ## Requirements
 - Android SDK API level 19+ / Android 4.4+ (KitKat)
 - Cordova Android 8+.
-- PSPDFKit for Android v6.0.1
+- PSPDFKit for Android 6.5
 
 ## Installation
 
@@ -150,12 +150,9 @@ cordova platform add android
 cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 ```
 
-4. Next you need to setup your PSPDFKit license key and Maven password. If you don't have a license key or Maven password yet, you can get them by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Inside your Android app's `platforms/android/local.properties` file, specify the `pspdfkit.password` and `pspdfkit.license` properties.:
+4. Next you need to setup your PSPDFKit license key. If you don't have a license key yet, you can get one by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Inside your Android app's `platforms/android/local.properties` file, specify the `pspdfkit.license` property:
 
 ```properties
-# This is the MAVEN_KEY you received when requesting a demo or from the customer portal.
-pspdfkit.password=YOUR_PASSWORD
-
 # This is the LICENSE_KEY you received when requesting a demo or from the customer portal.
 pspdfkit.license=LICENSE_STRING
 ```
@@ -209,12 +206,9 @@ ionic cordova platform add android
 ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 ```
 
-4. Next you need to setup your PSPDFKit license key and Maven password. If you don't have a license key or Maven password yet, you can get them by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Specify the `pspdfkit.password` and `pspdfkit.license` properties inside your Android app's `platforms/android/local.properties` file, create the file if it does not exist:
+4. Next you need to set up your PSPDFKit license key. If you don't have a license key yet, you can get one by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Specify the `pspdfkit.license` property inside your Android app's `platforms/android/local.properties` file, create the file if it does not exist:
 
 ```properties
-# This is the MAVEN_KEY you received when requesting a demo or from the customer portal.
-pspdfkit.password=YOUR_PASSWORD
-
 # This is the LICENSE_KEY you received when requesting a demo or from the customer portal.
 pspdfkit.license=LICENSE_STRING
 ```
@@ -283,6 +277,7 @@ You can find the API documentation in [PSPDFKit.js](../../www/PSPDFKit.js).
 ## Troubleshooting
 
 ### Error Reporting
+
 To get proper error reporting for JavaScript exceptions, you need to register a global error listener which will print most runtime errors to Logcat.
 
 Put the following code snippet into `[your-project]/platforms⁩/android⁩/app⁩/src⁩/main⁩/assets⁩/⁨www⁩/js⁩/index.js`:

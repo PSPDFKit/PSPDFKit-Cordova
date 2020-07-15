@@ -10,12 +10,6 @@
 repositories {
     maven {
         url pspdfkitMavenUrl
-        credentials {
-            username pspdfkitUsername
-            // The PSPDFKit password has to be specified in your app's local.properties file, for example:
-            // pspdfkit.password = MY_PSPDFKIT_PASSWORD
-            password pspdfkitPassword
-        }
     }
     maven {
         url "https://maven.google.com"

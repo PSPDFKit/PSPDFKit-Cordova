@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="pspdfkit-cordova" version="1.0.16">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="pspdfkit-cordova" version="1.0.17">
   <engines>
     <engine name="cordova" version="&gt;=6.3.1" />
   </engines>
@@ -115,14 +115,11 @@ There's only on more step to get you started:
 
     1) You need to add following lines to the `local.properties` (usually inside platforms/android/): 
 
-    pspdfkit.password = YOUR_PASSWORD
     pspdfkit.license = YOUR_PSPDFKIT_LICENSE
 
-    2) Inside your `project.properties` you need to set the `target` to `android-28`.
-
-    Make sure to replace YOUR_PASSWORD and YOUR_PSPDFKIT_LICENSE with the actual PSPDFKit customer password
-    and license string that you received while requesting a demo at https://pspdfkit.com/try/ or via the PSPDFKit 
-    customer portal (in case you already own a license).
+    Make sure to replace YOUR_PSPDFKIT_LICENSE with the actual PSPDFKit license string that you
+    received while requesting a demo at https://pspdfkit.com/try/ or via the 
+    PSPDFKit customer portal (in case you already own a license).
 
 For the complete documentation and troubleshooting, check out our documentation at https://github.com/PSPDFKit/PSPDFKit-Cordova. 
 In case there are issues, feel free to reach out to our support team at https://pspdfkit.com/support/request/.
