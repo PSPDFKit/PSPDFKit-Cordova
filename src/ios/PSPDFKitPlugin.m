@@ -487,6 +487,11 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGestureRecognizerDidChangeState:)];
     [_pdfController.interactions.allInteractions allowSimultaneousRecognitionWithGestureRecognizer:longPressGestureRecognizer];
     [_pdfController.view addGestureRecognizer:longPressGestureRecognizer];
+
+    // Notifications
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationsAddedNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationChangedNotification object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationsRemovedNotification object:nil];
 }
 
 - (PSPDFDocument *)createXFDFDocumentWithPath:(NSString *)xfdfFilePath {
@@ -1730,7 +1735,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
 
 #pragma mark - Helper
 
-+ (NSArray <NSDictionary *> *)instantJSONFromAnnotations:(NSArray <PSPDFAnnotation *> *) annotations {
++ (NSArray <NSDictionary *> *)instantJSONFromAnnotations:(NSArray <PSPDFAnnotation *> *)annotations {
     NSMutableArray <NSDictionary *> *annotationsJSON = [NSMutableArray new];
     for (PSPDFAnnotation *annotation in annotations) {
         NSDictionary <NSString *, NSString *> *uuidDict = @{@"uuid" : annotation.uuid};
@@ -1967,6 +1972,35 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
                                                       messageAsDictionary:@{@"localizedDescription": error.localizedDescription, @"domain": error.domain}];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    }
+}
+
+#pragma mark - Notifications
+
+- (void)annotationChangedNotification:(NSNotification *)notification {
+    id object = notification.object;
+    NSArray <PSPDFAnnotation *> *annotations;
+    if ([object isKindOfClass:NSArray.class]) {
+        annotations = object;
+    } else if ([object isKindOfClass:PSPDFAnnotation.class]) {
+        annotations = @[object];
+    } else {
+        return;
+    }
+
+    NSString *name = notification.name;
+    NSString *changeEventName;
+    if ([name isEqualToString:PSPDFAnnotationChangedNotification]) {
+        changeEventName = @"onAnnotationsChanged";
+    } else if ([name isEqualToString:PSPDFAnnotationsAddedNotification]) {
+        changeEventName = @"onAnnotationsAdded";
+    } else if ([name isEqualToString:PSPDFAnnotationsRemovedNotification]) {
+        changeEventName = @"onAnnotationsRemoved";
+    }
+
+    NSArray <NSDictionary *> *annotationsJSON = [PSPDFKitPlugin instantJSONFromAnnotations:annotations];
+    if (annotationsJSON) {
+        [self sendEventWithJSON:@{@"type": changeEventName, @"annotations": annotationsJSON}];
     }
 }
 
