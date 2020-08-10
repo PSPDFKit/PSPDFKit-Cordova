@@ -1991,7 +1991,7 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     NSString *name = notification.name;
     NSString *changeEventName;
     if ([name isEqualToString:PSPDFAnnotationChangedNotification]) {
-        changeEventName = @"onAnnotationChanged";
+        changeEventName = @"onAnnotationsChanged";
     } else if ([name isEqualToString:PSPDFAnnotationsAddedNotification]) {
         changeEventName = @"onAnnotationsAdded";
     } else if ([name isEqualToString:PSPDFAnnotationsRemovedNotification]) {
