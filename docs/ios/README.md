@@ -1,4 +1,4 @@
-# Cordova Plugin for PSPDFKit 9 for iOS
+# Cordova Plugin for PSPDFKit 10 for iOS
 
 The [PSPDFKit SDK](https://pspdfkit.com/pdf-sdk/) is a framework that allows you to view, annotate, sign, and fill PDF forms on iOS, Android, Windows, macOS, and Web.
 
@@ -6,9 +6,9 @@ PSPDFKit comes with open source plugins for Cordova on both [iOS](https://pspdfk
 
 ## Requirements
 
-- Xcode 11.5 or later
-- PSPDFKit 9.5.0 for iOS or later
-- Cordova Lib >= 9.0.0
+- Xcode 12 or later
+- PSPDFKit 10.0.0 for iOS or later
+- Cordova Lib >= 10.0.0
 - Cordova iOS >= 5.1.1
 - CocoaPods >= 1.9.3
 
