@@ -157,9 +157,22 @@ cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 pspdfkit.license=LICENSE_STRING
 ```
 
+
 > Note: If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. com.ionic.test). You can check this in your `AndroidManifest.xml` by searching for `package`. If you are using a trial license then you don't have to worry about that.
 
-5. Now open your `index.js` file located in `www/js/` and paste the below code into the `receivedEvent: function(id)` function. For this to work you need to create a folder called `documents` in `www` and paste a PDF in this folder.
+5. PSPDFKit requires modern Jetpack libraries AndroidX. To enable AndroidX modify the `config.xml` adding the following line in the `android` section:
+
+```diff
+...
+<platform name="android">
++   <preference name="AndroidXEnabled" value="true" />
+    <allow-intent href="market:*" />
+</platform>
+...
+
+```
+
+6. Now open your `index.js` file located in `www/js/` and paste the below code into the `onDeviceReady()` function. For this to work you need to create a folder called `documents` in `www` and paste a PDF in this folder.
 
 ```javascript
 PSPDFKit.presentFromAssets("www/documents/A.pdf", {
@@ -171,7 +184,7 @@ PSPDFKit.presentFromAssets("www/documents/A.pdf", {
 });
 ```
 
-6. You are now ready to build and test your app!
+7. You are now ready to build and test your app!
 
 ```shell
 cordova build
