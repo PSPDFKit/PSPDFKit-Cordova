@@ -9,7 +9,7 @@ This plugin defines a global `PSPDFKit` object, which provides an API for viewin
 ## Requirements
 - Android SDK API level 19+ / Android 4.4+ (KitKat)
 - Cordova Android 8+.
-- PSPDFKit for Android 6.5
+- PSPDFKit for Android 6.5.2
 
 ## Installation
 
