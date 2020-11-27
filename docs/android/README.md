@@ -396,6 +396,36 @@ If you want to lock the device orientation to, for example, portrait mode, you c
 2. From the command line, run `cordova prepare` to update the `AndroidManifest.xml`.
 3. Open the `platforms/android/app/src/main/AndroidManifest.xml` file and ensure that the `android:screenOrientation` attribute was properly added to the existing `PdfActivity` declaration.
 
+### Conflict Trying to Modify Attributes
+
+In some cases, Cordova might fail adding `pspdfkit-cordova` plugin because of clashing configuration:
+
+```
+Failed to install 'pspdfkit-cordova': Error: There was a conflict trying to modify attributes with <edit-config> in plugin pspdfkit-cordova. The conflicting plugin, ..., already modified the same attributes. The conflict must be resolved before pspdfkit-cordova can be added. You may use --force to add the plugin and overwrite the conflicting attributes.
+```
+
+You can workaround this issue by following these steps:
+
+1. Reorder the PSPDFKit plugin inside `package.json` before other conflicting plugins:
+
+```package.json
+...
+"cordova": {
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "plugins": {
+      "pspdfkit-cordova": {},
+      "conflicting-plugin": {}
+    }
+  }
+...
+```
+
+2. Remove platforms and plugins directories (`rm -rf platforms plugins`).
+3. Run `cordova prepare` to initialize all platforms and plugins in order specified inside the `package.json`.
+
 ## Troubleshooting Ionic
 
 ### Failed Version Downgrade
