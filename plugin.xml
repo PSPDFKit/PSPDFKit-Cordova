@@ -49,13 +49,13 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
         <param name="android-package" value="com.pspdfkit.cordova.PSPDFKitPlugin" />
       </feature>
     </config-file>
-    <config-file parent="/*/application" target="AndroidManifest.xml">
+    <config-file target="app/src/main/AndroidManifest.xml" parent="/*/application">
       <meta-data android:name="pspdfkit_license_key" android:value="@string/PSPDFKIT_LICENSE_KEY" />
     </config-file>
-    <config-file parent="/*/application" target="AndroidManifest.xml" after="activity">
+    <config-file target="app/src/main/AndroidManifest.xml" parent="/*/application" after="activity">
       <activity android:name="com.pspdfkit.cordova.CordovaPdfActivity" android:theme="@style/PSPDFKit.Theme" android:windowSoftInputMode="adjustNothing" />
     </config-file>
-    <edit-config file="AndroidManifest.xml" target="/manifest/application" mode="merge">
+    <edit-config file="app/src/main/AndroidManifest.xml" target="/manifest/application" mode="merge">
       <application android:largeHeap="true" />
     </edit-config>
     
