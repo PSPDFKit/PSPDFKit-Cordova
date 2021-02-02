@@ -1412,7 +1412,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 
 - (void)clearCacheForPage:(CDVInvokedUrlCommand *)command {
     PSPDFPageIndex pageIndex = (PSPDFPageIndex)[[command argumentAtIndex:0] longLongValue];
-    [self.pdfController reloadPageAtIndex:pageIndex animated:NO];
+    [self.pdfController reloadPagesAtIndexes:[NSIndexSet indexSetWithIndex:pageIndex] animated:NO];
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK] callbackId:command.callbackId];
 }
 
