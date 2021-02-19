@@ -17,7 +17,7 @@
 
 #define VALIDATE_DOCUMENT(document, ...) { if (!document.isValid) { [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Document is invalid."] callbackId:command.callbackId]; return __VA_ARGS__; }}
 
-@interface PSPDFKitPlugin () <PSPDFViewControllerDelegate, PSPDFFlexibleToolbarContainerDelegate, UIGestureRecognizerDelegate>
+@interface PSPDFKitPlugin () <PSPDFViewControllerDelegate, PSPDFFlexibleToolbarContainerDelegate>
 
 @property (nonatomic, strong) UINavigationController *navigationController;
 @property (nonatomic, strong) PSPDFViewController *pdfController;
@@ -480,13 +480,15 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     _pdfController.document = _pdfDocument;
 
     // Setup gesture recognizers.
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognizerDidChangeState:)];
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureRecognizerDidFire:)];
+    tapGestureRecognizer.cancelsTouchesInView = NO;
     [_pdfController.interactions.allInteractions allowSimultaneousRecognitionWithGestureRecognizer:tapGestureRecognizer];
-    [_pdfController.view addGestureRecognizer:tapGestureRecognizer];
+    [_pdfController.documentViewController.view addGestureRecognizer:tapGestureRecognizer];
 
-    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGestureRecognizerDidChangeState:)];
+    UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressGestureRecognizerDidFire:)];
+    longPressGestureRecognizer.cancelsTouchesInView = NO;
     [_pdfController.interactions.allInteractions allowSimultaneousRecognitionWithGestureRecognizer:longPressGestureRecognizer];
-    [_pdfController.view addGestureRecognizer:longPressGestureRecognizer];
+    [_pdfController.documentViewController.view addGestureRecognizer:longPressGestureRecognizer];
 
     // Notifications
     [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(annotationChangedNotification:) name:PSPDFAnnotationsAddedNotification object:nil];
@@ -1593,20 +1595,14 @@ static NSString *PSPDFStringFromCGRect(CGRect rect) {
     return container.bounds;
 }
 
-#pragma mark - UIGestureRecognizerDelegate
-
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    return [_pdfController.interactions.allAnnotationInteractions canActivateAtPoint:[gestureRecognizer locationInView:_pdfController.view] inCoordinateSpace:_pdfController.view];
-}
-
 #pragma mark - Gesture Recognizers
 
-- (void)tapGestureRecognizerDidChangeState:(UITapGestureRecognizer *)gestureRecognizer {
+- (void)tapGestureRecognizerDidFire:(UITapGestureRecognizer *)gestureRecognizer {
     CGPoint viewPoint = [gestureRecognizer locationInView:_pdfController.view];
     [self sendEventWithJSON:[NSString stringWithFormat:@"{type:'didTapOnPageView',viewPoint:[%g,%g]}", viewPoint.x, viewPoint.y]];
 }
 
-- (void)longPressGestureRecognizerDidChangeState:(UILongPressGestureRecognizer *)gestureRecognizer {
+- (void)longPressGestureRecognizerDidFire:(UILongPressGestureRecognizer *)gestureRecognizer {
     CGPoint viewPoint = [gestureRecognizer locationInView:_pdfController.view];
     [self sendEventWithJSON:[NSString stringWithFormat:@"{type:'didLongPressOnPageView',viewPoint:[%g,%g]}", viewPoint.x, viewPoint.y]];
 }
