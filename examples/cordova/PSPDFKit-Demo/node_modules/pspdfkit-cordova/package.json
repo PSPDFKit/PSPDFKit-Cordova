@@ -1,0 +1,57 @@
+{
+  "_from": "git+https://github.com/PSPDFKit/PSPDFKit-Cordova.git",
+  "_id": "pspdfkit-cordova@1.1.7",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/pspdfkit-cordova",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "https://github.com/PSPDFKit/PSPDFKit-Cordova.git",
+    "rawSpec": "https://github.com/PSPDFKit/PSPDFKit-Cordova.git",
+    "saveSpec": "git+https://github.com/PSPDFKit/PSPDFKit-Cordova.git",
+    "fetchSpec": "https://github.com/PSPDFKit/PSPDFKit-Cordova.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/PSPDFKit/PSPDFKit-Cordova.git#90e7a52148425e7a7966c5c93920ca19bcdf905b",
+  "_spec": "https://github.com/PSPDFKit/PSPDFKit-Cordova.git",
+  "_where": "/Users/radazzouz/Downloads/Cordova/PSPDFKit-Demo",
+  "author": {
+    "name": "PSPDFKit GmbH"
+  },
+  "bugs": {
+    "url": "https://github.com/PSPDFKit/PSPDFKit-Cordova/issues"
+  },
+  "bundleDependencies": false,
+  "cordova": {
+    "id": "pspdfkit-cordova",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "deprecated": false,
+  "description": "PSPDFKit Cordova Plugin for Android and iOS",
+  "homepage": "https://github.com/PSPDFKit/PSPDFKit-Cordova#readme",
+  "keywords": [
+    "pspdfkit",
+    "pdf",
+    "ios",
+    "android",
+    "ionic",
+    "ecosystem:cordova",
+    "cordova-ios",
+    "cordova-android"
+  ],
+  "license": "MIT",
+  "name": "pspdfkit-cordova",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PSPDFKit/PSPDFKit-Cordova.git"
+  },
+  "version": "1.1.7"
+}
