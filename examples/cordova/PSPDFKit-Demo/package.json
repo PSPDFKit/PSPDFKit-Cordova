@@ -15,7 +15,6 @@
   "dependencies": {
     "cordova-android": "^8.1.0",
     "cordova-ios": "^5.1.1",
-    "cordova-plugin-enable-multidex": "git+https://github.com/PSPDFKit-labs/cordova-plugin-enable-multidex.git",
     "pspdfkit-cordova": "git+https://github.com/PSPDFKit/PSPDFKit-Cordova.git"
   },
   "cordova": {
@@ -29,6 +28,7 @@
     ]
   },
   "devDependencies": {
+    "cordova-plugin-enable-multidex": "git+https://github.com/PSPDFKit-labs/cordova-plugin-enable-multidex.git",
     "cordova-plugin-whitelist": "^1.3.4"
   }
 }
