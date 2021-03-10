@@ -6,10 +6,26 @@ PSPDFKit comes with open source wrappers for Cordova on both [iOS](https://pspdf
 
 This plugin defines a global `PSPDFKit` object, which provides an API for viewing PDF documents with PSPDFKit for Android.
 
-## Requirements
-- Android SDK API level 19+ / Android 4.4+ (KitKat)
-- Cordova Android 8+.
-- PSPDFKit for Android 6.5.3
+## Cordova Requirements
+
+- The [latest stable version of cordova-lib](https://github.com/apache/cordova-lib/releases).
+- The [latest stable version of cordova-android](https://github.com/apache/cordova-android/releases).
+- The [latest stable version of Android Studio](https://developer.android.com/studio).
+- The [Android NDK](https://developer.android.com/studio/projects/install-ndk).
+- The [latest stable version of Gradle](https://gradle.org/install).
+- An [Android Virtual Device](https://developer.android.com/studio/run/managing-avds.html) or a hardware device.
+
+## Ionic Requirements
+
+- The [latest stable version of Node.js](https://nodejs.org/en/).
+- The [latest stable version of Ionic CLI](https://ionicframework.com/docs/cli).
+- The [latest stable version of `cordova-res`](https://www.npmjs.com/package/cordova-res).
+- The [latest stable version of Android Studio](https://developer.android.com/studio).
+- The [Android NDK](https://developer.android.com/studio/projects/install-ndk).
+- The [latest stable version of Gradle](https://gradle.org/install).
+- An [Android Virtual Device](https://developer.android.com/studio/run/managing-avds.html) or a hardware device.
+
+For more information regarding the Ionic installation you can check out the [official Ionic installation guide](https://ionicframework.com/docs/v1/guide/installation.html).
 
 ## Installation
 
@@ -31,7 +47,6 @@ ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 
 The plugin is accessed via the PSPDFKit singleton. Here is an example which shows the document from your `assets/www/documents` folder:
 
-
 ```javascript
 function showMyDocument() {
   PSPDFKit.presentFromAssets("www/documents/myFile.pdf", {
@@ -40,7 +55,7 @@ function showMyDocument() {
     scrollDirection: PSPDFKit.PageScrollDirection.VERTICAL,
     scrollMode: PSPDFKit.ScrollMode.CONTINUOUS,
     useImmersiveMode: true,
-    password: "my-document-password"
+    password: "my-document-password",
   });
 }
 ```
@@ -125,7 +140,7 @@ PSPDFKit.presentFromAssets('www/documents/myFile.pdf', options);
 
 ## New Cordova Project
 
-Let's create a simple Corodva app that integrates PSPDFKit and uses the `pspdfkit-cordova` plugin.
+Let's create a minimal Corodva app that integrates PSPDFKit and uses the `pspdfkit-cordova` plugin.
 
 ### Quickstart Guide Cordova
 
@@ -138,29 +153,7 @@ cd pdfapp
 
 > Important: Your app's package name (in the above example `com.example.pdfapp`) has to match your PSPDFKit license name or PSPDFKit will throw an exception. If you don't have a license yet, you can request an evaluation license of PSPDFKit at https://pspdfkit.com/try.
 
-2. Add Android platform support to your project. This plugin requires the latest `android` plugin 8+.
-
-```shell
-cordova platform add android
-```
-
-3. Install the PSPDFKit plugin:
-
-```shell
-cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
-```
-
-4. Next you need to setup your PSPDFKit license key. If you don't have a license key yet, you can get one by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Inside your Android app's `platforms/android/local.properties` file, specify the `pspdfkit.license` property:
-
-```properties
-# This is the LICENSE_KEY you received when requesting a demo or from the customer portal.
-pspdfkit.license=LICENSE_STRING
-```
-
-
-> Note: If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. com.ionic.test). You can check this in your `AndroidManifest.xml` by searching for `package`. If you are using a trial license then you don't have to worry about that.
-
-5. PSPDFKit requires modern Jetpack libraries AndroidX. To enable AndroidX modify the `config.xml` adding the following line in the `android` section:
+2. PSPDFKit requires modern Jetpack libraries AndroidX. To enable AndroidX modify the `config.xml` adding the following line in the `android` section:
 
 ```diff
 ...
@@ -172,87 +165,233 @@ pspdfkit.license=LICENSE_STRING
 
 ```
 
-6. Now open your `index.js` file located in `www/js/` and paste the below code into the `onDeviceReady()` function. For this to work you need to create a folder called `documents` in `www` and paste a PDF in this folder.
-
-```javascript
-PSPDFKit.presentFromAssets("www/documents/A.pdf", {
-  title: "My PDF Document",
-  page: 0,
-  scrollDirection: PSPDFKit.PageScrollDirection.VERTICAL,
-  scrollMode: PSPDFKit.ScrollMode.CONTINUOUS,
-  useImmersiveMode: true
-});
-```
-
-7. You are now ready to build and test your app!
+2. Install the PSPDFKit plugin:
 
 ```shell
-cordova build
-cordova run
+cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 ```
 
-### Quickstart Guide Ionic
-
-For more information regarding the Ionic installation you can check out the [official Ionic installation guide](https://ionicframework.com/docs/v1/guide/installation.html).
-
-1. Create a new Ionic project from the command line using the [Ionic Command-Line Interface (CLI)](https://ionicframework.com/docs/cli/start/) .
+3. Add Android platform support to your project. This plugin requires the latest `android` plugin 8+.
 
 ```shell
-ionic start todo blank --type ionic1
+cordova platform add android
 ```
 
-It will then ask you if you want to integrate your new app with Cordova, answer with yes. After the process is finished change to the newly created Ionic project directory.
-
-```shell
-cd todo
-```
-
-2. Add Android platform support to your project. This plugin requires the latest `cordova-android` plugin 8+.
-
-```shell
-ionic cordova platform add android
-```
-
-3. Install the PSPDFKit plugin:
-
-```shell
-ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
-```
-
-4. Next you need to set up your PSPDFKit license key. If you don't have a license key yet, you can get one by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Specify the `pspdfkit.license` property inside your Android app's `platforms/android/local.properties` file, create the file if it does not exist:
+4. Next, you need to setup your PSPDFKit license key. If you don't have a license key yet, you can get one by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Inside your Android app's `platforms/android/local.properties` file, specify the `pspdfkit.license` property:
 
 ```properties
 # This is the LICENSE_KEY you received when requesting a demo or from the customer portal.
 pspdfkit.license=LICENSE_STRING
 ```
 
-> Note: If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. com.ionic.test). You can check this in your `AndroidManifest.xml` by searching for `package`. If you are using a trial license then you don't have to worry about that.
+> Note: If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. com.example.pdfapp). You can check this in your `AndroidManifest.xml` by searching for `package`. If you are using a trial license then you don't have to worry about that.
 
-5. Now open your `app.js` file located in `www/js/` and paste the below code into the `$ionicPlatform.ready(function() {}` function. For this to work you need to create a folder called `documents` in `www` and paste a PDF in this folder.
+5. Add the PDF document you want to display in your project’s `assets` directory. You can use <a href="https://pspdfkit.com/downloads/pspdfkit-android-quickstart-guide.pdf" download="Document.pdf">this QuickStart Guide PDF</a> as an example.
+
+```shell
+cp ~/Downloads/Document.pdf platforms/android/app/src/main/assets/Document.pdf
+```
+
+6. Now open your `index.js` file located in `www/js/` and paste the below code into the `onDeviceReady()` function. For this to work you need to create a folder called `documents` in `www` and paste a PDF in this folder.
 
 ```javascript
-PSPDFKit.showDocumentFromAssets("www/documents/Document.pdf", {
+PSPDFKit.present("Document.pdf", {
   title: "My PDF Document",
   page: 0,
   scrollDirection: PSPDFKit.PageScrollDirection.VERTICAL,
   scrollMode: PSPDFKit.ScrollMode.CONTINUOUS,
-  useImmersiveMode: true
+  useImmersiveMode: true,
 });
 ```
 
-6. Now you need to build the app to see if everything works correctly:
+7. [Start your emulator](https://developer.android.com/studio/run/emulator#runningemulator).
+8. The app is now ready to launch:
 
 ```shell
-ionic cordova build
+cordova emulate android
 ```
 
-7. And finally to run the app on a real device simply enter:
+## Running the PSPDFKit-Demo Cordova Example
+
+1. Open the Terminal app and clone the GitHub repository:
 
 ```shell
-ionic cordova run android
+git clone https://github.com/PSPDFKit/pspdfkit-cordova.git
 ```
 
-Or if you want to run the app on a simulator you can use:
+2. Change the current working directory to the example project’s folder:
+
+```shell
+cd pspdfkit-cordova/examples/cordova/PSPDFKit-Demo
+```
+
+2. Install the dependencies:
+
+```shell
+npm install
+```
+
+3. Add the Android platform:
+
+```shell
+cordova platform add android
+```
+
+4. Next, you need to setup your PSPDFKit license key. If you don't have a license key yet, you can get one by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Inside your Android app's `platforms/android/local.properties` file, specify the `pspdfkit.license` property:
+
+```properties
+# This is the LICENSE_KEY you received when requesting a demo or from the customer portal.
+pspdfkit.license=LICENSE_STRING
+```
+
+> Note: If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. com.pspdfkit.demo). You can check this in your `AndroidManifest.xml` by searching for `package`. If you are using a trial license then you don't have to worry about that.
+
+5. Copy the PDF document from the `www` directory into your project’s assets directory:
+
+```shell
+cp www/Document.pdf platforms/android/app/src/main/assets/Document.pdf
+```
+
+6. [Start your emulator](https://developer.android.com/studio/run/emulator#runningemulator).
+7. The app is now ready to launch:
+
+```shell
+cordova emulate android
+```
+
+## New Ionic Project
+
+Let's create a minimal Ionic app that integrates PSPDFKit and uses the `pspdfkit-cordova` plugin.
+
+### Quickstart Guide Ionic
+
+1. Create a new Ionic project from the command line using the [Ionic Command-Line Interface (CLI)](https://ionicframework.com/docs/cli/start/) .
+
+```shell
+ionic start PSPDFKit-Demo blank --type=angular
+cd PSPDFKit-Demo
+```
+
+2. Install the PSPDFKit plugin:
+
+```shell
+ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
+```
+
+3. Open `config.xml` in a text editor and enable AndroidX:
+
+```diff
+...
+  <platform name="android">
+-    <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+-       <application android:networkSecurityConfig="@xml/network_security_config" />
+-    </edit-config>
++   <preference name="AndroidXEnabled" value="true" />
+    ...
+  </platform>
+...
+```
+
+4. Declare PSPDFKit in the src/declarations.d.ts file:
+
+```shell
+echo "declare var PSPDFKit: any;" > src/declarations.d.ts
+```
+
+5. Open the `src/app/app.component.ts` file:
+
+```shell
+open src/app/app.component.ts
+```
+
+6. Replace the entire contents of the `app.component.ts` file with the following code snippet:
+
+```typescript
+import { Component } from "@angular/core";
+import { Platform } from "@ionic/angular";
+
+@Component({
+  selector: "app-root",
+  templateUrl: "app.component.html",
+  styleUrls: ["app.component.scss"],
+})
+export class AppComponent {
+  constructor(private platform: Platform) {
+    this.platform.ready().then(() => {
+      PSPDFKit.setLicenseKey("LICENSE_KEY_GOES_HERE");
+      PSPDFKit.present("Document.pdf");
+    });
+  }
+}
+```
+
+7. Run `ionic cordova platform add android` to add the Android platform.
+
+8. Next, you need to set up your PSPDFKit license key. If you don't have a license key yet, you can get one by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Specify the `pspdfkit.license` property inside your Android app's `platforms/android/local.properties` file, create the file if it does not exist:
+
+```properties
+# This is the LICENSE_KEY you received when requesting a demo or from the customer portal.
+pspdfkit.license=LICENSE_STRING
+```
+
+> Note: If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. io.ionic.starter). You can check this in your `AndroidManifest.xml` by searching for `package`. If you are using a trial license then you don't have to worry about that.
+
+9. Add the PDF document you want to display in your project’s `assets` directory. You can use <a href="https://pspdfkit.com/downloads/pspdfkit-android-quickstart-guide.pdf" download="Document.pdf">this QuickStart Guide PDF</a> as an example.
+
+```shell
+cp ~/Downloads/Document.pdf platforms/android/app/src/main/assets/Document.pdf
+```
+
+7. [Start your emulator](https://developer.android.com/studio/run/emulator#runningemulator).
+8. The app is now ready to launch:
+
+```shell
+ionic cordova emulate android
+```
+
+## Running the PSPDFKit-Demo Ionic Example
+
+1. Open the Terminal app and clone the GitHub repository:
+
+```shell
+git clone https://github.com/PSPDFKit/pspdfkit-cordova.git
+```
+
+2. Change the current working directory to the example project’s folder:
+
+```shell
+cd pspdfkit-cordova/examples/ionic/PSPDFKit-Demo
+```
+
+2. Install the dependencies:
+
+```shell
+npm install
+```
+
+3. Add the Android platform:
+
+```shell
+ionic cordova platform add android
+```
+
+4. Next, you need to set up your PSPDFKit license key. If you don't have a license key yet, you can get one by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Specify the `pspdfkit.license` property inside your Android app's `platforms/android/local.properties` file, create the file if it does not exist:
+
+```properties
+# This is the LICENSE_KEY you received when requesting a demo or from the customer portal.
+pspdfkit.license=LICENSE_STRING
+```
+
+> Note: If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. com.pspdfkit.ionic.starter). You can check this in your `AndroidManifest.xml` by searching for `package`. If you are using a trial license then you don't have to worry about that.
+
+5. Copy the PDF document from the `resources` directory into your project’s assets directory:
+
+```shell
+cp resources/Document.pdf platforms/android/app/src/main/assets/
+```
+
+6. [Start your emulator](https://developer.android.com/studio/run/emulator#runningemulator).
+7. The app is now ready to launch:
 
 ```shell
 ionic cordova emulate android
@@ -296,15 +435,17 @@ To get proper error reporting for JavaScript exceptions, you need to register a 
 Put the following code snippet into `[your-project]/platforms⁩/android⁩/app⁩/src⁩/main⁩/assets⁩/⁨www⁩/js⁩/index.js`:
 
 ```javascript
-window.onerror = function(msg, url, line, col, error) {
-       var extra = !col ? '' : '\ncolumn: ' + col;
-       extra += !error ? '' : '\nerror: ' + error;
-       console.log("ErrorReport: " + msg + "\nurl: " + url + "\nline: " + line + extra);
-       return true;
+window.onerror = function (msg, url, line, col, error) {
+  var extra = !col ? "" : "\ncolumn: " + col;
+  extra += !error ? "" : "\nerror: " + error;
+  console.log(
+    "ErrorReport: " + msg + "\nurl: " + url + "\nline: " + line + extra
+  );
+  return true;
 };
 ```
 
-### Conflicts with Android Support Library/AndroidX 
+### Conflicts with Android Support Library/AndroidX
 
 When running `cordova build` for a project with multiple plugins installed, it can happen that you see a build error like this:
 
@@ -318,15 +459,15 @@ The most common cause for this error is that your Cordova/Ionic project uses plu
 
 1. Install the [`cordova-plugin-androidx`](https://github.com/dpa99c/cordova-plugin-androidx) plugin, which will configure your project to use AndroidX.
 
-    ```
-    cordova plugin add cordova-plugin-androidx
-    ```
-    
+   ```
+   cordova plugin add cordova-plugin-androidx
+   ```
+
 2. Install the [`cordova-plugin-androidx-adapter`](https://github.com/dpa99c/cordova-plugin-androidx-adapter) plugin, which will enable auto-migration of all outdated Cordova plugins, so that they also use AndroidX instead of the Support Library.
 
-    ```
-    cordova plugin add cordova-plugin-androidx-adapter
-    ```
+   ```
+   cordova plugin add cordova-plugin-androidx-adapter
+   ```
 
 3. Run `cordova build`. This will process and update all third-party plugins to use AndroidX, and will then build your project.
 
@@ -446,6 +587,7 @@ Please make sure that your license key is properly set in the `AndroidManifest.x
 ### Can't find version for a specific support library
 
 Example:
+
 ```
 * What went wrong:
 Could not resolve all files for configuration ':app:debugCompileClasspath'.
@@ -454,7 +596,7 @@ Could not resolve all files for configuration ':app:debugCompileClasspath'.
       https://jcenter.bintray.com/com/android/support/support-media-compat/26.0.2/support-media-compat-26.0.2.aar
 ```
 
-Simply open your `platforms/android/pspdfkit-cordova/YOURAPP-pspdfkit.gradle` file and change the version. In this case changing `26.0.2` to `26.0.1` can already fix such issues because sometimes specific support library versions are not available anymore.
+Open your `platforms/android/pspdfkit-cordova/YOURAPP-pspdfkit.gradle` file and change the version. In this case changing `26.0.2` to `26.0.1` can already fix such issues because sometimes specific support library versions are not available anymore.
 
 ### PSPDFKit name not found in TypeScript app
 

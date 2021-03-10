@@ -4,37 +4,62 @@ The [PSPDFKit SDK](https://pspdfkit.com/pdf-sdk/) is a framework that allows you
 
 PSPDFKit comes with open source plugins for Cordova on both [iOS](https://pspdfkit.com/guides/ios/current/other-languages/apache-cordova-phonegap/) and [Android](https://pspdfkit.com/guides/android/current/other-languages/apache-cordova-phonegap/).
 
-## Requirements
+### Cordova Requirements
 
-- The latest [Xcode](https://developer.apple.com/xcode/)
-- PSPDFKit 10.2.0 for iOS or later
-- Cordova Lib >= 10.0.0
-- Cordova iOS >= 5.1.1
-- CocoaPods >= 1.10.1
+- The [latest stable version of cordova-lib](https://github.com/apache/cordova-lib/releases).
+- The [latest stable version of cordova-ios](https://github.com/apache/cordova-ios/releases).
+- The [latest stable version of Xcode](https://developer.apple.com/xcode/).
+- The [latest stable version of CocoaPods](https://guides.cocoapods.org/using/getting-started.html#installation).
+
+### Ionic Requirements
+
+- The [latest stable version of Node.js](https://nodejs.org/en/).
+- The [latest stable version of Ionic CLI](https://ionicframework.com/docs/cli).
+- The [latest stable version of `cordova-res`](https://www.npmjs.com/package/cordova-res).
+- The [latest stable version of Xcode](https://developer.apple.com/xcode/).
+- The [latest stable version of CocoaPods](https://guides.cocoapods.org/using/getting-started.html#installation).
 
 ## Installation
 
 We assume that you have [an existing Cordova project](https://cordova.apache.org/#getstarted).
 
-1. Run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
-2. Update your `Podfile`: `cd platforms/ios` and open your `Podfile` in a text editor. Make sure the platform is set to iOS 12 or later. Your `Podfile` should look like this:
+1. Open the Terminal app and change the location of the current working directory inside the your project:
 
-```diff
-source 'https://github.com/CocoaPods/Specs.git'
-- platform :ios, '10.0'
-+ platform :ios, '12.0'
-use_frameworks!
-target 'CordovaDemo' do
-	project 'CordovaDemo.xcodeproj'
-	pod 'PSPDFKit', podspec: 'https://customers.pspdfkit.com/pspdfkit-ios/latest.podspec'
-end
+```bash
+cd path/to/YourProject
 ```
 
-3. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
+2. Remove all the platforms from your project:
 
-![always-embed-swift-standard-libraries.png](screenshots/always-embed-swift-standard-libraries.png)
+```bash
+cordova platform remove android
+cordova platform remove ios
+```
 
-4. Install the Pods: run `pod install`.
+3. Add back all the platforms:
+
+```bash
+cordova platform add android
+cordova platform add ios
+```
+
+4. Open `config.xml` in a text editor and change the deployment target to iOS 12 or later:
+
+```bash
+open config.xml
+```
+
+Your `config.xml` file should look like this:
+
+```diff
+...
+  <platform name="ios">
+    <allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
++   <preference name="deployment-target" value="12.0" />
+  </platform>
+...
+```
 
 ## Usage
 
@@ -47,11 +72,11 @@ PSPDFKit.setLicenseKey("YOUR KEY");
 // Show pdf with in single page mode, with a black background.
 PSPDFKit.present("pdf/document.pdf", {
   pageMode: "single",
-  backgroundColor: "black"
+  backgroundColor: "black",
 });
 
 // Show a PDF document with a callback.
-PSPDFKit.present("pdf/document.pdf", function() {
+PSPDFKit.present("pdf/document.pdf", function () {
   alert("pdf has appeared");
 });
 
@@ -59,29 +84,45 @@ PSPDFKit.present("pdf/document.pdf", function() {
 PSPDFKit.setPage(1, true);
 
 // Get the page number.
-PSPDFKit.getPage(function(page) {
+PSPDFKit.getPage(function (page) {
   alert("Current page: " + page);
 });
 ```
 
+5. Add the PSPDFKit plugin:
+
+```bash
+cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
+```
+
 ## Getting Started
 
-#### New Cordova Project
+### New Cordova Project
 
-Let's create a simple Corodva app that integrates PSPDFKit and uses the `pspdfkit-cordova` plugin.
+Let's create a minimal Corodva app that integrates PSPDFKit and uses the `pspdfkit-cordova` plugin.
 
-1. Run `cordova create Cordova-Demo com.pspdfkit.demo CordovaDemo` to create a new Cordova project.
-2. Add a sample PDF into your `www` directory: `www/pdf/document.pdf`.
+1. Create the new Cordova project by running app by running the following command:
+
+```bash
+cordova create PSPDFKit-Demo com.pspdfkit.demo PSPDFKit-Demo
+```
+
+2. Add the PDF document you want to display in your project’s `www` directory. You can use <a href="https://pspdfkit.com/downloads/pspdfkit-ios-quickstart-guide.pdf" download="Document.pdf">this QuickStart Guide PDF</a> as an example.
+
+```bash
+cp ~/Downloads/Document.pdf www/Document.pdf
+```
+
 3. Modify the `onDeviceReady` function in `www/js/index.js` like so:
 
 ```javascript
 onDeviceReady: function() {
   this.receivedEvent('deviceready');
   // Set your license key here.
-  PSPDFKit.setLicenseKey("YOUR KEY");
+  PSPDFKit.setLicenseKey("LICENSE_KEY_GOES_HERE");
 
   // Show pdf with in single page mode.
-  PSPDFKit.present('pdf/document.pdf', {
+  PSPDFKit.present('Document.pdf', {
     pageMode: 'single',
   });
 },
@@ -91,60 +132,148 @@ onDeviceReady: function() {
 5. Open `config.xml` and change the deployment target to iOS 12 or later:
 
 ```diff
-<platform name="ios">
-	<allow-intent href="itms:*" />
-	<allow-intent href="itms-apps:*" />
-+	<preference name="deployment-target" value="12.0" />
-</platform>
+...
+  <platform name="ios">
+    <allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
++   <preference name="deployment-target" value="12.0" />
+  </platform>
+...
 ```
 
 6. Run `cordova platform add ios` to add the iOS platform.
-7. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
+7. Run the app: Open `platforms/ios/CordovaDemo.xcworkspace` in Xcode, then build and run, or run `cordova emulate ios` in the Terminal.
 
-![always-embed-swift-standard-libraries.png](screenshots/always-embed-swift-standard-libraries.png)
+### Running the PSPDFKit-Demo Cordova Example
 
-8. Run the app: Open `platforms/ios/CordovaDemo.xcworkspace` in Xcode, then build and run, or run `cordova emulate ios` in the Terminal.
+1. Open the Terminal app and clone the GitHub repository:
 
-#### New Ionic Project
-
-Let's create a simple Ionic app that integrates PSPDFKit and uses the `pspdfkit-cordova` plugin.
-
-1. Run `ionic start IonicDemo blank --type=angular` to create a new Ionic project.
-2. `cd` into `IonicDemo` and run `ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
-3. Open `config.xml` and change the deployment target to iOS 12 or later:
-
-```diff
-<platform name="ios">
-	<allow-intent href="itms:*" />
-	<allow-intent href="itms-apps:*" />
-+ 	<allow-navigation href="*" />
-+	<preference name="deployment-target" value="12.0" />
-</platform>
+```bash
+git clone https://github.com/PSPDFKit/pspdfkit-cordova.git
 ```
 
-4. Declare `PSPDFKit` in `src/declarations.d.ts` (create this file first): `declare var PSPDFKit: any;`
-5. Modifying `src/app/app.component.ts` to use the PSPDFKit plugin to Present a PDF:
+2. Change the current working directory to the example project’s folder:
 
-```javascript
-initializeApp() {
-  this.platform.ready().then(() => {
-    this.statusBar.styleDefault();
-    this.splashScreen.hide();
-    
-    PSPDFKit.setLicenseKey('YOUR KEY');
-    PSPDFKit.present('pdf/document.pdf', {});
-  });
+```bash
+cd pspdfkit-cordova/examples/cordova/PSPDFKit-Demo
+```
+
+2. Install the dependencies:
+
+```bash
+npm install
+```
+
+3. Add the iOS platform:
+
+```bash
+cordova platform add ios
+```
+
+4. The app is now ready to launch:
+
+```bash
+cordova emulate ios
+```
+
+### New Ionic Project
+
+Let's create a minimal Ionic app that integrates PSPDFKit and uses the `pspdfkit-cordova` plugin.
+
+1. Run `ionic start IonicDemo blank --type=angular` to create a new Ionic project.
+2. Open `config.xml` and change the deployment target to iOS 12 or later:
+
+```diff
+...
+  <platform name="ios">
+    <allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
++   <preference name="deployment-target" value="12.0" />
+  </platform>
+...
+```
+
+3. `cd` into `IonicDemo` and run `ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` to install the `pspdfkit-cordova` plugin.
+4. Declare PSPDFKit in the src/declarations.d.ts file:
+
+```bash
+echo "declare var PSPDFKit: any;" > src/declarations.d.ts
+```
+
+5. Open the `src/app/app.component.ts` file:
+
+```bash
+open src/app/app.component.ts
+```
+
+6. Replace the entire contents of the `app.component.ts` file with the following code snippet:
+
+```typescript
+import { Component } from "@angular/core";
+import { Platform } from "@ionic/angular";
+
+@Component({
+  selector: "app-root",
+  templateUrl: "app.component.html",
+  styleUrls: ["app.component.scss"],
+})
+export class AppComponent {
+  constructor(private platform: Platform) {
+    this.platform.ready().then(() => {
+      PSPDFKit.setLicenseKey("LICENSE_KEY_GOES_HERE");
+      PSPDFKit.present("Document.pdf");
+    });
+  }
 }
 ```
 
-6. Run `ionic cordova platform add ios` to add the iOS platform.
-7. Run `ionic cordova prepare ios` to prepare iOS platform.
-8. If your application is targeting iOS versions **prior to iOS 12.2** and your application **does not already contain any Swift code**, then you need to make sure Xcode bundles Swift standard libraries with your application distribution. To to so, open your target Build Settings and enable `Always Embed Swift Standard Libraries`:
+7. Add the PDF document you want to display in your project’s `platforms/ios/www directory`. You can use <a href="https://pspdfkit.com/downloads/pspdfkit-ios-quickstart-guide.pdf" download="Document.pdf">this QuickStart Guide PDF</a> as an example.
 
-![always-embed-swift-standard-libraries.png](screenshots/always-embed-swift-standard-libraries.png)
+```bash
+cp ~/Downloads/Document.pdf platforms/ios/platform_www/Document.pdf
+```
 
-9. Add a sample PDF into your `platforms/ios/www` directory: `platforms/ios/www/pdf/document.pdf`.
+8. Run `ionic cordova platform add ios` to add the iOS platform.
+9. Run `ionic cordova prepare ios` to prepare iOS platform.
 10. Run the app: Open `platforms/ios/MyApp.xcworkspace` in Xcode, then build and run, or run `ionic cordova emulate ios` in the Terminal.
+
+### Running the PSPDFKit-Demo Ionic Example
+
+1. Open the Terminal app and clone the GitHub repository:
+
+```bash
+git clone https://github.com/PSPDFKit/pspdfkit-cordova.git
+```
+
+2. Change the current working directory to the example project’s folder:
+
+```bash
+cd pspdfkit-cordova/examples/ionic/PSPDFKit-Demo
+```
+
+2. Install the dependencies:
+
+```bash
+npm install
+```
+
+3. Add the iOS platform:
+
+```bash
+ionic cordova platform add ios
+```
+
+4. Copy the PDF document from the `resources` directory into your project’s `platform_www` directory:
+
+```bash
+cp resources/Document.pdf platforms/ios/platform_www/
+```
+
+5. The app is now ready to launch:
+
+```bash
+ionic cordova emulate ios
+```
 
 ## API
 
