@@ -13,8 +13,6 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "dependencies": {
-    "cordova-android": "^8.1.0",
-    "cordova-ios": "^5.1.1",
     "pspdfkit-cordova": "git+https://github.com/PSPDFKit/PSPDFKit-Cordova.git"
   },
   "cordova": {
@@ -22,10 +20,7 @@
       "pspdfkit-cordova": {},
       "cordova-plugin-whitelist": {}
     },
-    "platforms": [
-      "ios",
-      "android"
-    ]
+    "platforms": []
   },
   "devDependencies": {
     "cordova-plugin-enable-multidex": "git+https://github.com/PSPDFKit-labs/cordova-plugin-enable-multidex.git",

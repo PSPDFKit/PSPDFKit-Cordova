@@ -17,6 +17,6 @@ $RECYCLE.BIN/
 log.txt
 npm-debug.log*
 
-/node_modules
-/platforms
-/plugins
+node_modules/
+platforms/
+plugins/

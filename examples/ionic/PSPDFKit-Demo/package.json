@@ -21,8 +21,6 @@
     "@angular/router": "~11.2.0",
     "@capacitor/core": "2.4.7",
     "@ionic/angular": "^5.5.2",
-    "cordova-android": "^8.1.0",
-    "cordova-ios": "^5.1.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -71,9 +69,6 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {}
     },
-    "platforms": [
-      "ios",
-      "android"
-    ]
+    "platforms": []
   }
 }
