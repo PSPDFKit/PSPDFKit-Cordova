@@ -10,6 +10,7 @@ This plugin defines a global `PSPDFKit` object, which provides an API for viewin
 
 - The [latest stable version of cordova-lib](https://github.com/apache/cordova-lib/releases).
 - The [latest stable version of cordova-android](https://github.com/apache/cordova-android/releases).
+- The [Java 8 Development Kit](https://www.oracle.com/ca-en/java/technologies/javase/javase-jdk8-downloads.html).
 - The [latest stable version of Android Studio](https://developer.android.com/studio).
 - The [Android NDK](https://developer.android.com/studio/projects/install-ndk).
 - The [latest stable version of Gradle](https://gradle.org/install).
@@ -20,6 +21,7 @@ This plugin defines a global `PSPDFKit` object, which provides an API for viewin
 - The [latest stable version of Node.js](https://nodejs.org/en/).
 - The [latest stable version of Ionic CLI](https://ionicframework.com/docs/cli).
 - The [latest stable version of `cordova-res`](https://www.npmjs.com/package/cordova-res).
+- The [Java 8 Development Kit](https://www.oracle.com/ca-en/java/technologies/javase/javase-jdk8-downloads.html).
 - The [latest stable version of Android Studio](https://developer.android.com/studio).
 - The [Android NDK](https://developer.android.com/studio/projects/install-ndk).
 - The [latest stable version of Gradle](https://gradle.org/install).
@@ -27,20 +29,120 @@ This plugin defines a global `PSPDFKit` object, which provides an API for viewin
 
 For more information regarding the Ionic installation you can check out the [official Ionic installation guide](https://ionicframework.com/docs/v1/guide/installation.html).
 
-## Installation
+## Cordova Installation
 
 We assume that you have [an existing Cordova project](https://cordova.apache.org/#getstarted).
 
-### Installation in a Cordova app
+1. Open the Terminal app and change the location of the current working directory inside the newly created project:
 
-```shell
+```bash
+cd path/to/YourProject
+```
+
+2. Remove all the platforms from your project to properly propagate the changes in the `config.xml` file below throughout the project:
+
+```bash
+cordova platform remove android
+cordova platform remove ios
+```
+
+3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 12 or later:
+
+```bash
+open config.xml
+```
+
+Your `config.xml` file should look like this:
+
+```diff
+...
+  <platform name="android">
++   <preference name="AndroidXEnabled" value="true" />
+    <allow-intent href="market:*" />
+  </platform>
+  <platform name="ios">
+    <allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
++   <preference name="deployment-target" value="12.0" />
+    ...
+  </platform>
+...
+```
+
+4. Add the PSPDFKit plugin:
+
+```bash
 cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 ```
 
-### Installation in an Ionic app
+5. Add back all the platforms:
+
+```bash
+cordova platform add android
+cordova platform add ios
+```
+
+## Ionic Installation
+
+We assume that you have [an existing Ionic project](https://ionicframework.com/docs/cli/start/).
+
+1. Open the Terminal app and change the location of the current working directory inside the newly created project:
+
+```bash
+cd path/to/YourProject
+```
+
+2. Remove all the platforms from your project to properly propagate the changes in the `config.xml` file below throughout the project:
+
+```bash
+ionic cordova platform remove android
+ionic cordova platform remove ios
+```
+
+3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 12 or later:
+
+```bash
+open config.xml
+```
+
+Your `config.xml` file should look like this:
+
+```diff
+...
+  <platform name="android">
+-   <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+-      <application android:networkSecurityConfig="@xml/network_security_config" />
+-   </edit-config>
++   <preference name="AndroidXEnabled" value="true" />
+    ...
+  </platform>
+  <platform name="ios">
+    <allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
++   <allow-navigation href="*" />
++   <preference name="deployment-target" value="12.0" />
+    ...
+  </platform>
+...
+```
+
+4. Add back all the platforms:
+
+```bash
+ionic cordova platform add android
+ionic cordova platform add ios
+```
+
+5. Add the PSPDFKit plugin:
+
+```bash
+ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
+```
+
+6. Declare PSPDFKit in the src/declarations.d.ts file:
 
 ```shell
-ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
+echo "declare var PSPDFKit: any;" >> src/declarations.d.ts
 ```
 
 ## Usage
@@ -153,16 +255,27 @@ cd pdfapp
 
 > Important: Your app's package name (in the above example `com.example.pdfapp`) has to match your PSPDFKit license name or PSPDFKit will throw an exception. If you don't have a license yet, you can request an evaluation license of PSPDFKit at https://pspdfkit.com/try.
 
-2. PSPDFKit requires modern Jetpack libraries AndroidX. To enable AndroidX modify the `config.xml` adding the following line in the `android` section:
+3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 12 or later:
+
+```bash
+open config.xml
+```
+
+Your `config.xml` file should look like this:
 
 ```diff
 ...
-<platform name="android">
+  <platform name="android">
 +   <preference name="AndroidXEnabled" value="true" />
     <allow-intent href="market:*" />
-</platform>
+  </platform>
+  <platform name="ios">
+    <allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
++   <preference name="deployment-target" value="12.0" />
+    ...
+  </platform>
 ...
-
 ```
 
 2. Install the PSPDFKit plugin:
@@ -195,7 +308,7 @@ cp ~/Downloads/Document.pdf platforms/android/app/src/main/assets/Document.pdf
 6. Now open your `index.js` file located in `www/js/` and paste the below code into the `onDeviceReady()` function. For this to work you need to create a folder called `documents` in `www` and paste a PDF in this folder.
 
 ```javascript
-PSPDFKit.present("Document.pdf", {
+PSPDFKit.present("file:///android_asset/Document.pdf", {
   title: "My PDF Document",
   page: 0,
   scrollDirection: PSPDFKit.PageScrollDirection.VERTICAL,
@@ -268,7 +381,7 @@ Let's create a minimal Ionic app that integrates PSPDFKit and uses the `pspdfkit
 1. Create a new Ionic project from the command line using the [Ionic Command-Line Interface (CLI)](https://ionicframework.com/docs/cli/start/) .
 
 ```shell
-ionic start PSPDFKit-Demo blank --type=angular
+ionic start PSPDFKit-Demo blank tabs --cordova --type=angular
 cd PSPDFKit-Demo
 ```
 
@@ -278,15 +391,28 @@ cd PSPDFKit-Demo
 ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 ```
 
-3. Open `config.xml` in a text editor and enable AndroidX:
+3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 12 or later:
+
+```bash
+open config.xml
+```
+
+Your `config.xml` file should look like this:
 
 ```diff
 ...
   <platform name="android">
--    <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
--       <application android:networkSecurityConfig="@xml/network_security_config" />
--    </edit-config>
+-   <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+-      <application android:networkSecurityConfig="@xml/network_security_config" />
+-   </edit-config>
 +   <preference name="AndroidXEnabled" value="true" />
+    ...
+  </platform>
+  <platform name="ios">
+    <allow-intent href="itms:*" />
+    <allow-intent href="itms-apps:*" />
++   <allow-navigation href="*" />
++   <preference name="deployment-target" value="12.0" />
     ...
   </platform>
 ...
@@ -295,7 +421,7 @@ ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 4. Declare PSPDFKit in the src/declarations.d.ts file:
 
 ```shell
-echo "declare var PSPDFKit: any;" > src/declarations.d.ts
+echo "declare var PSPDFKit: any;" >> src/declarations.d.ts
 ```
 
 5. Open the `src/app/app.component.ts` file:
@@ -319,7 +445,10 @@ export class AppComponent {
   constructor(private platform: Platform) {
     this.platform.ready().then(() => {
       PSPDFKit.setLicenseKey("LICENSE_KEY_GOES_HERE");
-      PSPDFKit.present("Document.pdf");
+      const DOCUMENT = this.platform.is("ios")
+        ? "Document.pdf"
+        : "file:///android_asset/Document.pdf";
+      PSPDFKit.present(DOCUMENT);
     });
   }
 }
@@ -387,7 +516,7 @@ pspdfkit.license=LICENSE_STRING
 5. Copy the PDF document from the `resources` directory into your project’s assets directory:
 
 ```shell
-cp resources/Document.pdf platforms/android/app/src/main/assets/
+cp resources/Document.pdf platforms/android/app/src/main/assets/Document.pdf
 ```
 
 6. [Start your emulator](https://developer.android.com/studio/run/emulator#runningemulator).

@@ -24,8 +24,10 @@ ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 
 Please follow the step-by-step installation instructions below for:
 
-- [Android](/docs/android#installation)
-- [iOS](/docs/ios#installation)
+- [Cordova Installation Android](/docs/android#cordova-installation).
+- [Cordova Installation iOS](/docs/ios#cordova-installation).
+- [Ionic Installation Android](/docs/android#ionic-installation).
+- [Ionic Installation iOS](/docs/ios#ionic-installation).
 
 ## Requirements
 
@@ -46,9 +48,9 @@ Please follow the getting started guides below:
 ## Example Projects
 
 - [Running the PSPDFKit-Demo Cordova Example on Android](/docs/android#running-the-pspdfkit-demo-cordova-example)
-- [Running the PSPDFKit-Demo Cordova Example on iOS](/docs/android#running-the-pspdfkit-demo-cordova-example)
+- [Running the PSPDFKit-Demo Cordova Example on iOS](/docs/ios#running-the-pspdfkit-demo-cordova-example)
 - [Running the PSPDFKit-Demo Ionic Example on Android](/docs/android#running-the-pspdfkit-demo-ionic-example)
-- [Running the PSPDFKit-Demo Ionic Example on iOS](/docs/android#running-the-pspdfkit-demo-ionic-example)
+- [Running the PSPDFKit-Demo Ionic Example on iOS](/docs/ios#running-the-pspdfkit-demo-ionic-example)
 
 ## Documentation
 
