@@ -412,13 +412,86 @@ You can find the API documentation in [PSPDFKit.js](../../www/PSPDFKit.js).
 
 ### Problem:
 
-```sh
+```bash
 Error: Cannot find plugin.xml for plugin "PSPDFKit-Cordova". Please try adding it again.
 ```
 
 ### Solution:
 
 Run `cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git` instead of `ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git`.
+
+### Problem:
+
+```bash
+Installing "pspdfkit-cordova" for ios
+Running command: pod install --verbose
+/Users/yourUsername/.rbenv/versions/2.7.0/lib/ruby/gems/2.7.0/gems/cocoapods-1.10.1/lib/cocoapods/external_sources/podspec_source.rb:19: warning: calling URI.open via Kernel#open is deprecated, call URI.open directly or use URI#open
+
+Failed to install 'pspdfkit-cordova': Error: pod: Command failed with exit code 1 Error output:
+/Users/yourUsername/.rbenv/versions/2.7.0/lib/ruby/gems/2.7.0/gems/cocoapods-1.10.1/lib/cocoapods/external_sources/podspec_source.rb:19: warning: calling URI.open via Kernel#open is deprecated, call URI.open directly or use URI#open
+    at ChildProcess.whenDone (/Users/yourUsername/Downloads/pspdfkit-cordova/examples/ionic/PSPDFKit-Demo/node_modules/cordova-common/src/superspawn.js:136:25)
+    at ChildProcess.emit (events.js:315:20)
+    at maybeClose (internal/child_process.js:1048:16)
+    at Socket.<anonymous> (internal/child_process.js:439:11)
+    at Socket.emit (events.js:315:20)
+    at Pipe.<anonymous> (net.js:673:12)
+pod: Command failed with exit code 1 Error output:
+/Users/yourUsername/.rbenv/versions/2.7.0/lib/ruby/gems/2.7.0/gems/cocoapods-1.10.1/lib/cocoapods/external_sources/podspec_source.rb:19: warning: calling URI.open via Kernel#open is deprecated, call URI.open directly or use URI#open
+[ERROR] An error occurred while running subprocess cordova.
+        
+        cordova platform add ios exited with exit code 1.
+        
+        Re-running this command with the --verbose flag may provide more
+        information.
+```
+
+### Solution:
+
+1. Open your project's Podfile:
+
+```bash
+open platforms/ios/Podifile
+```
+
+2. Modify your Podfile like so:
+
+```diff
+source 'https://github.com/CocoaPods/Specs.git'
+- platform :ios, '11.0'
++ platform :ios, '12.0'
+use_frameworks!
+target 'MyApp' do
+	project 'MyApp.xcodeproj'
+	pod 'PSPDFKit', podspec: 'https://customers.pspdfkit.com/pspdfkit-ios/latest.podspec'
+end
+```
+
+3. Change your local working directory to `platforms/ios`:
+
+```bash
+cd platforms/ios/
+```
+
+4. Run `pod install`
+5. Change your local working directory back to the root of your project:
+
+```bash
+cd ../../
+```
+
+6. Launch your app:
+
+**Cordova:**
+
+```bash
+cordova emulate ios
+```
+
+**Ionic:**
+
+```bash
+ionic cordova emulate ios
+```
 
 ## Migration Guide from `Cordova-iOS`
 
