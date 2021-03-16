@@ -395,7 +395,7 @@ ionic cordova platform add ios
 4. Copy the PDF document from the `resources` directory into your project’s `platform_www` directory:
 
 ```bash
-cp resources/Document.pdf platforms/ios/platform_www/
+cp resources/Document.pdf platforms/ios/platform_www/Document.pdf
 ```
 
 5. The app is now ready to launch:
