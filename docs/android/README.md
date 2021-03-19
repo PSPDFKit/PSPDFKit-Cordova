@@ -18,6 +18,7 @@ This plugin defines a global `PSPDFKit` object, which provides an API for viewin
 
 ## Ionic Requirements
 
+- A [development environment setup](https://ionicframework.com/getting-started/) for running Ionic projects.
 - The [latest stable version of Node.js](https://nodejs.org/en/).
 - The [latest stable version of Ionic CLI](https://ionicframework.com/docs/cli).
 - The [latest stable version of `cordova-res`](https://www.npmjs.com/package/cordova-res).
@@ -292,9 +293,8 @@ cordova platform add android
 
 4. Next, you need to setup your PSPDFKit license key. If you don't have a license key yet, you can get one by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Inside your Android app's `platforms/android/local.properties` file, specify the `pspdfkit.license` property:
 
-```properties
-# This is the LICENSE_KEY you received when requesting a demo or from the customer portal.
-pspdfkit.license=LICENSE_STRING
+```shell
+echo "pspdfkit.license=LICENSE_KEY_GOES_HERE" >> platforms/android/local.properties
 ```
 
 > Note: If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. com.example.pdfapp). You can check this in your `AndroidManifest.xml` by searching for `package`. If you are using a trial license then you don't have to worry about that.
@@ -305,7 +305,7 @@ pspdfkit.license=LICENSE_STRING
 cp ~/Downloads/Document.pdf platforms/android/app/src/main/assets/Document.pdf
 ```
 
-6. Now open your `index.js` file located in `www/js/` and paste the below code into the `onDeviceReady()` function. For this to work you need to create a folder called `documents` in `www` and paste a PDF in this folder.
+6. Now open your `index.js` file located in `www/js/` and paste the below code into the `onDeviceReady()` function:
 
 ```javascript
 PSPDFKit.present("file:///android_asset/Document.pdf", {
@@ -350,14 +350,11 @@ npm install
 cordova platform add android
 ```
 
-4. Next, you need to setup your PSPDFKit license key. If you don't have a license key yet, you can get one by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Inside your Android app's `platforms/android/local.properties` file, specify the `pspdfkit.license` property:
+4. Add the trial license key to the `platforms/android/local.properties` file:
 
-```properties
-# This is the LICENSE_KEY you received when requesting a demo or from the customer portal.
-pspdfkit.license=LICENSE_STRING
+```shell
+echo "pspdfkit.license=LICENSE_KEY_GOES_HERE" >> platforms/android/local.properties
 ```
-
-> Note: If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. com.pspdfkit.demo). You can check this in your `AndroidManifest.xml` by searching for `package`. If you are using a trial license then you don't have to worry about that.
 
 5. Copy the PDF document from the `www` directory into your project’s assets directory:
 
@@ -458,9 +455,8 @@ export class AppComponent {
 
 8. Next, you need to set up your PSPDFKit license key. If you don't have a license key yet, you can get one by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Specify the `pspdfkit.license` property inside your Android app's `platforms/android/local.properties` file, create the file if it does not exist:
 
-```properties
-# This is the LICENSE_KEY you received when requesting a demo or from the customer portal.
-pspdfkit.license=LICENSE_STRING
+```shell
+echo "pspdfkit.license=LICENSE_KEY_GOES_HERE" >> platforms/android/local.properties
 ```
 
 > Note: If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. io.ionic.starter). You can check this in your `AndroidManifest.xml` by searching for `package`. If you are using a trial license then you don't have to worry about that.
@@ -504,16 +500,13 @@ npm install
 ionic cordova platform add android
 ```
 
-4. Next, you need to set up your PSPDFKit license key. If you don't have a license key yet, you can get one by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Specify the `pspdfkit.license` property inside your Android app's `platforms/android/local.properties` file, create the file if it does not exist:
+4. Add the trial license key to the `platforms/android/local.properties` file:
 
-```properties
-# This is the LICENSE_KEY you received when requesting a demo or from the customer portal.
-pspdfkit.license=LICENSE_STRING
+```shell
+echo "pspdfkit.license=LICENSE_KEY_GOES_HERE" >> platforms/android/local.properties
 ```
 
-> Note: If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. com.pspdfkit.ionic.starter). You can check this in your `AndroidManifest.xml` by searching for `package`. If you are using a trial license then you don't have to worry about that.
-
-5. Copy the PDF document from the `resources` directory into your project’s assets directory:
+5. Copy the PDF document from the `resources` directory into your project’s `assets` directory:
 
 ```shell
 cp resources/Document.pdf platforms/android/app/src/main/assets/Document.pdf

@@ -6,6 +6,7 @@ PSPDFKit comes with open source plugins for Cordova on both [iOS](https://pspdfk
 
 ### Cordova Requirements
 
+- A [development environment setup](https://cordova.apache.org/#getstarted) for running Cordova projects.
 - The [latest stable version of cordova-lib](https://github.com/apache/cordova-lib/releases).
 - The [latest stable version of cordova-ios](https://github.com/apache/cordova-ios/releases).
 - The [latest stable version of Xcode](https://developer.apple.com/xcode/).
@@ -13,6 +14,7 @@ PSPDFKit comes with open source plugins for Cordova on both [iOS](https://pspdfk
 
 ### Ionic Requirements
 
+- A [development environment setup](https://ionicframework.com/getting-started/) for running Ionic projects.
 - The [latest stable version of Node.js](https://nodejs.org/en/).
 - The [latest stable version of Ionic CLI](https://ionicframework.com/docs/cli).
 - The [latest stable version of `cordova-res`](https://www.npmjs.com/package/cordova-res).
