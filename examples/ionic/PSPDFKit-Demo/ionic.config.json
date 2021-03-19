@@ -1,0 +1,8 @@
+{
+  "name": "PSPDFKit-Demo",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}
