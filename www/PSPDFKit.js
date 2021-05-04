@@ -58,7 +58,7 @@ exports.setGlobalOptions = function (options, callback) {
  * Android: Opens the PSPDFActivity to show a document from the local device file system.
  *
  * @param path The path should be a string containing the file path (not URL) for the PDF. Relative paths are assumed to be relative to the www directory (if the path has a different base URL set, this will be ignored). To specify a path inside the application documents or library directory, use a `~`, e.g. `"~/Documents/mypdf.pdf"` or `"~/Library/Application Support/mypdf.pdf"`. Path can be null, but must not be omitted
- * @param options The `options` parameter is an optional object containing configuration properties for the PDF document and/or view controller. All currently supported values are listed below under Options.
+ * @param options The `options` parameter is an optional object containing configuration properties for the PDF document and/or view controller. All currently supported values for Android are listed below under Options. For all currently supported values for iOS please take a look at `enumValuesOfType` in https://github.com/PSPDFKit/PSPDFKit-Cordova/blob/master/src/ios/PSPDFKitPlugin.m.
  * @callback callback Success and error callback function.
  *
  * __Supported Platforms__
