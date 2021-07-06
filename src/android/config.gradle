@@ -25,5 +25,5 @@ ext.pspdfkitLicense = localProperties.getProperty('pspdfkit.license')
 ext.pspdfkitMavenModuleName = 'pspdfkit'
 ext.pspdfkitVersion = localProperties.getProperty('pspdfkit.version')
 if (pspdfkitVersion == null || pspdfkitVersion == '') {
-    ext.pspdfkitVersion = '6.5.3'
+    ext.pspdfkitVersion = '6.6.2'
 }
