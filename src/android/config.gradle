@@ -21,12 +21,6 @@ if (pspdfkitMavenUrl == null || pspdfkitMavenUrl == '') {
 }
 
 ext.pspdfkitLicense = localProperties.getProperty('pspdfkit.license')
-if (pspdfkitLicense == null || pspdfkitLicense == '') {
-    throw new GradleException("PSPDFKit license was not specified. The license is required to initialize and run PSPDFKit."
-        + " Please specify as pspdfkit.license inside the local.properties file. In case you don't own a license for PSPDFKit"
-        + " yet, you can request an evaluation copy of PSPDFKit at https://pspdfkit.com/try/. If you already own a license of"
-        + " PSPDFKit, you can access it at https://customers.pspdfkit.com/.")
-}
 
 ext.pspdfkitMavenModuleName = 'pspdfkit'
 ext.pspdfkitVersion = localProperties.getProperty('pspdfkit.version')
