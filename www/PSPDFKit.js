@@ -24,13 +24,10 @@ var platform = window.cordova.platformId;
  * __Supported Platforms__
  *
  * -iOS
+ * -Android
  */
 exports.setLicenseKey = function(key, callback) {
-  if (platform === "ios") {
     executeAction(callback, "setLicenseKey", [key]);
-  } else {
-    console.log("Not implemented on " + platform + ".");
-  }
 };
 
 /**

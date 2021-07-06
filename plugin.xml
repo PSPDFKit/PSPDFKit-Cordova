@@ -35,6 +35,7 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
     <source-file src="src/android/java/com/pspdfkit/cordova/action/ActionManager.java" target-dir="src/com/pspdfkit/cordova/action" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/BasicAction.java" target-dir="src/com/pspdfkit/cordova/action" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/DismissAction.java" target-dir="src/com/pspdfkit/cordova/action" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/LicenseKeyAction.java" target-dir="src/com/pspdfkit/cordova/action" />
     <source-file src="src/android/java/com/pspdfkit/cordova/event/EventDispatcher.java" target-dir="src/com/pspdfkit/cordova/event" />
     <source-file src="src/android/java/com/pspdfkit/cordova/provider/DocumentJsonDataProvider.java" target-dir="src/com/pspdfkit/cordova/provider" />
     <source-file src="src/android/java/com/pspdfkit/cordova/CordovaPdfActivity.java" target-dir="src/com/pspdfkit/cordova" />
@@ -48,9 +49,6 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
       <feature name="PSPDFKitPlugin">
         <param name="android-package" value="com.pspdfkit.cordova.PSPDFKitPlugin" />
       </feature>
-    </config-file>
-    <config-file target="app/src/main/AndroidManifest.xml" parent="/*/application">
-      <meta-data android:name="pspdfkit_license_key" android:value="@string/PSPDFKIT_LICENSE_KEY" />
     </config-file>
     <config-file target="app/src/main/AndroidManifest.xml" parent="/*/application" after="activity">
       <activity android:name="com.pspdfkit.cordova.CordovaPdfActivity" android:theme="@style/PSPDFKit.Theme" android:windowSoftInputMode="adjustNothing" />

@@ -16,6 +16,7 @@ import android.text.TextUtils;
 import com.pspdfkit.PSPDFKit;
 import com.pspdfkit.cordova.action.ActionManager;
 import com.pspdfkit.cordova.action.DismissAction;
+import com.pspdfkit.cordova.action.LicenseKeyAction;
 import com.pspdfkit.cordova.action.annotation.AddAnnotationAction;
 import com.pspdfkit.cordova.action.annotation.ApplyInstantJsonAction;
 import com.pspdfkit.cordova.action.annotation.GetAllUnsavedAnnotationsAction;
@@ -51,10 +52,6 @@ import androidx.annotation.NonNull;
  * JavaScript using the {@code PSPDFKit} object.
  */
 public class PSPDFKitPlugin extends CordovaPlugin {
-  /**
-   * Name of a {@code meta-data} element in the app manifest file holding the PSPDFKit license key.
-   */
-  private static final String METADATA_LICENSE_KEY = "pspdfkit_license_key";
 
   @NonNull
   private final List<OnActivityResultListener> onActivityResultListeners = new ArrayList<>();
@@ -65,8 +62,6 @@ public class PSPDFKitPlugin extends CordovaPlugin {
   @Override
   public void initialize(CordovaInterface cordova, CordovaWebView webView) {
     super.initialize(cordova, webView);
-
-    initializePSPDFKit(cordova);
 
     final EventDispatcher.EventDispatchingActions connectionActions =
         eventDispatcher.getConnectionActions(this);
@@ -91,33 +86,14 @@ public class PSPDFKitPlugin extends CordovaPlugin {
             new ClearCacheAction("clearCache", this),
             new ClearCacheForPageAction("clearCacheForPage", this),
             new RemoveCacheForPresentedDocumentAction("removeCacheForPresentedDocument", this),
-            new GetHasDirtyAnnotationsAction("getHasDirtyAnnotations", this)
+            new GetHasDirtyAnnotationsAction("getHasDirtyAnnotations", this),
+            new LicenseKeyAction("setLicenseKey", this)
         );
   }
 
-  private void initializePSPDFKit(CordovaInterface cordova) {
-    final String licenseKey;
+  public void setLicenseKey(String licenseKey) {
     try {
-      licenseKey =
-          cordova
-              .getActivity()
-              .getPackageManager()
-              .getApplicationInfo(
-                  cordova.getActivity().getPackageName(), PackageManager.GET_META_DATA)
-              .metaData
-              .getString(METADATA_LICENSE_KEY, null);
-    } catch (PackageManager.NameNotFoundException e) {
-      throw new PSPDFKitPluginException(
-          "Error while reading PSPDFKit license from AndroidManifest.xml", e);
-    }
-
-    if (TextUtils.isEmpty(licenseKey)) {
-      throw new PSPDFKitPluginException(
-          "PSPDFKit license key is missing! Please add a <meta-data android:name=\"pspdfkit_license_key\" android:value=\"...\"> to your AndroidManifest.xml.");
-    }
-
-    try {
-      PSPDFKit.initialize(cordova.getActivity(), licenseKey);
+      PSPDFKit.initialize(this.cordova.getActivity(), licenseKey);
     } catch (Exception ex) {
       throw new PSPDFKitPluginException("Error while initializing PSPDFKit", ex);
     }

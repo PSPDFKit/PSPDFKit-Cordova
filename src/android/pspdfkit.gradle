@@ -16,13 +16,6 @@ repositories {
     }
 }
 
-android {
-    defaultConfig {
-        // The license string has to be specified in your app's local.properties file, for example:
-        // pspdfkit.license = MY_LICENSE_STRING.
-        resValue "string", "PSPDFKIT_LICENSE_KEY", "\"$pspdfkitLicense\""
-    }
-}
 dependencies {
     implementation "com.pspdfkit:$pspdfkitMavenModuleName:$pspdfkitVersion"
 }
