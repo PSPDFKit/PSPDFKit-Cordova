@@ -525,7 +525,7 @@ You can find the API documentation in [PSPDFKit.js](../../www/PSPDFKit.js).
 
 ## Troubleshooting
 
-### PSPDFKit runs in trial mode
+### Setting the license key / PSPDFKit runs in trial mode
 
 If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. io.ionic.starter). You can check this in your `AndroidManifest.xml` by searching for `package`.
 
@@ -533,6 +533,7 @@ Make sure that you are setting the license key via `PSPDFKit.setLicenseKey()`.
 If you used the PSPDFKit Cordova plugin previously, you might still have `pspdfkit.license=YOUR LICENSE` set in `local.properties`. 
 This is no longer supported.
 Please make sure to migrate this to use `PSPDFKit.setLicenseKey("YOUR LICENSE")`.
+If you are a trial customer, you won't need to call `PSPDFKit.setLicenseKey()` at all.
 
 ### Error Reporting
 
