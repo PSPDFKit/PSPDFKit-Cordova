@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="pspdfkit-cordova" version="1.1.9">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="pspdfkit-cordova" version="1.1.10">
   <engines>
     <engine name="cordova" version="&gt;=6.3.1" />
   </engines>
@@ -35,6 +35,7 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
     <source-file src="src/android/java/com/pspdfkit/cordova/action/ActionManager.java" target-dir="src/com/pspdfkit/cordova/action" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/BasicAction.java" target-dir="src/com/pspdfkit/cordova/action" />
     <source-file src="src/android/java/com/pspdfkit/cordova/action/DismissAction.java" target-dir="src/com/pspdfkit/cordova/action" />
+    <source-file src="src/android/java/com/pspdfkit/cordova/action/LicenseKeyAction.java" target-dir="src/com/pspdfkit/cordova/action" />
     <source-file src="src/android/java/com/pspdfkit/cordova/event/EventDispatcher.java" target-dir="src/com/pspdfkit/cordova/event" />
     <source-file src="src/android/java/com/pspdfkit/cordova/provider/DocumentJsonDataProvider.java" target-dir="src/com/pspdfkit/cordova/provider" />
     <source-file src="src/android/java/com/pspdfkit/cordova/CordovaPdfActivity.java" target-dir="src/com/pspdfkit/cordova" />
@@ -48,9 +49,6 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
       <feature name="PSPDFKitPlugin">
         <param name="android-package" value="com.pspdfkit.cordova.PSPDFKitPlugin" />
       </feature>
-    </config-file>
-    <config-file target="app/src/main/AndroidManifest.xml" parent="/*/application">
-      <meta-data android:name="pspdfkit_license_key" android:value="@string/PSPDFKIT_LICENSE_KEY" />
     </config-file>
     <config-file target="app/src/main/AndroidManifest.xml" parent="/*/application" after="activity">
       <activity android:name="com.pspdfkit.cordova.CordovaPdfActivity" android:theme="@style/PSPDFKit.Theme" android:windowSoftInputMode="adjustNothing" />
@@ -105,24 +103,10 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
   <!-- don't indent the info block, because it will also indent the console output -->
   <info><![CDATA[Thanks for using the PSPDFKit for Cordova/Ionic Plugin. 
 
-### iOS
+**Important** If you’re an existing customer, you can find your license key in your customer portal(https://customers.pspdfkit.com/).
 
-**Important** If you’re an existing customer, you can find your license key in your customer portal(https://customers.pspdfkit.com/). Otherwise, if you don’t already have PSPDFKit, sign up for our 60-day trial(https://pspdfkit.com/try/) and you will receive an email with the instructions to get started.
-
-Since this plugin is iOS 12+ only, you will have to set the deployment target
+iOS: Since this plugin is iOS 12+ only, you will have to set the deployment target
 of your Xcode project in platforms/ios to iOS 12.
-
-### Android
-
-There's only on more step to get you started:
-
-    1) You need to add following lines to the `local.properties` (usually inside platforms/android/): 
-
-    pspdfkit.license = YOUR_PSPDFKIT_LICENSE
-
-    Make sure to replace YOUR_PSPDFKIT_LICENSE with the actual PSPDFKit license string that you
-    received while requesting a demo at https://pspdfkit.com/try/ or via the 
-    PSPDFKit customer portal (in case you already own a license).
 
 For the complete documentation and troubleshooting, check out our documentation at https://github.com/PSPDFKit/PSPDFKit-Cordova. 
 In case there are issues, feel free to reach out to our support team at https://pspdfkit.com/support/request/.

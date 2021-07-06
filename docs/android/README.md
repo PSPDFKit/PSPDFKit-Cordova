@@ -152,6 +152,9 @@ The plugin is accessed via the PSPDFKit singleton. Here is an example which show
 
 ```javascript
 function showMyDocument() {
+  // Set your license key here.
+  PSPDFKit.setLicenseKey("YOUR KEY");
+
   PSPDFKit.presentFromAssets("www/documents/myFile.pdf", {
     title: "My PDF Document",
     page: 4,
@@ -254,7 +257,7 @@ cordova create pdfapp com.example.pdfapp PDF-App
 cd pdfapp
 ```
 
-> Important: Your app's package name (in the above example `com.example.pdfapp`) has to match your PSPDFKit license name or PSPDFKit will throw an exception. If you don't have a license yet, you can request an evaluation license of PSPDFKit at https://pspdfkit.com/try.
+> Important: Your app's package name (in the above example `com.example.pdfapp`) has to match your PSPDFKit license name or PSPDFKit will throw an exception.
 
 3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 12 or later:
 
@@ -291,21 +294,13 @@ cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 cordova platform add android
 ```
 
-4. Next, you need to setup your PSPDFKit license key. If you don't have a license key yet, you can get one by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Inside your Android app's `platforms/android/local.properties` file, specify the `pspdfkit.license` property:
-
-```shell
-echo "pspdfkit.license=LICENSE_KEY_GOES_HERE" >> platforms/android/local.properties
-```
-
-> Note: If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. com.example.pdfapp). You can check this in your `AndroidManifest.xml` by searching for `package`. If you are using a trial license then you don't have to worry about that.
-
-5. Add the PDF document you want to display in your project’s `assets` directory. You can use <a href="https://pspdfkit.com/downloads/pspdfkit-android-quickstart-guide.pdf" download="Document.pdf">this QuickStart Guide PDF</a> as an example.
+4. Add the PDF document you want to display in your project’s `assets` directory. You can use <a href="https://pspdfkit.com/downloads/pspdfkit-android-quickstart-guide.pdf" download="Document.pdf">this QuickStart Guide PDF</a> as an example.
 
 ```shell
 cp ~/Downloads/Document.pdf platforms/android/app/src/main/assets/Document.pdf
 ```
 
-6. Now open your `index.js` file located in `www/js/` and paste the below code into the `onDeviceReady()` function:
+5. Now open your `index.js` file located in `www/js/` and paste the below code into the `onDeviceReady()` function:
 
 ```javascript
 PSPDFKit.present("file:///android_asset/Document.pdf", {
@@ -317,8 +312,8 @@ PSPDFKit.present("file:///android_asset/Document.pdf", {
 });
 ```
 
-7. [Start your emulator](https://developer.android.com/studio/run/emulator#runningemulator).
-8. The app is now ready to launch:
+6. [Start your emulator](https://developer.android.com/studio/run/emulator#runningemulator).
+7. The app is now ready to launch:
 
 ```shell
 cordova emulate android
@@ -350,20 +345,14 @@ npm install
 cordova platform add android
 ```
 
-4. Add the trial license key to the `platforms/android/local.properties` file:
-
-```shell
-echo "pspdfkit.license=LICENSE_KEY_GOES_HERE" >> platforms/android/local.properties
-```
-
-5. Copy the PDF document from the `www` directory into your project’s assets directory:
+4. Copy the PDF document from the `www` directory into your project’s assets directory:
 
 ```shell
 cp www/Document.pdf platforms/android/app/src/main/assets/Document.pdf
 ```
 
-6. [Start your emulator](https://developer.android.com/studio/run/emulator#runningemulator).
-7. The app is now ready to launch:
+5. [Start your emulator](https://developer.android.com/studio/run/emulator#runningemulator).
+6. The app is now ready to launch:
 
 ```shell
 cordova emulate android
@@ -453,22 +442,14 @@ export class AppComponent {
 
 7. Run `ionic cordova platform add android` to add the Android platform.
 
-8. Next, you need to set up your PSPDFKit license key. If you don't have a license key yet, you can get one by requesting an evaluation version of PSPDFKit at https://pspdfkit.com/try. Specify the `pspdfkit.license` property inside your Android app's `platforms/android/local.properties` file, create the file if it does not exist:
-
-```shell
-echo "pspdfkit.license=LICENSE_KEY_GOES_HERE" >> platforms/android/local.properties
-```
-
-> Note: If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. io.ionic.starter). You can check this in your `AndroidManifest.xml` by searching for `package`. If you are using a trial license then you don't have to worry about that.
-
-9. Add the PDF document you want to display in your project’s `assets` directory. You can use <a href="https://pspdfkit.com/downloads/pspdfkit-android-quickstart-guide.pdf" download="Document.pdf">this QuickStart Guide PDF</a> as an example.
+8. Add the PDF document you want to display in your project’s `assets` directory. You can use <a href="https://pspdfkit.com/downloads/pspdfkit-android-quickstart-guide.pdf" download="Document.pdf">this QuickStart Guide PDF</a> as an example.
 
 ```shell
 cp ~/Downloads/Document.pdf platforms/android/app/src/main/assets/Document.pdf
 ```
 
-7. [Start your emulator](https://developer.android.com/studio/run/emulator#runningemulator).
-8. The app is now ready to launch:
+9. [Start your emulator](https://developer.android.com/studio/run/emulator#runningemulator).
+10. The app is now ready to launch:
 
 ```shell
 ionic cordova emulate android
@@ -500,20 +481,14 @@ npm install
 ionic cordova platform add android
 ```
 
-4. Add the trial license key to the `platforms/android/local.properties` file:
-
-```shell
-echo "pspdfkit.license=LICENSE_KEY_GOES_HERE" >> platforms/android/local.properties
-```
-
-5. Copy the PDF document from the `resources` directory into your project’s `assets` directory:
+4. Copy the PDF document from the `resources` directory into your project’s `assets` directory:
 
 ```shell
 cp resources/Document.pdf platforms/android/app/src/main/assets/Document.pdf
 ```
 
-6. [Start your emulator](https://developer.android.com/studio/run/emulator#runningemulator).
-7. The app is now ready to launch:
+5. [Start your emulator](https://developer.android.com/studio/run/emulator#runningemulator).
+6. The app is now ready to launch:
 
 ```shell
 ionic cordova emulate android
@@ -549,6 +524,16 @@ Below is a screenshot of how the project structure should look like if it's a wo
 You can find the API documentation in [PSPDFKit.js](../../www/PSPDFKit.js).
 
 ## Troubleshooting
+
+### Setting the license key / PSPDFKit runs in trial mode
+
+If you're already a customer then please make sure that the package ID matches with your bundle ID that's assigned to your license (e.g. io.ionic.starter). You can check this in your `AndroidManifest.xml` by searching for `package`.
+
+Make sure that you are setting the license key via `PSPDFKit.setLicenseKey()`.
+If you used the PSPDFKit Cordova plugin previously, you might still have `pspdfkit.license=YOUR LICENSE` set in `local.properties`. 
+This is no longer supported.
+Please make sure to migrate this to use `PSPDFKit.setLicenseKey("YOUR LICENSE")`.
+If you are a trial customer, you won't need to call `PSPDFKit.setLicenseKey()` at all.
 
 ### Error Reporting
 
@@ -704,7 +689,7 @@ To solve this just uninstall the existing app from your device. To be 100% sure 
 
 ### Build succeeds but it doesn't show the document on the device
 
-Please make sure that your license key is properly set in the `AndroidManifest.xml`! You can also open a new terminal window and type `adb logcat` to see exactly what's happening on your device. When searching for "PSPDFKit" you should be able to search for the error rather easily.
+Please make sure that your license key is properly set via `PSPDFKit.setLicenseKey()`. You can also open a new terminal window and type `adb logcat` to see exactly what's happening on your device. When searching for "PSPDFKit" you should be able to search for the error rather easily.
 
 ### Can't find version for a specific support library
 
