@@ -1,4 +1,4 @@
-# Cordova Plugin for PSPDFKit 10 for iOS
+# Cordova Plugin for PSPDFKit for iOS
 
 The [PSPDFKit SDK](https://pspdfkit.com/pdf-sdk/) is a framework that allows you to view, annotate, sign, and fill PDF forms on iOS, Android, Windows, macOS, and Web.
 
@@ -38,7 +38,7 @@ cordova platform remove android
 cordova platform remove ios
 ```
 
-3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 12 or later:
+3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 13 or later:
 
 ```bash
 open config.xml
@@ -55,7 +55,7 @@ Your `config.xml` file should look like this:
   <platform name="ios">
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
-+   <preference name="deployment-target" value="12.0" />
++   <preference name="deployment-target" value="13.0" />
     ...
   </platform>
 ...
@@ -91,7 +91,7 @@ ionic cordova platform remove android
 ionic cordova platform remove ios
 ```
 
-3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 12 or later:
+3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 13 or later:
 
 ```bash
 open config.xml
@@ -112,7 +112,7 @@ Your `config.xml` file should look like this:
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
 +   <allow-navigation href="*" />
-+   <preference name="deployment-target" value="12.0" />
++   <preference name="deployment-target" value="13.0" />
     ...
   </platform>
 ...
@@ -184,7 +184,7 @@ cordova create PSPDFKit-Demo com.pspdfkit.demo PSPDFKit-Demo
 cd PSPDFKit-Demo
 ```
 
-2. Open `config.xml` and change the deployment target to iOS 12 or later:
+2. Open `config.xml` and change the deployment target to iOS 13 or later:
 
 ```diff
 ...
@@ -195,7 +195,7 @@ cd PSPDFKit-Demo
   <platform name="ios">
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
-+   <preference name="deployment-target" value="12.0" />
++   <preference name="deployment-target" value="13.0" />
     ...
   </platform>
 ...
@@ -292,7 +292,7 @@ cd PSPDFKit-Demo
 ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 ```
 
-3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 12 or later:
+3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 13 or later:
 
 ```bash
 open config.xml
@@ -313,7 +313,7 @@ Your `config.xml` file should look like this:
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
 +   <allow-navigation href="*" />
-+   <preference name="deployment-target" value="12.0" />
++   <preference name="deployment-target" value="13.0" />
     ...
   </platform>
 ...
@@ -460,7 +460,7 @@ open platforms/ios/Podifile
 ```diff
 source 'https://github.com/CocoaPods/Specs.git'
 - platform :ios, '11.0'
-+ platform :ios, '12.0'
++ platform :ios, '13.0'
 use_frameworks!
 target 'MyApp' do
 	project 'MyApp.xcodeproj'
