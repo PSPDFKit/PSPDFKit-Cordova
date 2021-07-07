@@ -47,7 +47,7 @@ cordova platform remove android
 cordova platform remove ios
 ```
 
-3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 12 or later:
+3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 13 or later:
 
 ```bash
 open config.xml
@@ -64,7 +64,7 @@ Your `config.xml` file should look like this:
   <platform name="ios">
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
-+   <preference name="deployment-target" value="12.0" />
++   <preference name="deployment-target" value="13.0" />
     ...
   </platform>
 ...
@@ -100,7 +100,7 @@ ionic cordova platform remove android
 ionic cordova platform remove ios
 ```
 
-3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 12 or later:
+3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 13 or later:
 
 ```bash
 open config.xml
@@ -121,7 +121,7 @@ Your `config.xml` file should look like this:
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
 +   <allow-navigation href="*" />
-+   <preference name="deployment-target" value="12.0" />
++   <preference name="deployment-target" value="13.0" />
     ...
   </platform>
 ...
@@ -259,7 +259,7 @@ cd pdfapp
 
 > Important: Your app's package name (in the above example `com.example.pdfapp`) has to match your PSPDFKit license name or PSPDFKit will throw an exception.
 
-3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 12 or later:
+3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 13 or later:
 
 ```bash
 open config.xml
@@ -276,7 +276,7 @@ Your `config.xml` file should look like this:
   <platform name="ios">
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
-+   <preference name="deployment-target" value="12.0" />
++   <preference name="deployment-target" value="13.0" />
     ...
   </platform>
 ...
@@ -377,7 +377,7 @@ cd PSPDFKit-Demo
 ionic cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 ```
 
-3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 12 or later:
+3. Open `config.xml` in a text editor to enable AndroidX and to change the deployment target to iOS 13 or later:
 
 ```bash
 open config.xml
@@ -398,7 +398,7 @@ Your `config.xml` file should look like this:
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
 +   <allow-navigation href="*" />
-+   <preference name="deployment-target" value="12.0" />
++   <preference name="deployment-target" value="13.0" />
     ...
   </platform>
 ...
