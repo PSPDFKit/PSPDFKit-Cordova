@@ -454,7 +454,10 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 
     if (path) {
         //configure document
-        NSURL *url = [self fileURLWithPath:path];
+        NSURL *url = [NSURL URLWithString:path];
+        if ([[url scheme] isEqualToString:@"file"]) {
+            url = [self fileURLWithPath:path];
+        }
         if ([self isImagePath:path]) {
             _pdfDocument = [[PSPDFImageDocument alloc] initWithImageURL:url];
         }
