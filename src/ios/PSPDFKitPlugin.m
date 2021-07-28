@@ -444,7 +444,7 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
 
 - (BOOL)isImagePath:(NSString *)path {
     NSString *pathExtension = path.pathExtension.lowercaseString;
-    return [pathExtension isEqualToString:@"png"] || [pathExtension isEqualToString:@"jpeg"] || [pathExtension isEqualToString:@"jpg"];
+    return [pathExtension isEqualToString:@"png"] || [pathExtension isEqualToString:@"jpeg"] || [pathExtension isEqualToString:@"jpg"] || [pathExtension isEqualToString:@"tiff"] || [pathExtension isEqualToString:@"tiff"];
 }
 
 - (void)configurePDFViewControllerWithPath:(NSString *)path options:(NSDictionary *)options {
