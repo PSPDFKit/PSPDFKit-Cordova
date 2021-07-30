@@ -1131,16 +1131,6 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void)) {
     return @(_pdfController.configuration.shouldAskForAnnotationUsername);
 }
 
-- (void)setPageGrabberEnabledForPSPDFViewControllerWithJSON:(NSNumber *)pageGrabberEnabled {
-    [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
-        builder.pageGrabberEnabled = pageGrabberEnabled.boolValue;
-    }];
-}
-
-- (NSNumber *)pageGrabberEnabledAsJSON {
-    return @(_pdfController.configuration.pageGrabberEnabled);
-}
-
 - (void)setPageLabelEnabledForPSPDFViewControllerWithJSON:(NSNumber *)pageLabelEnabled {
     [_pdfController updateConfigurationWithBuilder:^(PSPDFConfigurationBuilder *builder) {
         builder.pageLabelEnabled = pageLabelEnabled.boolValue;
