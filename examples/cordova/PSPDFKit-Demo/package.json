@@ -13,7 +13,7 @@
   "author": "Apache Cordova Team",
   "license": "Apache-2.0",
   "dependencies": {
-    "pspdfkit-cordova": "git+https://github.com/PSPDFKit/PSPDFKit-Cordova.git"
+    "pspdfkit-cordova": "git+https://github.com/PSPDFKit/PSPDFKit-Cordova.git#rad/upgrade-to-android-8"
   },
   "cordova": {
     "plugins": {
@@ -24,6 +24,6 @@
   },
   "devDependencies": {
     "cordova-plugin-enable-multidex": "git+https://github.com/PSPDFKit-labs/cordova-plugin-enable-multidex.git",
-    "cordova-plugin-whitelist": "^1.3.4"
+    "cordova-plugin-whitelist": "^1.3.5"
   }
 }
