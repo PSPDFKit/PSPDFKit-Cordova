@@ -14,19 +14,17 @@
   "license": "Apache-2.0",
   "dependencies": {
     "cordova-android": "^10.1.1",
-    "cordova-ios": "^6.2.0",
-    "cordova-plugin-androidx-adapter": "github:dpa99c/cordova-plugin-androidx-adapter",
-    "cordova-plugin-enable-multidex": "github:PSPDFKit-labs/cordova-plugin-enable-multidex"
+    "cordova-ios": "^6.2.0"
   },
   "cordova": {
     "plugins": {
       "pspdfkit-cordova": {}
     },
-    "platforms": [
-      "ios"
-    ]
+    "platforms": []
   },
   "devDependencies": {
+    "cordova-plugin-androidx-adapter": "github:dpa99c/cordova-plugin-androidx-adapter",
+    "cordova-plugin-enable-multidex": "github:PSPDFKit-labs/cordova-plugin-enable-multidex",
     "pspdfkit-cordova": "github:PSPDFKit/PSPDFKit-Cordova#rad/upgrade-to-android-8"
   }
 }
