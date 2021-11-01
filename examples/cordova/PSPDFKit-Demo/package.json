@@ -15,7 +15,6 @@
   "dependencies": {
     "cordova-android": "^10.1.1",
     "cordova-ios": "^6.2.0",
-    "pspdfkit-cordova": "github:PSPDFKit/PSPDFKit-Cordova#rad/upgrade-to-android-8",
     "cordova-plugin-androidx-adapter": "github:dpa99c/cordova-plugin-androidx-adapter",
     "cordova-plugin-enable-multidex": "github:PSPDFKit-labs/cordova-plugin-enable-multidex"
   },
@@ -23,7 +22,11 @@
     "plugins": {
       "pspdfkit-cordova": {}
     },
-    "platforms": []
+    "platforms": [
+      "ios"
+    ]
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "pspdfkit-cordova": "github:PSPDFKit/PSPDFKit-Cordova#rad/upgrade-to-android-8"
+  }
 }
