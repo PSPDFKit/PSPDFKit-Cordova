@@ -1,4 +1,4 @@
-# Cordova Plugin - PSPDFKit for Android 6
+# Cordova Plugin for PSPDFKit for Android
 
 The [PSPDFKit SDK](https://pspdfkit.com/pdf-sdk/) is a framework that allows you to view, annotate, sign, and fill PDF forms on iOS, Android, Windows, macOS, and Web. [PSPDFKit Instant](https://pspdfkit.com/instant/) adds real-time collaboration features to seamlessly share, edit, and annotate PDF documents.
 
@@ -8,12 +8,11 @@ This plugin defines a global `PSPDFKit` object, which provides an API for viewin
 
 ## Cordova Requirements
 
-- The [latest stable version of cordova-lib](https://github.com/apache/cordova-lib/releases).
-- The [latest stable version of cordova-android](https://github.com/apache/cordova-android/releases).
-- The [Java 8 Development Kit](https://www.oracle.com/ca-en/java/technologies/javase/javase-jdk8-downloads.html).
+- The [latest stable version of cordova-lib](https://github.com/apache/cordova-lib/tags).
+- The [latest stable version of cordova-android](https://github.com/apache/cordova-android/tags).
+- The [Java Development Kit (JDK) 11](https://adoptopenjdk.net/)
 - The [latest stable version of Android Studio](https://developer.android.com/studio).
 - The [Android NDK](https://developer.android.com/studio/projects/install-ndk).
-- The [latest stable version of Gradle](https://gradle.org/install).
 - An [Android Virtual Device](https://developer.android.com/studio/run/managing-avds.html) or a hardware device.
 
 ## Ionic Requirements
@@ -22,10 +21,9 @@ This plugin defines a global `PSPDFKit` object, which provides an API for viewin
 - The [latest stable version of Node.js](https://nodejs.org/en/).
 - The [latest stable version of Ionic CLI](https://ionicframework.com/docs/cli).
 - The [latest stable version of `cordova-res`](https://www.npmjs.com/package/cordova-res).
-- The [Java 8 Development Kit](https://www.oracle.com/ca-en/java/technologies/javase/javase-jdk8-downloads.html).
+- The [Java Development Kit (JDK) 11](https://adoptopenjdk.net/)
 - The [latest stable version of Android Studio](https://developer.android.com/studio).
 - The [Android NDK](https://developer.android.com/studio/projects/install-ndk).
-- The [latest stable version of Gradle](https://gradle.org/install).
 - An [Android Virtual Device](https://developer.android.com/studio/run/managing-avds.html) or a hardware device.
 
 For more information regarding the Ionic installation you can check out the [official Ionic installation guide](https://ionicframework.com/docs/v1/guide/installation.html).
@@ -79,7 +77,7 @@ cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 5. Add back all the platforms:
 
 ```bash
-cordova platform add android
+cordova platform add android@latest
 cordova platform add ios
 ```
 
@@ -130,7 +128,7 @@ Your `config.xml` file should look like this:
 4. Add back all the platforms:
 
 ```bash
-ionic cordova platform add android
+ionic cordova platform add android@latest
 ionic cordova platform add ios
 ```
 
@@ -291,7 +289,7 @@ cordova plugin add https://github.com/PSPDFKit/PSPDFKit-Cordova.git
 3. Add Android platform support to your project. This plugin requires the latest `android` plugin 8+.
 
 ```shell
-cordova platform add android
+cordova platform add android@latest
 ```
 
 4. Add the PDF document you want to display in your project’s `assets` directory. You can use <a href="https://pspdfkit.com/downloads/pspdfkit-android-quickstart-guide.pdf" download="Document.pdf">this QuickStart Guide PDF</a> as an example.
@@ -440,7 +438,7 @@ export class AppComponent {
 }
 ```
 
-7. Run `ionic cordova platform add android` to add the Android platform.
+7. Run `ionic cordova platform add android@latest` to add the Android platform.
 
 8. Add the PDF document you want to display in your project’s `assets` directory. You can use <a href="https://pspdfkit.com/downloads/pspdfkit-android-quickstart-guide.pdf" download="Document.pdf">this QuickStart Guide PDF</a> as an example.
 
