@@ -440,6 +440,12 @@ export class AppComponent {
 
 7. Run `ionic cordova platform add android@latest` to add the Android platform.
 
+8. Cordova version `10.0.0` and upwards does not need `cordova-plugin-whitelist` plugin. We can simply remove it.
+
+```shell
+ionic cordova plugin rm cordova-plugin-whitelist
+```
+
 8. Add the PDF document you want to display in your project’s `assets` directory. You can use <a href="https://pspdfkit.com/downloads/pspdfkit-android-quickstart-guide.pdf" download="Document.pdf">this QuickStart Guide PDF</a> as an example.
 
 ```shell
