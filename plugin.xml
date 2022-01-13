@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="pspdfkit-cordova" version="1.4.0">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="pspdfkit-cordova" version="1.4.1">
   <engines>
     <engine name="cordova" version=">=10.1.0" />
     <engine name="cordova-android" version=">=10.1.1" />
@@ -8,7 +8,7 @@
   <name>PSPDFKit</name>
   <description>Integration of the PSPDFKit for Android and iOS.</description>
   <author>PSPDFKit</author>
-  <license>Copyright 2011-2021 PSPDFKit GmbH. All rights reserved.
+  <license>Copyright 2011-2022 PSPDFKit GmbH. All rights reserved.
 THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY INTERNATIONAL COPYRIGHT LAW
 AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT. UNAUTHORIZED REPRODUCTION OR DISTRIBUTION IS SUBJECT TO CIVIL AND CRIMINAL PENALTIES. This notice may not be removed from this file. http://pspdfkit.com/license.html</license>
   
@@ -98,7 +98,7 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
         <source url="https://github.com/CocoaPods/Specs.git" />
       </config>
       <pods use-frameworks="true">
-        <pod name="PSPDFKit" spec="~> 11.1.0"/>
+        <pod name="PSPDFKit" spec="~> 11.2.0"/>
       </pods>
     </podspec>
   </platform>

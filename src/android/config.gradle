@@ -1,5 +1,5 @@
 /*
- *   Copyright (c) 2018-2021 PSPDFKit GmbH. All rights reserved.
+ *   Copyright (c) 2018-2022 PSPDFKit GmbH. All rights reserved.
  *
  *   THIS SOURCE CODE AND ANY ACCOMPANYING DOCUMENTATION ARE PROTECTED BY INTERNATIONAL COPYRIGHT LAW
  *   AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE AGREEMENT.
@@ -23,5 +23,5 @@ if (pspdfkitMavenUrl == null || pspdfkitMavenUrl == '') {
 ext.pspdfkitMavenModuleName = 'pspdfkit'
 ext.pspdfkitVersion = localProperties.getProperty('pspdfkit.version')
 if (pspdfkitVersion == null || pspdfkitVersion == '') {
-    ext.pspdfkitVersion = '8.0.1'
+    ext.pspdfkitVersion = '8.0.2'
 }
