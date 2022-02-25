@@ -53,15 +53,12 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
       </feature>
     </config-file>
     <config-file target="app/src/main/AndroidManifest.xml" parent="/*/application" after="activity">
-      <activity android:name="com.pspdfkit.cordova.CordovaPdfActivity" android:theme="@style/PSPDFKit.Theme" android:windowSoftInputMode="adjustNothing" android:exported="false"/>
+      <activity android:name="com.pspdfkit.cordova.CordovaPdfActivity" android:theme="@style/PSPDFKit.Theme" android:windowSoftInputMode="adjustNothing"/>
     </config-file>
     <edit-config file="app/src/main/AndroidManifest.xml" target="/manifest/application" mode="merge">
       <application android:largeHeap="true" />
     </edit-config>
     
-    <!--Android Multidex-->
-    <dependency id="cordova-plugin-enable-multidex" url="https://github.com/PSPDFKit-labs/cordova-plugin-enable-multidex.git" />
-	
     <!--AndroidX-->
     <dependency id="cordova-plugin-androidx-adapter" url="https://github.com/dpa99c/cordova-plugin-androidx-adapter.git" />
   </platform>
