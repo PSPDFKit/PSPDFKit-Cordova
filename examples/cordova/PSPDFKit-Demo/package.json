@@ -20,7 +20,8 @@
       "pspdfkit-cordova": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   },
   "devDependencies": {
