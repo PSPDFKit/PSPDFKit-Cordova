@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.pspdfkit.demo" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.pspdfkit.demo" version="1.0.0"
+    xmlns="http://www.w3.org/ns/widgets"
+    xmlns:cdv="http://cordova.apache.org/ns/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    
     <name>PSPDFKit-Demo</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
@@ -18,6 +22,9 @@
     <platform name="android">
         <preference name="AndroidXEnabled" value="true" />
         <allow-intent href="market:*" />
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application/activity">
+            <activity android:exported="true"/>
+        </edit-config>
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />

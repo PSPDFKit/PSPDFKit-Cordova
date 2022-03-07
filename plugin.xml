@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="pspdfkit-cordova" version="1.4.1">
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="pspdfkit-cordova" version="1.5.0">
   <engines>
     <engine name="cordova" version=">=10.1.0" />
     <engine name="cordova-android" version=">=10.1.1" />
@@ -53,15 +53,12 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
       </feature>
     </config-file>
     <config-file target="app/src/main/AndroidManifest.xml" parent="/*/application" after="activity">
-      <activity android:name="com.pspdfkit.cordova.CordovaPdfActivity" android:theme="@style/PSPDFKit.Theme" android:windowSoftInputMode="adjustNothing" />
+      <activity android:name="com.pspdfkit.cordova.CordovaPdfActivity" android:theme="@style/PSPDFKit.Theme" android:windowSoftInputMode="adjustNothing"/>
     </config-file>
     <edit-config file="app/src/main/AndroidManifest.xml" target="/manifest/application" mode="merge">
       <application android:largeHeap="true" />
     </edit-config>
     
-    <!--Android Multidex-->
-    <dependency id="cordova-plugin-enable-multidex" url="https://github.com/PSPDFKit-labs/cordova-plugin-enable-multidex.git" />
-	
     <!--AndroidX-->
     <dependency id="cordova-plugin-androidx-adapter" url="https://github.com/dpa99c/cordova-plugin-androidx-adapter.git" />
   </platform>
@@ -98,7 +95,7 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
         <source url="https://github.com/CocoaPods/Specs.git" />
       </config>
       <pods use-frameworks="true">
-        <pod name="PSPDFKit" spec="~> 11.2.0"/>
+        <pod name="PSPDFKit" spec="~> 11.2.4"/>
       </pods>
     </podspec>
   </platform>
