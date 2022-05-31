@@ -129,7 +129,7 @@ open platforms/ios/Podifile
 ```diff
 source 'https://github.com/CocoaPods/Specs.git'
 - platform :ios, '11.0'
-+ platform :ios, '13.0'
++ platform :ios, '14.0'
 use_frameworks!
 target 'MyApp' do
 	project 'MyApp.xcodeproj'
