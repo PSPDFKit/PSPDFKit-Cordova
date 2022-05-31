@@ -95,7 +95,7 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
         <source url="https://github.com/CocoaPods/Specs.git" />
       </config>
       <pods use-frameworks="true">
-        <pod name="PSPDFKit" spec="~> 11.3.0"/>
+        <pod name="PSPDFKit" spec="~> 11.4.0"/>
       </pods>
     </podspec>
   </platform>
