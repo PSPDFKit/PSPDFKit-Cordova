@@ -10,8 +10,8 @@ export class AppComponent {
   constructor(private platform: Platform) {
     this.platform.ready().then(() => {
       const DOCUMENT = this.platform.is("ios")
-        ? "Document.pdf"
-        : "file:///android_asset/Document.pdf";
+        ? "samples/Document.pdf"
+        : "file:///android_asset/www/samples/Document.pdf";
       PSPDFKit.present(DOCUMENT);
     });
   }
