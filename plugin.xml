@@ -104,8 +104,8 @@ AND MAY NOT BE RESOLD OR REDISTRIBUTED. USAGE IS BOUND TO THE PSPDFKIT LICENSE A
 
 **Important** If you’re an existing customer, you can find your license key in your customer portal(https://customers.pspdfkit.com/).
 
-iOS: Since this plugin is iOS 14+ only, you will have to set the deployment target
-of your Xcode project in platforms/ios to iOS 14.
+iOS: Since this plugin is iOS 15+ only, you will have to set the deployment target
+of your Xcode project in platforms/ios to iOS 15.
 
 For the complete documentation and troubleshooting, check out our documentation at https://github.com/PSPDFKit/PSPDFKit-Cordova. 
 In case there are issues, feel free to reach out to our support team at https://pspdfkit.com/support/request/.
