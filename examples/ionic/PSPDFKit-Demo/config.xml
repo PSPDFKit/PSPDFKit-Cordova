@@ -23,6 +23,7 @@
         <preference name="android-targetSdkVersion" value="30" />
         <preference name="android-compileSdkVersion" value="31" />
         <resource-file src="resources/android/xml/network_security_config.xml" target="app/src/main/res/xml/network_security_config.xml" />
+        <resource-file src="resources/Document.pdf" target="app/src/main/assets/www/samples/Document.pdf" />
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
@@ -48,6 +49,7 @@
         <allow-intent href="itms-apps:*" />
         <allow-navigation href="*" />
         <preference name="deployment-target" value="15.0" />
+        <resource-file src="resources/Document.pdf" target="../../www/samples/Document.pdf" />
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
         <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
         <icon height="29" src="resources/ios/icon/icon-small.png" width="29" />
