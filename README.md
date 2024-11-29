@@ -2,6 +2,8 @@
 
 The official plugin to use PSPDFKit with Apache Cordova/PhoneGap/Ionic.
 
+> **Note**: PSPDFKit Cordova and Ionic are being sunset and will not receive future updates after 1 December 2025. They remains available as source code, should you want to maintain them yourself. All licenses will remain valid and fully supported until 1 December 2025, or until your license expires, whichever occurs later.</br> Interested in transitioning to another Nutrient product? [Contact us](/company/contact) and we’ll be happy to help.
+
 ## Support, Issues and License Questions
 
 PSPDFKit offers support for customers with an active SDK license via https://pspdfkit.com/support/request/
